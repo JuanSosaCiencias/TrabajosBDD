@@ -5,3 +5,6 @@
 *.fls
 *.log
 *.synctex.gz
+*.bcf
+*.out
+*.run.xml
