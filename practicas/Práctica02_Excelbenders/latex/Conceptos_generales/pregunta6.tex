@@ -1,0 +1,26 @@
+\begin{center}
+\textbf{Investiga qué es la redundancia de datos. ¿Cuál sería la diferencia entre redundancia de datos
+controlada y no controlada?}\\
+\end{center} 
+
+
+La redundancia de datos se refiere a la duplicación de información dentro de una base de datos o sistema, lo cual puede ocurrir cuando la misma información se almacena en múltiples ubicaciones. La redundancia puede ser intencional o accidental, y si bien la redundancia puede servir para ciertos propósitos, como mejorar la confiabilidad de los datos y tolerar fallas, la redundancia excesiva puede generar inconsistencias, ineficiencias, demoras y mayores costos de energía de procesamiento y espacio de almacenamiento. Garantizar que se mantenga la precisión y la integridad de los datos mientras se minimiza la redundancia es una consideración esencial en el diseño e implementación de sistemas de bases de datos eficientes.\\
+
+La redundancia de datos se puede clasificar en varios tipos según la causa raíz de la redundancia, como:
+\begin{itemize}
+    \item \textbf{Redundancia de columnas:} columnas duplicadas en una tabla, donde los atributos almacenados se repiten en diferentes columnas, lo que lleva a casos en los que la misma información se almacena en varios lugares. \\
+    
+    \item \textbf{Redundancia de filas:} filas duplicadas en una tabla, donde varias filas contienen los mismos datos, lo que puede causar confusión y errores durante el procesamiento y la recuperación de datos. \\
+    
+    \item \textbf{Redundancia de tablas:} tablas duplicadas en una base de datos, donde los mismos datos se almacenan en varias tablas, lo que aumenta significativamente el espacio de almacenamiento y los requisitos de potencia de procesamiento. \\
+    
+    \item \textbf{Redundancia funcional:} información repetida en una base de datos como resultado de funciones idénticas que se realizan o cálculos que se realizan utilizando el mismo conjunto de datos de entrada. \\
+
+    \textbf{Redundancia Controlada: }Se produce cuando la duplicación de datos es intencional y forma parte del diseño del sistema. Por ejemplo, se puede aplicar para mejorar el rendimiento de las consultas, como en sistemas de almacenamiento en caché o bases de datos desnormalizadas, donde se introduce cierta duplicidad para minimizar la latencia y mejorar el acceso a la información.\\
+    
+    \textbf{Redundancia No Controlada: } Ocurre de manera involuntaria debido a un mal diseño de la base de datos o la falta de normalización. En este caso, la duplicación de datos puede llevar a inconsistencias, uso ineficiente del almacenamiento y errores al actualizar o acceder a los datos.
+\end{itemize}
+
+\textcolor{blue}{Toda la información de esta sección se sacó del texto proporcionado. \cite{Appmaster}
+}
+

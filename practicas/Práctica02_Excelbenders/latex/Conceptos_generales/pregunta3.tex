@@ -1,0 +1,18 @@
+\begin{center}
+\textbf{¿Qué es la independencia de datos y por qué se carece de ella en los sistemas de archivos? ¿Cuál tipo de independencia de datos es más difícil de lograr? Justifica tu respuesta.} \\
+\end{center}
+
+Sabiendo que una base de datos tiene niveles, entendemos por independencia de datos a la capacidad de modificar el esquema de una base de datos en un nivel sin afectar los esquemas en otros niveles, es decir, la independencia de los datos consiste en la capacidad de modificar la presentación de una base de datos sin tener que afectar o hacer cambios en las aplicaciones que se sirven de ella. Dicho esto, existen dos tipos de independencia de datos.
+
+
+\begin{enumerate}
+    \item \textbf{Independencia física:} Es la capacidad de modificar el esquema físico de la base, es decir,  cómo los datos están almacenados físicamente en el hardware (índices, estructuras de almacenamiento, etc) sin tener que modificar el esquema lógico o las aplicaciones que acceden a los datos. Esto significa que podemos optimizar el almacenamiento o cambiar la forma en que los datos se almacenan y recuperan para mejorar el rendimiento, sin afectar a los usuarios finales o a las aplicaciones.
+    \item \textbf{Independencia lógica:} Es la capacidad de modificar el esquema lógico, es decir, la estructura de tablas, relaciones, vistas, etc., sin necesidad de cambiar las aplicaciones o los programas que acceden a los datos. Por ejemplo, si se añade una nueva columna a una tabla o se cambian algunas relaciones, las aplicaciones no deberían verse afectadas si no utilizan esas partes del esquema que se han modificado.
+\end{enumerate}
+
+Ahora bien, los sistemas de archivos no ofrecen la independencia de datos que un sistema de bases de datos. De hecho, es todo lo contrario, ya que las aplicaciones dependen del tipo de datos que manejan, por lo que editar o modificar la definición de los datos afecta directamente a las aplicaciones que trabajan con los datos modificados. \\
+
+Por otro lado, podemos considerar la independencia lógica más difícil ya que trabajamos con la abstracción de los datos, además de que representa la estructura y organización de los datos tal como son percibidos por los usuarios y las aplicaciones, lo que significa que está mucho más ligado a cómo los datos son utilizados y comprendidos en la aplicación. Por lo que mantiene una estrecha relación entre el esquema lógico de la base de datos y las aplicaciones que dependen de ese esquema, lo que hace que cualquier cambio en el esquema lógico sea potencialmente disruptivo para esas aplicaciones.
+
+\textcolor{blue}{Toda la información de esta sección se sacó del texto proporcionado. \cite{independencia}}
+\\

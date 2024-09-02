@@ -1,0 +1,51 @@
+\begin{center} 
+\textbf{Describe el papel que tienen los Sistemas Manejadores de Bases de Datos (SMBD) en el enfoque
+de bases de datos. ¿Por qué consideras que es importante (o no) que un administrador de bases
+de datos (DBA) conozca las características de un SMBD?}
+\\
+\end{center}
+
+
+
+El SMBD, tiene como característica la posibilidad de que el usuario defina restricciones de integridad referencial.
+
+Igualmente son programas que se encargan de manipular los datos según nuestras indicaciones, y se clasifican en: Locales y Servidores. \\
+
+\begin{table}[h!]
+\centering
+\begin{tabularx}{\textwidth}{|X|X|}
+\hline
+\textbf{Locales} & \textbf{Servidores} \\
+\hline
+Almacenan la información en el propio equipo del usuario que accede a ella. Un ejemplo de SMBD es “Microsoft Access”, pues es un programa que, a demanda del usuario, puede recuperar y manipular datos que están almacenados en el disco de la computadora. & Programas ejecutados en una computadora central denominada servidor, a la cual se conectan los usuarios, denominados “Clientes”. Las computadoras de los clientes tienen un software que les permite conectarse con el servidor, para así tener un único almacenamiento de información, pero se requieren permisos para poder efectuar ciertas acciones. \\
+\hline
+\end{tabularx}
+\caption{Comparación entre SMBD Locales y Servidores}
+\label{tab:locales_vs_servidores}
+\end{table}
+
+
+
+\begin{table}[h]
+\centering
+\small 
+\begin{tabularx}{\textwidth}{|X|X|}
+\hline
+\textbf{Funciones} & \textbf{\textcolor{myPurple}{¿Qué hace?}} \\
+\hline
+\textbf{Definición de los Datos} & El SMBD, define todos los objetos de la BD partiendo de definiciones en versión fuente para convertirlas en la versión objeto \\
+\hline
+\textbf{Manipulación de Datos} & El SMBD responde solicitudes del usuario para realizar operación de actualización, extracción, etc.. \\
+\hline
+\textbf{Seguridad e integridad de los datos} & Un SMBD aplica medidas de seguridad de datos, esto para garantizar su validez; es decir debe tener la capacidad para resistir ataques o simplemente impedir su acceso a usuario no autorizados \\
+\hline
+\textbf{Recuperación y restauración de los datos} & Ante un posible fallo es otra de las principales de las funciones de un SMBD, y se realiza a través de un plan de recuperación y restauración de los datos que sirva de respaldo \\
+\hline
+\end{tabularx}
+\label{tab:Funciones_vs_}
+\end{table}
+
+\newpage
+
+\textcolor{blue}{Toda la información de esta sección se sacó del texto proporcionado. \cite{UAPA}}
+\\
