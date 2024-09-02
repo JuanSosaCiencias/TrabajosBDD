@@ -1,4 +1,4 @@
-\documentclass[11pt,letterpaper]{article}
+\documentclass{report}
 \usepackage[utf8]{inputenc}
 
 %ola 
@@ -17,15 +17,9 @@
 \usepackage{verbatim}
 \usepackage[shortlabels]{enumitem}
 \usepackage{venndiagram}
-\usepackage{xcolor}
 \usetikzlibrary{shapes.geometric}
-\renewcommand{\proofname}{Demostración}
 \usepackage{cancel}
 \usepackage{hyperref}
-
-%%Para la portada
-%\usepackage[top=1in, left=0.9in, right=1.25in, bottom=1in]{geometry}
-%\usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
 \usepackage[spanish,es-nodecimaldot,es-tabla]{babel}
@@ -33,14 +27,8 @@
 \usepackage{tocloft}
 \graphicspath{{./figs/}}
 \usepackage{setspace}
+\usepackage{xcolor}
 
-%Color bibi
-\definecolor{bibi}{RGB}{0,103,148}
-% Otros colores
-\definecolor{lightblue}{RGB}
-\definecolor{myPurple}{RGB}{128, 0, 128}
-
-\usepackage[dvipsnames]{xcolor}
 
 
 
@@ -52,42 +40,27 @@
 		\section*{\LARGE{Tarea 1}}
 	\end{center}
 
-    % Conceptos generales  
+        \LARGE{\textbf{Analisis de requerimientos:}}\\
+        \normalsize
+        \begin{enumerate}
+            \item \input{requerimientos/requerimientos.tex}
+        \end{enumerate}
+
+    % Preguntas  
     \begin{center}
-        \LARGE{\textbf{Conceptos generales}}\\
+        \LARGE{\textbf{Preguntas}}\\
     \end{center}
     \normalsize
-    \begin{enumerate}[label=\alph*.]
-        \item \input{Conceptos_generales/pregunta1}
-        \item \input{Conceptos_generales/pregunta2}
-        \item \input{Conceptos_generales/pregunta3}
-        \item \input{Conceptos_generales/pregunta4}
-        \item \input{Conceptos_generales/pregunta5}
-        \item \input{Conceptos_generales/pregunta6}
-        \item \input{Conceptos_generales/pregunta7}
-        \item \input{Conceptos_generales/pregunta8}
-        \item \input{Conceptos_generales/pregunta9}
-        \item \input{Conceptos_generales/pregunta10}
+    \begin{enumerate}%[label=\alph*.]
+        \item \input{preguntas/pregunta1.tex}
+        \item \input{preguntas/pregunta2.tex}
     \end{enumerate}
     \newpage
-
-    % ´Lectura del articulo
-    \begin{center}
-    \LARGE{\textbf{Lectura del articulo}}
-    \normalsize
-    \begin{enumerate}[label=\alph*.]
-        \item \input{Lectura_articulo/pregunta1}
-        \item \input{Lectura_articulo/pregunta2}
-        \item \input{Lectura_articulo/pregunta3}
-    \end{enumerate}
     
 \newpage
 
 \Large \section*{Bibliografía}
-  \bibliography{resources/referencias/referencias}
+  \bibliography{resources/referencias/referencias.bib}
   \bibliographystyle{plainnat}
   
-    
-	
-
 \end{document}

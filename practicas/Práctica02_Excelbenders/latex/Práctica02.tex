@@ -11,7 +11,6 @@
 \usepackage{amsthm}
 \usepackage{amsmath}
 \usepackage{tabularx}
-\usepackage[numbers]{natbib}
 \usepackage{fancyhdr}
 \usepackage{lastpage}
 \usepackage{verbatim}
@@ -28,6 +27,10 @@
 \graphicspath{{./figs/}}
 \usepackage{setspace}
 \usepackage{xcolor}
+
+% Referencias
+\usepackage[backend=biber]{biblatex}
+\addbibresource{resources/referencias/referencias.bib}
 
 
 
@@ -46,6 +49,7 @@
             \item \input{requerimientos/requerimientos.tex}
         \end{enumerate}
 
+
     % Preguntas  
     \begin{center}
         \LARGE{\textbf{Preguntas}}\\
@@ -59,8 +63,8 @@
     
 \newpage
 
+\newpage
 \Large \section*{Bibliografía}
-  \bibliography{resources/referencias/referencias.bib}
-  \bibliographystyle{plainnat}
+    \printbibliography
   
 \end{document}
