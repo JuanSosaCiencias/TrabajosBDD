@@ -151,6 +151,24 @@ def consult_record_menu(db):
         for header, value in zip(headers, record):
             print(f"{header}: {value}")
 
+def get_next_id(db, entity):
+    """Obtiene el siguiente ID disponible para la entidad especificada.
+
+    Args:
+        db (OlympicDatabase): Instancia de la base de datos.
+        entity (str): Nombre de la entidad.
+    
+    Returns:
+        int: Siguiente ID disponible.
+    """
+    if not os.path.exists(db.entities[entity]):
+        return 1  # Si no hay archivo, el primer ID será 1
+    with open(db.entities[entity], 'r') as f:
+        reader = csv.reader(f)
+        ids = [int(row[0]) for row in reader if row[0].isdigit()]
+        return max(ids) + 1 if ids else 1
+
+
 def main_menu():
     db = OlympicDatabase()
     while True:
@@ -167,7 +185,7 @@ def main_menu():
         choice = validate_number("Seleccione una opción: ")
         
         if choice == 1:
-            id = validate_id(db, 'atletas', "Ingrese el ID del atleta: ")
+            id = get_next_id(db, 'atletas')  # Obtener el próximo ID disponible para atletas
             nombre = input("Ingrese el nombre del atleta: ")
             sexo = select_sex()
             edad = validate_number("Ingrese la edad del atleta: ")
@@ -175,7 +193,7 @@ def main_menu():
             disciplinas = input("Ingrese las disciplinas del atleta (separadas por coma): ")
             db.add_record('atletas', [id, nombre, sexo, edad, disciplinas])
         elif choice == 2:
-            id = validate_id(db, 'entrenadores', "Ingrese el ID del entrenador: ")
+            id = get_next_id(db, 'entrenadores')  # Obtener el próximo ID disponible para entrenadores
             nombre = input("Ingrese el nombre del entrenador: ")
             sexo = select_sex()
             edad = validate_number("Ingrese la edad del entrenador: ")
