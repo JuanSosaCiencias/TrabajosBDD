@@ -171,21 +171,17 @@ def consult_record_menu(db):
             print(f"{header}: {value}")
 
 def get_next_id(db, entity):
-    """Obtiene el siguiente ID disponible para la entidad especificada.
+    try:
+        if not os.path.exists(db.entities[entity]):
+            return 1
+        with open(db.entities[entity], 'r') as f:
+            reader = csv.reader(f)
+            ids = [int(row[0]) for row in reader if len(row) > 0 and row[0].isdigit()]
+            return max(ids) + 1 if ids else 1
+    except Exception as e:
+        print(f"Error al obtener el siguiente ID: {e}")
+        return 1
 
-    Args:
-        db (OlympicDatabase): Instancia de la base de datos.
-        entity (str): Nombre de la entidad.
-    
-    Returns:
-        int: Siguiente ID disponible.
-    """
-    if not os.path.exists(db.entities[entity]):
-        return 1  # Si no hay archivo, el primer ID será 1
-    with open(db.entities[entity], 'r') as f:
-        reader = csv.reader(f)
-        ids = [int(row[0]) for row in reader if row[0].isdigit()]
-        return max(ids) + 1 if ids else 1
     
 def discipline_exists(db, discipline_name):
     """Verifica si una disciplina existe en la base de datos.
@@ -283,8 +279,9 @@ def main_menu():
             sexo = select_sex()
             edad = validate_number("Ingrese la edad del entrenador: ")
             show_disciplines(db)
-            disciplinas = input_disciplines(db)
-            db.add_record('entrenadores', [id, nombre, sexo, edad, disciplina])
+            disciplinas = input_disciplines(db)  # Cambiado a disciplinas
+            db.add_record('entrenadores', [id, nombre, sexo, edad, disciplinas])  # Cambiado a disciplinas
+
 
         elif choice == 3:
             id = get_next_id(db, 'disciplinas')
