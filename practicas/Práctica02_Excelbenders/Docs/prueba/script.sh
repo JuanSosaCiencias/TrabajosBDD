@@ -1,5 +1,8 @@
 #!/bin/bash
 
+## Script para ejecutar el programa y automatizar las entradas
+## Prueba de la práctica 2
+
 # Verifica si el comando `expect` está instalado
 if ! command -v expect &> /dev/null
 then
