@@ -1,9 +1,39 @@
-import csv
-import os
+import csv # Para leer y escribir archivos CSV
+import os # Para verificar si un archivo existe
 import unicodedata # Para normalizar texto
 
 class OlympicDatabase:
+    """Clase para interactuar con la base de datos de atletas, entrenadores y disciplinas.
+    
+    Attributes:
+        entities (dict): Diccionario con las entidades disponibles y sus archivos CSV asociados.
+        
+        Methods:
+            id_exists(entity, id): Verifica si un ID ya está en uso en la base de datos.
+            add_record(entity, record): Añade un registro a la base de datos.
+            get_record(entity, id): Obtiene un registro de la base de datos.
+            update_record(entity, id, new_data): Actualiza un registro en la base de datos.
+            delete_record(entity, id): Elimina un registro de la base de datos.
+            get_all_disciplines(): Obtiene todas las disciplinas registradas en la base de datos.
+            
+            Ejemplo de uso:
+                db = OlympicDatabase()
+                db.add_record('atletas', ['1', 'Juan', 'Pérez', 'Gómez', 'Masculino', '25', 'Natación'])
+                db.get_record('atletas', '1')
+                db.update_record('atletas', '1', ['Juan', 'Pérez', 'Gómez', 'Masculino', '26', 'Natación'])
+                db.delete_record('atletas', '1')
+                db.get_all_disciplines()
+                
+    """
     def __init__(self):
+        """Inicializa la base de datos y las entidades disponibles.
+        
+        Args:
+            None
+            
+        Returns:
+            None
+        """
         self.entities = {
             'atletas': 'atletas.csv',
             'entrenadores': 'entrenadores.csv',
@@ -11,6 +41,15 @@ class OlympicDatabase:
         }
 
     def id_exists(self, entity, id):
+        """Verifica si un ID ya está en uso en la base de datos.
+        
+        Args:
+            entity (str): Nombre de la entidad a la que pertenece el ID.
+            id (str): ID a verificar.
+            
+        Returns:
+            bool: True si el ID ya está en uso, False en caso contrario.
+        """
         if not os.path.exists(self.entities[entity]):
             return False
         with open(self.entities[entity], 'r') as f:
@@ -18,12 +57,30 @@ class OlympicDatabase:
             return any(row[0] == id for row in reader)
 
     def add_record(self, entity, record):
+        """Añade un registro a la base de datos.
+        
+        Args:
+            entity (str): Nombre de la entidad a la que pertenece el registro.
+            record (list): Lista con los datos del registro a añadir.
+            
+        Returns:
+            None
+        """
         with open(self.entities[entity], 'a', newline='') as f:
             writer = csv.writer(f)
             writer.writerow(record)
         print(f"Registro añadido a {entity} exitosamente.")
 
     def get_record(self, entity, id):
+        """Obtiene un registro de la base de datos.
+        
+        Args:
+            entity (str): Nombre de la entidad a la que pertenece el registro.
+            id (str): ID del registro a obtener.
+            
+        Returns:
+            list: Lista con los datos del registro, o None si no se encontró el registro.
+        """
         if not os.path.exists(self.entities[entity]):
             print(f"No hay registros en {entity}.")
             return None
@@ -36,6 +93,16 @@ class OlympicDatabase:
         return None
 
     def update_record(self, entity, id, new_data):
+        """Actualiza un registro en la base de datos.
+        
+        Args:
+            entity (str): Nombre de la entidad a la que pertenece el registro.
+            id (str): ID del registro a actualizar.
+            new_data (list): Lista con los nuevos datos del registro.
+            
+        Returns:
+            None
+        """
         if not os.path.exists(self.entities[entity]):
             print(f"No hay registros en {entity} para actualizar.")
             return
@@ -58,6 +125,14 @@ class OlympicDatabase:
             print(f"No se encontró el registro con ID {id} en {entity}.")
 
     def delete_record(self, entity, id):
+        """Elimina un registro de la base de datos.
+        
+        Args:
+            entity (str): Nombre de la entidad a la que pertenece el registro.
+            id (str): ID del registro a eliminar.
+            
+        Returns:
+            None"""
         if not os.path.exists(self.entities[entity]):
             print(f"No hay registros en {entity} para eliminar.")
             return
@@ -80,6 +155,13 @@ class OlympicDatabase:
             print(f"No se encontró el registro con ID {id} en {entity}.")
 
     def get_all_disciplines(self):
+        """Obtiene todas las disciplinas registradas en la base de datos.
+
+        Args:
+            None
+        
+        Returns:
+            list: Lista de disciplinas, donde cada disciplina es una lista con los campos ID, Nombre y Fecha de inclusión."""
         disciplines = []
         if os.path.exists(self.entities['disciplinas']):
             with open(self.entities['disciplinas'], 'r') as f:
@@ -88,6 +170,14 @@ class OlympicDatabase:
         return disciplines
 
 def validate_number(prompt):
+    """Valida que el número ingresado por el usuario sea un entero.
+    
+    Args:
+        prompt (str): Mensaje a mostrar al usuario para solicitar el número.
+        
+    Returns:
+        int: Número validado.
+"""
     while True:
         try:
             return int(input(prompt))
@@ -95,6 +185,16 @@ def validate_number(prompt):
             print("Por favor, ingrese un número válido.")
 
 def validate_id(db, entity, prompt):
+    """Valida que el ID ingresado por el usuario no esté en uso en la base de datos.
+    
+    Args:
+        db (OlympicDatabase): Instancia de la base de datos.
+        entity (str): Nombre de la entidad a la que pertenece el ID.
+        prompt (str): Mensaje a mostrar al usuario para solicitar el ID.
+        
+    Returns:
+        str: ID validado.
+    """
     while True:
         id = input(prompt)
         if id.isdigit():
@@ -106,6 +206,13 @@ def validate_id(db, entity, prompt):
             print("Por favor, ingrese un ID válido (número entero).")
 
 def select_sex():
+    """Permite al usuario seleccionar el sexo de un atleta o entrenador.
+
+    Args:
+        None
+    
+    Returns:
+        str: Sexo seleccionado."""
     while True:
         print("\nSeleccione el sexo:")
         print("1. Femenino")
@@ -122,6 +229,16 @@ def select_sex():
             print("Opción no válida. Por favor, intente de nuevo.")
 
 def select_entity():
+    """Permite al usuario seleccionar la entidad a la que desea acceder.
+
+    Available entities: Atletas, Entrenadores, Disciplinas
+
+    Args:
+        None
+    
+    Returns:
+        str: Nombre de la entidad seleccionada.
+    """
     while True:
         print("\nSeleccione la entidad:")
         print("1. Atletas")
@@ -171,6 +288,15 @@ def consult_record_menu(db):
             print(f"{header}: {value}")
 
 def get_next_id(db, entity):
+    """Obtiene el siguiente ID disponible para una entidad en la base de datos.
+    
+    Args:
+        db (OlympicDatabase): Instancia de la base de datos.
+        entity (str): Nombre de la entidad para la que se desea obtener el siguiente ID.
+        
+    Returns:
+        int: Siguiente ID disponible.
+    """
     try:
         if not os.path.exists(db.entities[entity]):
             return 1
@@ -239,7 +365,14 @@ def input_disciplines(db):
 
 
 def normalize_string(s):
-    # Normalizar el string para eliminar acentos y convertir a minúsculas
+    """Normaliza una cadena de texto para comparaciones de texto sin distinción de mayúsculas y minúsculas.
+    
+    Args:
+        s (str): Cadena de texto a normalizar.
+        
+    Returns:
+        str: Cadena de texto normalizada.
+    """
     return ''.join(
         c for c in unicodedata.normalize('NFD', s.lower())
         if unicodedata.category(c) != 'Mn'
