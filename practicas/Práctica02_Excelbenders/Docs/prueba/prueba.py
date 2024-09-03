@@ -1,5 +1,6 @@
 import csv
 import os
+import unicodedata # Para normalizar texto
 
 class OlympicDatabase:
     def __init__(self):
@@ -133,6 +134,14 @@ def select_entity():
             print("Opción no válida. Por favor, intente de nuevo.")
 
 def show_disciplines(db):
+    """Muestra todas las disciplinas disponibles en la base de datos.
+    
+    Args:
+        db (OlympicDatabase): Instancia de la base de datos.
+        
+    Returns:
+        None
+    """
     disciplines = db.get_all_disciplines()
     if disciplines:
         print("\nDisciplinas disponibles:")
@@ -142,6 +151,16 @@ def show_disciplines(db):
         print("No hay disciplinas registradas.")
 
 def consult_record_menu(db):
+    """Menú para consultar un registro en la base de datos.
+    
+    Permite al usuario seleccionar la entidad y el ID del registro a consultar.
+
+    Args:
+        db (OlympicDatabase): Instancia de la base de datos.
+
+    Returns:
+        None
+    """
     entity = select_entity()
     id = input(f"Ingrese el ID del {entity[:-1]} a consultar: ")
     record = db.get_record(entity, id)
@@ -167,9 +186,74 @@ def get_next_id(db, entity):
         reader = csv.reader(f)
         ids = [int(row[0]) for row in reader if row[0].isdigit()]
         return max(ids) + 1 if ids else 1
+    
+def discipline_exists(db, discipline_name):
+    """Verifica si una disciplina existe en la base de datos.
+    
+    Args:
+        db (OlympicDatabase): Instancia de la base de datos.
+        discipline_name (str): Nombre de la disciplina a buscar.
 
+    Returns:
+        bool: True si la disciplina existe, False en caso contrario.
+    """
+    normalized_name = normalize_string(discipline_name)
+    if not os.path.exists(db.entities['disciplinas']):
+        return False
+    with open(db.entities['disciplinas'], 'r') as f:
+        reader = csv.reader(f)
+        for row in reader:
+            if normalize_string(row[1]) == normalized_name:
+                return True
+    return False
+
+
+    
+def input_disciplines(db):
+    """Solicita al usuario ingresar las disciplinas de un atleta o entrenador.
+
+    Args:
+        db (OlympicDatabase): Instancia de la base de datos.
+
+    Returns:
+        str: Disciplinas ingresadas por el usuario.
+    """
+    valid_disciplines = []
+    show_disciplines(db)  # Mostrar las disciplinas disponibles
+    while True:
+        disciplinas = input("Ingrese las disciplinas (separadas por coma): ").split(',')
+        all_valid = True
+        for disciplina in disciplinas:
+            disciplina = disciplina.strip()
+            if not discipline_exists(db, disciplina):
+                print(f"La disciplina '{disciplina}' no existe.")
+                option = input(f"¿Desea agregar '{disciplina}' como una nueva disciplina? (s/n): ").lower()
+                if option == 's':
+                    fecha_inclusion = input("Ingrese la fecha de inclusión (YYYY-MM-DD): ")
+                    id = get_next_id(db, 'disciplinas')
+                    db.add_record('disciplinas', [id, disciplina, fecha_inclusion])
+                    print(f"Disciplina '{disciplina}' añadida exitosamente.")
+                else:
+                    all_valid = False
+                    print(f"Por favor, ingrese disciplinas válidas o agregue las que falten.")
+        if all_valid:
+            valid_disciplines = [disciplina.strip() for disciplina in disciplinas]
+            break
+    return ",".join(valid_disciplines)
+
+
+def normalize_string(s):
+    # Normalizar el string para eliminar acentos y convertir a minúsculas
+    return ''.join(
+        c for c in unicodedata.normalize('NFD', s.lower())
+        if unicodedata.category(c) != 'Mn'
+    )
 
 def main_menu():
+    """Menú principal del sistema.
+    
+    Muestra las opciones disponibles y permite al usuario seleccionar una de ellas.
+    """
     db = OlympicDatabase()
     while True:
         print("\n--- Menú Principal ---")
@@ -185,28 +269,37 @@ def main_menu():
         choice = validate_number("Seleccione una opción: ")
         
         if choice == 1:
-            id = get_next_id(db, 'atletas')  # Obtener el próximo ID disponible para atletas
+            id = get_next_id(db, 'atletas')  
             nombre = input("Ingrese el nombre del atleta: ")
             sexo = select_sex()
             edad = validate_number("Ingrese la edad del atleta: ")
             show_disciplines(db)
-            disciplinas = input("Ingrese las disciplinas del atleta (separadas por coma): ")
+            disciplinas = input_disciplines(db)
             db.add_record('atletas', [id, nombre, sexo, edad, disciplinas])
+
         elif choice == 2:
-            id = get_next_id(db, 'entrenadores')  # Obtener el próximo ID disponible para entrenadores
+            id = get_next_id(db, 'entrenadores') 
             nombre = input("Ingrese el nombre del entrenador: ")
             sexo = select_sex()
             edad = validate_number("Ingrese la edad del entrenador: ")
             show_disciplines(db)
-            disciplina = input("Ingrese la disciplina del entrenador: ")
+            disciplinas = input_disciplines(db)
             db.add_record('entrenadores', [id, nombre, sexo, edad, disciplina])
+
         elif choice == 3:
-            id = validate_id(db, 'disciplinas', "Ingrese el ID de la disciplina: ")
-            nombre = input("Ingrese el nombre de la disciplina: ")
+            id = get_next_id(db, 'disciplinas')
+            print(f"ID asignado a la disciplina: {id}")
+            while True:
+                nombre = input("Ingrese el nombre de la disciplina: ")
+                if not discipline_exists(db, nombre):
+                    break
+                print(f"La disciplina '{nombre}' ya existe. Por favor, ingrese otra.")
             fecha_inclusion = input("Ingrese la fecha de inclusión (YYYY-MM-DD): ")
             db.add_record('disciplinas', [id, nombre, fecha_inclusion])
+
         elif choice == 4:
             consult_record_menu(db)
+
         elif choice == 5:
             entity = select_entity()
             id = input("Ingrese el ID a editar: ")
@@ -217,6 +310,7 @@ def main_menu():
                 show_disciplines(db)
                 disciplinas = input("Ingrese las nuevas disciplinas del atleta (separadas por coma): ")
                 db.update_record(entity, id, [nombre, sexo, edad, disciplinas])
+
             elif entity == 'entrenadores':
                 nombre = input("Ingrese el nuevo nombre del entrenador: ")
                 sexo = select_sex()
@@ -224,19 +318,24 @@ def main_menu():
                 show_disciplines(db)
                 disciplina = input("Ingrese la nueva disciplina del entrenador: ")
                 db.update_record(entity, id, [nombre, sexo, edad, disciplina])
+
             elif entity == 'disciplinas':
                 nombre = input("Ingrese el nuevo nombre de la disciplina: ")
                 fecha_inclusion = input("Ingrese la nueva fecha de inclusión (YYYY-MM-DD): ")
                 db.update_record(entity, id, [nombre, fecha_inclusion])
+
         elif choice == 6:
             entity = select_entity()
             id = input("Ingrese el ID a eliminar: ")
             db.delete_record(entity, id)
+
         elif choice == 7:
             show_disciplines(db)
+
         elif choice == 8:
             print("Gracias por usar el sistema. ¡Hasta luego!")
             break
+
         else:
             print("Opción no válida. Por favor, intente de nuevo.")
 
