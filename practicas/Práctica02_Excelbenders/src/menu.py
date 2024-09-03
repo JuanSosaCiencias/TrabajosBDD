@@ -1,10 +1,18 @@
 # menu.py
 
-from OlympicDatabase import BaseDeDatosOlimpica
-from validators import validar_numero, seleccionar_entidad, validar_id, seleccionar_sexo, mostrar_disciplinas, menu_consultar_registro 
+from OlympicDatabase import *
+from validators import *
 
 
 def mostrar_disciplinas(db):
+    """Muestra todas las disciplinas disponibles en la base de datos.
+    
+    Args:
+        db (OlympicDatabase): Instancia de la base de datos.
+        
+    Returns:
+        None
+    """
     disciplinas = db.obtener_todas_las_disciplinas()
     if disciplinas:
         print("\nDisciplinas disponibles:")
@@ -14,17 +22,31 @@ def mostrar_disciplinas(db):
         print("No hay disciplinas registradas.")
 
 def menu_consultar_registro(db):
+    """Menú para consultar un registro en la base de datos.
+    
+    Permite al usuario seleccionar la entidad y el ID del registro a consultar.
+
+    Args:
+        db (OlympicDatabase): Instancia de la base de datos.
+
+    Returns:
+        None
+    """
     entidad = seleccionar_entidad()
     id = input(f"Ingrese el ID del {entidad[:-1]} a consultar: ")
     registro = db.obtener_registro(entidad, id)  
     if registro:
         print(f"\nRegistro encontrado:")
-        cabeceras = ['ID', 'Nombre', 'Sexo', 'Edad', 'Disciplinas/Disciplina'] if entidad != 'disciplinas' else ['ID', 'Nombre', 'Fecha de inclusión']
+        cabeceras = ['ID', 'Nombre','Apellido Materno','Apellido Paterno', 'Sexo', 'Edad', 'Disciplinas/Disciplina'] if entidad != 'disciplinas' else ['ID', 'Nombre', 'Fecha de inclusión']
         for cabecera, valor in zip(cabeceras, registro):
             print(f"{cabecera}: {valor}")
 
 
 def menu_principal():
+    """Menú principal del sistema.
+    
+    Muestra las opciones disponibles y permite al usuario seleccionar una de ellas.
+    """
     db = BaseDeDatosOlimpica()
     while True:
         print("\n--- Menú Principal ---")
@@ -40,58 +62,75 @@ def menu_principal():
         opcion = validar_numero("Seleccione una opción: ")
         
         if opcion == 1:
-            id = validar_id(db, 'atletas', "Ingrese el ID del atleta: ")
+            id = conseguir_siguiente_id(db, 'atletas')
             nombre = input("Ingrese el nombre del atleta: ")
+            apellido_paterno = input("Ingrese el apellido paterno del atleta: ")
+            apellido_materno = input("Ingrese el apellido materno del atleta: ")
             sexo = seleccionar_sexo()
             edad = validar_numero("Ingrese la edad del atleta: ")
-            mostrar_disciplinas(db)
-            disciplinas = input("Ingrese las disciplinas del atleta (separadas por coma): ")
-            db.agregar_registro('atletas', [id, nombre, sexo, edad, disciplinas])
+            disciplinas = ingresar_disciplinas(db)
+            db.agregar_registro('atletas', [id, nombre, apellido_paterno, apellido_materno, sexo, edad, disciplinas])
+
         elif opcion == 2:
-            id = validar_id(db, 'entrenadores', "Ingrese el ID del entrenador: ")
+            id = conseguir_siguiente_id(db, 'entrenadores')
             nombre = input("Ingrese el nombre del entrenador: ")
+            apellido_paterno = input("Ingrese el apellido paterno del entrenador: ")
+            apellido_materno = input("Ingrese el apellido materno del entrenador: ")
             sexo = seleccionar_sexo()
             edad = validar_numero("Ingrese la edad del entrenador: ")
-            mostrar_disciplinas(db)
-            disciplina = input("Ingrese la disciplina del entrenador: ")
-            db.agregar_registro('entrenadores', [id, nombre, sexo, edad, disciplina])
+            disciplina = ingresar_disciplinas(db)
+            db.agregar_registro('entrenadores', [id, nombre, apellido_paterno, apellido_materno, sexo, edad, disciplina])
+
         elif opcion == 3:
-            id = validar_id(db, 'disciplinas', "Ingrese el ID de la disciplina: ")
-            nombre = input("Ingrese el nombre de la disciplina: ")
+            id = conseguir_siguiente_id(db, 'disciplinas')
+            print(f"ID asignado a la disciplina: {id}")
+            while True:
+                nombre = input("Ingrese el nombre de la disciplina: ")
+                if not disciplina_existe(db, nombre):
+                    break
+                print(f"La disciplina '{nombre}' ya existe. Por favor, ingrese otra.")
             fecha_inclusion = input("Ingrese la fecha de inclusión (YYYY-MM-DD): ")
             db.agregar_registro('disciplinas', [id, nombre, fecha_inclusion])
+
         elif opcion == 4:
             menu_consultar_registro(db)
+
         elif opcion == 5:
             entidad = seleccionar_entidad()
             id = input("Ingrese el ID a editar: ")
             if entidad == 'atletas':
                 nombre = input("Ingrese el nuevo nombre del atleta: ")
+                apellido_paterno = input("Ingrese el nuevo apellido paterno del atleta: ")
+                apellido_materno = input("Ingrese el nuevo apellido materno del atleta: ")
                 sexo = seleccionar_sexo()
                 edad = validar_numero("Ingrese la nueva edad del atleta: ")
-                mostrar_disciplinas(db)
                 disciplinas = input("Ingrese las nuevas disciplinas del atleta (separadas por coma): ")
-                db.actualizar_registro(entidad, id, [nombre, sexo, edad, disciplinas])
+                db.actualizar_registro(entidad, id, [nombre, apellido_paterno, apellido_materno, sexo, edad, disciplinas])
             elif entidad == 'entrenadores':
                 nombre = input("Ingrese el nuevo nombre del entrenador: ")
+                apellido_paterno = input("Ingrese el nuevo apellido paterno del entrenador: ")
+                apellido_materno = input("Ingrese el nuevo apellido materno del entrenador: ")
                 sexo = seleccionar_sexo()
                 edad = validar_numero("Ingrese la nueva edad del entrenador: ")
-                mostrar_disciplinas(db)
                 disciplina = input("Ingrese la nueva disciplina del entrenador: ")
-                db.actualizar_registro(entidad, id, [nombre, sexo, edad, disciplina])
+                db.actualizar_registro(entidad, id, [nombre, apellido_paterno, apellido_materno, sexo, edad, disciplina])
             elif entidad == 'disciplinas':
                 nombre = input("Ingrese el nuevo nombre de la disciplina: ")
                 fecha_inclusion = input("Ingrese la nueva fecha de inclusión (YYYY-MM-DD): ")
                 db.actualizar_registro(entidad, id, [nombre, fecha_inclusion])
+
         elif opcion == 6:
             entidad = seleccionar_entidad()
             id = input("Ingrese el ID a eliminar: ")
             db.eliminar_registro(entidad, id)
+
         elif opcion == 7:
             mostrar_disciplinas(db)
+
         elif opcion == 8:
             print("Gracias por usar el sistema. ¡Hasta luego!")
             break
+
         else:
             print("Opción no válida. Por favor, intente de nuevo.")
 

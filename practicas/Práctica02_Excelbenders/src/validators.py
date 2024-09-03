@@ -1,6 +1,14 @@
 # validators.py
 
 def validar_numero(prompt):
+    """Valida que el número ingresado por el usuario sea un entero.
+    
+    Args:
+        prompt (str): Mensaje a mostrar al usuario para solicitar el número.
+        
+    Returns:
+        int: Número validado.
+    """
     while True:
         try:
             return int(input(prompt))
@@ -8,15 +16,36 @@ def validar_numero(prompt):
             print("Por favor, ingrese un número válido.")
 
 def validar_id(db, entidad, prompt):
-    """Valida que el ID no exista ya en la base de datos para la entidad especificada."""
+
+    """Valida que el ID ingresado por el usuario no esté en uso en la base de datos.
+    
+    Args:
+        db (OlympicDatabase): Instancia de la base de datos.
+        entidady (str): Nombre de la entidad a la que pertenece el ID.
+        prompt (str): Mensaje a mostrar al usuario para solicitar el ID.
+        
+    Returns:
+        str: ID validado.
+    """
     while True:
         id = input(prompt)
-        if not db.id_existe(entidad, id):
-            return id
+        if id.isdigit():
+            if not db.id_existe(entidad, id):
+                return id
+            else:
+                print(f"El ID {id} ya está en uso. Por favor, elija otro.")
         else:
-            print(f"El ID {id} ya existe en {entidad}. Por favor, ingrese otro.")
+            print("Por favor, ingrese un ID válido (número entero).")
 
 def seleccionar_sexo():
+    """Permite al usuario seleccionar el sexo de un atleta o entrenador.
+
+    Args:
+        None
+    
+    Returns:
+        str: Sexo seleccionado.
+    """
     while True:
         print("\nSeleccione el sexo:")
         print("1. Femenino")
@@ -33,6 +62,16 @@ def seleccionar_sexo():
             print("Opción no válida. Por favor, intente de nuevo.")
 
 def seleccionar_entidad():
+    """Permite al usuario seleccionar la entidad a la que desea acceder.
+
+    Entidades Disponibles: Atletas, Entrenadores, Disciplinas
+
+    Args:
+        None
+    
+    Returns:
+        str: Nombre de la entidad seleccionada.
+    """
     while True:
         print("\nSeleccione la entidad:")
         print("1. Atletas")
@@ -45,6 +84,14 @@ def seleccionar_entidad():
             print("Opción no válida. Por favor, intente de nuevo.")
 
 def mostrar_disciplinas(db):
+    """Muestra todas las disciplinas disponibles en la base de datos.
+    
+    Args:
+        db (OlympicDatabase): Instancia de la base de datos.
+        
+    Returns:
+        None
+    """
     disciplinas = db.obtener_todas_las_disciplinas()
     if disciplinas:
         print("\nDisciplinas disponibles:")
@@ -54,6 +101,16 @@ def mostrar_disciplinas(db):
         print("No hay disciplinas registradas.")
 
 def menu_consultar_registro(db):
+    """Menú para consultar un registro en la base de datos.
+    
+    Permite al usuario seleccionar la entidad y el ID del registro a consultar.
+
+    Args:
+        db (OlympicDatabase): Instancia de la base de datos.
+
+    Returns:
+        None
+    """
     entidad = seleccionar_entidad()
     id = input(f"Ingrese el ID del {entidad[:-1]} a consultar: ")
     registro = db.obtener_registro(entidad, id)

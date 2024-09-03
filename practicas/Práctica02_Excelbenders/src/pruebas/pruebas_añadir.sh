@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ## Script para ejecutar el programa y automatizar las entradas
-## Prueba de la práctica 2
+## Prueba de la práctica
 
 # Verifica si el comando `expect` está instalado
 if ! command -v expect &> /dev/null
@@ -13,9 +13,9 @@ fi
 # Ejecuta el programa y automatiza las entradas con expect
 expect << EOF
     # Ejecutar el programa Python
-    spawn python3 prueba.py
+    spawn python3 ../menu.py
 
-    # 1. Agregar disciplinas
+    # 1. Agregar 5 disciplinas
     expect "Seleccione una opción:"
     send "3\r"
     expect "Ingrese el nombre de la disciplina:"
@@ -51,7 +51,7 @@ expect << EOF
     expect "Ingrese la fecha de inclusión"
     send "2024-09-05\r"
 
-    # 2. Agregar atletas
+    # 2. Agregar 5 atletas
     expect "Seleccione una opción:"
     send "1\r"
     expect "Ingrese el nombre del atleta:"
@@ -127,7 +127,7 @@ expect << EOF
     expect "Ingrese las disciplinas (separadas por coma):"
     send "Boxeo,Fútbol\r"
 
-    # 3. Agregar entrenadores
+    # 3. Agregar 5 entrenadores
     expect "Seleccione una opción:"
     send "2\r"
     expect "Ingrese el nombre del entrenador:"
@@ -202,25 +202,6 @@ expect << EOF
     send "35\r"
     expect "Ingrese la nueva disciplina del entrenador:"
     send "Baloncesto\r"
-
-    # 4. Modificar registros (ejemplo de modificación de un registro)
-    expect "Seleccione una opción:"
-    send "5\r"
-    send "1\r"  # Editar un atleta
-    expect "Ingrese el ID a editar:"
-    send "1\r"
-    expect "Ingrese el nuevo nombre del atleta:"
-    send "Carlos Modificado\r"
-    expect "Ingrese el nuevo apellido paterno del atleta:"
-    send "Pérez\r"
-    expect "Ingrese el nuevo apellido materno del atleta:"
-    send "Gómez\r"
-    expect "Seleccione el sexo:"
-    send "2\r"
-    expect "Ingrese la nueva edad del atleta:"
-    send "26\r"
-    expect "Ingrese las nuevas disciplinas del atleta (separadas por coma):"
-    send "Fútbol,Atletismo\r"
 
     # Finaliza el programa
     expect "Seleccione una opción:"
