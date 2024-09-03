@@ -4,14 +4,7 @@ import csv
 import os
 
 def leer_csv(ruta_archivo):
-    """Lee un archivo CSV y devuelve su contenido como una lista de listas.
-    
-    Args:
-        ruta_archivo (str): Ruta del archivo CSV a leer.
-        
-    Returns:
-        list: Lista de listas, donde cada lista representa una fila del archivo CSV.
-    """
+    """Lee el contenido de un archivo CSV y devuelve las filas como una lista."""
     if os.path.exists(ruta_archivo):
         with open(ruta_archivo, 'r') as f:
             lector = csv.reader(f)
@@ -19,29 +12,13 @@ def leer_csv(ruta_archivo):
     return []
 
 def escribir_csv(ruta_archivo, filas):
-    """Escribe una lista de listas en un archivo CSV.
-    
-    Args:
-        ruta_archivo (str): Ruta del archivo CSV a escribir.
-        filas (list): Lista de listas, donde cada lista representa una fila del archivo CSV.
-        
-    Returns:
-        None
-    """
+    """Escribe una lista de filas en un archivo CSV, sobrescribiendo el contenido existente."""
     with open(ruta_archivo, 'w', newline='') as f:
         escritor = csv.writer(f)
         escritor.writerows(filas)
 
 def agregar_a_csv(ruta_archivo, fila):
-    """Agrega una fila al final de un archivo CSV.
-    
-    Args:
-        ruta_archivo (str): Ruta del archivo CSV a escribir.
-        fila (list): Lista que representa una fila del archivo CSV.
-        
-    Returns:
-        None
-    """
+    """Agrega una sola fila al final de un archivo CSV existente."""
     with open(ruta_archivo, 'a', newline='') as f:
         escritor = csv.writer(f)
         escritor.writerow(fila)

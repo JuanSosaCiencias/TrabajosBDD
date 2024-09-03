@@ -3,23 +3,40 @@
 from OlympicDatabase import *
 from validators import *
 
+# Códigos de color para decoracion:D
+LILA = '\033[95m'
+MORADO = '\033[35m'
+AZUL_CLARO = '\033[94m'
+AMARILLO_CLARO = '\033[93m'
+ROSA = '\033[95m' 
+VERDE_LIMON = '\033[92m'
+ROJO = '\033[91m'
+RESET = '\033[0m'  # Para resetear el color
+NEGRITA = '\033[1m'
+CYAN = '\033[36m'
+VERDE = '\033[32m'
+AZUL = '\033[34m'
+NARANJA = '\033[38;5;208m'
+MAGENTA_BRILLANTE = '\033[95m'
+CYAN_BRILLANTE = '\033[96m'
+MARRON = '\033[38;5;94m'
+CORAL = '\033[38;5;209m'
+SALMON = '\033[38;5;173m'
 
 def mostrar_disciplinas(db):
     """Muestra todas las disciplinas disponibles en la base de datos.
     
     Args:
         db (OlympicDatabase): Instancia de la base de datos.
-        
-    Returns:
-        None
+
     """
     disciplinas = db.obtener_todas_las_disciplinas()
     if disciplinas:
-        print("\nDisciplinas disponibles:")
+        print(f"\n{AZUL_CLARO}{NEGRITA}Disciplinas disponibles:{RESET}")
         for disciplina in disciplinas:
             print(f"ID: {disciplina[0]}, Nombre: {disciplina[1]}, Fecha de inclusión: {disciplina[2]}")
     else:
-        print("No hay disciplinas registradas.")
+        print(f"{ROJO}No hay disciplinas registradas.{RESET}")
 
 def menu_consultar_registro(db):
     """Menú para consultar un registro en la base de datos.
@@ -28,15 +45,12 @@ def menu_consultar_registro(db):
 
     Args:
         db (OlympicDatabase): Instancia de la base de datos.
-
-    Returns:
-        None
     """
     entidad = seleccionar_entidad()
     id = input(f"Ingrese el ID del {entidad[:-1]} a consultar: ")
     registro = db.obtener_registro(entidad, id)  
     if registro:
-        print(f"\nRegistro encontrado:")
+        print(f"\n{AZUL_CLARO}Registro encontrado:{RESET}")
         cabeceras = ['ID', 'Nombre','Apellido Materno','Apellido Paterno', 'Sexo', 'Edad', 'Disciplinas/Disciplina'] if entidad != 'disciplinas' else ['ID', 'Nombre', 'Fecha de inclusión']
         for cabecera, valor in zip(cabeceras, registro):
             print(f"{cabecera}: {valor}")
@@ -49,15 +63,15 @@ def menu_principal():
     """
     db = BaseDeDatosOlimpica()
     while True:
-        print("\n--- Menú Principal ---")
-        print("1. Agregar atleta")
-        print("2. Agregar entrenador")
-        print("3. Agregar disciplina")
-        print("4. Consultar registro")
-        print("5. Editar registro")
-        print("6. Eliminar registro")
-        print("7. Mostrar todas las disciplinas")
-        print("8. Salir")
+        print(f"{NEGRITA}{AMARILLO_CLARO}\n~~~~ Menú Principal ~~~~{RESET}")
+        print(f"{NEGRITA}{NARANJA}1.{RESET} Agregar atleta")
+        print(f"{NEGRITA}{AZUL}2.{RESET} Agregar entrenador")
+        print(f"{NEGRITA}{MAGENTA_BRILLANTE}3.{RESET} Agregar disciplina")
+        print(f"{NEGRITA}{CYAN_BRILLANTE}4.{RESET} Consultar registro")
+        print(f"{NEGRITA}{VERDE}5.{RESET} Editar registro")
+        print(f"{NEGRITA}{MARRON}6.{RESET} Eliminar registro")
+        print(f"{NEGRITA}{CORAL}7.{RESET} Mostrar todas las disciplinas")
+        print(f"{NEGRITA}{ROJO}8.{RESET} Salir")
         
         opcion = validar_numero("Seleccione una opción: ")
         
@@ -88,7 +102,7 @@ def menu_principal():
                 nombre = input("Ingrese el nombre de la disciplina: ")
                 if not disciplina_existe(db, nombre):
                     break
-                print(f"La disciplina '{nombre}' ya existe. Por favor, ingrese otra.")
+                print(f"{ROJO}La disciplina '{nombre}' ya existe. Por favor, ingrese otra.{RESET}")
             fecha_inclusion = input("Ingrese la fecha de inclusión (YYYY-MM-DD): ")
             db.agregar_registro('disciplinas', [id, nombre, fecha_inclusion])
 
@@ -128,11 +142,11 @@ def menu_principal():
             mostrar_disciplinas(db)
 
         elif opcion == 8:
-            print("Gracias por usar el sistema. ¡Hasta luego!")
+            print(f"{VERDE}Gracias por usar el sistema. ¡Hasta luego!{RESET}")
             break
 
         else:
-            print("Opción no válida. Por favor, intente de nuevo.")
+            print(f"{ROJO}Opción no válida. Por favor, intente de nuevo.{RESET}")
 
 if __name__ == "__main__":
     menu_principal()

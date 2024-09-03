@@ -5,14 +5,23 @@ import os
 import unicodedata # Para normalizar texto
 from validators import mostrar_disciplinas
 
+VERDE_LIMON = '\033[92m'
+ROJO = '\033[91m'
+RESET = '\033[0m'  # Para resetear el color
+NEGRITA = '\033[1m'
+VERDE = '\033[32m'
+AZUL = '\033[34m'
+
+
+
 class BaseDeDatosOlimpica:
     """Clase para manejar la base de datos de atletas, entrenadores y disciplinas olímpicas.
     
-    Attributes:
+    Attributos:
         entidades (dict): Rutas de los archivos CSV de las entidades.
         ruta_datos (str): Ruta de la carpeta de datos.
         
-    Methods:
+    Métodos:
         id_existe(entidad, id): Verifica si un ID ya está en uso en la base de datos.
         agregar_registro(entidad, registro): Añade un registro a la base de datos.
         obtener_registro(entidad, id): Obtiene un registro de la base de datos.
@@ -30,12 +39,6 @@ class BaseDeDatosOlimpica:
 
     def __init__(self):
         """Inicializa la base de datos y las rutas de los archivos CSV.
-        
-        Args:
-            None
-            
-        Returns:
-            None
         """
         # Definimos la ruta de la carpeta de datos
         self.ruta_datos = 'data'
@@ -73,13 +76,11 @@ class BaseDeDatosOlimpica:
             entidades (str): Nombre de la entidad a la que pertenece el registro.
             record (list): Lista con los datos del registro a añadir.
             
-        Returns:
-            None
         """
         with open(self.entidades[entidad], 'a', newline='') as f:
             escritor = csv.writer(f)
             escritor.writerow(registro)
-        print(f"Registro añadido a {entidad} exitosamente.")
+        print(f"{VERDE}Registro añadido a {entidad} exitosamente.{RESET}")
 
     def obtener_registro(self, entidad, id):
         """Obtiene un registro de la base de datos.
@@ -89,17 +90,17 @@ class BaseDeDatosOlimpica:
             id (str): ID del registro a obtener.
             
         Returns:
-            list: Lista con los datos del registro, o None si no se encontró el registro.
+            list: Lista con los datos del registro, o Ninguno si no se encontró el registro.
         """
         if not os.path.exists(self.entidades[entidad]):
-            print(f"No hay registros en {entidad}.")
+            print(f"{ROJO}No hay registros en {entidad}.{RESET}")
             return None
         with open(self.entidades[entidad], 'r') as f:
             lector = csv.reader(f)
             for fila in lector:
                 if fila[0] == id:
                     return fila
-        print(f"No se encontró el registro con ID {id} en {entidad}.")
+        print(f"{ROJO}No se encontró el registro con ID {id} en {entidad}.{RESET}")
         return None
 
     def actualizar_registro(self, entidad, id, nuevos_datos):
@@ -109,12 +110,10 @@ class BaseDeDatosOlimpica:
             entidades (str): Nombre de la entidad a la que pertenece el registro.
             id (str): ID del registro a actualizar.
             new_data (list): Lista con los nuevos datos del registro.
-            
-        Returns:
-            None
+     
         """
         if not os.path.exists(self.entidades[entidad]):
-            print(f"No hay registros en {entidad} para actualizar.")
+            print(f"{ROJO}No hay registros en {entidad} para actualizar.{RESET}")
             return
         filas = []
         actualizado = False
@@ -130,9 +129,9 @@ class BaseDeDatosOlimpica:
             with open(self.entidades[entidad], 'w', newline='') as f:
                 escritor = csv.writer(f)
                 escritor.writerows(filas)
-            print(f"Registro actualizado en {entidad} exitosamente.")
+            print(f"{VERDE}Registro actualizado en {entidad} exitosamente.{RESET}")
         else:
-            print(f"No se encontró el registro con ID {id} en {entidad}.")
+            print(f"{ROJO}No se encontró el registro con ID {id} en {entidad}.{RESET}")
 
     def eliminar_registro(self, entidad, id):
         """Elimina un registro de la base de datos.
@@ -141,8 +140,7 @@ class BaseDeDatosOlimpica:
             entidades (str): Nombre de la entidad a la que pertenece el registro.
             id (str): ID del registro a eliminar.
             
-        Returns:
-            None
+       
         """
         if not os.path.exists(self.entidades[entidad]):
             print(f"No hay registros en {entidad} para eliminar.")
@@ -161,15 +159,12 @@ class BaseDeDatosOlimpica:
             with open(self.entidades[entidad], 'w', newline='') as f:
                 escritor = csv.writer(f)
                 escritor.writerows(filas)
-            print(f"Registro eliminado de {entidad} exitosamente.")
+            print(f"{VERDE}Registro eliminado de {entidad} exitosamente.{RESET}")
         else:
-            print(f"No se encontró el registro con ID {id} en {entidad}.")
+            print(f"{ROJO}No se encontró el registro con ID {id} en {entidad}.{RESET}")
 
     def obtener_todas_las_disciplinas(self):
         """Obtiene todas las disciplinas registradas en la base de datos.
-
-        Args:
-            None
         
         Returns:
             list: Lista de disciplinas, donde cada disciplina es una lista con los campos ID, Nombre y Fecha de inclusión.
@@ -199,7 +194,7 @@ def conseguir_siguiente_id(db, entidad):
             ids = [int(row[0]) for row in reader if len(row) > 0 and row[0].isdigit()]
             return max(ids) + 1 if ids else 1
     except Exception as e:
-        print(f"Error al obtener el siguiente ID: {e}")
+        print(f"{ROJO}Error al obtener el siguiente ID: {e}{RESET}")
         return 1
 
 def disciplina_existe(db, discipline_name):
@@ -254,16 +249,16 @@ def ingresar_disciplinas(db):
         for disciplina in disciplinas:
             disciplina = disciplina.strip()
             if not disciplina_existe(db, disciplina):
-                print(f"La disciplina '{disciplina}' no existe.")
-                option = input(f"¿Desea agregar '{disciplina}' como una nueva disciplina? (s/n): ").lower()
+                print(f"{ROJO}La disciplina '{disciplina}' no existe.{RESET}")
+                option = input(f"{VERDE_LIMON}¿Desea agregar '{disciplina}' como una nueva disciplina? (s/n): {VERDE_LIMON}").lower()
                 if option == 's':
                     fecha_inclusion = input("Ingrese la fecha de inclusión (YYYY-MM-DD): ")
                     id = conseguir_siguiente_id(db, 'disciplinas')
                     db.agregar_registro('disciplinas', [id, disciplina, fecha_inclusion])
-                    print(f"Disciplina '{disciplina}' añadida exitosamente.")
+                    print(f"{VERDE}Disciplina '{disciplina}' añadida exitosamente.{RESET}")
                 else:
                     all_valid = False
-                    print(f"Por favor, ingrese disciplinas válidas o agregue las que falten.")
+                    print(f"{ROJO}Por favor, ingrese disciplinas válidas o agregue las que falten.{RESET}")
         if all_valid:
             valid_disciplines = [disciplina.strip() for disciplina in disciplinas]
             break
