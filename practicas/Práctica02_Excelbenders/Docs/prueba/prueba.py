@@ -267,20 +267,24 @@ def main_menu():
         if choice == 1:
             id = get_next_id(db, 'atletas')  
             nombre = input("Ingrese el nombre del atleta: ")
+            apellido_paterno = input("Ingrese el apellido paterno del atleta: ")
+            apellido_materno = input("Ingrese el apellido materno del atleta: ")
             sexo = select_sex()
             edad = validate_number("Ingrese la edad del atleta: ")
             show_disciplines(db)
             disciplinas = input_disciplines(db)
-            db.add_record('atletas', [id, nombre, sexo, edad, disciplinas])
+            db.add_record('atletas', [id, nombre, apellido_paterno, apellido_materno, sexo, edad, disciplinas])
 
         elif choice == 2:
             id = get_next_id(db, 'entrenadores') 
             nombre = input("Ingrese el nombre del entrenador: ")
+            apellido_paterno = input("Ingrese el apellido paterno del entrenador: ")
+            apellido_materno = input("Ingrese el apellido materno del entrenador: ")
             sexo = select_sex()
             edad = validate_number("Ingrese la edad del entrenador: ")
             show_disciplines(db)
-            disciplinas = input_disciplines(db)  # Cambiado a disciplinas
-            db.add_record('entrenadores', [id, nombre, sexo, edad, disciplinas])  # Cambiado a disciplinas
+            disciplinas = input_disciplines(db)
+            db.add_record('entrenadores', [id, nombre, apellido_paterno, apellido_materno, sexo, edad, disciplinas])
 
 
         elif choice == 3:
@@ -302,19 +306,23 @@ def main_menu():
             id = input("Ingrese el ID a editar: ")
             if entity == 'atletas':
                 nombre = input("Ingrese el nuevo nombre del atleta: ")
+                apellido_paterno = input("Ingrese el nuevo apellido paterno del atleta: ")
+                apellido_materno = input("Ingrese el nuevo apellido materno del atleta: ")
                 sexo = select_sex()
                 edad = validate_number("Ingrese la nueva edad del atleta: ")
                 show_disciplines(db)
                 disciplinas = input("Ingrese las nuevas disciplinas del atleta (separadas por coma): ")
-                db.update_record(entity, id, [nombre, sexo, edad, disciplinas])
+                db.update_record(entity, id, [nombre, apellido_paterno, apellido_materno, sexo, edad, disciplinas])
 
             elif entity == 'entrenadores':
                 nombre = input("Ingrese el nuevo nombre del entrenador: ")
+                apellido_paterno = input("Ingrese el nuevo apellido paterno del entrenador: ")
+                apellido_materno = input("Ingrese el nuevo apellido materno del entrenador: ")
                 sexo = select_sex()
                 edad = validate_number("Ingrese la nueva edad del entrenador: ")
                 show_disciplines(db)
-                disciplina = input("Ingrese la nueva disciplina del entrenador: ")
-                db.update_record(entity, id, [nombre, sexo, edad, disciplina])
+                disciplinas = input("Ingrese las nuevas disciplinas del entrenador (separadas por coma): ")
+                db.update_record(entity, id, [nombre, apellido_paterno, apellido_materno, sexo, edad, disciplinas])
 
             elif entity == 'disciplinas':
                 nombre = input("Ingrese el nuevo nombre de la disciplina: ")
