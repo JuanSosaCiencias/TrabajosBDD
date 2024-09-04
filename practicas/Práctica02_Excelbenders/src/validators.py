@@ -35,25 +35,6 @@ def validar_numero(prompt):
         except ValueError:
             print(f"{ROJO}Por favor, ingrese un número válido.{RESET}")
 
-def validar_edad(prompt):
-    """Valida que la edad ingresada por el usuario esté entre 8 y 60 años.
-    
-    Args:
-        prompt (str): Mensaje a mostrar al usuario para solicitar la edad.
-        
-    Returns:
-        int: Edad validada.
-    """
-    while True:
-        try:
-            edad = int(input(prompt))
-            if 8 <= edad <= 60:
-                return edad
-            else:
-                print("Por favor, ingrese una edad entre 8 y 60 años.")
-        except ValueError:
-            print("Por favor, ingrese un número válido.")
-
 def validar_nombre(mensaje):
     """Valida que el nombre ingresado contenga solo letras.
 
