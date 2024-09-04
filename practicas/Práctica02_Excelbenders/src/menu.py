@@ -51,7 +51,7 @@ def menu_consultar_registro(db):
     registro = db.obtener_registro(entidad, id)  
     if registro:
         print(f"\n{AZUL_CLARO}Registro encontrado:{RESET}")
-        cabeceras = ['ID', 'Nombre','Apellido Materno','Apellido Paterno', 'Sexo', 'Edad', 'Disciplinas/Disciplina'] if entidad != 'disciplinas' else ['ID', 'Nombre', 'Fecha de inclusión']
+        cabeceras = ['ID', 'Nombre','Apellido Materno','Apellido Paterno', 'Sexo', 'Fecha de Nacimiento','Correo', 'Disciplina(s)'] if entidad != 'disciplinas' else ['ID', 'Nombre', 'Fecha de inclusión']
         for cabecera, valor in zip(cabeceras, registro):
             print(f"{cabecera}: {valor}")
 
@@ -80,20 +80,26 @@ def menu_principal():
             nombre = input("Ingrese el nombre del atleta: ")
             apellido_paterno = input("Ingrese el apellido paterno del atleta: ")
             apellido_materno = input("Ingrese el apellido materno del atleta: ")
+            nacionalidad= input("Ingrese la nacionalidad del atleta: ")
             sexo = seleccionar_sexo()
-            edad = validar_numero("Ingrese la edad del atleta: ")
+            fecha_nacimiento = validar_fecha("Ingrese la fecha de nacimiento del atleta (YYYY-MM-DD): ")
+            correo=validar_formato_correo("Ingrese el correo del atleta: ")
+            telefono= validar_numero("Ingresa el número telefónico del atleta: ")
             disciplinas = ingresar_disciplinas(db)
-            db.agregar_registro('atletas', [id, nombre, apellido_paterno, apellido_materno, sexo, edad, disciplinas])
+            db.agregar_registro('atletas', [id, nombre, apellido_paterno, apellido_materno, nacionalidad, sexo, fecha_nacimiento,correo,telefono, disciplinas])
 
         elif opcion == 2:
             id = conseguir_siguiente_id(db, 'entrenadores')
             nombre = input("Ingrese el nombre del entrenador: ")
             apellido_paterno = input("Ingrese el apellido paterno del entrenador: ")
             apellido_materno = input("Ingrese el apellido materno del entrenador: ")
+            nacionalidad= input("Ingrese la nacionalidad del entrenador: ")
             sexo = seleccionar_sexo()
-            edad = validar_numero("Ingrese la edad del entrenador: ")
+            fecha_nacimiento = validar_fecha("Ingrese la fecha de nacimiento del entrenador (YYYY-MM-DD): ")
+            correo=validar_formato_correo("Ingrese el correo del entrenador: ")
+            telefono= validar_numero("Ingresa el número telefónico del entrenador: ")
             disciplina = ingresar_disciplinas(db)
-            db.agregar_registro('entrenadores', [id, nombre, apellido_paterno, apellido_materno, sexo, edad, disciplina])
+            db.agregar_registro('entrenadores', [id, nombre, apellido_paterno, apellido_materno, nacionalidad, sexo, fecha_nacimiento,correo, telefono, disciplina])
 
         elif opcion == 3:
             id = conseguir_siguiente_id(db, 'disciplinas')
@@ -103,7 +109,7 @@ def menu_principal():
                 if not disciplina_existe(db, nombre):
                     break
                 print(f"{ROJO}La disciplina '{nombre}' ya existe. Por favor, ingrese otra.{RESET}")
-            fecha_inclusion = input("Ingrese la fecha de inclusión (YYYY-MM-DD): ")
+            fecha_inclusion = validar_fecha(input("Ingrese la fecha de inclusión (YYYY-MM-DD): "))
             db.agregar_registro('disciplinas', [id, nombre, fecha_inclusion])
 
         elif opcion == 4:
@@ -116,21 +122,27 @@ def menu_principal():
                 nombre = input("Ingrese el nuevo nombre del atleta: ")
                 apellido_paterno = input("Ingrese el nuevo apellido paterno del atleta: ")
                 apellido_materno = input("Ingrese el nuevo apellido materno del atleta: ")
+                nacionalidad= input("Ingrese la nueva nacionalidad del atleta: ")
                 sexo = seleccionar_sexo()
-                edad = validar_numero("Ingrese la nueva edad del atleta: ")
+                fecha_nacimiento = validar_fecha("Ingrese la nueva fecha de nacimiento del atleta (YYYY-MM-DD): ")
+                correo= validar_formato_correo("Ingrese el nuevo correo del atleta: ")
+                telefono=validar_numero("Ingrese el nuevo número telefónico del atleta: ")
                 disciplinas = input("Ingrese las nuevas disciplinas del atleta (separadas por coma): ")
-                db.actualizar_registro(entidad, id, [nombre, apellido_paterno, apellido_materno, sexo, edad, disciplinas])
+                db.actualizar_registro(entidad, id, [nombre, apellido_paterno, apellido_materno, nacionalidad, sexo, fecha_nacimiento, correo, telefono, disciplinas])
             elif entidad == 'entrenadores':
                 nombre = input("Ingrese el nuevo nombre del entrenador: ")
                 apellido_paterno = input("Ingrese el nuevo apellido paterno del entrenador: ")
                 apellido_materno = input("Ingrese el nuevo apellido materno del entrenador: ")
+                nacionalidad= input("Ingrese la nueva nacionalidad del entrenador: ")
                 sexo = seleccionar_sexo()
-                edad = validar_numero("Ingrese la nueva edad del entrenador: ")
+                fecha_nacimiento = validar_fecha("Ingrese la nueva fecha de nacimiento del entrenador (YYYY-MM-DD): ")
+                correo= validar_formato_correo("Ingrese el nuevo correo del entrenador: ")
+                telefono=validar_numero("Ingrese el nuevo número telefónico del entrenador: ")
                 disciplina = input("Ingrese la nueva disciplina del entrenador: ")
-                db.actualizar_registro(entidad, id, [nombre, apellido_paterno, apellido_materno, sexo, edad, disciplina])
+                db.actualizar_registro(entidad, id, [nombre, apellido_paterno, apellido_materno, nacionalidad, sexo, fecha_nacimiento, correo, telefono, disciplina])
             elif entidad == 'disciplinas':
                 nombre = input("Ingrese el nuevo nombre de la disciplina: ")
-                fecha_inclusion = input("Ingrese la nueva fecha de inclusión (YYYY-MM-DD): ")
+                fecha_inclusion = validar_fecha("Ingrese la nueva fecha de inclusión (YYYY-MM-DD): ")
                 db.actualizar_registro(entidad, id, [nombre, fecha_inclusion])
 
         elif opcion == 6:

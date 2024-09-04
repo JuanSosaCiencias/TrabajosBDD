@@ -1,4 +1,7 @@
 # validators.py
+from datetime import datetime
+import re
+
 LILA = '\033[95m'
 MORADO = '\033[35m'
 AZUL_CLARO = '\033[94m'
@@ -19,10 +22,8 @@ CORAL = '\033[38;5;209m'
 SALMON = '\033[38;5;173m'
 def validar_numero(prompt):
     """Valida que el número ingresado por el usuario sea un entero.
-    
     Args:
         prompt (str): Mensaje a mostrar al usuario para solicitar el número.
-        
     Returns:
         int: Número validado.
     """
@@ -31,6 +32,50 @@ def validar_numero(prompt):
             return int(input(prompt))
         except ValueError:
             print(f"{ROJO}Por favor, ingrese un número válido.{RESET}")
+
+
+def validar_fecha(prompt):
+    """
+    Metodo que valida que la fecha ingresada sea una fecha válida y esté en el formato correcto
+    """
+    while True:
+        fecha_str = input(prompt)
+        try:
+            fecha = datetime.strptime(fecha_str, "%Y-%m-%d")
+            
+            if fecha.date() > datetime.now().date():
+                print(f"{ROJO}La fecha no puede ser en el futuro.{RESET}")
+                continue
+            
+            # Verifica que la persona no tenga más de 120 años (ajusta según necesites)
+            edad = (datetime.now().date() - fecha.date()).days // 365
+            if edad > 120:
+                print(f"{ROJO}La fecha ingresada resulta en una edad mayor a 120 años.{RESET}")
+                continue
+            
+            return fecha.date()
+        except ValueError:
+            print(f"{ROJO}Por favor, ingrese una fecha válida en el formato YYYY-MM-DD.{RESET}")
+
+
+def validar_formato_correo(prompt):
+    """
+    Solicita al usuario un correo electrónico y valida su formato.
+    
+    Args:
+    prompt (str): El mensaje para mostrar al usuario cuando se solicita el correo.
+    
+    Returns:
+    str: El correo electrónico válido ingresado por el usuario.
+    """
+    patron = r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$'
+    
+    while True:
+        correo = input(prompt)
+        if re.match(patron, correo):
+            return correo
+        else:
+            print("Formato de correo electrónico no válido. Por favor, intente nuevamente.")
 
 def validar_id(db, entidad, prompt):
 
