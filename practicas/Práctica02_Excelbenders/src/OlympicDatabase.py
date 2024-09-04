@@ -3,8 +3,10 @@
 import csv
 import os
 import unicodedata # Para normalizar texto
+
 from validators import mostrar_disciplinas
 from validators import validar_fecha
+from validators import validar_numero
 
 VERDE_LIMON = '\033[92m'
 ROJO = '\033[91m'
@@ -83,6 +85,7 @@ class BaseDeDatosOlimpica:
             escritor.writerow(registro)
             
         print(f"{VERDE}Registro añadido a {entidad} exitosamente.{RESET}")
+        
 
     def obtener_registro(self, entidad, id):
         """Obtiene un registro de la base de datos.
@@ -255,14 +258,16 @@ def ingresar_disciplinas(db):
                 option = input(f"{VERDE_LIMON}¿Desea agregar '{disciplina}' como una nueva disciplina? (s/n): {RESET}").lower()
                 if option == 's':
                     fecha_inclusion = validar_fecha("Ingrese la fecha de inclusión (YYYY-MM-DD): ")
+                    categoria=input("Ingrese la categoría (individual/equipos): ")
+                    participantes= validar_numero("Ingrese el total de participantes (ej. 1,2,...): ")
                     id = conseguir_siguiente_id(db, 'disciplinas')
-                    db.agregar_registro('disciplinas', [id, disciplina, fecha_inclusion])
+                    db.agregar_registro('disciplinas', [id, disciplina, fecha_inclusion, categoria, participantes])
+
                     print(f"{VERDE}Disciplina '{disciplina}' añadida exitosamente.{RESET}")
                 else:
                     all_valid = False
                     mostrar_disciplinas(db)
                     break
-                    print(f"{ROJO}Por favor, ingrese disciplinas válidas o agregue las que falten.{RESET}")
         if all_valid:
             valid_disciplines = [disciplina.strip() for disciplina in disciplinas]
             break
