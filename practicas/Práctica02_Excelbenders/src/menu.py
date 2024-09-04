@@ -77,9 +77,9 @@ def menu_principal():
         
         if opcion == 1:
             id = conseguir_siguiente_id(db, 'atletas')
-            nombre = input("Ingrese el nombre del atleta: ")
-            apellido_paterno = input("Ingrese el apellido paterno del atleta: ")
-            apellido_materno = input("Ingrese el apellido materno del atleta: ")
+            nombre = validar_nombre("Ingrese el nombre del atleta: ")
+            apellido_paterno = validar_nombre("Ingrese el apellido paterno del atleta: ")
+            apellido_materno = validar_nombre("Ingrese el apellido materno del atleta: ")
             nacionalidad= input("Ingrese la nacionalidad del atleta: ")
             sexo = seleccionar_sexo()
             fecha_nacimiento = validar_fecha("Ingrese la fecha de nacimiento del atleta (YYYY-MM-DD): ")
@@ -90,9 +90,9 @@ def menu_principal():
 
         elif opcion == 2:
             id = conseguir_siguiente_id(db, 'entrenadores')
-            nombre = input("Ingrese el nombre del entrenador: ")
-            apellido_paterno = input("Ingrese el apellido paterno del entrenador: ")
-            apellido_materno = input("Ingrese el apellido materno del entrenador: ")
+            nombre = validar_nombre("Ingrese el nombre del entrenador: ")
+            apellido_paterno = validar_nombre("Ingrese el apellido paterno del entrenador: ")
+            apellido_materno = validar_nombre("Ingrese el apellido materno del entrenador: ")
             nacionalidad= input("Ingrese la nacionalidad del entrenador: ")
             sexo = seleccionar_sexo()
             fecha_nacimiento = validar_fecha("Ingrese la fecha de nacimiento del entrenador (YYYY-MM-DD): ")
@@ -119,9 +119,9 @@ def menu_principal():
             entidad = seleccionar_entidad()
             id = input("Ingrese el ID a editar: ")
             if entidad == 'atletas':
-                nombre = input("Ingrese el nuevo nombre del atleta: ")
-                apellido_paterno = input("Ingrese el nuevo apellido paterno del atleta: ")
-                apellido_materno = input("Ingrese el nuevo apellido materno del atleta: ")
+                nombre = validar_nombre("Ingrese el nuevo nombre del atleta: ")
+                apellido_paterno = validar_nombre("Ingrese el nuevo apellido paterno del atleta: ")
+                apellido_materno = validar_nombre("Ingrese el nuevo apellido materno del atleta: ")
                 nacionalidad= input("Ingrese la nueva nacionalidad del atleta: ")
                 sexo = seleccionar_sexo()
                 fecha_nacimiento = validar_fecha("Ingrese la nueva fecha de nacimiento del atleta (YYYY-MM-DD): ")
@@ -130,9 +130,9 @@ def menu_principal():
                 disciplinas = input("Ingrese las nuevas disciplinas del atleta (separadas por coma): ")
                 db.actualizar_registro(entidad, id, [nombre, apellido_paterno, apellido_materno, nacionalidad, sexo, fecha_nacimiento, correo, telefono, disciplinas])
             elif entidad == 'entrenadores':
-                nombre = input("Ingrese el nuevo nombre del entrenador: ")
-                apellido_paterno = input("Ingrese el nuevo apellido paterno del entrenador: ")
-                apellido_materno = input("Ingrese el nuevo apellido materno del entrenador: ")
+                nombre = validar_nombre("Ingrese el nuevo nombre del entrenador: ")
+                apellido_paterno = validar_nombre("Ingrese el nuevo apellido paterno del entrenador: ")
+                apellido_materno = validar_nombre("Ingrese el nuevo apellido materno del entrenador: ")
                 nacionalidad= input("Ingrese la nueva nacionalidad del entrenador: ")
                 sexo = seleccionar_sexo()
                 fecha_nacimiento = validar_fecha("Ingrese la nueva fecha de nacimiento del entrenador (YYYY-MM-DD): ")
@@ -141,7 +141,7 @@ def menu_principal():
                 disciplina = input("Ingrese la nueva disciplina del entrenador: ")
                 db.actualizar_registro(entidad, id, [nombre, apellido_paterno, apellido_materno, nacionalidad, sexo, fecha_nacimiento, correo, telefono, disciplina])
             elif entidad == 'disciplinas':
-                nombre = input("Ingrese el nuevo nombre de la disciplina: ")
+                nombre = validar_nombre("Ingrese el nuevo nombre de la disciplina: ")
                 fecha_inclusion = validar_fecha("Ingrese la nueva fecha de inclusión (YYYY-MM-DD): ")
                 db.actualizar_registro(entidad, id, [nombre, fecha_inclusion])
 
