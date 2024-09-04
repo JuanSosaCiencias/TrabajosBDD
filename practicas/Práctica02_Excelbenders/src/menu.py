@@ -51,7 +51,7 @@ def menu_consultar_registro(db):
     registro = db.obtener_registro(entidad, id)  
     if registro:
         print(f"\n{AZUL_CLARO}Registro encontrado:{RESET}")
-        cabeceras = ['ID', 'Nombre','Apellido Materno','Apellido Paterno', 'Sexo', 'Fecha de Nacimiento','Correo', 'Teléfono', 'Disciplina(s)'] if entidad != 'disciplinas' else ['ID', 'Nombre', 'Fecha de inclusión', 'Categoría', 'Participantes']
+        cabeceras = ['ID', 'Nombre','Apellido Materno','Apellido Paterno','Nacionalidad', 'Sexo', 'Fecha de Nacimiento','Correo', 'Teléfono', 'Disciplina(s)'] if entidad != 'disciplinas' else ['ID', 'Nombre', 'Fecha de inclusión', 'Categoría', 'Participantes']
         for cabecera, valor in zip(cabeceras, registro):
             print(f"{cabecera}: {valor}")
 
