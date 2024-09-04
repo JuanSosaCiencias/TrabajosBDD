@@ -4,7 +4,7 @@ import csv
 import os
 
 def leer_csv(ruta_archivo):
-    """Lee el contenido de un archivo CSV y devuelve las filas como una lista."""
+    """Lee el conten1ido de un archivo CSV y devuelve las filas como una lista."""
     if os.path.exists(ruta_archivo):
         with open(ruta_archivo, 'r') as f:
             lector = csv.reader(f)
