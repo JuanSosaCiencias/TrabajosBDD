@@ -54,6 +54,23 @@ def validar_edad(prompt):
         except ValueError:
             print("Por favor, ingrese un número válido.")
 
+def validar_nombre(mensaje):
+    """Valida que el nombre ingresado contenga solo letras.
+
+    Args:
+        mensaje (str): El mensaje a mostrar al usuario.
+
+    Returns:
+        str: El nombre validado.
+    """
+    while True:
+        nombre = input(mensaje)
+        # Verificar que todos los caracteres sean letras o espacios
+        if all(char.isalpha() or char.isspace() for char in nombre):
+            return nombre
+        else:
+            print("Error: El nombre solo debe contener letras y espacios. Intente de nuevo.")
+
 def validar_fecha(prompt):
     """
     Metodo que valida que la fecha ingresada sea una fecha válida y esté en el formato correcto
