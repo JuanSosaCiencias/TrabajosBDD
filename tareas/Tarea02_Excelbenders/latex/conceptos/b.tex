@@ -1,10 +1,7 @@
-\begin{center}
-    \textbf{¿Cuál es el significado de un tipo de relación recursiva? Proporciona un par de ejemplos de este tipo de relación.}
-\end{center}
+¿En qué condiciones se puede migrar un atributo de algún tipo de entidad que participa en un tipo de relación binaria y convertirse en un atributo del tipo de relación? ¿Cuál sería en el efecto?
 
-\vspace{.3cm}
+   Las \textbf{condiciones} en que se puede realizar esto es cuando la relación tiene una cardinalidad de muchos a muchos. Ademas el atributo a migrar debe tener sentido en el contexto de la relación y no solo de la entidad individual, y debe depender de la ocurrencia específica de la relación, no solo de una de las entidades participantes. 
+   
+   Una buena condicion para migrar es si el atributo es multivaluado para una misma instancia de la relación.
 
-Un tipo de relación recursiva es una relación donde una entidad está relacionada consigo misma. Es decir, es cuando tenemos un conjunto de objetos del mismo tipo que pueden tener alguna relación entre ellos. Esto es útil cuando queremos modelar situaciones en las que un elemento necesita estar vinculado a otro del mismo tipo.  Por ejemplo, imaginemos que en una empresa tenemos empleados y algunos empleados supervisan a otros empleados. Aquí, la entidad es \textit{Empleado}, y la relación recursiva sería \textit{supervisa}. Esta relación nos diría que un empleado puede supervisar a uno o más empleados, y a su vez, un empleado puede ser supervisado por uno o más empleados. La relación “supervisa” es recursiva porque conecta empleados con empleados. \\
-
-Otro ejemplo sería en una biblioteca, donde un libro puede estar compuesto de varios capítulos, y a su vez, cada capítulo puede estar compuesto de subcapítulos. Aquí, la entidad es \textit{Capítulo}, y la relación recursiva sería \textit{compuesto de}. Esta relación nos dice que un capítulo puede contener otros capítulos, permitiendo representar una estructura jerárquica de contenidos dentro del mismo tipo de entidad. \\
-
+   Por otro lado, los \textbf{efectos} que tendría puede ser que, como movemos el atributo a la relación, se está indicando que este atributo es una propiedad de la interacción entre las dos entidades, no de una entidad individual, lo cual nos permite asociar diferentes valores del atributo a diferentes instancias de la relación entre las mismas entidades, esto nos permitiría mejorar la integridad de los datos al asociar el atributo directamente con la relación que lo determina y evitar redundancias. 
