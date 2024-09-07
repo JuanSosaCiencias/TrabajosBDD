@@ -1,0 +1,76 @@
+\begin{center}
+    \textbf{Responde a las siguientes cuestiones, indicando si son posibles o no y justificando tu respuesta. Cuando no sea posible, deberás indicar alguna recomendación al respecto:} 
+
+
+    \textbf{¿Un atributo compuesto puede ser llave?, ¿Un atributo multivaluado puede ser llave?, ¿Un atributo derivado puede ser llave?, ¿Un atributo multivaluado puede ser compuesto?, ¿Un atributo multivaluado puede ser derivado?, ¿Qué implicaría la existencia de una entidad cuyos atributos sean todos derivados?} 
+\end{center}
+
+\vspace{.3cm}
+
+\begin{enumerate}
+    \item ¿Un atributo compuesto puede ser llave?
+
+Sí es posible. \\
+Bien sabemos que un atributo compuesto es cuando dicho atributo se puede descomponer en varios sub-atributos más simples; como lo es el $"Nombre completo"$, se descompone en $"Nombre"$, $"Apellido paterno"$, $"Apellido materno$. \\
+
+Entonces sí es posible, pero en la mayoría de dichos casos no es recomendable. \\
+
+Al descomponerse el atributo compuesto en varios sub-atributos, claro que se puede utilizar como llave, pues combinados pueden formar una llave. Un ejemplo sería el $"Nombre completo"$, si lo tomamos como llave y nos aseguramos que no haya dos personas con el mismo nombre completo, claro que funcionaría. \\
+
+Pero es mejor hacer algo más simple, porque entre más aumente la Base de Datos, se complica más guardar otros atributos, entonces es mejor usar un atributo más simple; un ejemplo sería $"número de identificación"$. \\
+
+    \item ¿Un atributo multivaluado puede ser llave?
+
+No es posible. \\
+Bien sabemos que un atributo multivaluado es aquel que se puede encontrar con más de un valor para una entidad, en lugar de uno solo, contine un conjunto de valores. Un ejemplo sería $"Número de teléfono"$. \\
+
+Entonces no es posible, pues al ser multivaludado contiene más de un valor, y bien se sabe que por definición de llave nos pide que sea único, y al ser atributo multivaluado, no  nos puede garantizar esto. \\
+
+Pero en vez de un atributo multivaluado, se pude crear una entidad separada para los múltiples valores y establecer la relación uno a muchos. \\
+
+    \item ¿Un atributo derivado puede ser llave?
+
+No es posible. \\
+Bien sabemos que un atributo derivado es aquel que su valor se obtiene a partir de varios atributos. Y no está almacenado directamente en la Base de Datos. Un ejemplo sería $"Edad", "Fecha de nacimiento"$ \\
+
+Como se sabe por la definición, el atributo derivado se calcula a partir de otros atributos, lo que quiere decir que no cuenta con valor alamacenado propio, y bien sabemos que la llave debe tener unicidad y estabilidad, que es lo que no nos garantiza el atributo derivado. Un ejemplo es $"Edad"$, la cual cambia con el tiempo. \\
+
+Pero en vez de un atributo derivado, se puede utilizar atributos almacenados como llaves. \\
+
+    \item ¿Un atributo multivaluado puede ser compuesto?
+
+Sí es posible. \\
+Bien sabemos que un atributo multivaluado es aquel que se puede encontrar con más de un valor para una entidad, en lugar de uno solo, contine un conjunto de valores. Un ejemplo sería $"Número de teléfono"$. \\
+
+Bien sabemos que un atributo compuesto es cuando dicho atributo se puede descomponer en varios sub-atributos más simples; como lo es el $"Nombre completo"$, se descompone en $"Nombre"$, $"Apellido paterno"$, $"Apellido materno$. \\
+
+Entonces claro que sí se puede, Un ejemplo sería que una persona tenga varios domicilios, y cada domicilio es multivaluado puede estar compuesto, es decir tener sub-atributos como \\
+$"calle", "número", "ciudad", etc.$ \\
+
+Domicilios (multivaluado): \\
+Domicilio 1: Calle "A", Número "123", Ciudad "X" \\
+Domicilio 2: Calle "B", Número "456", Ciudad "Y" \\
+
+    \item ¿Un atributo multivaluado puede ser derivado?
+
+Sí es posible. \\
+Bien sabemos que un atributo multivaluado es aquel que se puede encontrar con más de un valor para una entidad, en lugar de uno solo, contine un conjunto de valores. Un ejemplo sería $"Número de teléfono"$. \\
+
+Bien sabemos que un atributo derivado es aquel que su valor se obtiene a partir de varios atributos. Y no está almacenado directamente en la Base de Datos. Un ejemplo sería $"Edad", "Fecha de nacimiento"$ \\
+
+Entonces por supuesto que sí. Un ejemplo sería que una persona puede tener varias edades relacionadas a diferentes eventos históricos, y cada una de esas edades puede derivarse de la fecha de nacimiento en relación con esos eventos. \\
+
+Atributo derivado multivaluado: $"Edad en distintos aniversarios"$ \\
+Edad en el año 2000: 10 años \\
+Edad en el año 2020: 30 años \\
+
+    \item ¿Qué implicaría la existencia de una entidad cuyos atributos sean todos derivados?
+
+Esto implica que dicha entidad no tiene nada de información alamcenada en la Base de Daros, esto por la definición de atributos derivados. También sus valores de dichas entidades se calculan a partir de otras entidades o atributos. \\
+
+Por lo tanto esto sería una manera ineficiente y complicada de manejar la Base de Datos, ya que cada vez se requerirá calcular sus atributos por otros atributos, en vez de tener acceso a la información directamente almacenada.
+
+Pero em vez de tener una entidad cuyos atribuos sean todos derivados, mejor que sean atributos compuestos u otro tipo de atributos, pues si se hacen derivados perdería la capacidad e almacenar datos propios.
+
+\end{enumerate}
+
