@@ -1,1 +1,16 @@
-\textbf{Los empleados y/o directores deben vivir en la misma Ciudad que la Compañía para la que laboran/dirigen.}\vspace{.3cm}
+\textbf{Los empleados y/o directores deben vivir en la misma Ciudad que la Compañía para la que laboran/dirigen.}\vspace{.3cm} \\
+
+Para que esta afirmación sea verdadera, debería haber algún tipo de relación entre la ciudad en la que vive un empleado o director y la ciudad donde está ubicada la compañía para la cual trabajan o dirigen, pero dado que no existe una tabla llamada \textit{compañía}, podríamos asumir que dicha información, se almacena en alguna de las otras tablas. Por lo cual se pueden considerar los siguientes dos casos: \\
+
+\textit{Caso 1: Si hay un campo ciuada en ambas tablas:}
+
+Si alguna de las tablas \texttt{proyecto}, \texttt{asignar} o \texttt{dirigir} contiene un campo que indique la ubicación de la compañía o proyecto, y la tabla \texttt{empleado} incluye un campo Ciudad \textit{(como efectivamente lo tiene)}, entonces podríamos establecer una restricción de integridad referencial para asegurar que los valores de Ciudad coincidan. De lo contrario, la afirmación no sería válida automáticamente.\\
+
+\textit{Caso 2: Si solo hay un campo Ciudad en la tabla de Empleado:} \\
+
+Si solo hay un campo Ciudad en la tabla \texttt{empleado}, y ninguna otra tabla contiene información sobre la ubicación de la compañía o proyecto, no habría forma de comprobar la afirmación, ya que no habría un valor de ciudad en el lado de la empresa o proyecto. En este caso, la afirmación no podría ser validada. \\
+
+
+Entonces analizando estos casos, se puede decir que esta afirmación no se cumple por sí sola, ya que no hay una relación directa entre la ciudad de la empresa y la ciudad de los empleados o directores. Para que esta afirmación sea verdadera, se necesitaría una tabla adicional que contenga información sobre la ubicación de la empresa o proyecto, y que esta información esté relacionada con las tablas de empleados y directores. \\
+
+$\therefore$ \text{La afirmación no se cumple para el modelo relacional actual.} \\
