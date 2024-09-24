@@ -1,2 +1,34 @@
 \textbf{Investiga que cuáles son las Reglas de Codd y explica con tus propias palabras cada una de ellas. Indica por qué
 consideras que son importantes.}\vspace{.3cm}
+
+Bien se sabe que las Reglas de Codd fueron propuestas por Edgar F. Codd, son 12, las cuáles son principios que definen los requisitos que una Base de Datos debe cumplir para ser considerada una Base de Datos relacional en su totalidad. Estas reglas son importantes y piezas clave, ya que garantizan la consistencia y eficiencia de los sistemas de Bases de Datos relacionales.
+
+\begin{enumerate}
+    \item \textbf{Regla de la información}: Nos dice que los valores serán representados en tablas, esto quiere decir que lo que necesitamos en la Base de Datos debe estar en filas y columnas. Aparte es importante porque garantiza un modelo uniforme para almacenar datos.
+
+    \item \textbf{Regla de acceso garantizado}: Nos dice que, para poder acceder a cualquier dato en la Base de Datos, se debe señalar sus tablas, columna y la clave primaria. Esto nos asegura que no importa le tamaño de la Base de Datos, siempre se podrá encontrar los datos de una manera accesible.
+
+    \item \textbf{Regla de valores nulos}: Nos dice que el sistema debe permitir los valores nulos, sin confundirlos con ceros o espacios vacíos. Esos valores nulos son necesarios cuando no hay información o esta no se aplica.
+
+    \item \textbf{Regla del catálogo en línea}: Nos dice que el catálogo de la Base de Datos, el cual contiene toda la información de las tablas y otros elementos, debe estar disponible para el público, es decir se puede consultar y manipular por los usuarios y administradores.
+
+    \item \textbf{Regla del sublenguaje de datos}: Nos dice que la Base de Datos debe tener un lenguaje propio que permita hacer todo tipo de operaciones (consultar, actualizar, eliminar, etc..). Esto es clave, pues sin un lenguaje de manipulación de datos, no se podría interactuar con la base de datos de manera eficiente.
+
+    \item \textbf{Regla de actualización de vistas}: Nos dice que las vistas son consultas guardadas, deben ser actualizables. Esto nos permite que no solo se puedan ver los datos a través de una vista, sino también poder modificarlos si es necesario.
+
+    \item \textbf{Regla de inserción, actualización y eliminación masiva}: Nos dice que se debe poder hacer operaciones sobre múltiples filas de datos a la vez, no solo una a la vez. Esto es esencial para la eficiencia, pues te permite trabajar con grandes cantidades de datos sin tener que procesarlos uno por uno.
+
+    \item \textbf{Independencia física de los datos}: Nos dice que los cambios en la manera en que los datos se almacenan físicamente no deben afectar la forma en que se acceden o manejan. Esto significa que los usuarios no deben preocuparse por cómo se guardan los datos.
+
+    \item \textbf{Independencia lógica de los datos}: Nos dice que, si se realizan cambios en la estructura lógica de la Base Datos, como agregar nuevas tablas o modificar columnas, no debe afectar las aplicaciones existentes. Esto nos garantiza la estabilidad y flexibilidad, sin romper aplicaciones que ya funcionan.
+
+    \item \textbf{Regla de integridad}: Nos dice que esas reglas deben definirse y mantenerse dentro de la Base de Datos, no en las aplicaciones. Esto nos garantiza que la integridad de la información no dependa de las aplicaciones externas.
+
+    \item \textbf{Regla de independencia de la distribución}: Nos dice que la Base de Datos debe funcionar correctamente, aunque se encuentre en varios lugares. Esto significa que no importa dónde estén físicamente los datos, el sistema debe ser capaz de acceder a ellos; esto en un mundo con redes distribuidas y aplicaciones en la nube.
+
+    \item \textbf{Regla de no subversión}: Nos dice que si el sistema permite acceder a los datos a un nivel más bajo (código), esto no debe violar las reglas de integridad y seguridad de la Base de Datos, aparte si hay acceso no deberías poder saltarte las reglas del sistema.
+\end{enumerate}
+
+\section{Conclusión}
+
+Por último, para mencionar, las Reglas de Codd son esenciales porque aseguran que los SBD relacionales funcionen de una manera eficiente y coherente, aparte todas esas reglas establecen una base sólida para el diseño y construcción de la Base de Datos, esto permite que sean modificables, confiables y seguras. Además, estas reglas hacen que haya una separación lógica del manejo de datos de las aplicaciones, esto nos dice que los datos pueden evolucionar y adaptarse a nuevas necesidades sin tener que reescribir todo el código de las aplicaciones.
