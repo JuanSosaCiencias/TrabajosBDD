@@ -1,1 +1,20 @@
 \textbf{‘Mr. Plow’ no requiere tener definido algún empleado que la dirija.}\vspace{.3cm}
+
+
+\textit{Borrador}
+
+\textit{Análisis:} 
+
+Esta afirmación depende de cómo se haya modelado la relación entre la entidad \texttt{Compañía} y la entidad \texttt{Director}. 
+
+\textit{Caso 1: Participación parcial}
+
+Si la relación entre \texttt{Compañía} y \texttt{Director} es de participación parcial, es posible que \texttt{Mr. Plow} no tenga un director definido. En este caso, el campo \texttt{id\_director} en la tabla de compañías puede ser \texttt{NULL}, por lo que la afirmación se cumple.
+
+\textit{Caso 2: Participación total}
+
+Si la relación es de participación total, entonces todas las compañías deben tener un director, por lo que \texttt{Mr. Plow} debería tener uno asignado. En este caso, la afirmación no se cumple.
+
+\textit{Conclusión:}
+
+La afirmación se cumple si el modelo relacional permite que algunas compañías existan sin tener un director asignado (participación parcial).
