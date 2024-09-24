@@ -1,3 +1,19 @@
 \textbf{Completa la tabla que se presenta a continuación, convirtiendo el Modelo E-R en un Modelo Relacional, para todas
 las opciones de cardinalidad (considera en todos los casos, participación parcial). Indica las relaciones resultantes,
 su llave primaria y la integridad referencial. Considera el formato Tabla(llavePk1, llavePK2, ..., atr1, atr2, ..., llaveFk1,...)}\vspace{.3cm}
+
+\begin{table}[H]
+    \centering
+    \renewcommand{\arraystretch}{1.5} % Espaciado entre filas
+    \setlength{\tabcolsep}{12pt} % Espaciado entre columnas
+    
+    \begin{tabular}{|>{\centering\arraybackslash}p{2.5cm}|>{\centering\arraybackslash}p{8cm}|}
+    \hline
+    \rowcolor{blue!90} \textcolor{white}{\textbf{Modelo E-R}} & \textcolor{white}{\textbf{Modelo Relacional}} \\ \hline
+    \rowcolor{blue!20} M:N & A(\underline{a1},\underline{a2},a3), B(\underline{b},b1), AB(a1,a2,b,ab1) \\ \hline
+    \rowcolor{white} 1:N &  A(\underline{a1},\underline{a2},a3), B(\underline{b},b1,a1,a2,ab1) \\ \hline
+    \rowcolor{blue!20} N:1 & A(\underline{a1},\underline{a2},a3,b,ab1), B(\underline{b},b1) \\ \hline
+    \rowcolor{white} 1:1 &  A(\underline{a1},\underline{a2},a3), B(\underline{b},b1), AB(a1,a2,b,ab1) \\ \hline
+    \end{tabular}
+    
+\end{table}
