@@ -1,0 +1,3 @@
+\textbf{Un empleado puede trabajar en ‘Compumundo Hipermegared’ y dirigir ‘El Bar de Moe’ al mismo tiempo.}\vspace{.3cm}
+
+Verdadera. Vemos que hay dos entidades separadas relacionadas con los proyectos: Asignar y Dirigir. Ambas tienen una relación con Empleado a través de la llave foránea IdPersona, y con Proyecto a través de FK NumProyecto. No hay ninguna restricción visible que impida a un empleado estar asignado a un proyecto y dirigir otro al mismo tiempo. Las tablas Asignar y Dirigir permiten múltiples registros para el mismo IdPersona con diferentes NumProyecto.

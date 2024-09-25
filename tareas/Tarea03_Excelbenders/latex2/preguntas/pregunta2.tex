@@ -1,0 +1,11 @@
+\textbf{¿Qué restricciones impone una llave primaria y una llave foránea al modelo de datos relacional?}\vspace{.3cm} \\
+
+Las llaves primarias y foráneas dentro de un modelo relacional imponen algunas restricciones las cuales muchas veces son necesarias para mantener una buena coherencia y relacion de los datos que estan dentro del modelo.
+
+\begin{itemize}
+    \item \textbf{Llave primaria (PK):} La llave primaria debe garantizar que cada registro en la tabla sea único, es decir, no puede haber dos registros con el mismo valor en los atributos que forman la llave primaria. Además, una PK no puede tener valores nulos, ya que su propósito es identificar de manera clara y sin ambigüedades a cada registro. \\
+    
+    \item \textbf{Llave foránea (FK):} La llave foránea, por otro lado, se usa para conectar dos tablas. Los valores de una FK deben coincidir con los de una llave primaria en otra tabla \textit{(o en la misma tabla, si se trata de una relación recursiva)}. La principal restricción que impone una FK es la integridad referencial: no se puede insertar un valor en una FK si no existe una correspondencia en la tabla referenciada. A diferencia de una PK, una FK puede contener valores nulos cuando la relación no es obligatoria. \\
+\end{itemize}
+
+Informacion tomada de la presentacion de la clase: "03ModeloR\texttt{\_}BD.pdf" de la materia "Fundamentos de Bases de Datos" \\

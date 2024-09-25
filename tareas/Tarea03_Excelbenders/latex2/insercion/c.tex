@@ -1,0 +1,40 @@
+\textbf{Del inciso a) toma como base el MR que obtuviste para la cardinalidad 1 : N. Los incisos que se presentan a
+continuación representan un conjunto de tuplas a insertar (en ese orden) en la relación B, indica cuál conjunto se
+puede insertar completamente en dicha relación. Justifica tu respuesta en cada caso.}\vspace{.3cm}
+
+\begin{enumerate}
+    \item (2,’f’,57,’zz’); (4,’g’,47,’yy’); (6,’h’,37,’xx’); (8,’i’,27,’ww’); (2,’j’,17,’yy’)
+    \item (57,8,’zz’,’f’); (47,6,’yy’,’g’); (37,4,’xx’,’h’); (27,2,’ww’,’i’); (17,6,’yy’,’j’)
+    \item (57,’f’,8,’zz’); (47,’g’,6,’yy’); (37,’h’,4,’xx’); (27,’i’,2,’ww’); (17,’j’,6,’yy’)
+    \item (57,’f’,8,’a’); (47,’g’,6,’b’); (37,’h’,4,’c’); (27,’i’,2,’d’); (17,’j’,6,’c’)
+\end{enumerate}
+
+\vspace{.5cm}
+
+Tomando como base el modelo relacional obtenido para la relación 1:N del inciso a), procederemos a analizar cada conjunto de tuplas para determinar cuál de ellos se puede insertar completamente en la relación \texttt{B}. \\
+
+\begin{enumerate}
+    \item \textbf{(2,’f’,57,’zz’); (4,’g’,47,’yy’); (6,’h’,37,’xx’); (8,’i’,27,’ww’); (2,’j’,17,’yy’)} \\
+    
+    En este caso, los valores de \texttt{b} (57, 47, 37, 27, 17) son todos únicos, por lo que no hay problemas con la clave primaria en \texttt{B}. Además, las combinaciones de \texttt{a1} y \texttt{a2} (\texttt{(2,'zz')}, \texttt{(4,'yy')}, \texttt{(6,'xx')}, \texttt{(8,'ww')}, \texttt{(2,'yy')}) no generan conflictos en términos de las claves foráneas. Si estas combinaciones existen en la tabla \texttt{A}, se pueden insertar sin problemas. \\
+    
+    $\therefore$ El conjunto de tuplas se puede insertar completamente. \\
+
+    \item \textbf{(57,8,’zz’,’f’); (47,6,’yy’,’g’); (37,4,’xx’,’h’); (27,2,’ww’,’i’); (17,6,’yy’,’j’)} \\
+    
+    Los valores de \texttt{b} (57, 47, 37, 27, 17) son diferentes, por lo que no hay conflictos con la clave primaria en \texttt{B}. Las combinaciones de \texttt{a1} y \texttt{a2} (\texttt{(8,'zz')}, \texttt{(6,'yy')}, \texttt{(4,'xx')}, \texttt{(2,'ww')}, \texttt{(6,'yy')}) muestran una repetición de \texttt{(6,'yy')}, pero mientras esa combinación sea válida en \texttt{A}, no debería haber problemas para insertar las tuplas en \texttt{B}. \\
+
+    $\therefore$ El conjunto de tuplas se puede insertar completamente.\\
+
+    \item \textbf{(57,’f’,8,’zz’); (47,’g’,6,’yy’); (37,’h’,4,’xx’); (27,’i’,2,’ww’); (17,’j’,6,’yy’)} \\
+    
+    En este conjunto, los valores de \texttt{b} (57, 47, 37, 27, 17) son únicos, lo cual es correcto para la clave primaria de \texttt{B}. Las combinaciones de \texttt{a1} y \texttt{a2} (\texttt{(8,'zz')}, \texttt{(6,'yy')}, \texttt{(4,'xx')}, \texttt{(2,'ww')}, \texttt{(6,'yy')}) incluyen una duplicación de \texttt{(6,'yy')}, pero si esta combinación es válida en \texttt{A}, no habría problemas para que las tuplas se inserten en \texttt{B}. \\
+
+    $\therefore$ Este conjunto de tuplas se puede insertar completamente. \\
+
+    \item \textbf{(57,’f’,8,’a’); (47,’g’,6,’b’); (37,’h’,4,’c’); (27,’i’,2,’d’); (17,’j’,6,’c’)} \\
+    
+    Aquí los valores de \texttt{b} (57, 47, 37, 27, 17) siguen siendo únicos, por lo que no hay conflicto con la clave primaria en \texttt{B}. Sin embargo, la combinación de \texttt{a1} y \texttt{a2} \texttt{(6,'c')} aparece en dos tuplas, lo cual es un problema, ya que \texttt{a1} y \texttt{a2} forman parte de la clave primaria compuesta en \texttt{A}. Esta duplicación no es válida, lo que viola la integridad referencial y, por lo tanto, no es posible insertar todas las tuplas. \\
+
+    $\therefore$ No se puede insertar completamente este conjunto de tuplas.
+\end{enumerate}
