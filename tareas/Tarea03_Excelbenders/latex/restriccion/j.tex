@@ -1,14 +1,7 @@
 \textbf{‘Mr. Plow’ no requiere tener definido algún empleado que la dirija.}\vspace{.3cm}
 
-Esta afirmación depende de cómo se haya modelado la relación entre la entidad \texttt{Compañía} y la entidad \texttt{Director}. \\
+Esta afirmación es \textbf{verdadera}, debido a la naturaleza opcional de la relación entre \texttt{Empleado} y \texttt{Dirigir}. Según el modelo relacional, un empleado no necesariamente tiene que estar vinculado a una tupla en \texttt{Dirigir}. Esto significa que \texttt{Mr. Plow} puede existir sin que haya un director asignado, ya que la relación es opcional para el empleado, y el campo \texttt{id\_director} podría ser \texttt{NULL}. \\
 
-\textit{Caso 1: Participación parcial} \\
+Sin embargo, si el modelo exigiera que todos los empleados tengan asignada una dirección de proyecto, entonces \texttt{Mr. Plow} tendría que tener un director definido. \\
 
-Si la relación entre \texttt{Compañía} y \texttt{Director} es de participación parcial, es posible que \texttt{Mr. Plow} no tenga un director definido. En este caso, el campo \texttt{id\_director} en la tabla de compañías puede ser \texttt{NULL}, por lo que la afirmación se cumple.
-
-\textit{Caso 2: Participación total} \\
-
-Si la relación es de participación total, entonces todas las compañías deben tener un director, por lo que \texttt{Mr. Plow} debería tener uno asignado. En este caso, la afirmación no se cumple. \\
-
-
-Por lo tanto veamos que la afirmación se cumple si el modelo relacional permite que algunas compañías existan sin tener un director asignado.
+$\therefore$ La afirmación se cumple porque la participación opcional de \texttt{Empleado} en la relación con \texttt{Dirigir} permite que algunas compañías no tengan un director asignado.
