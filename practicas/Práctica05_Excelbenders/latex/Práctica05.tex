@@ -1,0 +1,56 @@
+\documentclass{report}
+\usepackage[utf8]{inputenc}
+
+%----- Configuración del estilo del documento------%
+\usepackage{epsfig,graphicx}
+\usepackage[left=2.5cm,right=2.5cm,top=1.8cm,bottom=2.3cm]{geometry}
+%------ Paquetes matematicos --------%
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{tabularx}
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\usepackage{verbatim}
+\usepackage[shortlabels]{enumitem}
+\usepackage{venndiagram}
+\usetikzlibrary{shapes.geometric}
+\usepackage{cancel}
+\usepackage{hyperref}
+\usepackage[T1]{fontenc}
+\usepackage[spanish,es-nodecimaldot,es-tabla]{babel}
+\usepackage{csquotes}
+\usepackage{graphicx}
+\usepackage{tocloft}
+\graphicspath{{./figs/}}
+\usepackage{setspace}
+\usepackage{xcolor}
+
+
+\usepackage[backend=biber]{biblatex}
+\addbibresource{resources/referencias/referencias.bib}
+
+
+
+
+\begin{document}
+	
+	\input{portada.tex}
+	
+	\begin{center}
+		\section*{\LARGE{Tarea 1}}
+	\end{center}
+
+    \begin{center}
+		\LARGE{\textbf{Espeficacion de reestriciones:}}\\
+        \normalsize
+	\end{center}
+        \begin{enumerate}
+            \item \input{reestricciones/reestricciones.tex}
+        \end{enumerate}
+    \newpage
+    
+\printbibliography
+  
+\end{document}
