@@ -45,7 +45,7 @@ Una vez reiniciado el contenedor, procedimos a conectarnos a él utilizando el c
     sudo docker exec -it <CONTAINER_ID> psql -U postgres
 \end{verbatim}
 
-lo cual nos mete dentro de psql, una vez detro ejecutamos \textit{\l} y podemos observar lo siguiente: \\
+lo cual nos mete dentro de psql, una vez detro ejecutamos \textit{\l} donde podemos observar lo siguiente: \\
 
 \begin{figure}[h]
     \centering
@@ -65,4 +65,57 @@ Como bien se menciona en el PDF, para hacer un backup necesitamos asegurarnos de
 \begin{figure}[h!]
     \centering
         \includegraphics[width=1\textwidth]{../latex/resources/recovery/R5.png}
+\end{figure}
+
+Como se puede observar ejecutamos \textit{\textbackslash dt} para checar el contenido de la base de datos y vemos que efectivamente está vacía. De esta manera procedemos a la restauración del backup que en nuestro caso se encuentra en el archivo \textit{transporte.backup}. utilizamos el siguiente comando. \\
+
+\begin{verbatim}
+    sudo docker exec -i <CONTAINER_ID> pg_restore --verbose --clean --no-acl --no-owner -U 
+    postgres -d transporte < /home/abovewolf37845/Downloads/backup/transporte.backup
+\end{verbatim}
+
+Notemos que en lugar de utilizar \textit{psql} utilizamos \textit{pg\_restore} ya que parece que \textit{psql} solamente para archivos sql y \textit{psql} para dump files. \\
+
+\begin{figure}[h!]
+    \centering
+        \includegraphics[width=1\textwidth]{../latex/resources/recovery/R6.png}
+\end{figure}
+
+\newpage
+
+Después verificamos que la base de datos se haya restaurado correctamente con \textit{\textbackslash dt} dentro de psql donde veríamos algo como lo siguiente: \\ 
+
+\begin{figure}[h!]
+    \centering
+        \includegraphics[width=1\textwidth]{../latex/resources/recovery/R7.png}
+\end{figure}
+
+Lo cual nos indica que restauramos la base de datos correctamente. \\
+
+\subsection*{Para ver las bases de datos que se crearon en Dbeaver}
+
+Seguimos las instrucciones para configurar correctamente el Database Tool DBeaver. \\
+
+\begin{figure}[h!]
+    \centering
+        \includegraphics[width=1\textwidth]{../latex/resources/recovery/BD1.png}
+\end{figure}
+
+\begin{figure}[h!]
+    \centering
+        \includegraphics[width=1\textwidth]{../latex/resources/recovery/BD2.png}
+\end{figure}
+
+\begin{figure}
+    \centering
+        \includegraphics[width=1\textwidth]{../latex/resources/recovery/BD3.png}
+\end{figure}
+
+\newpage
+
+Ahora podemos ver las bases de datos que se crearon en DBeaver. \\
+
+\begin{figure}[h!]
+    \centering
+        \includegraphics[width=1\textwidth]{../latex/resources/recovery/BD4.png}
 \end{figure}
