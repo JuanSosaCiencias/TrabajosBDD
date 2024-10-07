@@ -26,6 +26,8 @@
 \graphicspath{{./figs/}}
 \usepackage{setspace}
 \usepackage{xcolor}
+\usepackage{float}
+
 
 
 \usepackage[backend=biber]{biblatex}
@@ -38,8 +40,6 @@
 	
 	\input{portada.tex}
 
-    \input{recovery.tex}
-
     \newpage
 	
 	\begin{center}
@@ -50,11 +50,12 @@
 		\LARGE{\textbf{Espeficacion de reestriciones:}}\\
         \normalsize
 	\end{center}
-        \begin{enumerate}
-            \item \input{reestricciones/reestricciones.tex}
-        \end{enumerate}
-    \newpage
+    \begin{enumerate}
+        \item \input{reestricciones/reestricciones.tex}
+    \end{enumerate}
+
+    \input{recovery.tex}
     
-\printbibliography
+% \printbibliography
   
 \end{document}
