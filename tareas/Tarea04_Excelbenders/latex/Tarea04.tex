@@ -1,0 +1,79 @@
+\documentclass{report}
+\usepackage[utf8]{inputenc}
+
+%----- Configuración del estilo del documento------%
+\usepackage{epsfig,graphicx}
+\usepackage[left=2.5cm,right=2.5cm,top=1.8cm,bottom=2.3cm]{geometry}
+%------ Paquetes matematicos --------%
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{tabularx}
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\usepackage{verbatim}
+\usepackage[shortlabels]{enumitem}
+\usepackage{venndiagram}
+\usetikzlibrary{shapes.geometric}
+\usepackage{cancel}
+\usepackage{hyperref}
+\usepackage[T1]{fontenc}
+\usepackage[spanish,es-nodecimaldot,es-tabla]{babel}
+\usepackage{csquotes}
+\usepackage{graphicx}
+\usepackage{tocloft}
+\graphicspath{{./figs/}}
+\usepackage{setspace}
+\usepackage{xcolor}
+
+
+\usepackage[backend=biber]{biblatex}
+\addbibresource{resources/referencias/referencias.bib}
+
+
+
+
+\begin{document}
+	
+	\input{portada.tex}
+	
+	\begin{center}
+		\section*{\LARGE{Tarea 4}}
+	\end{center}
+
+    % Preguntas  
+    \begin{center}
+        \LARGE{\textbf{Preguntas}}\\
+    \end{center}
+    \normalsize
+    
+    \begin{enumerate}%[label=\alph*.]
+        \item \input{preguntas/pregunta1.tex}
+        \item \input{preguntas/pregunta2.tex}   
+        \begin{enumerate}[label=\alph*.]
+            \item \input{preguntas/2.a.tex} 
+            \item \input{preguntas/2.b.tex}
+            \item \input{preguntas/2.c.tex}
+            \item \input{preguntas/2.d.tex}
+            \item \input{preguntas/2.e.tex}
+            \item \input{preguntas/2.f.tex}
+            \item \input{preguntas/2.g.tex}
+            \item \input{preguntas/2.h.tex}
+            \item \input{preguntas/2.i.tex}
+            \item \input{preguntas/2.j.tex}
+        \end{enumerate}
+        \item \input{preguntas/pregunta3.tex}
+        \begin{enumerate}[label=\alph*.]
+            \item \input{preguntas/2.a.tex} 
+            \item \input{preguntas/2.b.tex}
+            \item \input{preguntas/2.c.tex}
+            \item \input{preguntas/2.d.tex}
+            \item \input{preguntas/2.e.tex}
+        \end{enumerate}
+    \end{enumerate}
+    \newpage
+    
+\printbibliography
+  
+\end{document}
