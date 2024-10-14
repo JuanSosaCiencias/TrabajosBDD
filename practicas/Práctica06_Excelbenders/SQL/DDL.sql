@@ -1,18 +1,12 @@
 -- Iniciamos creando todas las tablas para que no mande errores
 
 CREATE TABLE IF NOT EXISTS Pais(
-    NombrePais varchar(50)
+    NombrePais varchar(50) -- PK
 );
 
 CREATE TABLE IF NOT EXISTS Medallero(
-    IDMedallero serial,
+    IDMedallero serial, -- PK
     NombrePais varchar(50) -- FK
-);
-
-CREATE TABLE IF NOT EXISTS Gana(
-    NombrePais varchar(50), -- FK
-    TipoMedalla varchar(10), -- FK
-    IDDisciplina int -- FK
 );
 
 CREATE TABLE IF NOT EXISTS Concursa(
@@ -21,17 +15,17 @@ CREATE TABLE IF NOT EXISTS Concursa(
 );
 
 CREATE TABLE IF NOT EXISTS TelefonoAtleta(
-    IDTelefono varchar(15),
-    IDAtleta int -- FK
+    IDTelefono varchar(15), -- PK Compuesta
+    IDAtleta int -- FK (PK Compuesta)
 );
 
 CREATE TABLE IF NOT EXISTS CorreoAtleta(
-    IDCorreo varchar(50),
-    IDAtleta int -- FK
+    IDCorreo varchar(50), -- PK Compuesta
+    IDAtleta int -- FK (PK Compuesta)
 );
 
 CREATE TABLE IF NOT EXISTS Atleta(
-    IDAtleta serial,
+    IDAtleta serial, -- PK
     NombrePais varchar(50), -- FK
     IDEntrenador int, -- FK
     Temporada date, 
@@ -49,14 +43,15 @@ CREATE TABLE IF NOT EXISTS Participa(
 );
 
 CREATE TABLE IF NOT EXISTS Medalla(
-    TipoMedalla varchar(10),
-    IDDisciplina int  -- FK
+    TipoMedalla varchar(10), -- PK Compuesta
+    IDDisciplina int,  -- FK (PK Compuesta)
+    IDAtleta int -- FK
 );
 
 CREATE TABLE IF NOT EXISTS Evento(
-    IDEvento serial,
-    NombreLocalidad varchar(50), -- FK
-    IDDisciplina int, -- FK
+    IDEvento serial, -- PK
+    NombreLocalidad varchar(50), -- FK Compuesta
+    IDDisciplina int, -- FK Compuesta
     DuracionMax int ,
     Precio int ,
     FechaEvento date,
@@ -64,19 +59,19 @@ CREATE TABLE IF NOT EXISTS Evento(
 );
 
 CREATE TABLE IF NOT EXISTS TelefonoEntrenador(
-    IDTelefono varchar(15),
-    IDEntrenador int -- FK
+    IDTelefono varchar(15), -- PK Compuesta
+    IDEntrenador int -- FK (PK Compuesta)
 );
 
 CREATE TABLE IF NOT EXISTS Disciplina(
-    IDDisciplina serial,
-    NombreDisciplina varchar(50), 
+    IDDisciplina serial, -- PK
+    NombreDisciplina varchar(50),  
     Categoria varchar(50)
 );
 
 CREATE TABLE IF NOT EXISTS Localidad(
-    NombreLocalidad varchar(50),
-    IDDisciplina int, -- FK
+    NombreLocalidad varchar(50), -- PK Compuesta
+    IDDisciplina int, -- FK (PK Compuesta)
     Calle varchar(50), 
     Numero int,
     Ciudad varchar(50),
@@ -91,16 +86,16 @@ CREATE TABLE IF NOT EXISTS CompraEntrada(
 );
 
 CREATE TABLE IF NOT EXISTS Cliente(
-    IDCliente serial
+    IDCliente serial -- PK
 );
 
 CREATE TABLE IF NOT EXISTS CorreoEntrenador(
-    IDCorreo varchar(50),
-    IDEntrenador int -- FK
+    IDCorreo varchar(50), -- PK Compuesta
+    IDEntrenador int -- FK (PK Compuesta)
 );
 
 CREATE TABLE IF NOT EXISTS Entrenador(
-    IDEntrenador serial,
+    IDEntrenador serial, -- PK
     IDDisciplina int, -- FK
     Nombre varchar(50),
     PrimerApellido varchar(50),
@@ -111,17 +106,17 @@ CREATE TABLE IF NOT EXISTS Entrenador(
 );
 
 CREATE TABLE IF NOT EXISTS TelefonoArbitro(
-    IDTelefono varchar(15),
-    IDArbitro int -- FK
+    IDTelefono varchar(15), -- PK Compuesta
+    IDArbitro int -- FK (PK Compuesta)
 );
 
 CREATE TABLE IF NOT EXISTS Patrocina(
-    NombrePatrocinador varchar(50), -- FK
+    NombrePatrocinador varchar(50), -- FK 
     IDDisciplina int -- FK
 );
 
 CREATE TABLE IF NOT EXISTS Arbitro(
-    IDArbitro serial,
+    IDArbitro serial, -- PK
     IDDisciplina int, -- FK
     Nombre varchar(50),
     PrimerApellido varchar(50),
@@ -132,12 +127,12 @@ CREATE TABLE IF NOT EXISTS Arbitro(
 );
 
 CREATE TABLE IF NOT EXISTS CorreoArbitro(
-    IDCorreo varchar(50),
-    IDArbitro int -- FK
+    IDCorreo varchar(50), -- PK Compuesta
+    IDArbitro int -- FK (PK Compuesta)
 );
 
 CREATE TABLE IF NOT EXISTS Patrocinador(
-    NombrePatrocinador varchar(50)
+    NombrePatrocinador varchar(50) -- PK
 );
 
 -- Agregar reestricciones Primarias y otras (no foraneas)
@@ -166,15 +161,6 @@ alter table Disciplina
 	add primary key (IDDisciplina),
 	alter column NombreDisciplina set not null,
 	alter column Categoria set not null;
-	
-alter table Localidad 
-	add primary key (NombreLocalidad, IDDisciplina), -- Tecnicamente compuesta pero la dejo aca
-	alter column Calle set not null,
-	alter column Numero set not null,
-	alter column Ciudad set not null,
-	alter column Pais set not null,
-	alter column Aforo set not null,
-	alter column Tipo set not null;
 
 alter table Cliente 
 	add primary key (IDCliente);
@@ -202,6 +188,15 @@ alter table Patrocinador
 
 -- Definir llaves primarias compuestas
 
+alter table Localidad 
+	add primary key (NombreLocalidad), 
+	alter column Calle set not null,
+	alter column Numero set not null,
+	alter column Ciudad set not null,
+	alter column Pais set not null,
+	alter column Aforo set not null,
+	alter column Tipo set not null;
+
 alter table Medallero
 	add primary key (IDMedallero, NombrePais);
 
@@ -227,14 +222,6 @@ alter table CorreoEntrenador
 	add primary key (IDCorreo, IDEntrenador);
 
 -- Definir llaves foraneas que incluyan llaves primarias compuestas
-
-ALTER TABLE Gana
-ADD CONSTRAINT FK_Gana_Pais 
-FOREIGN KEY (NombrePais) REFERENCES Pais(NombrePais) 
-ON DELETE CASCADE ON UPDATE CASCADE,
-ADD CONSTRAINT FK_Gana_Medalla 
-FOREIGN KEY (TipoMedalla, IDDisciplina) REFERENCES Medalla(TipoMedalla, IDDisciplina)  -- Esta es la llave compuesta
-ON DELETE ON UPDATE CASCADE;
 
 ALTER TABLE Evento
 ADD CONSTRAINT FK_Evento_Localidad_Disciplina 
@@ -285,6 +272,9 @@ ON DELETE CASCADE ON UPDATE CASCADE;
 ALTER TABLE Medalla
 ADD CONSTRAINT FK_Medalla_Disciplina 
 FOREIGN KEY (IDDisciplina) REFERENCES Disciplina(IDDisciplina) 
+ON DELETE CASCADE ON UPDATE CASCADE;
+ADD CONSTRAINT FK_Medalla_Atleta 
+FOREIGN KEY (IDAtleta) REFERENCES Atleta(IDAtleta) 
 ON DELETE CASCADE ON UPDATE CASCADE;
 
 ALTER TABLE TelefonoEntrenador
