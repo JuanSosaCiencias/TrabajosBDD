@@ -140,19 +140,10 @@ CREATE TABLE IF NOT EXISTS Patrocinador(
     NombrePatrocinador varchar(50)
 );
 
--- Agregar reestricciones por atributo, no llaves foraneas (se puede juntar pero las hice separadas)
+-- Agregar reestricciones Primarias y otras (no foraneas)
 
 alter table Pais
 	add primary key (NombrePais);
-
-alter table Medallero
-	add primary key (IDMedallero, NombrePais);
-
-alter table TelefonoAtleta
-	add primary key (IDTelefono, IDAtleta);
-
-alter table CorreoAtleta 
-	add primary key (IDCorreo, IDAtleta);
 
 ALTER TABLE Atleta
 	ADD PRIMARY KEY (IDAtleta),
@@ -162,10 +153,7 @@ ALTER TABLE Atleta
     ALTER COLUMN SegundoApellido SET DEFAULT 'No proporcionado',
     ALTER COLUMN FechaNacimiento SET NOT NULL,
     ALTER COLUMN Nacionalidad SET DEFAULT 'No proporcionado',
-    ALTER COLUMN Genero SET DEFAULT '0';
-
-alter table Medalla 
-	add primary key (TipoMedalla, IDDisciplina);
+    ALTER COLUMN Genero SET DEFAULT 0;
 
 alter table Evento 
 	add primary key(IDEvento),
@@ -173,9 +161,6 @@ alter table Evento
 	alter column Precio set not null,
 	alter column FechaEvento set not null,
 	alter column Fase set default 0;
-	
-alter table TelefonoEntrenador 
-	add primary key(IDTelefono, IDEntrenador);
 
 alter table Disciplina 
 	add primary key (IDDisciplina),
@@ -183,7 +168,7 @@ alter table Disciplina
 	alter column Categoria set not null;
 	
 alter table Localidad 
-	add primary key (NombreLocalidad, IDDisciplina),
+	add primary key (NombreLocalidad, IDDisciplina), -- Tecnicamente compuesta pero la dejo aca
 	alter column Calle set not null,
 	alter column Numero set not null,
 	alter column Ciudad set not null,
@@ -194,9 +179,6 @@ alter table Localidad
 alter table Cliente 
 	add primary key (IDCliente);
 
-alter table CorreoEntrenador 
-	add primary key (IDCorreo, IDEntrenador);
-
 alter table Entrenador 
 	add primary key (IDEntrenador),
 	alter column Nombre set not null,
@@ -205,9 +187,6 @@ alter table Entrenador
 	alter column FechaNacimiento set not null,
 	alter column Nacionalidad set default 'No proporcionado',
 	alter column Genero set default 0;
-
-alter table TelefonoArbitro 
-	add primary key (IDTelefono, IDArbitro);
 
 alter table Arbitro 
 	add primary key (IDArbitro),
@@ -218,11 +197,49 @@ alter table Arbitro
 	alter column Nacionalidad set default 'No proporcionado',
 	alter column Genero set default 0;
 
+alter table Patrocinador 
+	add primary key (NombrePatrocinador);
+
+-- Definir llaves primarias compuestas
+
+alter table Medallero
+	add primary key (IDMedallero, NombrePais);
+
+alter table TelefonoAtleta
+	add primary key (IDTelefono, IDAtleta);
+
+alter table CorreoAtleta 
+	add primary key (IDCorreo, IDAtleta);
+
+alter table Medalla 
+	add primary key (TipoMedalla, IDDisciplina);
+
 alter table CorreoArbitro
 	add primary key (IDCorreo, IDArbitro);
 
-alter table Patrocinador 
-	add primary key (NombrePatrocinador);
+alter table TelefonoEntrenador 
+	add primary key(IDTelefono, IDEntrenador);
+
+alter table TelefonoArbitro 
+	add primary key (IDTelefono, IDArbitro);
+
+alter table CorreoEntrenador 
+	add primary key (IDCorreo, IDEntrenador);
+
+-- Definir llaves foraneas que incluyan llaves primarias compuestas
+
+ALTER TABLE Gana
+ADD CONSTRAINT FK_Gana_Pais 
+FOREIGN KEY (NombrePais) REFERENCES Pais(NombrePais) 
+ON DELETE CASCADE ON UPDATE CASCADE,
+ADD CONSTRAINT FK_Gana_Medalla 
+FOREIGN KEY (TipoMedalla, IDDisciplina) REFERENCES Medalla(TipoMedalla, IDDisciplina)  -- Esta es la llave compuesta
+ON DELETE ON UPDATE CASCADE;
+
+ALTER TABLE Evento
+ADD CONSTRAINT FK_Evento_Localidad_Disciplina 
+FOREIGN KEY (IDDisciplina, NombreLocalidad) REFERENCES Localidad(IDDisciplina, NombreLocalidad) 
+ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- Definir llaves foráneas
 
@@ -230,14 +247,6 @@ ALTER TABLE Medallero
 ADD CONSTRAINT FK_Medallero_Pais 
 FOREIGN KEY (NombrePais) REFERENCES Pais(NombrePais) 
 ON DELETE CASCADE ON UPDATE CASCADE;
-
-ALTER TABLE Gana
-ADD CONSTRAINT FK_Gana_Pais 
-FOREIGN KEY (NombrePais) REFERENCES Pais(NombrePais) 
-ON DELETE CASCADE ON UPDATE CASCADE,
-ADD CONSTRAINT FK_Gana_Medalla 
-FOREIGN KEY (TipoMedalla, IDDisciplina) REFERENCES Medalla(TipoMedalla, IDDisciplina) 
-ON DELETE ON UPDATE CASCADE;
 
 ALTER TABLE Concursa
 ADD CONSTRAINT FK_Concursa_Atleta 
@@ -276,11 +285,6 @@ ON DELETE CASCADE ON UPDATE CASCADE;
 ALTER TABLE Medalla
 ADD CONSTRAINT FK_Medalla_Disciplina 
 FOREIGN KEY (IDDisciplina) REFERENCES Disciplina(IDDisciplina) 
-ON DELETE CASCADE ON UPDATE CASCADE;
-
-ALTER TABLE Evento
-ADD CONSTRAINT FK_Evento_Localidad_Disciplina 
-FOREIGN KEY (IDDisciplina, NombreLocalidad) REFERENCES Localidad(IDDisciplina, NombreLocalidad) 
 ON DELETE CASCADE ON UPDATE CASCADE;
 
 ALTER TABLE TelefonoEntrenador
