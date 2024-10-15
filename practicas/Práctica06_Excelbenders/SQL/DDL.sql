@@ -32,7 +32,7 @@ CREATE TABLE IF NOT EXISTS TelefonoAtleta(
 
 COMMENT ON TABLE TelefonoAtleta IS 'Almacena los números de teléfono de los atletas.';
 COMMENT ON COLUMN TelefonoAtleta.IDTelefono IS 'Número de teléfono del atleta.';
-COMMENT ON COLUMN TelefonoAtleta.IDAtleta IS 'ID del atleta, FK de la tabla Atleta.';
+COMMENT ON COLUMN TelefonoAtleta.IDAtleta IS 'ID del atleta y FK por parte de la tabla Atleta.';
 
 CREATE TABLE IF NOT EXISTS CorreoAtleta(
     IDCorreo varchar(50), -- PK Compuesta
@@ -41,7 +41,7 @@ CREATE TABLE IF NOT EXISTS CorreoAtleta(
 
 COMMENT ON TABLE CorreoAtleta IS 'Almacena los correos electrónicos de los atletas.';
 COMMENT ON COLUMN CorreoAtleta.IDCorreo IS 'Dirección de correo electrónico del atleta.';
-COMMENT ON COLUMN CorreoAtleta.IDAtleta IS 'ID del atleta, FK de la tabla Atleta.';
+COMMENT ON COLUMN CorreoAtleta.IDAtleta IS 'ID del atleta, FK por parte de la tabla Atleta.';
 
 CREATE TABLE IF NOT EXISTS Atleta(
     IDAtleta serial, -- PK
@@ -74,8 +74,8 @@ CREATE TABLE IF NOT EXISTS Participa(
 );
 
 COMMENT ON TABLE Participa IS 'Tabla que relaciona a los atletas con las disciplinas en las que participan.';
-COMMENT ON COLUMN Participa.IDAtleta IS 'ID del atleta, FK de la tabla Atleta.';
-COMMENT ON COLUMN Participa.IDDisciplina IS 'ID de la disciplina, FK de la tabla Disciplina.';
+COMMENT ON COLUMN Participa.IDAtleta IS 'ID del atleta, por lo cual es FK por parte de la tabla Atleta.';
+COMMENT ON COLUMN Participa.IDDisciplina IS 'ID de la disciplina, que tambien es FK pero por parte de la tabla Disciplina.';
 
 CREATE TABLE IF NOT EXISTS Medalla(
     TipoMedalla varchar(10), -- PK Compuesta
@@ -84,9 +84,9 @@ CREATE TABLE IF NOT EXISTS Medalla(
 );
 
 COMMENT ON TABLE Medalla IS 'Tabla que registra las medallas ganadas por los atletas.';
-COMMENT ON COLUMN Medalla.TipoMedalla IS 'Tipo de medalla (Oro, Plata, Bronce).';
+COMMENT ON COLUMN Medalla.TipoMedalla IS 'Tipos de medalla (Oro, Plata, Bronce).';
 COMMENT ON COLUMN Medalla.IDDisciplina IS 'ID de la disciplina, FK de la tabla Disciplina.';
-COMMENT ON COLUMN Medalla.IDAtleta IS 'ID del atleta, FK de la tabla Atleta.';
+COMMENT ON COLUMN Medalla.IDAtleta IS 'ID del atleta, FK por parte de la tabla Atleta.';
 
 CREATE TABLE IF NOT EXISTS Evento(
     IDEvento serial, -- PK
@@ -114,7 +114,7 @@ CREATE TABLE IF NOT EXISTS TelefonoEntrenador(
 
 COMMENT ON TABLE TelefonoEntrenador IS 'Almacena los números de teléfono de los entrenadores.';
 COMMENT ON COLUMN TelefonoEntrenador.IDTelefono IS 'Número de teléfono del entrenador.';
-COMMENT ON COLUMN TelefonoEntrenador.IDEntrenador IS 'ID del entrenador, FK de la tabla Entrenador.';
+COMMENT ON COLUMN TelefonoEntrenador.IDEntrenador IS 'ID del entrenador, FK por parte de la tabla Entrenador.';
 
 CREATE TABLE IF NOT EXISTS Disciplina(
     IDDisciplina serial, -- PK
@@ -171,7 +171,7 @@ CREATE TABLE IF NOT EXISTS CorreoEntrenador(
 
 COMMENT ON TABLE CorreoEntrenador IS 'Tabla que almacena los correos electrónicos de los entrenadores.';
 COMMENT ON COLUMN CorreoEntrenador.IDCorreo IS 'Dirección de correo electrónico del entrenador.';
-COMMENT ON COLUMN CorreoEntrenador.IDEntrenador IS 'ID del entrenador, FK de la tabla Entrenador.';
+COMMENT ON COLUMN CorreoEntrenador.IDEntrenador IS 'ID del entrenador, siendo FK por parte de la tabla Entrenador.';
 
 CREATE TABLE IF NOT EXISTS Entrenador(
     IDEntrenador serial, -- PK
@@ -238,7 +238,7 @@ CREATE TABLE IF NOT EXISTS CorreoArbitro(
     IDArbitro int -- FK (PK Compuesta)
 );
 
-COMMENT ON TABLE CorreoArbitro IS 'Tabla para almacenar los correos electrónicos de los árbitros.';
+COMMENT ON TABLE CorreoArbitro IS 'Almacena los correos electrónicos de los árbitros.';
 COMMENT ON COLUMN CorreoArbitro.IDCorreo IS 'Correo electrónico del árbitro.';
 COMMENT ON COLUMN CorreoArbitro.IDArbitro IS 'ID del árbitro asociado.';
 
@@ -247,12 +247,14 @@ CREATE TABLE IF NOT EXISTS Patrocinador(
 );
 
 COMMENT ON TABLE Patrocinador IS 'Tabla para almacenar información de patrocinadores.';
-COMMENT ON COLUMN Patrocinador.NombrePatrocinador IS 'Nombre del patrocinador.';
+COMMENT ON COLUMN Patrocinador.NombrePatrocinador IS 'Nombre del patrocinador (PK).';
 
 -- Agregar reestricciones Primarias y otras (no foraneas)
 
 alter table Pais
 	add primary key (NombrePais);
+
+COMMENT ON COLUMN Pais.NombrePais IS 'Es la llave primaria para identificar de manera única cada país';
 
 ALTER TABLE Atleta
 	ADD PRIMARY KEY (IDAtleta),
@@ -264,6 +266,15 @@ ALTER TABLE Atleta
     ALTER COLUMN Nacionalidad SET DEFAULT 'No proporcionado',
     ALTER COLUMN Genero SET DEFAULT 0;
 
+COMMENT ON COLUMN Atleta.IDAtleta IS 'PK del atleta'; 
+COMMENT ON COLUMN Atleta.Temporada IS 'Se pone la fecha por defecto al crear un nuevo atleta en la temporada'; 
+COMMENT ON COLUMN Atleta.Nombre IS 'Se pone que el nombre del atleta no pueda ser nulo';
+COMMENT ON COLUMN Atleta.PrimerApellido IS 'El primer apellido por defecto sera "No proporcionado" si no se especifica el primer apellido';
+COMMENT ON COLUMN Atleta.SegundoApellido IS 'El segundo apellido por defecto sera "No proporcionado" si no se especifica el segundo apellido';
+COMMENT ON COLUMN Atleta.FechaNacimiento IS 'Fecha de nacimiento del atleta se pone como campo obligatorio';
+COMMENT ON COLUMN Atleta.Nacionalidad IS 'La Nacionalidad del atleta es por defecto "No proporcionado"';
+COMMENT ON COLUMN Atleta.Genero IS 'Género del atleta, restricción con valor por defecto 0 (sin especificar)';
+
 alter table Evento 
 	add primary key(IDEvento),
 	alter column DuracionMax set not null,
@@ -271,13 +282,25 @@ alter table Evento
 	alter column FechaEvento set not null,
 	alter column Fase set default 0;
 
+COMMENT ON COLUMN Evento.IDEvento IS 'La PK del evento';
+COMMENT ON COLUMN Evento.DuracionMax IS 'Duración máxima del evento, como campo obligatorio a manera de restriccion';
+COMMENT ON COLUMN Evento.Precio IS 'Precio del evento, como campo obligatorio en forma de restriccion';
+COMMENT ON COLUMN Evento.FechaEvento IS 'Fecha del evento, como campo obligatorio tambien';
+COMMENT ON COLUMN Evento.Fase IS 'Fase del evento, valor por defecto es 0 (fase inicial)';
+
 alter table Disciplina 
 	add primary key (IDDisciplina),
 	alter column NombreDisciplina set not null,
 	alter column Categoria set not null;
 
+COMMENT ON COLUMN Disciplina.IDDisciplina IS 'La PK de la disciplina';
+COMMENT ON COLUMN Disciplina.NombreDisciplina IS 'Ponemos que el nombre de la disciplina no puede ser nulo';
+COMMENT ON COLUMN Disciplina.Categoria IS 'La categoría de la disciplina no puede ser nula';
+
 alter table Cliente 
 	add primary key (IDCliente);
+
+COMMENT ON COLUMN Cliente.IDCliente IS 'PK del cliente';
 
 alter table Entrenador 
 	add primary key (IDEntrenador),
@@ -288,6 +311,14 @@ alter table Entrenador
 	alter column Nacionalidad set default 'No proporcionado',
 	alter column Genero set default 0;
 
+COMMENT ON COLUMN Entrenador.IDEntrenador IS 'PK del entrenador';
+COMMENT ON COLUMN Entrenador.Nombre IS 'Asignamos que el nombre del entrenador no puede ser nulo';
+COMMENT ON COLUMN Entrenador.PrimerApellido IS 'Por defecto "No proporcionado" si no se especifica el primer apellido';
+COMMENT ON COLUMN Entrenador.SegundoApellido IS 'Por defecto "No proporcionado" si no se especifica el segundo apellido';
+COMMENT ON COLUMN Entrenador.FechaNacimiento IS 'Fecha de nacimiento del entrenador, la ponemos como campo obligatorio';
+COMMENT ON COLUMN Entrenador.Nacionalidad IS 'La Nacionalidad del entrenador, por defecto "No proporcionado"';
+COMMENT ON COLUMN Entrenador.Genero IS 'Género del entrenador, con valor por defecto 0 (sin especificar)';
+
 alter table Arbitro 
 	add primary key (IDArbitro),
 	alter column Nombre set not null,
@@ -297,8 +328,18 @@ alter table Arbitro
 	alter column Nacionalidad set default 'No proporcionado',
 	alter column Genero set default 0;
 
+COMMENT ON COLUMN Arbitro.IDArbitro IS 'PK del árbitro';
+COMMENT ON COLUMN Arbitro.Nombre IS 'Definimos que el nombre del árbitro no puede ser nulo';
+COMMENT ON COLUMN Arbitro.PrimerApellido IS 'Por defecto sera "No proporcionado" si no se especifica el primer apellido';
+COMMENT ON COLUMN Arbitro.SegundoApellido IS 'Por defecto sera "No proporcionado" si no se especifica el segundo apellido';
+COMMENT ON COLUMN Arbitro.FechaNacimiento IS 'Fecha de nacimiento del árbitro, campo obligatorio';
+COMMENT ON COLUMN Arbitro.Nacionalidad IS 'Nacionalidad del árbitro, por defecto "No proporcionado"';
+COMMENT ON COLUMN Arbitro.Genero IS 'Género del árbitro, con valor por defecto 0 (sin especificar)';
+
 alter table Patrocinador 
 	add primary key (NombrePatrocinador);
+
+COMMENT ON COLUMN Patrocinador.NombrePatrocinador IS 'PK del patrocinador';
 
 -- Definir llaves primarias compuestas
 
@@ -311,29 +352,61 @@ alter table Localidad
 	alter column Aforo set not null,
 	alter column Tipo set not null;
 
+COMMENT ON COLUMN Localidad.NombreLocalidad IS 'PK de la localidad';
+COMMENT ON COLUMN Localidad.Calle IS 'Calle de la localidad, como restricción de campo obligatorio';
+COMMENT ON COLUMN Localidad.Numero IS 'Número de la localidad, como campo obligatorio';
+COMMENT ON COLUMN Localidad.Ciudad IS 'Ciudad donde se encuentra la localidad, tambien como restricción de campo obligatorio';
+COMMENT ON COLUMN Localidad.Pais IS 'País de la localidad, tambien campo obligatorio';
+COMMENT ON COLUMN Localidad.Aforo IS 'Aforo máximo de la localidad, como campo obligatorio';
+COMMENT ON COLUMN Localidad.Tipo IS 'Tipo de la localidad, tambien como campo obligatorio';
+
 alter table Medallero
 	add primary key (IDMedallero, NombrePais);
+
+COMMENT ON COLUMN Medallero.IDMedallero IS 'PK del medallero';
+COMMENT ON COLUMN Medallero.NombrePais IS 'País asociado al medallero forma parte de la llave primaria';
 
 alter table TelefonoAtleta
 	add primary key (IDTelefono, IDAtleta);
 
+COMMENT ON COLUMN TelefonoAtleta.IDTelefono IS 'PK del teléfono del atleta';
+COMMENT ON COLUMN TelefonoAtleta.IDAtleta IS 'Llave primaria del atleta, parte de la llave compuesta';
+
 alter table CorreoAtleta 
 	add primary key (IDCorreo, IDAtleta);
+
+COMMENT ON COLUMN CorreoAtleta.IDCorreo IS 'Llave primaria del correo del atleta';
+COMMENT ON COLUMN CorreoAtleta.IDAtleta IS 'PK del atleta, parte de la llave compuesta';
 
 alter table Medalla 
 	add primary key (TipoMedalla, IDDisciplina);
 
+COMMENT ON COLUMN Medalla.TipoMedalla IS 'EL Tipo de medalla, forma parte de la llave primaria compuesta';
+COMMENT ON COLUMN Medalla.IDDisciplina IS 'PK de la disciplina, parte de la llave compuesta';
+
 alter table CorreoArbitro
 	add primary key (IDCorreo, IDArbitro);
+
+COMMENT ON COLUMN CorreoArbitro.IDCorreo IS 'Llave primaria del correo del árbitro';
+COMMENT ON COLUMN CorreoArbitro.IDArbitro IS 'Llave primaria del árbitro, parte de la llave compuesta';
 
 alter table TelefonoEntrenador 
 	add primary key(IDTelefono, IDEntrenador);
 
+COMMENT ON COLUMN TelefonoEntrenador.IDTelefono IS 'Llave primaria del teléfono del entrenador';
+COMMENT ON COLUMN TelefonoEntrenador.IDEntrenador IS 'Llave primaria del entrenador forma parte de la llave compuesta';
+
 alter table TelefonoArbitro 
 	add primary key (IDTelefono, IDArbitro);
 
+COMMENT ON COLUMN TelefonoArbitro.IDTelefono IS 'PK del teléfono del árbitro';
+COMMENT ON COLUMN TelefonoArbitro.IDArbitro IS 'PK del árbitro forma parte de la llave compuesta';
+
 alter table CorreoEntrenador 
 	add primary key (IDCorreo, IDEntrenador);
+
+COMMENT ON COLUMN CorreoEntrenador.IDCorreo IS 'PK del correo del entrenador';
+COMMENT ON COLUMN CorreoEntrenador.IDEntrenador IS 'Llave primaria del entrenador formando parte de la llave compuesta';
 
 -- Definir llaves foraneas que incluyan llaves primarias compuestas
 
