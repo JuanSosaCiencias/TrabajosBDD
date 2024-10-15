@@ -8,26 +8,33 @@
 \usepackage{amsmath}
 \usepackage{amssymb}
 \usepackage{amsthm}
-\usepackage{amsmath}
 \usepackage{tabularx}
 \usepackage{fancyhdr}
 \usepackage{lastpage}
 \usepackage{verbatim}
 \usepackage[shortlabels]{enumitem}
-\usepackage{venndiagram}
-\usetikzlibrary{shapes.geometric}
 \usepackage{cancel}
 \usepackage{hyperref}
 \usepackage[T1]{fontenc}
 \usepackage[spanish,es-nodecimaldot,es-tabla]{babel}
 \usepackage{csquotes}
-\usepackage{graphicx}
 \usepackage{tocloft}
 \graphicspath{{./figs/}}
 \usepackage{setspace}
-\usepackage{xcolor}
 
+%------ Paquetes para joins ------------%
+\def\ojoin{\setbox0=\hbox{$\bowtie$}%
+  \rule[-.02ex]{.25em}{.4pt}\llap{\rule[\ht0]{.25em}{.4pt}}}
+\def\leftouterjoin{\mathbin{\ojoin\mkern-5.8mu\bowtie}}
+\def\rightouterjoin{\mathbin{\bowtie\mkern-5.8mu\ojoin}}
+\def\fullouterjoin{\mathbin{\ojoin\mkern-5.8mu\bowtie\mkern-5.8mu\ojoin}}
 
+%------ Paquetes para tablas ------------%
+\usepackage[table]{xcolor}
+\usepackage{float}
+\usepackage{longtable}
+
+%------ Paquetes para bibliografia ------------%
 \usepackage[backend=biber]{biblatex}
 \addbibresource{resources/referencias/referencias.bib}
 
@@ -65,15 +72,15 @@
         \end{enumerate}
         \item \input{preguntas/pregunta3.tex}
         \begin{enumerate}[label=\alph*.]
-            \item \input{preguntas/2.a.tex} 
-            \item \input{preguntas/2.b.tex}
-            \item \input{preguntas/2.c.tex}
-            \item \input{preguntas/2.d.tex}
-            \item \input{preguntas/2.e.tex}
+            \item \input{preguntas/3.a.tex} 
+            \item \input{preguntas/3.b.tex}
+            \item \input{preguntas/3.c.tex}
+            \item \input{preguntas/3.d.tex}
+            \item \input{preguntas/3.e.tex}
         \end{enumerate}
     \end{enumerate}
     \newpage
     
-\printbibliography
+% \printbibliography
   
 \end{document}
