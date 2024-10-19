@@ -1,0 +1,45 @@
+\begin{center}
+    \textbf{Para cada política que investigaron, ¿cuál es su objeto y su funcionamiento?}
+\end{center}
+
+\begin{itemize}
+    \item \textbf{CASCADE}: 
+
+    \textbf{Objeto}: Permite la eliminación o actualización de registros en cascada. Si se elimina o actualiza un registro en la tabla principal, los registros relacionados en la tabla secundaria se eliminan o actualizan automáticamente.
+    
+    \textbf{Funcionamiento}: Cuando se elimina o actualiza un registro en la tabla principal, PostgreSQL extiende la operación a las tablas secundarias relacionadas, eliminando o actualizando los registros dependientes automáticamente.
+    
+    \vspace{0.5cm}
+    
+    \item \textbf{SET NULL}: 
+    
+    \textbf{Objeto}: Evitar la eliminación de registros relacionados, pero dejar claro que la relación ya no es válida al establecer los valores de las llaves foráneas como \texttt{NULL}.
+    
+    \textbf{Funcionamiento}: Si se elimina o actualiza un registro en la tabla principal, las llaves foráneas en la tabla secundaria se establecerán a \texttt{NULL}. Es útil cuando los registros relacionados deben mantenerse, pero sin una referencia válida.
+    
+    \vspace{0.5cm}
+    
+    \item \textbf{SET DEFAULT}: 
+    
+    \textbf{Objeto}: Establecer un valor predeterminado en los registros relacionados cuando se elimina o actualiza un registro en la tabla principal.
+    
+    \textbf{Funcionamiento}: Al eliminar o actualizar un registro en la tabla principal, los valores de las llaves foráneas en la tabla secundaria se reemplazan por un valor predefinido. Es útil para mantener un estado predeterminado en los registros secundarios.
+    
+    \vspace{0.5cm}
+    
+    \item \textbf{RESTRICT}: 
+    
+    \textbf{Objeto}: Impedir la eliminación o actualización de registros en la tabla principal si existen registros relacionados en la tabla secundaria, evitando la creación de registros huérfanos.
+    
+    \textbf{Funcionamiento}: PostgreSQL no permite la eliminación o actualización del registro en la tabla principal si hay registros dependientes en la tabla secundaria. Garantiza la integridad referencial al evitar inconsistencias.
+    
+    \vspace{0.5cm}
+    
+    \item \textbf{NO ACTION}: 
+    
+    \textbf{Objeto}: Similar a \texttt{RESTRICT}, impide la eliminación o actualización de registros dependientes, pero la validación se realiza al final de la transacción. Es la política por defecto.
+    
+    \textbf{Funcionamiento}: Si se intenta eliminar o actualizar un registro en la tabla principal, PostgreSQL lanza un error, pero la verificación de la integridad referencial se realiza al final de la transacción.
+    
+    \vspace{0.5cm}
+\end{itemize}
