@@ -1,4 +1,8 @@
+<<<<<<< Updated upstream
 <mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36" version="24.7.17">
+=======
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36" version="24.7.17">
+>>>>>>> Stashed changes
   <diagram name="Página-1" id="cWyOJy4rAa10n7n6FvPp">
     <mxGraphModel grid="1" page="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
@@ -1105,7 +1109,11 @@
             </Array>
           </mxGeometry>
         </mxCell>
+<<<<<<< Updated upstream
         <mxCell id="LZco95R0kcnfF2moG8rG-38" value="" style="edgeStyle=elbowEdgeStyle;fontSize=12;html=1;endArrow=ERoneToMany;startArrow=ERzeroToOne;rounded=0;strokeWidth=2;fillColor=#fad9d5;strokeColor=#ae4132;exitX=0.006;exitY=-0.1;exitDx=0;exitDy=0;entryX=1;entryY=-0.1;entryDx=0;entryDy=0;entryPerimeter=0;exitPerimeter=0;" edge="1" parent="1" source="nFd2LTMDBVpqRNZDv_q9-5" target="36T4z24LOP3LeD5Vtb74-19">
+=======
+        <mxCell id="LZco95R0kcnfF2moG8rG-38" value="" style="edgeStyle=elbowEdgeStyle;fontSize=12;html=1;endArrow=ERoneToMany;startArrow=ERzeroToOne;rounded=0;strokeWidth=2;fillColor=#fad9d5;strokeColor=#ae4132;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=-0.1;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="nFd2LTMDBVpqRNZDv_q9-2" target="36T4z24LOP3LeD5Vtb74-19">
+>>>>>>> Stashed changes
           <mxGeometry width="100" height="100" relative="1" as="geometry">
             <mxPoint x="360" y="555" as="sourcePoint" />
             <mxPoint x="50" y="630" as="targetPoint" />
@@ -1198,7 +1206,11 @@
             </Array>
           </mxGeometry>
         </mxCell>
+<<<<<<< Updated upstream
         <mxCell id="TziOj_4ZsJbTpoA70mmC-2" value="" style="edgeStyle=elbowEdgeStyle;fontSize=12;html=1;endArrow=ERoneToMany;startArrow=ERzeroToOne;rounded=0;strokeWidth=2;fillColor=#fad9d5;strokeColor=#7EA6E0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;exitX=-0.004;exitY=0.702;exitDx=0;exitDy=0;exitPerimeter=0;" edge="1" parent="1" source="cqkPvYUDdSKqJvLp3jxx-16" target="36T4z24LOP3LeD5Vtb74-19">
+=======
+        <mxCell id="TziOj_4ZsJbTpoA70mmC-2" value="" style="edgeStyle=elbowEdgeStyle;fontSize=12;html=1;endArrow=ERoneToMany;startArrow=ERzeroToOne;rounded=0;strokeWidth=2;fillColor=#fad9d5;strokeColor=#7EA6E0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;exitX=-0.004;exitY=0.233;exitDx=0;exitDy=0;exitPerimeter=0;" edge="1" parent="1" source="nFd2LTMDBVpqRNZDv_q9-5" target="36T4z24LOP3LeD5Vtb74-19">
+>>>>>>> Stashed changes
           <mxGeometry width="100" height="100" relative="1" as="geometry">
             <mxPoint x="350" y="440" as="sourcePoint" />
             <mxPoint x="60" y="667" as="targetPoint" />
