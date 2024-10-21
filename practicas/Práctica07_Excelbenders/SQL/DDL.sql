@@ -344,7 +344,7 @@ COMMENT ON COLUMN Patrocinador.NombrePatrocinador IS 'PK del patrocinador';
 -- Definir llaves primarias compuestas
 
 alter table Localidad 
-	add primary key (NombreLocalidad), 
+	add primary key (NombreLocalidad, IDDisciplina), 
 	alter column Calle set not null,
 	alter column Numero set not null,
 	alter column Ciudad set not null,
@@ -476,7 +476,7 @@ COMMENT ON CONSTRAINT FK_Participa_Disciplina ON Participa IS 'FK que referencia
 ALTER TABLE Medalla
 ADD CONSTRAINT FK_Medalla_Disciplina 
 FOREIGN KEY (IDDisciplina) REFERENCES Disciplina(IDDisciplina) 
-ON DELETE CASCADE ON UPDATE CASCADE;
+ON DELETE CASCADE ON UPDATE CASCADE,
 ADD CONSTRAINT FK_Medalla_Atleta 
 FOREIGN KEY (IDAtleta) REFERENCES Atleta(IDAtleta) 
 ON DELETE CASCADE ON UPDATE CASCADE;
