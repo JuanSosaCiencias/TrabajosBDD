@@ -135,7 +135,7 @@ CREATE TABLE IF NOT EXISTS Localidad(
     Ciudad varchar(50),
     Pais varchar(50),
     Aforo int,
-    Tipo int
+    Tipo varchar(50)
 );
 
 COMMENT ON TABLE Localidad IS 'Tabla que contiene información sobre las localidades donde se celebran eventos.';
