@@ -255,7 +255,6 @@ alter table Pais
 	add primary key (NombrePais);
 
 COMMENT ON COLUMN Pais.NombrePais IS 'Es la llave primaria para identificar de manera única cada país';
-COMMENT ON CONSTRAINT Pais_pkey ON Pais IS 'Llave primaria de la tabla Pais.'; -- Restricción pais_pkey
 
 ALTER TABLE Atleta
 	ADD PRIMARY KEY (IDAtleta),
@@ -275,7 +274,6 @@ COMMENT ON COLUMN Atleta.SegundoApellido IS 'El segundo apellido por defecto ser
 COMMENT ON COLUMN Atleta.FechaNacimiento IS 'Fecha de nacimiento del atleta se pone como campo obligatorio';
 COMMENT ON COLUMN Atleta.Nacionalidad IS 'La Nacionalidad del atleta es por defecto "No proporcionado"';
 COMMENT ON COLUMN Atleta.Genero IS 'Género del atleta, restricción con valor por defecto 0 (sin especificar)';
-COMMENT ON CONSTRAINT Atleta_pkey ON Atleta IS 'Llave primaria de la tabla Atleta.'; -- Restricción atleta_pkey
 
 alter table Evento 
 	add primary key(IDEvento),
@@ -289,7 +287,6 @@ COMMENT ON COLUMN Evento.DuracionMax IS 'Duración máxima del evento, como camp
 COMMENT ON COLUMN Evento.Precio IS 'Precio del evento, como campo obligatorio en forma de restriccion';
 COMMENT ON COLUMN Evento.FechaEvento IS 'Fecha del evento, como campo obligatorio tambien';
 COMMENT ON COLUMN Evento.Fase IS 'Fase del evento, valor por defecto es 0 (fase inicial)';
-COMMENT ON CONSTRAINT Evento_pkey ON Evento IS 'Llave primaria de la tabla Evento.'; -- Restricción evento_pkey
 
 alter table Disciplina 
 	add primary key (IDDisciplina),
@@ -299,13 +296,11 @@ alter table Disciplina
 COMMENT ON COLUMN Disciplina.IDDisciplina IS 'La PK de la disciplina';
 COMMENT ON COLUMN Disciplina.NombreDisciplina IS 'Ponemos que el nombre de la disciplina no puede ser nulo';
 COMMENT ON COLUMN Disciplina.Categoria IS 'La categoría de la disciplina no puede ser nula';
-COMMENT ON CONSTRAINT Disciplina_pkey ON Disciplina IS 'Llave primaria de la tabla Disciplina.'; -- Restricción disciplina_pkey
 
 alter table Cliente 
 	add primary key (IDCliente);
 
 COMMENT ON COLUMN Cliente.IDCliente IS 'PK del cliente';
-COMMENT ON CONSTRAINT Cliente_pkey ON Cliente IS 'Llave primaria de la tabla Cliente.'; -- Restricción cliente_pkey
 
 alter table Entrenador 
 	add primary key (IDEntrenador),
@@ -323,7 +318,6 @@ COMMENT ON COLUMN Entrenador.SegundoApellido IS 'Por defecto "No proporcionado" 
 COMMENT ON COLUMN Entrenador.FechaNacimiento IS 'Fecha de nacimiento del entrenador, la ponemos como campo obligatorio';
 COMMENT ON COLUMN Entrenador.Nacionalidad IS 'La Nacionalidad del entrenador, por defecto "No proporcionado"';
 COMMENT ON COLUMN Entrenador.Genero IS 'Género del entrenador, con valor por defecto 0 (sin especificar)';
-COMMENT ON CONSTRAINT Entrenador_pkey ON Entrenador IS 'Llave primaria de la tabla Entrenador.'; -- Restricción entrenador_pkey
 
 alter table Arbitro 
 	add primary key (IDArbitro),
@@ -341,13 +335,11 @@ COMMENT ON COLUMN Arbitro.SegundoApellido IS 'Por defecto sera "No proporcionado
 COMMENT ON COLUMN Arbitro.FechaNacimiento IS 'Fecha de nacimiento del árbitro, campo obligatorio';
 COMMENT ON COLUMN Arbitro.Nacionalidad IS 'Nacionalidad del árbitro, por defecto "No proporcionado"';
 COMMENT ON COLUMN Arbitro.Genero IS 'Género del árbitro, con valor por defecto 0 (sin especificar)';
-COMMENT ON CONSTRAINT Arbitro_pkey ON Arbitro IS 'Llave primaria de la tabla Árbitro.'; -- Restricción arbitro_pkey
 
 alter table Patrocinador 
 	add primary key (NombrePatrocinador);
 
 COMMENT ON COLUMN Patrocinador.NombrePatrocinador IS 'PK del patrocinador';
-COMMENT ON CONSTRAINT Patrocinador ON Patrocinador IS 'Llave primaria de la tabla Patrocinador.'; -- Restricción patrocinador_pkey
 
 -- Definir llaves primarias compuestas
 
@@ -367,63 +359,54 @@ COMMENT ON COLUMN Localidad.Ciudad IS 'Ciudad donde se encuentra la localidad, t
 COMMENT ON COLUMN Localidad.Pais IS 'País de la localidad, tambien campo obligatorio';
 COMMENT ON COLUMN Localidad.Aforo IS 'Aforo máximo de la localidad, como campo obligatorio';
 COMMENT ON COLUMN Localidad.Tipo IS 'Tipo de la localidad, tambien como campo obligatorio';
-COMMENT ON CONSTRAINT Localidad_pkey ON Localidad IS 'Llave primaria de la tabla Localidad.'; -- Restricción localidad_pkey
 
 alter table Medallero
 	add primary key (IDMedallero, NombrePais);
 
 COMMENT ON COLUMN Medallero.IDMedallero IS 'PK del medallero';
 COMMENT ON COLUMN Medallero.NombrePais IS 'País asociado al medallero forma parte de la llave primaria';
-COMMENT ON CONSTRAINT Medallero_pkey ON Localidad IS 'Llave primaria de la tabla Medallero.'; -- Restricción medallero_pkey
 
 alter table TelefonoAtleta
 	add primary key (IDTelefono, IDAtleta);
 
 COMMENT ON COLUMN TelefonoAtleta.IDTelefono IS 'PK del teléfono del atleta';
 COMMENT ON COLUMN TelefonoAtleta.IDAtleta IS 'Llave primaria del atleta, parte de la llave compuesta';
-COMMENT ON CONSTRAINT TelefonoAtleta_pkey ON TelefonoAtleta IS 'Llave primaria de la tabla TelefonoAtleta.'; -- Restricción telefonoAtleta_pkey
 
 alter table CorreoAtleta 
 	add primary key (IDCorreo, IDAtleta);
 
 COMMENT ON COLUMN CorreoAtleta.IDCorreo IS 'Llave primaria del correo del atleta';
 COMMENT ON COLUMN CorreoAtleta.IDAtleta IS 'PK del atleta, parte de la llave compuesta';
-COMMENT ON CONSTRAINT CorreoAtleta_pkey ON CorreoAtleta IS 'Llave primaria de la tabla CorreoAtleta.'; -- Restricción correoAtleta_pkey
 
 alter table Medalla 
 	add primary key (TipoMedalla, IDDisciplina);
 
 COMMENT ON COLUMN Medalla.TipoMedalla IS 'EL Tipo de medalla, forma parte de la llave primaria compuesta';
 COMMENT ON COLUMN Medalla.IDDisciplina IS 'PK de la disciplina, parte de la llave compuesta';
-COMMENT ON CONSTRAINT Medalla_pkey ON Localidad IS 'Llave primaria de la tabla Medalla.'; -- Restricción medalla_pkey
 
 alter table CorreoArbitro
 	add primary key (IDCorreo, IDArbitro);
 
 COMMENT ON COLUMN CorreoArbitro.IDCorreo IS 'Llave primaria del correo del árbitro';
 COMMENT ON COLUMN CorreoArbitro.IDArbitro IS 'Llave primaria del árbitro, parte de la llave compuesta';
-COMMENT ON CONSTRAINT CorreoArbitro_pkey ON CorreoArbitro IS 'Llave primaria de la tabla CorreoArbitro.'; -- Restricción correoArbitro_pkey
 
 alter table TelefonoEntrenador 
 	add primary key(IDTelefono, IDEntrenador);
 
 COMMENT ON COLUMN TelefonoEntrenador.IDTelefono IS 'Llave primaria del teléfono del entrenador';
 COMMENT ON COLUMN TelefonoEntrenador.IDEntrenador IS 'Llave primaria del entrenador forma parte de la llave compuesta';
-COMMENT ON CONSTRAINT TelefonoEntrenador_pkey ON TelefonoEntrenador IS 'Llave primaria de la tabla TelefonoEntrenador.'; -- Restricción telefonoEntrenador_pkey
 
 alter table TelefonoArbitro 
 	add primary key (IDTelefono, IDArbitro);
 
 COMMENT ON COLUMN TelefonoArbitro.IDTelefono IS 'PK del teléfono del árbitro';
 COMMENT ON COLUMN TelefonoArbitro.IDArbitro IS 'PK del árbitro forma parte de la llave compuesta';
-COMMENT ON CONSTRAINT Telefonoarbitro_pkey ON TelefonoArbitro IS 'Llave primaria de la tabla TelefonoArbitro.'; -- Restricción telefonoArbitro_pkey
 
 alter table CorreoEntrenador 
 	add primary key (IDCorreo, IDEntrenador);
 
 COMMENT ON COLUMN CorreoEntrenador.IDCorreo IS 'PK del correo del entrenador';
 COMMENT ON COLUMN CorreoEntrenador.IDEntrenador IS 'Llave primaria del entrenador formando parte de la llave compuesta';
-COMMENT ON CONSTRAINT CorreoEntrenador_pkey ON CorreoEntrenador IS 'Llave primaria de la tabla CorreoEntrenador.'; -- Restricción correoEntrenador_pkey
 
 -- Definir llaves foraneas que incluyan llaves primarias compuestas
 

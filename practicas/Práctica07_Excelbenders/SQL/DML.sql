@@ -929,7 +929,7 @@ insert into CorreoAtleta (IDCorreo, IDAtleta) values ('timothy.rogers@gmail.com'
 insert into CorreoAtleta (IDCorreo, IDAtleta) values ('rebecca.reed@yahoo.com', 106);
 insert into CorreoAtleta (IDCorreo, IDAtleta) values ('john.doe@gmail.com', 134);
 insert into CorreoAtleta (IDCorreo, IDAtleta) values ('jane.smith@yahoo.com', 18);
-insert into CorreoAtleta (IDCorreo, IDAtleta) values ('michael.brown@outlook.com', 95);
+insert into CorreoAtleta (IDCorreo, IDAtleta) values ('micael.brown@outlook.com', 95);
 insert into CorreoAtleta (IDCorreo, IDAtleta) values ('emily.jones@hotmail.com', 88);
 insert into CorreoAtleta (IDCorreo, IDAtleta) values ('david.wilson@live.com', 47);
 insert into CorreoAtleta (IDCorreo, IDAtleta) values ('sarah.davis@aol.com', 140);
