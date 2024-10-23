@@ -255,7 +255,7 @@ alter table Pais
 	add primary key (NombrePais);
 
 COMMENT ON COLUMN Pais.NombrePais IS 'Es la llave primaria para identificar de manera única cada país';
-COMMENT ON CONSTRAINT Pais_pkey ON Pais IS 'Llave primaria de la tabla Medallero.'; -- Restricción pais_pkey
+COMMENT ON CONSTRAINT Pais_pkey ON Pais IS 'Llave primaria de la tabla Pais.'; -- Restricción pais_pkey
 
 ALTER TABLE Atleta
 	ADD PRIMARY KEY (IDAtleta),
