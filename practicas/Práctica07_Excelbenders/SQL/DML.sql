@@ -946,8 +946,8 @@ insert into Atleta (IDAtleta, NombrePais, IDEntrenador, Temporada, Nombre, Prime
 insert into Atleta (IDAtleta, NombrePais, IDEntrenador, Temporada, Nombre, PrimerApellido, SegundoApellido, FechaNacimiento, Nacionalidad, Genero) values (148, 'Papúa Nueva Guinea', 98, 2021, 'Audre', 'Wilmut', 'Empleton', '2004-01-21', 'Omaní', 'M');
 insert into Atleta (IDAtleta, NombrePais, IDEntrenador, Temporada, Nombre, PrimerApellido, SegundoApellido, FechaNacimiento, Nacionalidad, Genero) values (149, 'Kirguistán', 10, 2020, 'Hilly', 'Burnyeat', 'Heugh', '1999-07-10', 'Holandesa', 'M');
 insert into Atleta (IDAtleta, NombrePais, IDEntrenador, Temporada, Nombre, PrimerApellido, SegundoApellido, FechaNacimiento, Nacionalidad, Genero) values (150, 'Liberia', 116, 2021, 'James', 'Belton', 'Kull', '1996-03-16', 'Alemana', 'F');
--- Tuplas para CorreoAtleta
 
+-- Tuplas para CorreoAtleta
 insert into CorreoAtleta (IDCorreo, IDAtleta) values ('john.doe@gmail.com', 79);
 insert into CorreoAtleta (IDCorreo, IDAtleta) values ('jane.smith@yahoo.com', 16);
 insert into CorreoAtleta (IDCorreo, IDAtleta) values ('michael.brown@outlook.com', 95);
