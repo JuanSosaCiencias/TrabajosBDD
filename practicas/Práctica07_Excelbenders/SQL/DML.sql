@@ -938,7 +938,6 @@ insert into CorreoAtleta (IDCorreo, IDAtleta) values ('linda.moore@yahoo.com', 1
 insert into CorreoAtleta (IDCorreo, IDAtleta) values ('robert.taylor@outlook.com', 4);
 insert into CorreoAtleta (IDCorreo, IDAtleta) values ('mary.anderson@hotmail.com', 125);
 insert into CorreoAtleta (IDCorreo, IDAtleta) values ('william.thomas@live.com', 29);
-insert into CorreoAtleta (IDCorreo, IDAtleta) values ('patricia.jackson@aol.com', 83);
 insert into CorreoAtleta (IDCorreo, IDAtleta) values ('charles.white@gmail.com', 138);
 insert into CorreoAtleta (IDCorreo, IDAtleta) values ('barbara.harris@yahoo.com', 106);
 insert into CorreoAtleta (IDCorreo, IDAtleta) values ('joseph.martin@outlook.com', 50);
@@ -981,8 +980,7 @@ insert into CorreoAtleta (IDCorreo, IDAtleta) values ('john.doe@gmail.com', 120)
 insert into CorreoAtleta (IDCorreo, IDAtleta) values ('jane.smith@yahoo.com', 143);
 insert into CorreoAtleta (IDCorreo, IDAtleta) values ('michael.brown@outlook.com', 56);
 insert into CorreoAtleta (IDCorreo, IDAtleta) values ('emily.jones@hotmail.com', 22);
-insert into CorreoAtleta (IDCorreo, IDAtleta) values ('david.wilson@live.com', 79);
-insert into CorreoAtleta (IDCorreo, IDAtleta) values ('sarah.davis@aol.com', 140);
+insert into CorreoAtleta (IDCorreo, IDAtleta) values ('david.wilson@live.com', 79);;
 insert into CorreoAtleta (IDCorreo, IDAtleta) values ('james.miller@gmail.com', 59);
 insert into CorreoAtleta (IDCorreo, IDAtleta) values ('linda.moore@yahoo.com', 103);
 insert into CorreoAtleta (IDCorreo, IDAtleta) values ('robert.taylor@outlook.com', 42);
