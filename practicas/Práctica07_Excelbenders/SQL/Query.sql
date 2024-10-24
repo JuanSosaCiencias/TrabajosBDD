@@ -1,15 +1,18 @@
-SELECT	Atleta.Nombre
+SELECT	*
 FROM	Atleta
 WHERE	Atleta.Nombre LIKE 'R%';
 
-SELECT Entrenador.FechaNacimiento 
+SELECT *
 FROM Entrenador 
-WHERE EXTRACT(MONTH FROM fecha_nacimiento) = 6;
+WHERE EXTRACT(MONTH FROM FechaNacimiento) = 6;
 
-SELECT Evento.FechaEvento
+SELECT *
 FROM Evento
-WHERE BETWEEN '2024-01-01' AND '2024-04-14';
+WHERE FechaEvento BETWEEN '2024-01-01' AND '2024-04-14';
 
-SELECT Localidad.NombreLocalidad
+SELECT *
 FROM Localidad
-WHERE Localidad.Aforo > 400 
+WHERE Aforo > 400 
+
+SELECT *
+FROM Patrocinador
