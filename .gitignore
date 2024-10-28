@@ -8,4 +8,6 @@
 *.bcf
 *.out
 *.run.xml
-__*
+*__init__.py
+*settings.py
+*__pycache__*
