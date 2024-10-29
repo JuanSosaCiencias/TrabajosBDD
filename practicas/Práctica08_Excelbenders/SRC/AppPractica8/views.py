@@ -28,7 +28,7 @@ class DisciplinaAPIView(APIView):
                 {"detail": "Disciplina no encontrada."},
                 status=status.HTTP_404_NOT_FOUND
             )
-        serializer = DisciplinaSerializer(Disciplina.objects.filter(iddisciplina=request.data['iddisciplina']), data=request.data)
+        serializer = DisciplinaSerializer(disciplina, data=request.data)
         serializer.is_valid(raise_exception=True)
         serializer.save()
         return Response(
@@ -41,13 +41,19 @@ class DisciplinaAPIView(APIView):
         return Response(status=status.HTTP_200_OK, data=a)
  
 class DisciplinaApiId(APIView):
-    def get(self,request):
+    def get(self, request):
+        iddisciplina = request.query_params.get('iddisciplina')
+        if not iddisciplina:
+            return Response(
+                {"detail": "El parámetro 'iddisciplina' es requerido."},
+                status=status.HTTP_400_BAD_REQUEST
+            )
         try:
-            disciplina = Disciplina.objects.get(iddisciplina=request.data['iddisciplina'])
+            disciplina = Disciplina.objects.get(iddisciplina=iddisciplina)
         except Disciplina.DoesNotExist:
             return Response(
                 {"detail": "Disciplina no encontrada."},
                 status=status.HTTP_404_NOT_FOUND
             )
-        serializer = DisciplinaSerializer(Disciplina.objects.filter(iddisciplina=request.data['iddisciplina']), many=True)
+        serializer = DisciplinaSerializer(disciplina)
         return Response(status=status.HTTP_200_OK, data=serializer.data)
