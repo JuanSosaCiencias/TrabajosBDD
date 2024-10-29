@@ -11,6 +11,7 @@ class DisciplinaAPIView(APIView):
     # Método GET para obtener todas las disciplinas
     def get(self, request):
         serializer = DisciplinaSerializer(Disciplina.objects.all(), many=True)
+        print("Estoy mandando", Disciplina.objects.all())
         return Response(status=status.HTTP_200_OK, data=serializer.data)
     
     # Método POST para crear una nueva disciplina
@@ -32,10 +33,7 @@ class DisciplinaAPIView(APIView):
         serializer = DisciplinaSerializer(disciplina, data=request.data)
         serializer.is_valid(raise_exception=True)
         serializer.save()
-        return Response(
-            {"detail": "Disciplina actualizada con éxito.", "data": serializer.data},
-            status=status.HTTP_200_OK
-        )
+        return Response(status=status.HTTP_200_OK, data=serializer.data)
     
     # Método PATCH para actualizar parcialmente una disciplina existente
     def patch(self, request):
