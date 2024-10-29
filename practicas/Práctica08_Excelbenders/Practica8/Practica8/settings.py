@@ -76,9 +76,9 @@ WSGI_APPLICATION = 'Practica8.wsgi.application'
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
 DATABASES = {
-    'default': {
+    'default': {    # En general toda esta seccion dependera de como hayan nombrado la base de datos, la contraseña, el usuario que le pusieron, etc. entonces cada quien lo va a modificar xd
         'ENGINE': 'django.db.backends.postgresql', #Para PostgreSQL
-        'NAME': 'postgres', #Nombre de la base de datos (como la del ayudante)
+        'NAME': 'Olimpiadas', #Nombre de la base de datos (como la del ayudante)        
         'USER': 'postgres', #Usuario de la base de datos (como la del ayudante también)
         'PASSWORD': '1234', #Contraseña de la base de datos  ''''
         'HOST': 'localhost', #Host de la base de datos
