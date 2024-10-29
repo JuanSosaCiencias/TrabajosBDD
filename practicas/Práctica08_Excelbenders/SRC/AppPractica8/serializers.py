@@ -4,7 +4,7 @@ from .models import Disciplina, Arbitro
 class DisciplinaSerializer(serializers.ModelSerializer):
     class Meta:
         model = Disciplina
-        fields = ['nombredisciplina', 'categoria']  # Excluir 'iddisciplina'
+        fields = '__all__' # modidficar para agregar validaciones
 
 class ArbitroSerializer(serializers.ModelSerializer):
     class Meta:

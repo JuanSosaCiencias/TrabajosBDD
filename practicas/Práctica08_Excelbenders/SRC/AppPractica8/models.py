@@ -14,7 +14,7 @@ class Disciplina(models.Model):
 
 class Arbitro(models.Model):
     idarbitro = models.AutoField(primary_key=True)
-    iddisciplina = models.ForeignKey(Disciplina, on_delete=models.CASCADE, related_name='arbitros')
+    iddisciplina = models.ForeignKey(Disciplina, on_delete=models.CASCADE, related_name='arbitros', db_column='iddisciplina')
     nombre = models.CharField(max_length=50)
     primerapellido = models.CharField(max_length=50)
     segundoapellido = models.CharField(max_length=50)
