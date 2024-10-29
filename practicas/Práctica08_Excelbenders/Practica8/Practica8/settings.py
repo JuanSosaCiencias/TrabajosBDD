@@ -37,6 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'AppPractica8',
+    'rest_framework'
 ]
 
 MIDDLEWARE = [
@@ -74,10 +76,14 @@ WSGI_APPLICATION = 'Practica8.wsgi.application'
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+    'default': {    # En general toda esta seccion dependera de como hayan nombrado la base de datos, la contraseña, el usuario que le pusieron, etc. entonces cada quien lo va a modificar xd
+        'ENGINE': 'django.db.backends.postgresql', #Para PostgreSQL
+        'NAME': 'Olimpiadas', #Nombre de la base de datos (como la del ayudante)        
+        'USER': 'postgres', #Usuario de la base de datos (como la del ayudante también)
+        'PASSWORD': '1234', #Contraseña de la base de datos  ''''
+        'HOST': 'localhost', #Host de la base de datos
+        'PORT': '5432', #Puerto de la base de datos por defecto
+    }       #Todos esos son valores por default
 }
 
 
@@ -109,7 +115,7 @@ TIME_ZONE = 'UTC'
 
 USE_I18N = True
 
-USE_TZ = True
+USE_TZ = False # Para que no de error segun el ayudante
 
 
 # Static files (CSS, JavaScript, Images)
