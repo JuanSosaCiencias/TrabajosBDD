@@ -22,7 +22,7 @@
                 <div class="custom-card" > 
                     <h1 class="text-center" class="mt-4" >Arbitros</h1>
                     <br>
-                    <a href="{% url 'arbitro' %}" class="list-group-item list-group-item-action" >Lista de Árbitros + Métodos Create</a>
+                    <a href="{% url 'arbitro' %}" class="list-group-item list-group-item-action text-decoration-underline" >Lista de Árbitros + Métodos Create</a>
                 </div>
             </div>
             
@@ -31,7 +31,7 @@
 
                 <div class="text-center">
                     <div class="w-50 mx-auto">
-                        <label for="idarbitro">Ingrese el ID de la Árbitro:</label>
+                        <label for="idarbitro" class="espacio">Ingrese el ID de la Árbitro:</label>
                         <input type="number" id="idarbitro" name="idarbitro" class="form-control" required>
                     </div>
                     <br>
@@ -57,7 +57,7 @@
             <form action="{% url 'disciplina_id' %}" method="get" class="mb-4">
                 <div class="text-center">
                     <div class="w-50 mx-auto">
-                        <label for="iddisciplina">Ingrese el ID de la Disciplina:</label>
+                        <label for="iddisciplina" class="espacio ">Ingrese el ID de la Disciplina:</label>
                         <input type="number" id="iddisciplina" name="iddisciplina" class="form-control" required>
                     </div>
                     <br>
