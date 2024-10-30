@@ -12,9 +12,13 @@ hr {
   border: 1px solid #ccc; /* Cambia el color y el grosor de la línea aquí */
 }
 
+custom_label{
+  width: 10%;
+}
+
 
 .custom-card {
-  width: 40%; /* Cambia este valor según tus necesidades */
+  width: 28%; /* Cambia este valor según tus necesidades */
   margin: 0 auto; /* Centra horizontalmente */
   color: #f8f9fa; /* Cambia el color de fondo aquí */
   padding: 10px; /* Añade un poco de padding para que el texto no esté pegado al borde */
