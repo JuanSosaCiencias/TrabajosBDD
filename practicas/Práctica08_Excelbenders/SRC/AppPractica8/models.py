@@ -2,12 +2,12 @@ from django.db import models
 
 class Disciplina(models.Model):
     """
-    Modelo que representa una disciplina.
+    Modelo para representar una disciplina deportiva.
 
-    Attributes:
-        iddisciplina (AutoField): El identificador único de la disciplina.
-        nombredisciplina (CharField): El nombre de la disciplina.
-        categoria (CharField): La categoría de la disciplina.
+    Atributos:
+        iddisciplina (AutoField): Clave primaria de la disciplina.
+        nombredisciplina (CharField): Nombre de la disciplina.
+        categoria (CharField): Categoría de la disciplina.
     """
     iddisciplina = models.AutoField(primary_key=True)
     nombredisciplina = models.CharField(max_length=50)
@@ -19,10 +19,9 @@ class Disciplina(models.Model):
 
     def __str__(self):
         """
-        Devuelve una representación en cadena del objeto Disciplina.
-
-        Returns:
-            str: Una cadena que representa la disciplina.
+        Representación en cadena del modelo Disciplina.
+        
+        :return: Cadena con el id y nombre de la disciplina.
         """
         return f"{self.iddisciplina} - {self.nombredisciplina}" 
 
@@ -30,15 +29,15 @@ class Arbitro(models.Model):
     """
     Modelo que representa un árbitro.
 
-    Attributes:
-        idarbitro (AutoField): El identificador único del árbitro.
-        iddisciplina (ForeignKey): La disciplina a la que pertenece el árbitro.
-        nombre (CharField): El nombre del árbitro.
-        primerapellido (CharField): El primer apellido del árbitro.
-        segundoapellido (CharField): El segundo apellido del árbitro.
-        fechanacimiento (DateField): La fecha de nacimiento del árbitro.
-        nacionalidad (CharField): La nacionalidad del árbitro.
-        genero (CharField): El género del árbitro.
+    Atributos:
+        idarbitro (AutoField): Clave primaria del árbitro.
+        iddisciplina (ForeignKey): Relación con la disciplina a la que pertenece el árbitro.
+        nombre (CharField): Nombre del árbitro.
+        primerapellido (CharField): Primer apellido del árbitro.
+        segundoapellido (CharField): Segundo apellido del árbitro.
+        fechanacimiento (DateField): Fecha de nacimiento del árbitro.
+        nacionalidad (CharField): Nacionalidad del árbitro.
+        genero (CharField): Género del árbitro ('M' para masculino, 'F' para femenino, etc.).
     """
     idarbitro = models.AutoField(primary_key=True)
     iddisciplina = models.ForeignKey(Disciplina, on_delete=models.CASCADE, related_name='arbitros', db_column='iddisciplina')
@@ -53,11 +52,6 @@ class Arbitro(models.Model):
         db_table = 'arbitro'
         ordering = ['nombre']
 
-    def __str__(self):
-        """
-        Devuelve una representación en cadena del objeto Arbitro.
 
-        Returns:
-            str: Una cadena que representa el árbitro.
-        """
+    def __str__(self):
         return f"{self.idarbitro} - {self.nombre}"

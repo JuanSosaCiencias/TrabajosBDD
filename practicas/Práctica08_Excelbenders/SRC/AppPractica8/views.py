@@ -1,3 +1,4 @@
+
 from django.shortcuts import render
 from rest_framework import status
 from rest_framework.response import Response
@@ -181,9 +182,6 @@ class DisciplinaApiId(APIView):
         return Response(status=status.HTTP_204_NO_CONTENT)
     
     
-    
-
-########  ########  ########  ########  ######## Vistas para Arbitro ######## ########  ########  ########  ########
 
 class ArbitroAPIView(APIView):
     """
