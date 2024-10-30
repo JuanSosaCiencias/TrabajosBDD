@@ -7,24 +7,65 @@ from .serializers import DisciplinaSerializer, ArbitroSerializer
 
 def home(request):
     return render(request, 'home.html')
+    """
+    Renderiza la página de inicio.
 
-# Vista basada en clases para manejar las operaciones CRUD de Disciplina
+    Args:
+        request (HttpRequest): La solicitud HTTP.
+
+    Returns:
+        HttpResponse: La respuesta HTTP con el contenido de la página de inicio.
+    """
+
+
 class DisciplinaAPIView(APIView):
-    
-    # Método GET para obtener todas las disciplinas
+    """
+    Vista basada en clases para manejar las operaciones CRUD de Disciplina.
+    """
+
     def get(self, request):
+
+        """
+        Método GET para obtener todas las disciplinas.
+
+        Args:
+            request (Request): La solicitud HTTP.
+
+        Returns:
+            Response: Una respuesta HTTP con el estado y los datos de las disciplinas.
+        """
+
         serializer = DisciplinaSerializer(Disciplina.objects.all(), many=True)
         return Response(status=status.HTTP_200_OK, data=serializer.data)
     
-    # Método POST para crear una nueva disciplina
     def post(self, request):
+
+        """
+        Método POST para crear una nueva disciplina.
+
+        Args:
+            request (Request): La solicitud HTTP con los datos de la nueva disciplina.
+
+        Returns:
+            Response: Una respuesta HTTP con el estado y los datos de la disciplina creada.
+        """
+
         serializer = DisciplinaSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         serializer.save()
         return Response(status=status.HTTP_201_CREATED, data=serializer.data)
     
-    # Método PUT para actualizar una disciplina existente
     def put(self, request):
+
+        """
+        Método PUT para actualizar una disciplina existente.
+
+        Args:
+            request (Request): La solicitud HTTP con los datos actualizados de la disciplina.
+
+        Returns:
+            Response: Una respuesta HTTP con el estado y los datos de la disciplina actualizada.
+        """
 
         disciplinas = Disciplina.objects.filter(iddisciplina=request.data.get('iddisciplina'))
 
@@ -39,8 +80,17 @@ class DisciplinaAPIView(APIView):
         serializer.save()
         return Response(status=status.HTTP_200_OK, data=serializer.data)
     
-    # Método PATCH para actualizar parcialmente una disciplina existente
     def patch(self, request):
+        
+        """
+        Método PATCH para actualizar parcialmente una disciplina existente.
+
+        Args:
+            request (Request): La solicitud HTTP con los datos parcialmente actualizados de la disciplina.
+
+        Returns:
+            Response: Una respuesta HTTP con el estado y los datos de la disciplina actualizada parcialmente.
+        """
 
         disciplinas = Disciplina.objects.filter(iddisciplina=request.data.get('iddisciplina'))
 
@@ -59,15 +109,34 @@ class DisciplinaAPIView(APIView):
         )
     
     
-    # Método HEAD para obtener los metadatos de la solicitud
     def head(self, request):
+        """
+        Método HEAD para obtener los metadatos de la solicitud.
+
+        Args:
+            request (Request): La solicitud HTTP.
+
+        Returns:
+            Response: Una respuesta HTTP con el estado de la solicitud.
+        """
         return Response(status=status.HTTP_200_OK)
 
-# Vista basada en clases para manejar la obtención de una disciplina específica por iddisciplina
 class DisciplinaApiId(APIView):
+
+    """
+    Vista basada en clases para manejar la obtención de una disciplina específica por iddisciplina.
+    """
     
-    # Método GET para obtener una disciplina específica por iddisciplina
     def get(self, request):
+        """
+        Método GET para obtener una disciplina específica por iddisciplina.
+
+        Args:
+            request (Request): La solicitud HTTP con el id de la disciplina en los parámetros de consulta.
+
+        Returns:
+            Response: Una respuesta HTTP con el estado y los datos de la disciplina.
+        """
         iddisciplina = request.query_params.get('iddisciplina')
         if not iddisciplina:
             return Response(
@@ -85,6 +154,15 @@ class DisciplinaApiId(APIView):
         return Response(status=status.HTTP_200_OK, data=serializer.data)
     
     def delete(self, request):
+        """
+        Método DELETE para eliminar una disciplina específica por iddisciplina.
+
+        Args:
+            request (Request): La solicitud HTTP con el id de la disciplina en los parámetros de consulta.
+
+        Returns:
+            Response: Una respuesta HTTP con el estado de la eliminación.
+        """
         iddisciplina = request.query_params.get('iddisciplina')
         if not iddisciplina:
             return Response(
@@ -108,17 +186,51 @@ class DisciplinaApiId(APIView):
 ########  ########  ########  ########  ######## Vistas para Arbitro ######## ########  ########  ########  ########
 
 class ArbitroAPIView(APIView):
+    """
+    Vista basada en clases para manejar las operaciones CRUD de Arbitro.
+    """
     def get(self, request):
+        """
+        Método GET para obtener todos los árbitros.
+
+        Args:
+            request (Request): La solicitud HTTP.
+
+        Returns:
+            Response: Una respuesta HTTP con el estado y los datos de los árbitros.
+        """
         serializer = ArbitroSerializer(Arbitro.objects.all(), many=True)
         return Response(status=status.HTTP_200_OK, data=serializer.data)
     
     def post(self, request):
+        
+        """
+        Método POST para crear un nuevo árbitro.
+
+        Args:
+            request (Request): La solicitud HTTP con los datos del nuevo árbitro.
+
+        Returns:
+            Response: Una respuesta HTTP con el estado y los datos del árbitro creado.
+        """
+
         serializer = ArbitroSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         serializer.save()
         return Response(status=status.HTTP_201_CREATED, data=serializer.data)
     
     def put(self, request):
+
+        """
+        Método PUT para actualizar un árbitro existente.
+
+        Args:
+            request (Request): La solicitud HTTP con los datos actualizados del árbitro.
+
+        Returns:
+            Response: Una respuesta HTTP con el estado y los datos del árbitro actualizado.
+        """
+
         arbitros = Arbitro.objects.filter(idarbitro=request.data.get['idarbitro'])
         if not arbitros.exists():
             return Response(
@@ -134,6 +246,7 @@ class ArbitroAPIView(APIView):
     
     
     def patch(self, request):
+
         """
         Método PATCH para actualizar parcialmente un árbitro existente.
 
@@ -143,7 +256,7 @@ class ArbitroAPIView(APIView):
         Returns:
             Response: Una respuesta HTTP con el estado y los datos del árbitro actualizado parcialmente.
         """
-        # Corregir el uso de request.data.get
+        
         idarbitro = request.data.get('idarbitro')
         arbitros = Arbitro.objects.filter(idarbitro=idarbitro)
         if not arbitros.exists():
@@ -163,13 +276,37 @@ class ArbitroAPIView(APIView):
     # Método DELETE para eliminar una disciplina existente
     
     
-    # Método HEAD para obtener los metadatos de la solicitud
+    
     def head(self, request):
+        """
+        Método HEAD para obtener los metadatos de la solicitud.
+
+        Args:
+            request (Request): La solicitud HTTP.
+
+        Returns:
+            Response: Una respuesta HTTP con el estado de la solicitud.
+        """
         return Response(status=status.HTTP_200_OK)
 
 class ArbitroApiId(APIView):
     
+    """
+    Vista basada en clases para manejar la obtención de un árbitro específico por idarbitro.
+    """
+    
     def get(self, request):
+
+        """
+        Método GET para obtener un árbitro específico por idarbitro.
+
+        Args:
+            request (Request): La solicitud HTTP con el id del árbitro en los parámetros de consulta.
+
+        Returns:
+            Response: Una respuesta HTTP con el estado y los datos del árbitro.
+        """
+
         idarbitro = request.query_params.get('idarbitro')
         if not idarbitro:
             return Response(
@@ -187,6 +324,17 @@ class ArbitroApiId(APIView):
         return Response(status=status.HTTP_200_OK, data=serializer.data)
     
     def delete(self, request):
+
+        """
+        Método DELETE para eliminar un árbitro específico por idarbitro.
+
+        Args:
+            request (Request): La solicitud HTTP con el id del árbitro en los parámetros de consulta.
+
+        Returns:
+            Response: Una respuesta HTTP con el estado de la eliminación.
+        """
+        
         idarbitro = request.query_params.get('idarbitro')
         if not idarbitro:
             return Response(
