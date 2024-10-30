@@ -131,10 +131,10 @@ class ArbitroAPIView(APIView):
         serializer.save()
         return Response(status=status.HTTP_200_OK, data=serializer.data)
     
+    
+    
     def patch(self, request):
-
-        arbitros = Arbitro.objects.filter(idarbitro=request.data.get('idabitro'))
-
+        arbitros = Arbitro.objects.filter(idarbitro=request.data['idarbitro'])
         if not arbitros.exists():
             return Response(
                 {"detail": "Arbitro no encontrado."},
@@ -145,7 +145,7 @@ class ArbitroAPIView(APIView):
         serializer.is_valid(raise_exception=True)
         serializer.save()
         return Response(
-            {"detail": "Arbitro actualizado parcialmente, con éxito.", "data": serializer.data},
+            {"detail": "Arbitro actualizada parcialmente, con éxito.", "data": serializer.data},
             status=status.HTTP_200_OK
         )
     
@@ -174,3 +174,21 @@ class ArbitroApiId(APIView):
         arbitro = arbitros.first()
         serializer = ArbitroSerializer(arbitro)
         return Response(status=status.HTTP_200_OK, data=serializer.data)
+    
+    def delete(self, request):
+        idarbitro = request.query_params.get('idarbitro')
+        if not idarbitro:
+            return Response(
+                {"detail": "El parámetro 'idarbitro' es requerido."},
+                status=status.HTTP_400_BAD_REQUEST
+            )
+        
+        arbitro = Arbitro.objects.filter(idarbitro=idarbitro).first()
+        if not arbitro:
+            return Response(
+                {"detail": "Disciplina no encontrada."},
+                status=status.HTTP_404_NOT_FOUND
+            )
+        
+        arbitro.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
