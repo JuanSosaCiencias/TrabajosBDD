@@ -6,33 +6,69 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Página Principal</title>
+    <link rel="stylesheet" href="{% static 'main/bootstrap.css' %}">
     <link rel="stylesheet" href="{% static 'main/estilos.css' %}">
 </head>
 <body>
-    <h1>Página Principal</h1>
-    <ul>
-        <li><a href="{% url 'arbitro' %}">Lista de Árbitros + metodos Create</a></li>
-        <h2>Buscar Detalles de Arbitro por ID</h2>
-        <form action="{% url 'arbitro_id' %}" method="get" class="espacio">
-            <label for="idarbitro">Ingrese el ID de la Árbitro:</label>
-            <input type="number" id="idarbitro" name="idarbitro" required>
-            <button type="submit">Buscar</button>
-        </form>
-        <br >
+    <div class="container mt-5">
+        <!-- <h1 class="espacio">Excelbenders may REST</h1> -->
+        <br>
+        
+        <div class="list-group">
 
+            <!-- Cosas de arbitro -->
 
+            <div class="text-center">
+                <div class="custom-card" > 
+                    <h1 class="text-center" class="mt-4" >Arbitros</h1>
+                    <br>
+                    <a href="{% url 'arbitro' %}" class="list-group-item list-group-item-action" >Lista de Árbitros + Métodos Create</a>
+                </div>
+            </div>
+            
+            <h4 class="mt-4 text-center">Buscar Detalles del Arbitro por ID</h4>
+            <form action="{% url 'arbitro_id' %}" method="get" class="mb-4">
 
-        <li><a href="{% url 'disciplina' %}">Lista de Disciplinas + metodos Create</a></li>
-        <h2>Buscar Detalles de Disciplina por ID</h2>
-        <form action="{% url 'disciplina_id' %}" method="get" class="espacio">
-            <label for="iddisciplina">Ingrese el ID de la Disciplina:</label>
-            <input type="number" id="iddisciplina" name="iddisciplina" required>
-        <button type="submit">Buscar</button>
-    </form>
-    </ul>
+                <div class="text-center">
+                    <div class="w-50 mx-auto">
+                        <label for="idarbitro">Ingrese el ID de la Árbitro:</label>
+                        <input type="number" id="idarbitro" name="idarbitro" class="form-control" required>
+                    </div>
+                    <br>
+                    <button type="submit" class="btn btn-primary" >Buscar</button>
+                </div>  
+            </form>
 
+            <br>
+            <hr class="my-4">
+            <br>
+
+            <!-- Cosas de disciplina  -->
+            <div class="text-center">
+                <div class="custom-card" > 
+                    <h1 class="text-center" class="mt-4" >Disciplinas</h1>
+                    <br>
+                    <a href="{% url 'disciplina' %}" class="list-group-item list-group-item-action text-decoration-underline">Lista de Disciplinas + Métodos Create</a>
+                </div>
+            </div>
+            
+            
+            <h4 class="mt-4 text-center">Buscar Detalles de Disciplina por ID</h4>
+            <form action="{% url 'disciplina_id' %}" method="get" class="mb-4">
+                <div class="text-center">
+                    <div class="w-50 mx-auto">
+                        <label for="iddisciplina">Ingrese el ID de la Disciplina:</label>
+                        <input type="number" id="iddisciplina" name="iddisciplina" class="form-control" required>
+                    </div>
+                    <br>
+                    <button type="submit" class="btn btn-primary" >Buscar</button>
+                </div>                
+            </form>
+        </div>
+    </div>
     
-
-    
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
