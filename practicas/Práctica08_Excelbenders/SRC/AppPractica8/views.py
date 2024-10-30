@@ -229,7 +229,7 @@ class ArbitroAPIView(APIView):
             Response: Una respuesta HTTP con el estado y los datos del árbitro actualizado.
         """
 
-        arbitros = Arbitro.objects.filter(idarbitro=request.data.get['idarbitro'])
+        arbitros = Arbitro.objects.filter(idarbitro=request.data.get('idarbitro'))
         if not arbitros.exists():
             return Response(
                 {"detail": "Arbitro no encontrado."},
