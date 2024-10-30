@@ -8,10 +8,15 @@
   margin-top: 20px;
 }
 
+hr {
+  border: 1px solid #ccc; /* Cambia el color y el grosor de la línea aquí */
+}
+
+
 .custom-card {
   width: 40%; /* Cambia este valor según tus necesidades */
   margin: 0 auto; /* Centra horizontalmente */
-  background-color: #f8f9fa; /* Cambia el color de fondo aquí */
+  color: #f8f9fa; /* Cambia el color de fondo aquí */
   padding: 10px; /* Añade un poco de padding para que el texto no esté pegado al borde */
 }
 

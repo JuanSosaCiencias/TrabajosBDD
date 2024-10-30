@@ -11,7 +11,7 @@
 </head>
 <body>
     <div class="container mt-5">
-        <h1 class="espacio">Excelbenders may REST</h1>
+        <!-- <h1 class="espacio">Excelbenders may REST</h1> -->
         <br>
         
         <div class="list-group">
@@ -20,42 +20,49 @@
 
             <div class="text-center">
                 <div class="custom-card" > 
-                    <h4 class="text-center" class="mt-4" >Arbitros</h4>
+                    <h1 class="text-center" class="mt-4" >Arbitros</h1>
+                    <br>
                     <a href="{% url 'arbitro' %}" class="list-group-item list-group-item-action" >Lista de Árbitros + Métodos Create</a>
                 </div>
             </div>
             
-            <h4 class="mt-4">Buscar Detalles de Árbitro por ID</h4>
+            <h4 class="mt-4 text-center">Buscar Detalles del Arbitro por ID</h4>
             <form action="{% url 'arbitro_id' %}" method="get" class="mb-4">
-                <div class="form-group">
-                    <label for="idarbitro" class="espacio">Ingrese el ID de la Árbitro:</label>
-                    <input type="number" id="idarbitro" name="idarbitro" class="form-control" required>
-                </div>
-                <br>
-                <button type="submit" class="btn btn-primary">Buscar</button>
+
+                <div class="text-center">
+                    <div class="w-50 mx-auto">
+                        <label for="idarbitro">Ingrese el ID de la Árbitro:</label>
+                        <input type="number" id="idarbitro" name="idarbitro" class="form-control" required>
+                    </div>
+                    <br>
+                    <button type="submit" class="btn btn-primary" >Buscar</button>
+                </div>  
             </form>
 
             <br>
-            <br>
+            <hr class="my-4">
             <br>
 
             <!-- Cosas de disciplina  -->
             <div class="text-center">
                 <div class="custom-card" > 
-                    <h4 class="text-center" class="mt-4" >Disciplinas</h4>
+                    <h1 class="text-center" class="mt-4" >Disciplinas</h1>
+                    <br>
                     <a href="{% url 'disciplina' %}" class="list-group-item list-group-item-action text-decoration-underline">Lista de Disciplinas + Métodos Create</a>
                 </div>
             </div>
             
             
-            <h5 class="mt-4">Buscar Detalles de Disciplina por ID</h5>
+            <h4 class="mt-4 text-center">Buscar Detalles de Disciplina por ID</h4>
             <form action="{% url 'disciplina_id' %}" method="get" class="mb-4">
-                <div class="form-group" >
-                    <label for="iddisciplina" class="espacio">Ingrese el ID de la Disciplina:</label>
-                    <input type="number" id="iddisciplina" name="iddisciplina" class="form-control" required>
-                </div>
-                <br>
-                <button type="submit" class="btn btn-primary" >Buscar</button>
+                <div class="text-center">
+                    <div class="w-50 mx-auto">
+                        <label for="iddisciplina">Ingrese el ID de la Disciplina:</label>
+                        <input type="number" id="iddisciplina" name="iddisciplina" class="form-control" required>
+                    </div>
+                    <br>
+                    <button type="submit" class="btn btn-primary" >Buscar</button>
+                </div>                
             </form>
         </div>
     </div>
