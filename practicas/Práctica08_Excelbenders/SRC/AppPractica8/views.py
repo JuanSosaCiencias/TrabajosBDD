@@ -134,7 +134,18 @@ class ArbitroAPIView(APIView):
     
     
     def patch(self, request):
-        arbitros = Arbitro.objects.filter(idarbitro=request.data['idarbitro'])
+        """
+        Método PATCH para actualizar parcialmente un árbitro existente.
+
+        Args:
+            request (Request): La solicitud HTTP con los datos parcialmente actualizados del árbitro.
+
+        Returns:
+            Response: Una respuesta HTTP con el estado y los datos del árbitro actualizado parcialmente.
+        """
+        # Corregir el uso de request.data.get
+        idarbitro = request.data.get('idarbitro')
+        arbitros = Arbitro.objects.filter(idarbitro=idarbitro)
         if not arbitros.exists():
             return Response(
                 {"detail": "Arbitro no encontrado."},
@@ -145,7 +156,7 @@ class ArbitroAPIView(APIView):
         serializer.is_valid(raise_exception=True)
         serializer.save()
         return Response(
-            {"detail": "Arbitro actualizada parcialmente, con éxito.", "data": serializer.data},
+            {"detail": "Arbitro actualizado parcialmente con éxito.", "data": serializer.data},
             status=status.HTTP_200_OK
         )
     
