@@ -1,6 +1,14 @@
 from django.db import models
 
 class Disciplina(models.Model):
+    """
+    Modelo para representar una disciplina deportiva.
+
+    Atributos:
+        iddisciplina (AutoField): Clave primaria de la disciplina.
+        nombredisciplina (CharField): Nombre de la disciplina.
+        categoria (CharField): Categoría de la disciplina.
+    """
     iddisciplina = models.AutoField(primary_key=True)
     nombredisciplina = models.CharField(max_length=50)
     categoria = models.CharField(max_length=50)
@@ -10,9 +18,27 @@ class Disciplina(models.Model):
         ordering = ['nombredisciplina']
 
     def __str__(self):
+        """
+        Representación en cadena del modelo Disciplina.
+        
+        :return: Cadena con el id y nombre de la disciplina.
+        """
         return f"{self.iddisciplina} - {self.nombredisciplina}" 
 
 class Arbitro(models.Model):
+    """
+    Modelo que representa un árbitro.
+
+    Atributos:
+        idarbitro (AutoField): Clave primaria del árbitro.
+        iddisciplina (ForeignKey): Relación con la disciplina a la que pertenece el árbitro.
+        nombre (CharField): Nombre del árbitro.
+        primerapellido (CharField): Primer apellido del árbitro.
+        segundoapellido (CharField): Segundo apellido del árbitro.
+        fechanacimiento (DateField): Fecha de nacimiento del árbitro.
+        nacionalidad (CharField): Nacionalidad del árbitro.
+        genero (CharField): Género del árbitro ('M' para masculino, 'F' para femenino, etc.).
+    """
     idarbitro = models.AutoField(primary_key=True)
     iddisciplina = models.ForeignKey(Disciplina, on_delete=models.CASCADE, related_name='arbitros', db_column='iddisciplina')
     nombre = models.CharField(max_length=50)

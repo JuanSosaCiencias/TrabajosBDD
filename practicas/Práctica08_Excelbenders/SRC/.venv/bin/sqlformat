@@ -1,4 +1,4 @@
-#!/home/jsr_mario/Documents/Escuela/Semestre_5/BDD/TrabajosBDD/practicas/Práctica08_Excelbenders/SRC/.venv/bin/python
+#!/home/abovewolf37845/Documents/BaseDeDatos/Prácticas/TrabajosBDD/practicas/Práctica08_Excelbenders/SRC/.venv/bin/python3
 # -*- coding: utf-8 -*-
 import re
 import sys
