@@ -5,6 +5,9 @@ from rest_framework.views import APIView
 from .models import Disciplina, Arbitro
 from .serializers import DisciplinaSerializer, ArbitroSerializer
 
+def home(request):
+    return render(request, 'home.html')
+
 # Vista basada en clases para manejar las operaciones CRUD de Disciplina
 class DisciplinaAPIView(APIView):
     
@@ -51,8 +54,6 @@ class DisciplinaAPIView(APIView):
             status=status.HTTP_200_OK
         )
     
-    # Método DELETE para eliminar una disciplina existente
-    
     
     # Método HEAD para obtener los metadatos de la solicitud
     def head(self, request):
@@ -79,8 +80,27 @@ class DisciplinaApiId(APIView):
         serializer = DisciplinaSerializer(disciplina)
         return Response(status=status.HTTP_200_OK, data=serializer.data)
     
+class DisciplinaApiDelete(APIView):
+    def delete(self, request):
+        iddisciplina = request.query_params.get('iddisciplina')
+        if not iddisciplina:
+            return Response(
+                {"detail": "El parámetro 'iddisciplina' es requerido."},
+                status=status.HTTP_400_BAD_REQUEST
+            )
+        
+        disciplina = Disciplina.objects.filter(iddisciplina=iddisciplina).first()
+        if not disciplina:
+            return Response(
+                {"detail": "Disciplina no encontrada."},
+                status=status.HTTP_404_NOT_FOUND
+            )
+        
+        disciplina.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
+    
 
-######## Vistas para Arbitro ########
+########  ########  ########  ########  ######## Vistas para Arbitro ######## ########  ########  ########  ########
 
 class ArbitroAPIView(APIView):
     def get(self, request):

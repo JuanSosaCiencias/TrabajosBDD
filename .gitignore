@@ -9,5 +9,4 @@
 *.out
 *.run.xml
 *__init__.py
-*settings.py
 *__pycache__*
