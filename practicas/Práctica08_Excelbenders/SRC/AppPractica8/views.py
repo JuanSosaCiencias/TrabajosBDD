@@ -271,8 +271,6 @@ class ArbitroAPIView(APIView):
             status=status.HTTP_200_OK
         )
     
-    # Método DELETE para eliminar una disciplina existente
-    
     
     
     def head(self, request):
