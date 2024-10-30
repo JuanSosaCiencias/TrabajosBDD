@@ -7,7 +7,6 @@ from .models import Disciplina, Arbitro
 from .serializers import DisciplinaSerializer, ArbitroSerializer
 
 def home(request):
-    return render(request, 'home.html')
     """
     Renderiza la página de inicio.
 
@@ -17,7 +16,8 @@ def home(request):
     Returns:
         HttpResponse: La respuesta HTTP con el contenido de la página de inicio.
     """
-
+    return render(request, 'home.html')
+    
 
 class DisciplinaAPIView(APIView):
     """
