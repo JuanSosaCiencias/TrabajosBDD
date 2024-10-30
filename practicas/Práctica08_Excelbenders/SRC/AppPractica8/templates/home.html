@@ -11,22 +11,28 @@
 <body>
     <h1>Página Principal</h1>
     <ul>
-        <li><a href="{% url 'arbitro' %}">Lista de Árbitros</a></li>
-        <li><a href="{% url 'disciplina' %}">Lista de Disciplinas</a></li>
+        <li><a href="{% url 'arbitro' %}">Lista de Árbitros + metodos Create</a></li>
+        <h2>Buscar Detalles de Arbitro por ID</h2>
+        <form action="{% url 'arbitro_id' %}" method="get" class="espacio">
+            <label for="idarbitro">Ingrese el ID de la Árbitro:</label>
+            <input type="number" id="idarbitro" name="idarbitro" required>
+            <button type="submit">Buscar</button>
+        </form>
+        <br >
+
+
+
+        <li><a href="{% url 'disciplina' %}">Lista de Disciplinas + metodos Create</a></li>
+        <h2>Buscar Detalles de Disciplina por ID</h2>
+        <form action="{% url 'disciplina_id' %}" method="get" class="espacio">
+            <label for="iddisciplina">Ingrese el ID de la Disciplina:</label>
+            <input type="number" id="iddisciplina" name="iddisciplina" required>
+        <button type="submit">Buscar</button>
+    </form>
     </ul>
 
-    <h2>Buscar Detalles de Disciplina</h2>
-    <form action="{% url 'disciplina_id' %}" method="get">
-        <label for="iddisciplina">Ingrese el ID de la Disciplina:</label>
-        <input type="number" id="iddisciplina" name="iddisciplina" required>
-        <button type="submit">Buscar</button>
-    </form>
+    
 
-    <h2>Buscar Detalles de Arbitro</h2>
-    <form action="{% url 'arbitro_id' %}" method="get">
-        <label for="idarbitro">Ingrese el ID de la Árbitro:</label>
-        <input type="number" id="idarbitro" name="idarbitro" required>
-        <button type="submit">Buscar</button>
-    </form>
+    
 </body>
 </html>

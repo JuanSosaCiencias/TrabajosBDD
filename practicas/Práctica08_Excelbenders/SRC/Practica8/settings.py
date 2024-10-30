@@ -81,7 +81,7 @@ DATABASES = {
         'NAME': '', #Nombre de la base de datos (como la del ayudante)        
         'USER': '', #Usuario de la base de datos (como la del ayudante también)
         'PASSWORD': '', #Contraseña de la base de datos  ''''
-        'HOST': 'localhost', #Host de la base de datos
+        'HOST': '', #Host de la base de datos
         'PORT': '5432', #Puerto de la base de datos por defecto
     }       #Todos esos son valores por default
 }

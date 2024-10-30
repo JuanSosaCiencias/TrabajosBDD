@@ -25,7 +25,7 @@ class DisciplinaAPIView(APIView):
     
     # Método PUT para actualizar una disciplina existente
     def put(self, request):
-        disciplinas = Disciplina.objects.filter(iddisciplina=request.data('iddisciplina'))
+        disciplinas = Disciplina.objects.filter(iddisciplina=request.data['iddisciplina'])
         if not disciplinas.exists():
             return Response(
                 {"detail": "Disciplina no encontrada."},
@@ -39,7 +39,7 @@ class DisciplinaAPIView(APIView):
     
     # Método PATCH para actualizar parcialmente una disciplina existente
     def patch(self, request):
-        disciplinas = Disciplina.objects.filter(iddisciplina=request.data('iddisciplina'))
+        disciplinas = Disciplina.objects.filter(iddisciplina=request.data['iddisciplina'])
         if not disciplinas.exists():
             return Response(
                 {"detail": "Disciplina no encontrada."},
@@ -80,7 +80,6 @@ class DisciplinaApiId(APIView):
         serializer = DisciplinaSerializer(disciplina)
         return Response(status=status.HTTP_200_OK, data=serializer.data)
     
-class DisciplinaApiDelete(APIView):
     def delete(self, request):
         iddisciplina = request.query_params.get('iddisciplina')
         if not iddisciplina:
@@ -98,6 +97,8 @@ class DisciplinaApiDelete(APIView):
         
         disciplina.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
+    
+    
     
 
 ########  ########  ########  ########  ######## Vistas para Arbitro ######## ########  ########  ########  ########
@@ -127,7 +128,7 @@ class ArbitroAPIView(APIView):
         return Response(status=status.HTTP_200_OK, data=serializer.data)
     
     def patch(self, request):
-        arbitros = Arbitro.objects.filter(idarbitro=request.data('idabitro'))
+        arbitros = Arbitro.objects.filter(idarbitro=request.data['idabitro'])
         if not arbitros.exists():
             return Response(
                 {"detail": "Arbitro no encontrado."},
