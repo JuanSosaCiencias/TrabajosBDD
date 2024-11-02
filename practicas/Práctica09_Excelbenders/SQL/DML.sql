@@ -572,7 +572,6 @@ insert into Evento (IDEvento, NombreLocalidad, IDDisciplina, DuracionMax, Precio
 
 
 -- Tuplas para Entrenador 
-
 insert into Entrenador (IDEntrenador, IDDisciplina, Nombre, PrimerApellido, SegundoApellido, FechaNacimiento, Nacionalidad, Genero) values (1, 17, 'Mordecai', 'Bodemeaid', 'Ratnage', '1979-11-05', 'Malasia', 'M');
 insert into Entrenador (IDEntrenador, IDDisciplina, Nombre, PrimerApellido, SegundoApellido, FechaNacimiento, Nacionalidad, Genero) values (2, 48, 'Idalina', 'Bows', 'Killock', '1982-07-01', 'Kuwaití', 'F');
 insert into Entrenador (IDEntrenador, IDDisciplina, Nombre, PrimerApellido, SegundoApellido, FechaNacimiento, Nacionalidad, Genero) values (3, 123, 'Dyann', 'Sauven', 'Eisold', '1994-03-10', 'Estadounidense', 'M');
@@ -723,6 +722,40 @@ insert into Entrenador (IDEntrenador, IDDisciplina, Nombre, PrimerApellido, Segu
 insert into Entrenador (IDEntrenador, IDDisciplina, Nombre, PrimerApellido, SegundoApellido, FechaNacimiento, Nacionalidad, Genero) values (148, 122, 'Archambault', 'Spaldin', 'Maciak', '1985-11-30', 'Alemana', 'F');
 insert into Entrenador (IDEntrenador, IDDisciplina, Nombre, PrimerApellido, SegundoApellido, FechaNacimiento, Nacionalidad, Genero) values (149, 130, 'Angelique', 'Hallock', 'Strickler', '1991-08-01', 'Polaca', 'M');
 insert into Entrenador (IDEntrenador, IDDisciplina, Nombre, PrimerApellido, SegundoApellido, FechaNacimiento, Nacionalidad, Genero) values (150, 27, 'Kelby', 'Kennler', 'Andrey', '1981-12-12', 'Austriaca', 'F');
+
+-- Entrenadores para la consulta 1 (comparten apellidos y disciplinas con algunos atletas xd)
+INSERT INTO entrenador (identrenador ,iddisciplina, nombre, primerapellido, segundoapellido, fechanacimiento, nacionalidad, genero)
+VALUES
+    (151,1, 'Juan', 'Yoxen', 'Savery', '2024-11-24', 'Mexicano', 'M'),
+    (152,3, 'Juan', 'Buglar', 'Eunson', '2024-11-24', 'Mexicano', 'M'),
+    (153,150, 'Mario', 'Yea', 'Eunson', '2024-11-24', 'Chino', 'M'); 
+
+-- Tuplas para la tabla participa (que los atletas participen en alguna disciplina)
+INSERT INTO participa (idatleta, iddisciplina) 
+VALUES
+    (1,1),
+    (1,2),
+    (1,3),
+    (2,5),
+    (6,6),
+    (3,1),
+   	(8,1),
+    (9,1),
+    (10,1),
+    (13,1),
+    (22,2),
+    (33,1),
+    (25,25),
+    (25,1),
+    (40,1),
+    (40,160),
+    (110,1),
+    (110,2),
+    (110,3),
+    (24,1),
+	(4,1),
+    (101,3),
+    (10,150);
 
 -- Tuplas para la tabla Atleta
 insert into Atleta (IDAtleta, NombrePais, IDEntrenador, Temporada, Nombre, PrimerApellido, SegundoApellido, FechaNacimiento, Nacionalidad, Genero) values (1, 'Maldivas', 60, '2023-06-21', 'Hastings', 'Kornyshev', 'Postans', '2016-03-10', 'Coreana', 'F');
