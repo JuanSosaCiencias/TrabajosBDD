@@ -1221,3 +1221,16 @@ insert into Patrocinador (NombrePatrocinador) values ('Pandora');
 insert into Patrocinador (NombrePatrocinador) values ('H&M');
 insert into Patrocinador (NombrePatrocinador) values ('Zara');
 insert into Patrocinador (NombrePatrocinador) values ('Uniqlo');
+
+-- Tuplas para la consulta 10, agregamos medallas a los atletas que participen en esas disciplinas
+INSERT INTO medalla (tipomedalla, iddisciplina, idatleta)
+VALUES 
+    ('oro', 1, 1),
+    ('plata', 1, 3),
+    ('bronce', 1, 10),
+    ('plata', 2, 1),
+    ('bronce', 3, 1),
+    ('oro', 150, 10),
+    ('oro', 6, 6),
+    ('plata', 3, 110),
+    ('bronce', 160, 40);
