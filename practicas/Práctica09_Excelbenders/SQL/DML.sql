@@ -1295,7 +1295,7 @@ values (305, 'España', 5, '2023-06-21', 'Luis', 'González', 'Pérez', '1993-08
 insert into Atleta (IDAtleta, NombrePais, IDEntrenador, Temporada, Nombre, PrimerApellido, SegundoApellido, FechaNacimiento, Nacionalidad, Genero) 
 values (306, 'España', 6, '2023-06-21', 'Elena', 'Rodríguez', 'Santos', '1994-12-05', 'Española', 'F');
 
--- Insertar medallas de bronce ganadas por atletas de España
+-- Tuplas para medallas de bronce ganadas por atletas de España
 insert into Medalla (TipoMedalla, IDDisciplina, IDAtleta) values ('Bronce', 1, 301);
 insert into Medalla (TipoMedalla, IDDisciplina, IDAtleta) values ('Bronce', 2, 302);
 insert into Medalla (TipoMedalla, IDDisciplina, IDAtleta) values ('Bronce', 3, 303);
@@ -1304,16 +1304,16 @@ insert into Medalla (TipoMedalla, IDDisciplina, IDAtleta) values ('Bronce', 5, 3
 insert into Medalla (TipoMedalla, IDDisciplina, IDAtleta) values ('Bronce', 6, 306);
 
                                             ---- Tuplas para la consulta 9:  ----
--- Insertar atletas
+-- Tuplas para atletas
 insert into Atleta (IDAtleta, NombrePais, IDEntrenador, Temporada, Nombre, PrimerApellido, SegundoApellido, FechaNacimiento, Nacionalidad, Genero) 
-values (401, 'España', 1, '2023-06-21', 'Carlos', 'García', 'López', '1990-03-10', 'Española', 'M');
+values (401, 'España', 1, '2023-06-21', 'Carlos', 'García', 'López', '1990-03-10', 'Mexicana', 'M');
 insert into Atleta (IDAtleta, NombrePais, IDEntrenador, Temporada, Nombre, PrimerApellido, SegundoApellido, FechaNacimiento, Nacionalidad, Genero) 
 values (402, 'España', 2, '2023-06-21', 'María', 'Martínez', 'Sánchez', '1992-07-15', 'Española', 'F');
 insert into Atleta (IDAtleta, NombrePais, IDEntrenador, Temporada, Nombre, PrimerApellido, SegundoApellido, FechaNacimiento, Nacionalidad, Genero) 
-values (403, 'España', 3, '2023-06-21', 'Javier', 'Fernández', 'Gómez', '1995-11-20', 'Española', 'M');
+values (403, 'España', 3, '2023-06-21', 'Javier', 'Fernández', 'Gómez', '1995-11-20', 'Colombiana', 'M');
 
 
--- Insertar medallas ganadas por estos atletas en halterofilia
+-- Tiplas para medallas ganadas por estos atletas en halterofilia
 insert into Medalla (TipoMedalla, IDDisciplina, IDAtleta) values ('Oro', 27, 401);
 insert into Medalla (TipoMedalla, IDDisciplina, IDAtleta) values ('Plata', 27, 402);
 insert into Medalla (TipoMedalla, IDDisciplina, IDAtleta) values ('Bronce', 27, 403);
