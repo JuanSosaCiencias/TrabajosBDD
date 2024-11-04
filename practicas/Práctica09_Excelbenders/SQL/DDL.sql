@@ -347,7 +347,7 @@ alter table Patrocinador
 	add primary key (NombrePatrocinador);
 
 COMMENT ON COLUMN Patrocinador.NombrePatrocinador IS 'PK del patrocinador';
-COMMENT ON CONSTRAINT Patrocinador ON Patrocinador IS 'Llave primaria de la tabla Patrocinador.'; -- Restricción patrocinador_pkey
+COMMENT ON CONSTRAINT Patrocinador_pkey ON Patrocinador IS 'Llave primaria de la tabla Patrocinador.'; -- Restricción patrocinador_pkey
 
 -- Definir llaves primarias compuestas
 
@@ -374,7 +374,7 @@ alter table Medallero
 
 COMMENT ON COLUMN Medallero.IDMedallero IS 'PK del medallero';
 COMMENT ON COLUMN Medallero.NombrePais IS 'País asociado al medallero forma parte de la llave primaria';
-COMMENT ON CONSTRAINT Medallero_pkey ON Localidad IS 'Llave primaria de la tabla Medallero.'; -- Restricción medallero_pkey
+COMMENT ON CONSTRAINT Medallero_pkey ON Medallero IS 'Llave primaria de la tabla Medallero.'; -- Restricción medallero_pkey
 
 alter table TelefonoAtleta
 	add primary key (IDTelefono, IDAtleta);
@@ -395,7 +395,7 @@ alter table Medalla
 
 COMMENT ON COLUMN Medalla.TipoMedalla IS 'EL Tipo de medalla, forma parte de la llave primaria compuesta';
 COMMENT ON COLUMN Medalla.IDDisciplina IS 'PK de la disciplina, parte de la llave compuesta';
-COMMENT ON CONSTRAINT Medalla_pkey ON Localidad IS 'Llave primaria de la tabla Medalla.'; -- Restricción medalla_pkey
+COMMENT ON CONSTRAINT Medalla_pkey ON Medalla IS 'Llave primaria de la tabla Medalla.'; -- Restricción medalla_pkey
 
 alter table CorreoArbitro
 	add primary key (IDCorreo, IDArbitro);
@@ -410,6 +410,7 @@ alter table TelefonoEntrenador
 
 COMMENT ON COLUMN TelefonoEntrenador.IDTelefono IS 'Llave primaria del teléfono del entrenador';
 COMMENT ON COLUMN TelefonoEntrenador.IDEntrenador IS 'Llave primaria del entrenador forma parte de la llave compuesta';
+COMMENT ON CONSTRAINT TelefonoEntrenador_pkey ON TelefonoEntrenador IS 'Llave primaria de la tabla TelefonoEntrenador.';
 
 alter table TelefonoArbitro 
 	add primary key (IDTelefono, IDArbitro);

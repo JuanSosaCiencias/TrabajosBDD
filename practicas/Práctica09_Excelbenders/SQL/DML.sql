@@ -569,7 +569,18 @@ insert into Evento (IDEvento, NombreLocalidad, IDDisciplina, DuracionMax, Precio
 insert into Evento (IDEvento, NombreLocalidad, IDDisciplina, DuracionMax, Precio, FechaEvento, Fase) values (75, 'Campo de Hurling', 89, 24, 78, '2024-06-23', 1);
 insert into Evento (IDEvento, NombreLocalidad, IDDisciplina, DuracionMax, Precio, FechaEvento, Fase) values (76, 'Centro de Karate', 19, 24, 78, '2024-08-19', 1);
 insert into Evento (IDEvento, NombreLocalidad, IDDisciplina, DuracionMax, Precio, FechaEvento, Fase) values (77, 'Pista de Esquí Acrobático', 141, 8, 200, '2024-03-07', 2);
-
+insert into Evento (IDEvento, NombreLocalidad, IDDisciplina, DuracionMax, Precio, FechaEvento, Fase) 
+values
+    (78, 'Centro de Wing Chun', 65, 60, 2500,'2024-07-13', 1),
+    (79, 'Campo de Ulama', 137, 85, 2775,'2024-08-13', 2),
+    (80, 'Piscina Olímpica', 4, 90, 3200,'2024-02-13', 1),
+    (81, 'Cancha de Biribol', 62, 150, 4200,'2024-09-22', 3),
+    (82, 'Centro de Kickboxing', 118, 190, 2785,'2024-02-25', 1),
+    (90, 'Centro de Sumo', 89, 145, 2599,'2024-05-16', 3),
+    (112, 'Cancha de Tenis', 67, 120, 4800,'2024-03-28', 2),
+    (92, 'Centro de Muay Thai', 35, 95, 2699,'2024-02-13', 2),
+    (115, 'Skatepark', 59, 120, 2999,'2024-02-29', 3),
+    (123, 'Circuito de Carreras', 9, 60, 10999,'2024-07-13', 2);
 
 -- Tuplas para Entrenador 
 insert into Entrenador (IDEntrenador, IDDisciplina, Nombre, PrimerApellido, SegundoApellido, FechaNacimiento, Nacionalidad, Genero) values (1, 17, 'Mordecai', 'Bodemeaid', 'Ratnage', '1979-11-05', 'Malasia', 'M');
@@ -730,32 +741,6 @@ VALUES
     (152,3, 'Juan', 'Buglar', 'Eunson', '2024-11-24', 'Mexicano', 'M'),
     (153,150, 'Mario', 'Yea', 'Eunson', '2024-11-24', 'Chino', 'M'); 
 
--- Tuplas para la tabla participa (que los atletas participen en alguna disciplina)
-INSERT INTO participa (idatleta, iddisciplina) 
-VALUES
-    (1,1),
-    (1,2),
-    (1,3),
-    (2,5),
-    (6,6),
-    (3,1),
-   	(8,1),
-    (9,1),
-    (10,1),
-    (13,1),
-    (22,2),
-    (33,1),
-    (25,25),
-    (25,1),
-    (40,1),
-    (40,160),
-    (110,1),
-    (110,2),
-    (110,3),
-    (24,1),
-	(4,1),
-    (101,3),
-    (10,150);
 
 -- Tuplas para la tabla Atleta
 insert into Atleta (IDAtleta, NombrePais, IDEntrenador, Temporada, Nombre, PrimerApellido, SegundoApellido, FechaNacimiento, Nacionalidad, Genero) values (1, 'Maldivas', 60, '2023-06-21', 'Hastings', 'Kornyshev', 'Postans', '2016-03-10', 'Coreana', 'F');
@@ -908,6 +893,49 @@ insert into Atleta (IDAtleta, NombrePais, IDEntrenador, Temporada, Nombre, Prime
 insert into Atleta (IDAtleta, NombrePais, IDEntrenador, Temporada, Nombre, PrimerApellido, SegundoApellido, FechaNacimiento, Nacionalidad, Genero) values (148, 'Gambia', 138, '2024-02-03', 'Doralynn', 'Drugan', 'Lidgley', '2009-12-03', 'Rusa', 'M');
 insert into Atleta (IDAtleta, NombrePais, IDEntrenador, Temporada, Nombre, PrimerApellido, SegundoApellido, FechaNacimiento, Nacionalidad, Genero) values (149, 'Alemania', 110, '2023-10-18', 'Vivia', 'Petti', 'Heugh', '2014-07-05', 'Rusa', 'F');
 insert into Atleta (IDAtleta, NombrePais, IDEntrenador, Temporada, Nombre, PrimerApellido, SegundoApellido, FechaNacimiento, Nacionalidad, Genero) values (150, 'Jamaica', 38, '2023-02-10', 'Olly', 'Fattori', 'Crisall', '2008-11-30', 'Etíope', 'M');
+
+-- Tuplas para la tabla participa (que los atletas participen en alguna disciplina)
+INSERT INTO participa (idatleta, iddisciplina) 
+VALUES
+    (1,1),
+    (1,2),
+    (1,3),
+    (2,5),
+    (6,6),
+    (3,1),
+   	(8,1),
+    (9,1),
+    (10,1),
+    (13,1),
+    (22,2),
+    (33,1),
+    (25,25),
+    (25,1),
+    (40,1),
+    (40,150),
+    (110,1),
+    (110,2),
+    (110,3),
+    (24,1),
+	(4,1),
+    (101,3),
+    (65,89),
+    (65,100),
+    (65,40),
+    (30,15),
+    (30,135),
+    (30,3),
+    (8,15),
+    (8,82),
+    (145,7),
+    (145,12),
+    (145,11),
+    (18,24),
+    (18,90),
+    (18,73),
+    (10,150);
+
+
 -- Tuplas para CorreoAtleta
 
 insert into CorreoAtleta (IDCorreo, IDAtleta) values ('john.doe@gmail.com', 79);
