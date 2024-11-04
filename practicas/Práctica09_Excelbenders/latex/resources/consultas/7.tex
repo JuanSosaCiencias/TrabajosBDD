@@ -1,1 +1,27 @@
-\textbf{El número de medallas de plata ganadas por Japon.}\vspace{.3cm}
+\textbf{El número de medallas de plata ganadas por Japón.}\vspace{.3cm}
+
+Para resolver esta consulta, utilicé el siguiente enfoque: \vspace{.3cm}
+
+\begin{lstlisting}
+    SELECT 
+    COUNT(*) AS medallas_plata
+FROM 
+    Medalla m
+JOIN 
+    Atleta a ON m.IDAtleta = a.IDAtleta
+WHERE 
+    a.Nacionalidad = 'Japonesa' AND m.TipoMedalla = 'Plata';
+\end{lstlisting}
+
+\textbf{Explicación:} \vspace{.3cm}
+
+En esta consulta, seleccionamos la tabla `Medalla` para contar cuántas medallas de plata ha ganado Japón. Utilizamos la función `COUNT(*)` para contar todas las filas que cumplen con las condiciones especificadas en el `WHERE`, es decir, aquellas donde la nacionalidad del atleta es 'Japonesa' y el tipo de medalla es 'Plata'. \vspace{.3cm}
+
+El resultado es un único valor que representa el total de medallas de plata ganadas por Japón. \vspace{.3cm}
+
+\textbf{Resultado:}
+\begin{center}
+    
+\end{center}   
+
+Nota: Para obtener este resultado, se añadieron manualmente registros en la tabla `Medalla` para asegurar que Japón tenga medallas de plata registradas. \vspace{.3cm}

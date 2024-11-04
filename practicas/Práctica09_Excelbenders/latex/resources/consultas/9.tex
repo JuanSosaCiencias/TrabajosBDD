@@ -1,1 +1,36 @@
 \textbf{La información de los atletas que ganaron medallas en la disciplina halterofilia.}\vspace{.3cm}
+
+Para esta consulta, lo resolví de la siguiente manera: \vspace{.3cm}
+
+\begin{lstlisting}
+    SELECT 
+    a.IDAtleta,
+    a.Nombre,
+    a.PrimerApellido,
+    a.SegundoApellido,
+    a.FechaNacimiento,
+    a.Nacionalidad,
+    a.Genero,
+    m.TipoMedalla
+FROM 
+    Medalla m
+JOIN 
+    Atleta a ON m.IDAtleta = a.IDAtleta
+JOIN 
+    Disciplina d ON m.IDDisciplina = d.IDDisciplina
+WHERE 
+    d.NombreDisciplina = 'Halterofilia';
+\end{lstlisting}
+
+\textbf{Explicación:} \vspace{.3cm}
+
+En esta consulta, seleccionamos la tabla `atleta` para obtener la información de los atletas que han ganado medallas en la disciplina de halterofilia. Utilizamos un `JOIN` con la tabla `medalla` para relacionar los atletas con las medallas que han ganado. Luego, filtramos los resultados para incluir solo aquellos donde la disciplina de la medalla es 'Halterofilia'. \vspace{.3cm}
+
+El resultado es un conjunto de filas que representan a los atletas que han ganado medallas en la disciplina de halterofilia. \vspace{.3cm}
+
+\textbf{Resultado:}
+\begin{center}
+    
+\end{center}   
+
+Nota: Para este resultado, se añadieron manualmente tuplas en la tabla `medalla` para asegurar que haya registros de medallas en la disciplina de halterofilia. \vspace{.3cm}
