@@ -78,6 +78,71 @@ GROUP BY
 HAVING 
     COUNT(p.IDDisciplina) > 1;
     
+/* Consulta 7: El número de medallas de plata ganadas por atletas de nacionalidad japonesa.
+ * 
+ * Estrategia:
+ * - Seleccionar la tabla Medalla
+ * - Join con Atleta
+ * - Filtrar las filas donde la nacionalidad del atleta sea 'Japonesa' y el tipo de medalla sea 'Plata'
+ * - Contar el número de filas que cumplen con las condiciones anteriores
+ * - Devolver el resultado como el número total de medallas de plata ganadas por atletas de nacionalidad japonesa
+ */
+
+SELECT 
+    COUNT(*) AS medallas_plata
+FROM 
+    Medalla m
+JOIN 
+    Atleta a ON m.IDAtleta = a.IDAtleta
+WHERE 
+    a.Nacionalidad = 'Japonesa' AND m.TipoMedalla = 'Plata';
+   
+/* Consulta 8: El número de medallas de bronce ganadas por España.
+ * 
+ * Estrategia:
+ * - Seleccionar la tabla Medalla
+ * - Join con Atleta para obtener el país del atleta
+ * - Filtrar las filas donde el país sea 'España' y el tipo de medalla sea 'Bronce'
+ * - Contar el número de filas que cumplen con las condiciones anteriores
+ * - Devolver el resultado como el número total de medallas de bronce ganadas por España
+ */
+
+SELECT 
+    COUNT(*) AS medallas_bronce
+FROM 
+    Medalla m
+JOIN 
+    Atleta a ON m.IDAtleta = a.IDAtleta
+WHERE 
+    a.NombrePais = 'España' AND m.TipoMedalla = 'Bronce';
+
+/* Consulta 9: Información de los atletas que ganaron medallas en la disciplina halterofilia.
+ * 
+ * Estrategia:
+ * - Seleccionar la tabla Medalla
+ * - Join con Atleta para obtener la información del atleta
+ * - Join con Disciplina para obtener el nombre de la disciplina
+ * - Filtrar las filas donde el nombre de la disciplina sea 'Halterofilia'
+ * - Seleccionar la información relevante del atleta
+ */
+
+SELECT 
+    a.IDAtleta,
+    a.Nombre,
+    a.PrimerApellido,
+    a.SegundoApellido,
+    a.FechaNacimiento,
+    a.Nacionalidad,
+    a.Genero,
+    m.TipoMedalla
+FROM 
+    Medalla m
+JOIN 
+    Atleta a ON m.IDAtleta = a.IDAtleta
+JOIN 
+    Disciplina d ON m.IDDisciplina = d.IDDisciplina
+WHERE 
+    d.NombreDisciplina = 'Halterofilia';
 
 
 /* Consulta 10: La información de todos los atletas que hayan ganado alguna medalla. Asi como un conteo de las medallas
@@ -107,16 +172,3 @@ ORDER BY
     COUNT(CASE WHEN medalla.tipomedalla = 'oro' THEN 1 END) DESC,
     COUNT(CASE WHEN medalla.tipomedalla = 'plata' THEN 1 END) DESC,
     COUNT(CASE WHEN medalla.tipomedalla = 'bronce' THEN 1 END) DESC;
-   
-
-
- 
-
-
-
-
-
-
-   
-
-
