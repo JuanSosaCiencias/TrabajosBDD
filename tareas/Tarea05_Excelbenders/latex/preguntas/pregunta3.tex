@@ -19,7 +19,7 @@ Para cada uno de los \textbf{esquemas} que se muestran a continuación, con su r
     
     \begin{enumerate}[label=\alph*.]
         \item 
-        Calculamos la cerraduras de los lados izquierdos:
+        Calculamos la cerraduras de los lados izquierdos: (ninguna es trivial)
         \begin{align*}
             \{AB\}+ &= \{ABCFDEG\} \ \text{Es llave} \\
             \{AB\}+ &= \{ABCFDEG\} \ \text{Es llave} \\
@@ -29,7 +29,7 @@ Para cada uno de los \textbf{esquemas} que se muestran a continuación, con su r
         \end{align*}
 
         \item 
-        Calculamos la cerraduras de los lados izquierdos:
+        Calculamos la cerraduras de los lados izquierdos: (ninguna es trivial)
         \begin{align*}
             \{AB\}+ &= \{ABCDE\} \ \text{Violación a BCNF, la elegimos para normalizar} \\
             \{BC\}+ &= \{BCADE\} \ \text{Violación a BCNF} \\
@@ -42,9 +42,36 @@ Para cada uno de los \textbf{esquemas} que se muestran a continuación, con su r
     \item \textbf{Normaliza} de acuerdo con \textbf{BCNF}, asegúrate de indicar cuáles son las \textbf{relaciones resultantes} con sus respectivas \textbf{dependencias funcionales}. \vspace{.3cm}
     
     \begin{enumerate}[label=\alph*.]
-        \item \vspace{.2cm}
+        \item 
+        Elegimos la primera violación y dividimos \textbf{R}:
+
+        \begin{align*}
+            &R_1 (A,D,E) \text{ con } F = \{ A \rightarrow D, A \rightarrow E \} ; \{A\}+ = \{ADE\} \xrightarrow{} \text{A es llave para } R_1 \\ % Lado derecho de la violación
+            &R_2 (A,B,C,F,G) \text{ con } F = \{AB \rightarrow C, AB \rightarrow F, B \rightarrow G\} % lado izquierdo de la violación
+        \end{align*}
+
+        En $R_1$ no hay violación a BCNF, revisamos $R_2$:
+        \begin{align*}
+            \{AB\}+ &= \{ABCFG\} \ \text{Es llave para } R_2 \\
+            \{B\}+ &= \{BG\} \ \text{Violación a BCNF, la elegimos para normalizar}
+        \end{align*}
+        Divido $R_2$:
+        \begin{align*}
+            &R_3 = (B,G) \text{ con } F = \{B \rightarrow G\} ; \{B\}+ = \{BG\} \xrightarrow{} \text{A es llave para } R_3\\
+            &R_4 = (B,A,C,F) \text{ con } F = \{AB \rightarrow C, AB \rightarrow F\} ; \{AB\}+ = \{ABCF\} \xrightarrow{} \text{A es llave para } R_4
+        \end{align*}
+
+        Finalmente: 
+        \begin{align*}
+            R_1 (A,D,E) \text{ con } F &= \{ A \rightarrow D, A \rightarrow E \} \\
+            R_3 (B,G) \text{ con } F &= \{B \rightarrow G\} \\
+            R_4 (B,A,C,F) \text{ con } F &= \{AB \rightarrow C, AB \rightarrow F\}
+        \end{align*}
+        \vspace{.2cm}
         
-        \item \vspace{.2cm}
+        \item 
+        Elegimos la primera violación y dividimos \textbf{R}:
+        \vspace{.2cm}
     \end{enumerate}
     \vspace{.3cm}
     
