@@ -71,6 +71,39 @@ Para cada uno de los \textbf{esquemas} que se muestran a continuación, con su r
         
         \item 
         Elegimos la primera violación y dividimos \textbf{R}:
+        \begin{align*}
+            R_1 (A,B,C,D,E) \text{ con } F &= \{AB \rightarrow C, BC \rightarrow AD, D \rightarrow E\} ; \\
+            R_2 (A,B,F) \text{ con } F &= \{ABF \rightarrow ABF \} ; \xrightarrow{} \text{ABF es llave para } R_2 \\
+        \end{align*}
+
+        Aqui observamos 2 cosas, la primera es que $R_2$ al no cumplir ninguna dependencia funcional, solo se tiene la trivial y trivialmente es llave, ademas de esto, vemos que perdemos la DF $CF \rightarrow B$ por lo que deberiamos parar la normalización en $R_2$, pero como el profesor hizo vamos a seguir por fines didacticos. Revisamos $R_1$:
+
+        \begin{align*}
+            \{AB\}+ &= \{ABCDE\} \ \text{Es llave para } R_1 \\
+            \{BC\}+ &= \{BCADE\} \ \text{Es llave para } R_1 \\
+            \{D\}+ &= \{DE\} \ \text{Violación a BCNF, la elegimos para normalizar}
+        \end{align*}
+
+        Dividimos $R_1$:
+        \begin{align*}
+            R_3 (D,E) \text{ con } F &= \{D \rightarrow E\} ; \{D\}+ = \{DE\} \xrightarrow{} \text{D es llave para } R_3 \\
+            R_4 (D,A,B,C) \text{ con } F &= \{AB \rightarrow C, BC \rightarrow AD\} ; 
+        \end{align*}
+
+        Revisamos $R_4$:
+        \begin{align*}
+            \{AB\}+ &= \{ABCD\} \ \text{Es llave para } R_4 \\
+            \{BC\}+ &= \{BCAD\} \ \text{Es llave para } R_4 \\
+        \end{align*}
+
+        Finalmente:
+        \begin{align*}
+            R_2 (A,B,F) \text{ con } F &= \{ABF \rightarrow ABF \} \\
+            R_3 (D,E) \text{ con } F &= \{D \rightarrow E\} \\
+            R_4 (D,A,B,C) \text{ con } F &= \{AB \rightarrow C, BC \rightarrow AD\}
+        \end{align*}
+
+        Como nota importante, se presenta join con perdida, DF perdidas: $CF \rightarrow B$ 
         \vspace{.2cm}
     \end{enumerate}
     \vspace{.3cm}
