@@ -95,29 +95,48 @@ SELECT
     arbitro.nacionalidad
 FROM 
 	entrenador 
-join
+JOIN
 	arbitro on entrenador.nacionalidad = arbitro.nacionalidad 
-where 
+WHERE 
 	entrenador.iddisciplina != arbitro.iddisciplina 
 	
 
-/* Consulta : Patrocinadores que solo esten patrocinando a una disciplina.
+/* Consulta 5: Patrocinadores que solo esten patrocinando a una disciplina.
  * 
  * Estrategia:
- * - Seleccionar todo de entrenador
- * - Join con la tabla de arbitro donde coincida la nacionalidad
- * - Filtrar por iddisciplina, pues es con este dato donde se identifica si participan en el mismo evento.
+ * - Seleccionar todo de patrocina
+ * - Agrupar datos de patrocinador
+ * - Filtrar patrocinadores que tienen una entrada en la tabla patrocina
  */
 	
-select 
+SELECT 
 	patrocina.*
-from
+FROM
 	patrocina 
-group by
+GROUP BY
 	patrocina.nombrepatrocinador,
 	patrocina.iddisciplina 
-having
+HAVING
 	count(patrocina.iddisciplina) = 1 
+	
+/* Consulta 6: El número de medallas de oro ganadas por atletas de nacionalidad mexicana.
+ * 
+ * Estrategia:
+ * - Seleccionar la tabla Medalla
+ * - Join con Atleta
+ * - Filtrar las filas donde la nacionalidad del atleta sea 'mexicana' y el tipo de medalla sea 'oro'
+ * - Contar el número de filas que cumplen con las condiciones anteriores
+ * - Devolver el resultado como el número total de medallas de oro ganadas por atletas de nacionalidad mexicana
+ */
+	
+SELECT 
+    COUNT(*) AS medallas_oro
+FROM 
+    Medalla m
+JOIN 
+    Atleta a ON m.IDAtleta = a.IDAtleta
+WHERE 
+    a.Nacionalidad = 'Mexicana' AND m.TipoMedalla = 'Oro';
 	
     
 /* Consulta 7: El número de medallas de plata ganadas por atletas de nacionalidad japonesa.
