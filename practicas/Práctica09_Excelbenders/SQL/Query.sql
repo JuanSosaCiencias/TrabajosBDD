@@ -77,6 +77,48 @@ GROUP BY
     a.IDAtleta, a.Nombre, a.PrimerApellido, a.SegundoApellido
 HAVING 
     COUNT(p.IDDisciplina) > 1;
+   
+/* Consulta 4: Jueces y Entrenadores, que compartan la misma nacionalidad pero que no participen en el mismo evento.
+ * 
+ * Estrategia:
+ * - Seleccionar todo de entrenador
+ * - Join con la tabla de arbitro donde coincida la nacionalidad
+ * - Filtrar por iddisciplina, pues es con este dato donde se identifica si participan en el mismo evento.
+ */
+   
+SELECT 
+	entrenador.*,
+	arbitro.iddisciplina,
+    arbitro.nombre,
+    arbitro.primerapellido,
+    arbitro.segundoapellido,
+    arbitro.nacionalidad
+FROM 
+	entrenador 
+join
+	arbitro on entrenador.nacionalidad = arbitro.nacionalidad 
+where 
+	entrenador.iddisciplina != arbitro.iddisciplina 
+	
+
+/* Consulta : Patrocinadores que solo esten patrocinando a una disciplina.
+ * 
+ * Estrategia:
+ * - Seleccionar todo de entrenador
+ * - Join con la tabla de arbitro donde coincida la nacionalidad
+ * - Filtrar por iddisciplina, pues es con este dato donde se identifica si participan en el mismo evento.
+ */
+	
+select 
+	patrocina.*
+from
+	patrocina 
+group by
+	patrocina.nombrepatrocinador,
+	patrocina.iddisciplina 
+having
+	count(patrocina.iddisciplina) = 1 
+	
     
 /* Consulta 7: El número de medallas de plata ganadas por atletas de nacionalidad japonesa.
  * 
