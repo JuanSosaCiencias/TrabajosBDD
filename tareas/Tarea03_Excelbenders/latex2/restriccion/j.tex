@@ -1,7 +1,0 @@
-\textbf{‘Mr. Plow’ no requiere tener definido algún empleado que la dirija.}\vspace{.3cm}
-
-Esta afirmación es \textbf{verdadera}, debido a la naturaleza opcional de la relación entre \texttt{Empleado} y \texttt{Dirigir}. Según el modelo relacional, un empleado no necesariamente tiene que estar vinculado a una tupla en \texttt{Dirigir}. Esto significa que \texttt{Mr. Plow} puede existir sin que haya un director asignado, ya que la relación es opcional para el empleado, y el campo \texttt{id\_director} podría ser \texttt{NULL}. \\
-
-Sin embargo, si el modelo exigiera que todos los empleados tengan asignada una dirección de proyecto, entonces \texttt{Mr. Plow} tendría que tener un director definido. \\
-
-$\therefore$ La afirmación se cumple porque la participación opcional de \texttt{Empleado} en la relación con \texttt{Dirigir} permite que algunas compañías no tengan un director asignado.
