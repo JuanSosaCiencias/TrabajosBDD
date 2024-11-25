@@ -2569,3 +2569,4 @@ insert into Entrenador (IDEntrenador, IDDisciplina, Nombre, PrimerApellido, Segu
 insert into Entrenador (IDEntrenador, IDDisciplina, Nombre, PrimerApellido, SegundoApellido, FechaNacimiento, Nacionalidad, Genero) values (800, 202, 'Doc', 'Brown', 'DeLorean', '1980-09-22', 'Hill Valley', 'M');
 
 
+
