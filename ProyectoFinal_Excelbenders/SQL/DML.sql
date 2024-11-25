@@ -1,4 +1,4 @@
--- Tuplas para la tabla Pais
+                                                            -- Población de la Tabla País --
 insert into Pais (NombrePais) values ('Afganistán');
 insert into Pais (NombrePais) values ('Albania');
 insert into Pais (NombrePais) values ('Alemania');
@@ -188,7 +188,7 @@ insert into Pais (NombrePais) values ('Zimbabue');
 
 
 
--- Tuplas para Disciplina
+                                                            -- Población de la Tabla Disciplina --
 insert into Disciplina (IDDisciplina, NombreDisciplina, Categoria) values (1, 'Fútbol', 'Equipo');
 insert into Disciplina (IDDisciplina, NombreDisciplina, Categoria) values (2, 'Baloncesto', 'Individual');
 insert into Disciplina (IDDisciplina, NombreDisciplina, Categoria) values (3, 'Tenis', 'Duo');
@@ -402,7 +402,7 @@ insert into Disciplina (IDDisciplina, NombreDisciplina, Categoria) values (210, 
 
 
 
--- Tuplas para Localidad 
+                                                                        -- Población de la Tabla Localidad --
 insert into Localidad (NombreLocalidad, IDDisciplina, Calle, Numero, Ciudad, Pais, Aforo, Tipo) values ('Estadio Olímpico', 111, 'Plaza de la República', 74, 'París', 'Túnez', 5000, 'Granja');
 insert into Localidad (NombreLocalidad, IDDisciplina, Calle, Numero, Ciudad, Pais, Aforo, Tipo) values ('Velódromo', 16, 'Calle del Arco', 40, 'Ciudad de México', 'Belice', 250, 'Estadio');
 insert into Localidad (NombreLocalidad, IDDisciplina, Calle, Numero, Ciudad, Pais, Aforo, Tipo) values ('Piscina Olímpica', 102, 'Calle del Mercado', 193, 'Lisboa', 'Benín', 350, 'Campo de fútbol');
@@ -557,7 +557,7 @@ insert into Localidad (NombreLocalidad, IDDisciplina, Calle, Numero, Ciudad, Pai
 
 
 
--- Tuplas para Evento
+                                                                            -- Población de la Tabla Evento --    
 insert into Evento (IDEvento, NombreLocalidad, IDDisciplina, DuracionMax, Precio, FechaEvento, Fase) values (1, 'Campo de Bossaball', 138, 3, 650, '2023-12-25', 1);
 insert into Evento (IDEvento, NombreLocalidad, IDDisciplina, DuracionMax, Precio, FechaEvento, Fase) values (2, 'Campo de Tiro con Arco', 66, 9, 650, '2024-03-17', 1);
 insert into Evento (IDEvento, NombreLocalidad, IDDisciplina, DuracionMax, Precio, FechaEvento, Fase) values (3, 'Cancha de Bádminton', 85, 8, 700, '2023-11-20', 3);
@@ -761,7 +761,7 @@ insert into Evento (IDEvento, NombreLocalidad, IDDisciplina, DuracionMax, Precio
 
 
 
--- Tuplas para Atleta
+                                                                -- Población de la Tabla Atleta --    
 insert into Atleta (IDAtleta, NombrePais, IDEntrenador, Temporada, Nombre, PrimerApellido, SegundoApellido, FechaNacimiento, Nacionalidad, Genero) values (1, 'Montenegro', 170, 2024, 'Jada', 'Clere', 'Bodicam', '2007-11-02', 'Belga', 'M');
 insert into Atleta (IDAtleta, NombrePais, IDEntrenador, Temporada, Nombre, PrimerApellido, SegundoApellido, FechaNacimiento, Nacionalidad, Genero) values (2, 'Congo', 143, 2020, 'Linnell', 'Nutman', 'Grunson', '1993-08-28', 'Malasia', 'M');
 insert into Atleta (IDAtleta, NombrePais, IDEntrenador, Temporada, Nombre, PrimerApellido, SegundoApellido, FechaNacimiento, Nacionalidad, Genero) values (3, 'Tailandia', 88, 2022, 'Nickie', 'Kippin', 'Sporner', '1994-09-29', 'Francesa', 'M');
@@ -1766,7 +1766,7 @@ insert into Atleta (IDAtleta, NombrePais, IDEntrenador, Temporada, Nombre, Prime
 
 
 
---Tuplas para Entrenador
+                                                                    -- Población de la Tabla Entrenador --    
 insert into Entrenador (IDEntrenador, IDDisciplina, Nombre, PrimerApellido, SegundoApellido, FechaNacimiento, Nacionalidad, Genero) values (1, 27, 'Valencia', 'Poytres', 'Sexten', '1989-05-24', 'Kazaja', 'M');
 insert into Entrenador (IDEntrenador, IDDisciplina, Nombre, PrimerApellido, SegundoApellido, FechaNacimiento, Nacionalidad, Genero) values (2, 75, 'Jordain', 'Canedo', 'Moberley', '1970-12-16', 'Portuguesa', 'F');
 insert into Entrenador (IDEntrenador, IDDisciplina, Nombre, PrimerApellido, SegundoApellido, FechaNacimiento, Nacionalidad, Genero) values (3, 54, 'Jacinda', 'Wardel', 'Pollendine', '1991-07-23', 'Qatarí', 'M');
