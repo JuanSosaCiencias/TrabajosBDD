@@ -1,8 +1,32 @@
+-- Configuración de triggers para la gestión de eventos deportivos
+
+-- Eliminar triggers y funciones existentes si existen (para evitar conflictos)
+DROP TRIGGER IF EXISTS trigger_verificar_edad_atleta ON Atleta;
+DROP TRIGGER IF EXISTS trigger_registrar_medallas ON Evento;
+DROP TRIGGER IF EXISTS trigger_gestionar_aforo ON CompraEntrada;
+
+DROP FUNCTION IF EXISTS verificar_edad_atleta();
+DROP FUNCTION IF EXISTS registrar_medallas();
+DROP FUNCTION IF EXISTS gestionar_aforo();
+
+-- Crear tabla de registro si no existe. Se crea especialmente para este trigger
+CREATE TABLE IF NOT EXISTS RegistroAforo (
+    ID_Registro SERIAL PRIMARY KEY,
+    ID_Evento INT,
+    Fecha_Registro TIMESTAMP,
+    Aforo_Total INT,
+    Aforo_Disponible INT,
+    Tipo_Operacion VARCHAR(20),
+    Usuario VARCHAR(50),
+    Detalle VARCHAR(200)
+);
+
+-- 1. Trigger para verificación de edad
 CREATE OR REPLACE FUNCTION verificar_edad_atleta()
 RETURNS TRIGGER AS $$
 BEGIN
-    IF (EXTRACT(YEAR FROM AGE(CURRENT_DATE, NEW.FechaNacimiento)) < 18) THEN
-        RAISE EXCEPTION 'El atleta debe tener al menos 18 años de edad';
+    IF (EXTRACT(YEAR FROM AGE(CURRENT_DATE, NEW.FechaNacimiento)) < 10) THEN
+        RAISE EXCEPTION 'El atleta debe tener al menos 10 años de edad';
     END IF;
     RETURN NEW;
 END;
@@ -13,10 +37,10 @@ BEFORE INSERT OR UPDATE ON Atleta
 FOR EACH ROW
 EXECUTE FUNCTION verificar_edad_atleta();
 
+-- 2. Trigger para registro de medallas
 CREATE OR REPLACE FUNCTION registrar_medallas()
 RETURNS TRIGGER AS $$
 BEGIN
-    -- Verificar si el evento está en su fase final (fase 3)
     IF NEW.Fase = 3 AND OLD.Fase != 3 THEN
         -- Verificar si ya existen medallas para este evento
         IF EXISTS (
@@ -67,27 +91,12 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
-CREATE OR REPLACE TRIGGER trigger_registrar_medallas
+CREATE TRIGGER trigger_registrar_medallas
 AFTER UPDATE ON Evento
 FOR EACH ROW
 EXECUTE FUNCTION registrar_medallas();
 
-
--- Primero creamos una tabla para el registro de cambios de aforo
-CREATE TABLE IF NOT EXISTS RegistroAforo (
-    ID_Registro SERIAL PRIMARY KEY,
-    ID_Evento INT,
-    Fecha_Registro TIMESTAMP,
-    Aforo_Total INT,
-    Aforo_Disponible INT,
-    Tipo_Operacion VARCHAR(20),
-    Usuario VARCHAR(50),
-    Detalle VARCHAR(200)
-);
-/* gestión de aforo en los eventos, verificando múltiples condiciones y manteniendo un 
-** registro de cambios. Este trigger se activará cuando se inserten o actualicen registros en la tabla
-** CompraEntrada */
-
+-- 3. Trigger para gestión de aforo
 CREATE OR REPLACE FUNCTION gestionar_aforo()
 RETURNS TRIGGER AS $$
 DECLARE
@@ -98,7 +107,6 @@ DECLARE
     v_fecha_evento DATE;
     v_nombre_localidad VARCHAR(50);
     v_tipo_localidad VARCHAR(50);
-    v_limite_anticipacion INT := 80; -- días máximos de anticipación permitidos
 BEGIN
     -- Obtener información del evento y localidad
     SELECT e.Precio, e.FechaEvento, e.NombreLocalidad, l.Aforo, l.Tipo
@@ -107,22 +115,14 @@ BEGIN
     JOIN Localidad l ON e.NombreLocalidad = l.NombreLocalidad
     WHERE e.IDEvento = NEW.IDEvento;
 
-    -- Verificar si el evento existe
     IF NOT FOUND THEN
         RAISE EXCEPTION 'El evento con ID % no existe', NEW.IDEvento;
     END IF;
 
-    -- Verificar si la fecha del evento ya pasó
     IF v_fecha_evento < CURRENT_DATE THEN
         RAISE EXCEPTION 'No se pueden vender entradas para eventos pasados';
     END IF;
 
-    -- Verificar si la compra se realiza con demasiada anticipación
-    IF (v_fecha_evento - CURRENT_DATE) > v_limite_anticipacion THEN
-        RAISE EXCEPTION 'No se pueden comprar entradas con más de % días de anticipación', v_limite_anticipacion;
-    END IF;
-
-    -- Calcular entradas vendidas y aforo disponible
     SELECT COUNT(*)
     INTO v_entradas_vendidas
     FROM CompraEntrada
@@ -130,13 +130,11 @@ BEGIN
 
     v_aforo_disponible := v_aforo_total - v_entradas_vendidas;
 
-    -- Verificar si hay espacio disponible
     IF v_aforo_disponible <= 0 THEN
         RAISE EXCEPTION 'El evento está agotado. Aforo total: %, Entradas vendidas: %', 
             v_aforo_total, v_entradas_vendidas;
     END IF;
 
-    -- Verificar límite de compras por cliente
     IF TG_OP = 'INSERT' THEN
         IF (
             SELECT COUNT(*)
@@ -147,7 +145,6 @@ BEGIN
         END IF;
     END IF;
 
-    -- Registrar la operación en el log
     INSERT INTO RegistroAforo (
         ID_Evento,
         Fecha_Registro,
@@ -171,13 +168,17 @@ BEGIN
         )
     );
 
-    -- Si todo está bien, permitir la operación
     RETURN NEW;
 END;
 $$ LANGUAGE plpgsql;
 
--- Crear el trigger
 CREATE TRIGGER trigger_gestionar_aforo
 BEFORE INSERT OR UPDATE ON CompraEntrada
 FOR EACH ROW
 EXECUTE FUNCTION gestionar_aforo();
+
+-- Mensaje de confirmación
+DO $$
+BEGIN
+    RAISE NOTICE 'Configuración de triggers completada exitosamente.';
+END $$;
