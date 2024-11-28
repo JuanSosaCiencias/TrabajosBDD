@@ -249,7 +249,7 @@ ALTER TABLE Pais
     PRIMARY KEY (NombrePais);
 
 COMMENT ON COLUMN Pais.NombrePais IS 'Es la llave primaria para identificar de manera única cada país';
-COMMENT ON CONSTRAINT Pais_pkey ON Pais IS 'Llave primaria de la tabla Pais.'; -- Restricción pais_pkey
+COMMENT ON CONSTRAINT PK_Pais ON Pais IS 'Llave primaria de la tabla Pais.'; -- Restricción pais_pkey
 
 ALTER TABLE Atleta
 	ADD PRIMARY KEY (IDAtleta),
@@ -558,7 +558,7 @@ ALTER TABLE Atleta
     ADD CONSTRAINT CK_Atleta_Genero
     CHECK (Genero IN ('M', 'F')),
     ADD CONSTRAINT CK_Atleta_Temporada 
-    CHECK (Temporada >= 2023),
+    CHECK (Temporada >= 1989),
     ADD CONSTRAINT CK_Atleta_FechaNacimiento
     CHECK (FechaNacimiento <= CURRENT_DATE);
 
@@ -587,7 +587,7 @@ ALTER TABLE Evento
     ADD CONSTRAINT CK_Evento_Fase
     CHECK (Fase >= 1 AND Fase <= 3),
     ADD CONSTRAINT CK_Evento_FechaEvento 
-    CHECK (FechaEvento BETWEEN '2024-01-01' AND '2028-12-31');
+    CHECK (FechaEvento BETWEEN '2023-01-01' AND '2028-12-31');
 
 
 
@@ -596,7 +596,14 @@ ALTER TABLE Localidad
     ADD CONSTRAINT CK_Localidad_Aforo
     CHECK (Aforo > 0),
     ADD CONSTRAINT CK_Localidad_Tipo
-    CHECK (Tipo IN ('Estadio', 'Piscina', 'Gimnasio', 'Pista', 'Campo', 'Playa', 'Cancha'));
+    CHECK (Tipo IN (
+  'Alberca', 'Arena', 'Base', 'Campo', 'Centro Acuático', 
+  'Club', 'Coliseo', 'Complejo', 'Convención', 'Dojo', 
+  'Estación', 'Estadio', 'Frontón', 'Gimnasio', 'Hipódromo', 
+  'Lago', 'Marina', 'Palacio', 'Parque', 'Pista', 'Pista de Hielo', 
+  'Playa', 'Rocódromo', 'Río', 'Salón', 'Sendero', 'Simulador', 'Torre', 
+  'Trampolines', 'Velódromo'
+	));
 
 ALTER TABLE Entrenador
     ADD CONSTRAINT CK_Entrenador_Genero
