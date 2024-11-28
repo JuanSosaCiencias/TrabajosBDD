@@ -37,64 +37,94 @@ BEFORE INSERT OR UPDATE ON Atleta
 FOR EACH ROW
 EXECUTE FUNCTION verificar_edad_atleta();
 
+-- Probamos el trigger 1
+--insert into Atleta (IDAtleta, NombrePais, IDEntrenador, Temporada, Nombre, PrimerApellido, SegundoApellido, FechaNacimiento, Nacionalidad, Genero) values (1001, 'Bahamas', 48, 2022, 'Jed', 'Leathard', 'Somerfield', '2005-10-19', 'Emiratí', 'F');
+--insert into Atleta (IDAtleta, NombrePais, IDEntrenador, Temporada, Nombre, PrimerApellido, SegundoApellido, FechaNacimiento, Nacionalidad, Genero) values (1002, 'Bahamas', 48, 2022, 'Jed', 'Leathard', 'Somerfield', '2023-10-19', 'Emiratí', 'F');
+
+
 -- 2. Trigger para registro de medallas
-CREATE OR REPLACE FUNCTION registrar_medallas()
-RETURNS TRIGGER AS $$
-BEGIN
-    IF NEW.Fase = 3 AND OLD.Fase != 3 THEN
-        -- Verificar si ya existen medallas para este evento
-        IF EXISTS (
-            SELECT 1 FROM Medalla 
-            WHERE IDDisciplina = NEW.IDDisciplina
-            AND TipoMedalla IN ('Oro', 'Plata', 'Bronce')
-        ) THEN
-            RAISE EXCEPTION 'Ya se han registrado medallas para esta disciplina en este evento';
-        END IF;
+-- CREATE OR REPLACE FUNCTION registrar_medallas()
+-- RETURNS TRIGGER AS $$
+-- BEGIN
+--     IF NEW.Fase = 3 AND OLD.Fase != 3 THEN
+--         -- Verificar si ya existen medallas para este evento
+--         IF EXISTS (
+--             SELECT 1 FROM Medalla 
+--             WHERE IDDisciplina = NEW.IDDisciplina
+--             AND TipoMedalla IN ('Oro', 'Plata', 'Bronce')
+--         ) THEN
+--             RAISE EXCEPTION 'Ya se han registrado medallas para esta disciplina en este evento';
+--         END IF;
 
-        -- Insertar medalla de oro
-        INSERT INTO Medalla (TipoMedalla, IDDisciplina, IDAtleta)
-        SELECT 'Oro', NEW.IDDisciplina, IDAtleta
-        FROM Concursa
-        WHERE IDEvento = NEW.IDEvento
-        AND NOT EXISTS (
-            SELECT 1 FROM Medalla m 
-            WHERE m.IDDisciplina = NEW.IDDisciplina 
-            AND m.IDAtleta = Concursa.IDAtleta
-        )
-        LIMIT 1;
+--         -- Insertar medalla de oro
+--         INSERT INTO Medalla (TipoMedalla, IDDisciplina, IDAtleta)
+--         SELECT 'Oro', NEW.IDDisciplina, IDAtleta
+--         FROM Concursa
+--         WHERE IDEvento = NEW.IDEvento
 
-        -- Insertar medalla de plata
-        INSERT INTO Medalla (TipoMedalla, IDDisciplina, IDAtleta)
-        SELECT 'Plata', NEW.IDDisciplina, IDAtleta
-        FROM Concursa
-        WHERE IDEvento = NEW.IDEvento
-        AND IDAtleta NOT IN (
-            SELECT IDAtleta 
-            FROM Medalla 
-            WHERE IDDisciplina = NEW.IDDisciplina
-        )
-        LIMIT 1;
+--         AND NOT EXISTS (
+--             SELECT 1 FROM Medalla m 
+--             WHERE m.IDDisciplina = NEW.IDDisciplina 
+--             AND m.IDAtleta = Concursa.IDAtleta
+--         )
+--         LIMIT 1;
 
-        -- Insertar medalla de bronce
-        INSERT INTO Medalla (TipoMedalla, IDDisciplina, IDAtleta)
-        SELECT 'Bronce', NEW.IDDisciplina, IDAtleta
-        FROM Concursa
-        WHERE IDEvento = NEW.IDEvento
-        AND IDAtleta NOT IN (
-            SELECT IDAtleta 
-            FROM Medalla 
-            WHERE IDDisciplina = NEW.IDDisciplina
-        )
-        LIMIT 1;
-    END IF;
-    RETURN NEW;
-END;
-$$ LANGUAGE plpgsql;
+--         -- Insertar medalla de plata
+--         INSERT INTO Medalla (TipoMedalla, IDDisciplina, IDAtleta)
+--         SELECT 'Plata', NEW.IDDisciplina, IDAtleta
+--         FROM Concursa
+--         WHERE IDEvento = NEW.IDEvento
+--         AND IDAtleta NOT IN (
+--             SELECT IDAtleta 
+--             FROM Medalla 
+--             WHERE IDDisciplina = NEW.IDDisciplina
+--         )
+--         LIMIT 1;
 
-CREATE TRIGGER trigger_registrar_medallas
-AFTER UPDATE ON Evento
-FOR EACH ROW
-EXECUTE FUNCTION registrar_medallas();
+--         -- Insertar medalla de bronce
+--         INSERT INTO Medalla (TipoMedalla, IDDisciplina, IDAtleta)
+--         SELECT 'Bronce', NEW.IDDisciplina, IDAtleta
+--         FROM Concursa
+--         WHERE IDEvento = NEW.IDEvento
+--         AND IDAtleta NOT IN (
+--             SELECT IDAtleta 
+--             FROM Medalla 
+--             WHERE IDDisciplina = NEW.IDDisciplina
+--         )
+--         LIMIT 1;
+--     END IF;
+--     RETURN NEW;
+-- END;
+-- $$ LANGUAGE plpgsql;
+
+-- CREATE TRIGGER trigger_registrar_medallas
+-- AFTER UPDATE ON Evento
+-- FOR EACH ROW
+-- EXECUTE FUNCTION registrar_medallas();
+
+-- insert into Pais (NombrePais) values ('PaisPrueba');
+
+-- insert into Disciplina (IDDisciplina, NombreDisciplina, Categoria) values 
+-- 	(1000, 'DisciplinaPrueba', 'Individual');
+
+-- insert into Localidad (NombreLocalidad, IDDisciplina, Calle, Numero, Ciudad, Pais, Aforo, Tipo) values 
+-- 	('LocalidadPrueba', 1000, 'Calle Santo Domingo', 49, 'Toronto', 'Costa de Marfil', 800, 'Parque');
+
+-- INSERT INTO Evento (IDEvento,NombreLocalidad, IDDisciplina, DuracionMax, Precio, FechaEvento, Fase)
+-- VALUES 
+--     (1000,'LocalidadPrueba', 1000, 120, 50, '2024-11-30', 1);
+   
+-- insert into Entrenador (IDEntrenador, IDDisciplina, Nombre, PrimerApellido, SegundoApellido, FechaNacimiento, Nacionalidad, Genero) values 
+-- 	(1000, 1000, 'EntrenadorPrueba', '6969', '6969', '1989-05-24', 'PaisPrueba', 'M');
+   
+-- insert into Atleta (IDAtleta, NombrePais, IDEntrenador, Temporada, Nombre, PrimerApellido, SegundoApellido, FechaNacimiento, Nacionalidad, Genero) values 
+-- 	(1000, 'PaisPrueba', 1000, 2024, 'Jada', 'Clere', 'Bodicam', '2007-11-02', 'PaisPrueba', 'M');
+
+-- INSERT INTO Concursa (IDAtleta, IDEvento) VALUES 
+-- 	(1000, 1000);
+
+-- update  evento set Fase=3 where idevento =1000;
+
 
 -- 3. Trigger para gestión de aforo
 CREATE OR REPLACE FUNCTION gestionar_aforo()
@@ -176,6 +206,30 @@ CREATE TRIGGER trigger_gestionar_aforo
 BEFORE INSERT OR UPDATE ON CompraEntrada
 FOR EACH ROW
 EXECUTE FUNCTION gestionar_aforo();
+
+-- Probamos el trigger 3
+-- insert into Disciplina (IDDisciplina, NombreDisciplina, Categoria) values 
+-- 	(1000, 'DisciplinaPrueba', 'Individual');
+
+-- insert into Localidad (NombreLocalidad, IDDisciplina, Calle, Numero, Ciudad, Pais, Aforo, Tipo) values 
+-- 	('LocalidadPrueba', 1000, 'Calle Santo Domingo', 49, 'Toronto', 'Costa de Marfil', 10, 'Parque');
+
+-- INSERT INTO Evento (IDEvento,NombreLocalidad, IDDisciplina, DuracionMax, Precio, FechaEvento, Fase)
+-- VALUES 
+--     (1000,'LocalidadPrueba', 1000, 120, 50, '2024-11-30', 1);
+
+-- insert into cliente (idcliente) values
+-- 	(1000), (1001)
+
+-- insert into compraentrada (idcliente,idevento) values 
+-- 	(1000,1000), --(1001,1000)
+-- 	(1000,1000),
+-- 	(1000,1000),
+-- 	(1000,1000),
+-- 	(1000,1000)
+	
+-- insert into compraentrada (idcliente,idevento) values
+-- 	(1001,1000)
 
 -- Mensaje de confirmación
 DO $$

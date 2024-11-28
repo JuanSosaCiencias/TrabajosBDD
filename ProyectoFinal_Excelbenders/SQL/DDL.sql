@@ -249,7 +249,7 @@ ALTER TABLE Pais
     PRIMARY KEY (NombrePais);
 
 COMMENT ON COLUMN Pais.NombrePais IS 'Es la llave primaria para identificar de manera única cada país';
-COMMENT ON CONSTRAINT PK_Pais ON Pais IS 'Llave primaria de la tabla Pais.'; -- Restricción pais_pkey
+COMMENT ON CONSTRAINT Pais_pkey ON Pais IS 'Llave primaria de la tabla Pais.'; -- Restricción pais_pkey
 
 ALTER TABLE Atleta
 	ADD CONSTRAINT Atleta_pkey PRIMARY KEY (IDAtleta),
@@ -597,12 +597,12 @@ ALTER TABLE Evento
     ADD CONSTRAINT CK_Evento_Fase
     CHECK (Fase >= 1 AND Fase <= 3),
     ADD CONSTRAINT CK_Evento_FechaEvento 
-    CHECK (FechaEvento BETWEEN '2023-01-01' AND '2028-12-31');
+    CHECK (FechaEvento BETWEEN '2025-01-01' AND '2028-12-31');
 
 COMMENT ON CONSTRAINT CK_Evento_Precio ON Evento IS 'Verifica que el precio de la entrada no sea negativo';
 COMMENT ON CONSTRAINT CK_Evento_DuracionMax ON Evento IS 'Asegura que la duración máxima del evento sea mayor que cero';
 COMMENT ON CONSTRAINT CK_Evento_Fase ON Evento IS 'Limita las fases del evento a valores entre 1 y 3';
-COMMENT ON CONSTRAINT CK_Evento_FechaEvento ON Evento IS 'Restringe las fechas de eventos entre 2024 y 2028';
+COMMENT ON CONSTRAINT CK_Evento_FechaEvento ON Evento IS 'Restringe las fechas de eventos entre 2025 y 2028';
 
 -- Localidad
 ALTER TABLE Localidad
