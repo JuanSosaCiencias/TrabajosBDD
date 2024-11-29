@@ -192,6 +192,169 @@ GROUP BY
     p.NombrePais
 ORDER BY 
     CantidadMedallas DESC;
+   
+/* Consulta 9: Porcentaje de aforo utilizado en las localidades
+ * 
+ * Esta consulta muestra las entradas vendidas por evento  y calcula su porcentaje de aforo utilizado con respecto a ese dato y el aforo de
+ * la localidad donde se realizó el evento.
+ * 
+ * - Une las tablas `Evento`, `CompraEntrada` y `Localidad` para relacionar los eventos con las localidades y las entradas vendidas.
+ * - Calcula el porcentaje de aforo utilizado en cada localidad dividiendo el total de entradas vendidas entre el aforo de la localidad.
+ * - Ordena los resultados de mayor a menor porcentaje de aforo utilizado.
+ */
+SELECT 
+    Localidad.NombreLocalidad, 
+    Localidad.Aforo, 
+    COUNT(CompraEntrada.IDEvento) AS EntradasVendidas,
+    ROUND((COUNT(CompraEntrada.IDEvento) * 100.0 / Localidad.Aforo), 2) AS PorcentajeAforoUtilizado
+FROM 
+    Evento
+JOIN 
+    Localidad ON Evento.NombreLocalidad = Localidad.NombreLocalidad
+JOIN 
+    CompraEntrada ON Evento.IDEvento = CompraEntrada.IDEvento
+GROUP BY 
+    Localidad.NombreLocalidad, 
+    Localidad.Aforo
+ORDER BY 
+    PorcentajeAforoUtilizado DESC;
+
+   
+/* Consulta 10: Patrocinadores más activos. 
+ * 
+ * Esta consulta lista los patrocinadores que están asociados con más disciplinas.
+ * 
+ * - Agrupa los registros de la tabla `Patrocina` por el nombre del patrocinador.
+ * - Cuenta cuántas disciplinas ha patrocinado cada patrocinador.
+ * - Ordena los resultados de mayor a menor cantidad de disciplinas patrocinadas.
+ */
+SELECT 
+    Patrocina.NombrePatrocinador, 
+    COUNT(*) AS DisciplinasPatrocinadas
+FROM 
+    Patrocina
+GROUP BY 
+    Patrocina.NombrePatrocinador
+ORDER BY 
+    DisciplinasPatrocinadas DESC;
+   
+    
+/* Consulta 11: Promedio de edad por disciplina.
+ * 
+ * Esta consulta calcula el promedio de edad de los atletas por cada disciplina, ordenados alfabéticamente.
+ * 
+ * - Selecciona el nombre de la disciplina y calcula el promedio de la edad de los atletas.
+ * - Agrupa los resultados por disciplina.
+ * - Ordena los resultados alfabéticamente por el nombre de la disciplina.
+ */
+SELECT 
+    d.NombreDisciplina,
+    AVG(extract(year from evento.fechaevento) - extract(year from a.FechaNacimiento)) AS PromedioEdad
+FROM 
+     Evento, Disciplina d
+JOIN 
+    Participa p ON d.IDDisciplina = p.IDDisciplina
+JOIN 
+    Atleta a ON p.IDAtleta = a.IDAtleta
+GROUP BY 
+    d.NombreDisciplina
+ORDER BY 
+    d.NombreDisciplina;
+   
+
+/* Consulta 12: Árbitros asignados por disciplina y su nacionalidad.
+ * 
+ * Esta consulta muestra los árbitros que están asignados a cada disciplina junto con su nacionalidad.
+ * 
+ * - Selecciona el nombre de la disciplina, el nombre completo del árbitro y su nacionalidad.
+ * - Agrupa los resultados por disciplina y árbitro.
+ * - Ordena los resultados por disciplina y nacionalidad.
+ */
+SELECT 
+    d.NombreDisciplina,
+    ar.Nombre AS NombreArbitro,
+    ar.PrimerApellido,
+    ar.segundoapellido,
+    ar.Nacionalidad
+FROM 
+    Disciplina d
+JOIN 
+    Arbitro ar ON d.IDDisciplina = ar.IDDisciplina
+ORDER BY 
+    d.NombreDisciplina, ar.Nacionalidad;
+
+   
+/* Consulta 13: Entradas vendidas por disciplina en un rango de fechas.
+ * 
+ * Esta consulta calcula cuántas entradas se han vendido por disciplina en un rango específico de fechas.
+ * 
+ * - Selecciona el nombre de la disciplina y la cantidad de entradas vendidas.
+ * - Filtra los eventos por la fecha en que ocurrieron.
+ * - Agrupa los resultados por disciplina.
+ * - Ordena los resultados por la cantidad de entradas vendidas.
+ */
+SELECT 
+    d.NombreDisciplina,
+    COUNT(ce.idcliente) AS EntradasVendidas
+FROM 
+    Evento e
+JOIN 
+    CompraEntrada ce ON e.IDEvento = ce.IDEvento
+JOIN 
+    Disciplina d ON e.IDDisciplina = d.IDDisciplina
+WHERE 
+    e.FechaEvento BETWEEN '2024-01-01' AND '2024-12-31'
+GROUP BY 
+    d.NombreDisciplina
+ORDER BY 
+    EntradasVendidas DESC;
+   
+   
+/* Consulta 14: Relación entre atletas y sus países de origen.
+ * 
+ * Esta consulta obtiene la cantidad de atletas de cada país que participan en cada disciplina.
+ * 
+ * - Selecciona el nombre del país, el nombre de la disciplina y la cantidad de atletas.
+ * - Agrupa los resultados por país y disciplina.
+ * - Ordena los resultados por país y disciplina.
+ */
+SELECT 
+    p.NombrePais,
+    d.NombreDisciplina,
+    COUNT(a.IDAtleta) AS CantidadAtletas
+FROM 
+    Atleta a
+JOIN 
+    Pais p ON a.NombrePais = p.NombrePais
+JOIN 
+    Participa pa ON a.IDAtleta = pa.IDAtleta
+JOIN 
+    Disciplina d ON pa.IDDisciplina = d.IDDisciplina
+GROUP BY 
+    p.NombrePais, d.NombreDisciplina
+ORDER BY 
+    p.NombrePais, d.NombreDisciplina;
+   
+/* Consulta 15: Número de atletas por cada país.
+ * 
+ * Esta consulta obtiene el número de atletas registrados por cada país.
+ * 
+ * - Selecciona el nombre del país y cuenta la cantidad de atletas registrados en ese país.
+ * - Agrupa los resultados por el nombre del país.
+ * - Ordena los resultados por la cantidad de atletas en orden descendente.
+ */
+SELECT 
+    p.NombrePais,
+    COUNT(a.IDAtleta) AS NumeroAtletas
+FROM 
+    Pais p
+JOIN 
+    Atleta a ON p.NombrePais = a.NombrePais
+GROUP BY 
+    p.NombrePais
+ORDER BY 
+    NumeroAtletas DESC;
+
 
 
 /* Consulta Extra:
