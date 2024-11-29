@@ -9,7 +9,7 @@ DROP FUNCTION IF EXISTS verificar_edad_atleta();
 DROP FUNCTION IF EXISTS registrar_medallas();
 DROP FUNCTION IF EXISTS gestionar_aforo();
 
--- Crear tabla de registro si no existe. Se crea especialmente para este trigger
+-- Crear tabla de registro si no existe. Se crea especialmente para el trigger 3
 CREATE TABLE IF NOT EXISTS RegistroAforo (
     ID_Registro SERIAL PRIMARY KEY,
     ID_Evento INT,
@@ -43,87 +43,73 @@ EXECUTE FUNCTION verificar_edad_atleta();
 
 
 -- 2. Trigger para registro de medallas
--- CREATE OR REPLACE FUNCTION registrar_medallas()
--- RETURNS TRIGGER AS $$
--- BEGIN
---     IF NEW.Fase = 3 AND OLD.Fase != 3 THEN
---         -- Verificar si ya existen medallas para este evento
---         IF EXISTS (
---             SELECT 1 FROM Medalla 
---             WHERE IDDisciplina = NEW.IDDisciplina
---             AND TipoMedalla IN ('Oro', 'Plata', 'Bronce')
---         ) THEN
---             RAISE EXCEPTION 'Ya se han registrado medallas para esta disciplina en este evento';
---         END IF;
+CREATE OR REPLACE FUNCTION validar_medalla()
+RETURNS TRIGGER AS $$
+	BEGIN
+	    -- Verificar que el atleta no tenga ya una medalla en la misma disciplina
+	    IF EXISTS (
+	        SELECT 1
+	        FROM Medalla
+	        WHERE IDAtleta = NEW.IDAtleta
+	          AND IDDisciplina = NEW.IDDisciplina
+	    ) THEN
+	        RAISE EXCEPTION 'El atleta ya tiene una medalla en esta disciplina.';
+	    END IF;
+	
+	    -- Verificar que el atleta concursa en la disciplina
+	    IF NOT EXISTS (
+	        SELECT 1
+	        FROM Participa
+	        WHERE IDAtleta = NEW.IDAtleta
+	          AND IDDisciplina = NEW.IDDisciplina
+	    ) THEN
+	        RAISE EXCEPTION 'El atleta no participa en esta disciplina.';
+	    END IF;
+	
+	    -- Verificar si la disciplina es individual
+	    IF EXISTS (
+	        SELECT 1
+	        FROM Disciplina
+	        WHERE IDDisciplina = NEW.IDDisciplina
+	          AND Categoria = 'Individual'
+	    ) THEN
+	        -- Asegurarse de que solo haya una medalla de cada tipo en disciplinas individuales
+	        IF EXISTS (
+	            SELECT 1
+	            FROM Medalla
+	            WHERE IDDisciplina = NEW.IDDisciplina
+	              AND TipoMedalla = NEW.TipoMedalla
+	        ) THEN
+	            RAISE EXCEPTION 'Ya existe una medalla % en esta disciplina individual.', NEW.TipoMedalla;
+	        END IF;
+	    END IF;
+	
+	    RETURN NEW;
+	END;
+	$$ LANGUAGE plpgsql;
 
---         -- Insertar medalla de oro
---         INSERT INTO Medalla (TipoMedalla, IDDisciplina, IDAtleta)
---         SELECT 'Oro', NEW.IDDisciplina, IDAtleta
---         FROM Concursa
---         WHERE IDEvento = NEW.IDEvento
+-- Crear el trigger
+CREATE TRIGGER trg_validar_medalla
+BEFORE INSERT OR UPDATE ON Medalla
+FOR EACH ROW
+EXECUTE FUNCTION validar_medalla();
 
---         AND NOT EXISTS (
---             SELECT 1 FROM Medalla m 
---             WHERE m.IDDisciplina = NEW.IDDisciplina 
---             AND m.IDAtleta = Concursa.IDAtleta
---         )
---         LIMIT 1;
-
---         -- Insertar medalla de plata
---         INSERT INTO Medalla (TipoMedalla, IDDisciplina, IDAtleta)
---         SELECT 'Plata', NEW.IDDisciplina, IDAtleta
---         FROM Concursa
---         WHERE IDEvento = NEW.IDEvento
---         AND IDAtleta NOT IN (
---             SELECT IDAtleta 
---             FROM Medalla 
---             WHERE IDDisciplina = NEW.IDDisciplina
---         )
---         LIMIT 1;
-
---         -- Insertar medalla de bronce
---         INSERT INTO Medalla (TipoMedalla, IDDisciplina, IDAtleta)
---         SELECT 'Bronce', NEW.IDDisciplina, IDAtleta
---         FROM Concursa
---         WHERE IDEvento = NEW.IDEvento
---         AND IDAtleta NOT IN (
---             SELECT IDAtleta 
---             FROM Medalla 
---             WHERE IDDisciplina = NEW.IDDisciplina
---         )
---         LIMIT 1;
---     END IF;
---     RETURN NEW;
--- END;
--- $$ LANGUAGE plpgsql;
-
--- CREATE TRIGGER trigger_registrar_medallas
--- AFTER UPDATE ON Evento
--- FOR EACH ROW
--- EXECUTE FUNCTION registrar_medallas();
-
+-- Probamos el trigger 2
 -- insert into Pais (NombrePais) values ('PaisPrueba');
 
--- insert into Disciplina (IDDisciplina, NombreDisciplina, Categoria) values 
--- 	(1000, 'DisciplinaPrueba', 'Individual');
-
--- insert into Localidad (NombreLocalidad, IDDisciplina, Calle, Numero, Ciudad, Pais, Aforo, Tipo) values 
--- 	('LocalidadPrueba', 1000, 'Calle Santo Domingo', 49, 'Toronto', 'Costa de Marfil', 800, 'Parque');
-
--- INSERT INTO Evento (IDEvento,NombreLocalidad, IDDisciplina, DuracionMax, Precio, FechaEvento, Fase)
--- VALUES 
---     (1000,'LocalidadPrueba', 1000, 120, 50, '2024-11-30', 1);
+-- insert into Disciplina (IDDisciplina, NombreDisciplina, Categoria) values (1000, 'DisciplinaPrueba', 'Duos');
    
--- insert into Entrenador (IDEntrenador, IDDisciplina, Nombre, PrimerApellido, SegundoApellido, FechaNacimiento, Nacionalidad, Genero) values 
--- 	(1000, 1000, 'EntrenadorPrueba', '6969', '6969', '1989-05-24', 'PaisPrueba', 'M');
+-- insert into Entrenador (IDEntrenador, IDDisciplina, Nombre, PrimerApellido, SegundoApellido, FechaNacimiento, Nacionalidad, Genero) values  
+-- (1000, 1000, 'EntrenadorPrueba', '6969', '6969', '1989-05-24', 'PaisPrueba', 'M');
    
 -- insert into Atleta (IDAtleta, NombrePais, IDEntrenador, Temporada, Nombre, PrimerApellido, SegundoApellido, FechaNacimiento, Nacionalidad, Genero) values 
--- 	(1000, 'PaisPrueba', 1000, 2024, 'Jada', 'Clere', 'Bodicam', '2007-11-02', 'PaisPrueba', 'M');
+-- 	(1000, 'PaisPrueba', 1000, 2024, 'Jada', 'Clere', 'Bodicam', '2007-11-02', 'PaisPrueba', 'M'),
+-- 	(1001, 'PaisPrueba', 1000, 2024, 'Jada', 'Clere', 'Bodicam', '2007-11-02', 'PaisPrueba', 'M');
 
--- INSERT INTO Concursa (IDAtleta, IDEvento) VALUES 
--- 	(1000, 1000);
+-- insert into Participa (IDAtleta, IDDisciplina) values (1000, 1000), (1001, 1000);
 
--- update  evento set Fase=3 where idevento =1000;
+-- insert into Medalla (TipoMedalla, IDDIsciplina, IDAtleta) values ('Oro', 1000,1000), ('Oro', 1000,1001);
+
 
 
 -- 3. Trigger para gestión de aforo
@@ -230,6 +216,59 @@ EXECUTE FUNCTION gestionar_aforo();
 	
 -- insert into compraentrada (idcliente,idevento) values
 -- 	(1001,1000)
+
+-- 4. Trigger para validar concursa
+CREATE OR REPLACE FUNCTION verificar_disciplina_concursa()
+RETURNS TRIGGER AS $$
+	BEGIN
+	    -- Verificar si el atleta participa en la disciplina del evento
+	    IF NOT EXISTS (
+	        SELECT 1
+	        FROM Participa p
+	        INNER JOIN Evento e
+	        ON p.IDDisciplina = e.IDDisciplina
+	        WHERE p.IDAtleta = NEW.IDAtleta
+	          AND e.IDEvento = NEW.IDEvento
+	    ) THEN
+	        RAISE EXCEPTION 'La combinación de atleta y evento no es válida: el atleta no participa en la disciplina del evento.';
+	    END IF;
+	
+	    -- Si pasa la validación, permitir la operación
+	    RETURN NEW;
+	END;
+	$$ LANGUAGE plpgsql;
+
+-- Crear el trigger que llama a la función en inserciones o actualizaciones
+CREATE TRIGGER trigger_verificar_disciplina_concursa
+BEFORE INSERT OR UPDATE ON Concursa
+FOR EACH ROW
+EXECUTE FUNCTION verificar_disciplina_concursa();
+
+-- probamos el trigger 4
+-- insert into Pais (NombrePais) values ('PaisPrueba');
+
+-- insert into Disciplina (IDDisciplina, NombreDisciplina, Categoria) values 
+-- 	(1000, 'DisciplinaPrueba', 'Duos'), (1001, 'DisciplinaPrueba', 'Duos');
+   
+-- insert into Entrenador (IDEntrenador, IDDisciplina, Nombre, PrimerApellido, SegundoApellido, FechaNacimiento, Nacionalidad, Genero) values  
+-- 	(1000, 1000, 'EntrenadorPrueba', '6969', '6969', '1989-05-24', 'PaisPrueba', 'M');
+   
+--  insert into Atleta (IDAtleta, NombrePais, IDEntrenador, Temporada, Nombre, PrimerApellido, SegundoApellido, FechaNacimiento, Nacionalidad, Genero) values 
+--  	(1000, 'PaisPrueba', 1000, 2024, 'Jada', 'Clere', 'Bodicam', '2007-11-02', 'PaisPrueba', 'M');
+
+-- insert into Participa (IDAtleta, IDDisciplina) values (1000, 1000);
+
+-- insert into Localidad (NombreLocalidad, IDDisciplina, Calle, Numero, Ciudad, Pais, Aforo, Tipo) values 
+-- 	('LocalidadPrueba', 1000, 'Calle Santo Domingo', 49, 'Toronto', 'Costa de Marfil', 10, 'Parque');
+
+--  INSERT INTO Evento (IDEvento,NombreLocalidad, IDDisciplina, DuracionMax, Precio, FechaEvento, Fase) VALUES 
+--      (1000,'LocalidadPrueba', 1000, 120, 50, '2025-11-30', 1);
+ 
+-- insert into concursa (IDAtleta, IDEvento) values
+-- 	(1000, 1000);
+
+-- Este trigger fue el que me hizo darme cuenta de la utilidad, podemos checar la condicion super eficientemente; tuve que hacer un codigo en python para verificar que los inserts que ya teniamos lo cumplieran y estuvo bien feo al final tuve que crear nuevos inserts concursa porque habia como 10 que cumplian la condicion.
+
 
 -- Mensaje de confirmación
 DO $$

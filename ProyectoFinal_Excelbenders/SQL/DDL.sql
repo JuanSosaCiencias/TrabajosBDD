@@ -379,7 +379,7 @@ COMMENT ON COLUMN CorreoAtleta.IDAtleta IS 'PK del atleta, parte de la llave com
 COMMENT ON CONSTRAINT CorreoAtleta_pkey ON CorreoAtleta IS 'Llave primaria de la tabla CorreoAtleta.'; -- Restricción correoAtleta_pkey
 
 alter table Medalla 
-	add primary key (TipoMedalla, IDDisciplina);
+	add primary key (TipoMedalla, IDDisciplina, IDAtleta);
 
 COMMENT ON COLUMN Medalla.TipoMedalla IS 'EL Tipo de medalla, forma parte de la llave primaria compuesta';
 COMMENT ON COLUMN Medalla.IDDisciplina IS 'PK de la disciplina, parte de la llave compuesta';
