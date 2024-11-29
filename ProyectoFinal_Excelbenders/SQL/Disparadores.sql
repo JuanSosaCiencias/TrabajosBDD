@@ -1,15 +1,19 @@
 -- Configuración de triggers para la gestión de eventos deportivos
 
+-- ========= LIMPIEZA INICIAL =========
 -- Eliminar triggers y funciones existentes si existen (para evitar conflictos)
 DROP TRIGGER IF EXISTS trigger_verificar_edad_atleta ON Atleta;
-DROP TRIGGER IF EXISTS trigger_registrar_medallas ON Evento;
+DROP TRIGGER IF EXISTS trg_validar_medalla ON Medalla;
 DROP TRIGGER IF EXISTS trigger_gestionar_aforo ON CompraEntrada;
+DROP TRIGGER IF EXISTS trigger_verificar_disciplina_concursa ON Concursa;
 
 DROP FUNCTION IF EXISTS verificar_edad_atleta();
-DROP FUNCTION IF EXISTS registrar_medallas();
+DROP FUNCTION IF EXISTS validar_medalla();
 DROP FUNCTION IF EXISTS gestionar_aforo();
+DROP FUNCTION IF EXISTS verificar_disciplina_concursa();
 
--- Crear tabla de registro si no existe. Se crea especialmente para el trigger 3
+-- ========= TABLA DE REGISTRO DE AFORO =========
+-- Tabla auxiliar para mantener un registro de historial de cambios en el aforo. Se crea especialmente para el trigger 3
 CREATE TABLE IF NOT EXISTS RegistroAforo (
     ID_Registro SERIAL PRIMARY KEY,
     ID_Evento INT,
@@ -20,8 +24,22 @@ CREATE TABLE IF NOT EXISTS RegistroAforo (
     Usuario VARCHAR(50),
     Detalle VARCHAR(200)
 );
+COMMENT ON TABLE RegistroAforo IS 'Tabla que almacena el historial de cambios en el aforo de eventos';
+COMMENT ON COLUMN RegistroAforo.ID_Registro IS 'Identificador único del registro de aforo';
+COMMENT ON COLUMN RegistroAforo.ID_Evento IS 'Identificador del evento relacionado';
+COMMENT ON COLUMN RegistroAforo.Fecha_Registro IS 'Fecha y hora del registro';
+COMMENT ON COLUMN RegistroAforo.Aforo_Total IS 'Capacidad total del evento';
+COMMENT ON COLUMN RegistroAforo.Aforo_Disponible IS 'Lugares disponibles al momento del registro';
+COMMENT ON COLUMN RegistroAforo.Tipo_Operacion IS 'Tipo de operación realizada (INSERT/UPDATE)';
+COMMENT ON COLUMN RegistroAforo.Usuario IS 'Usuario que realizó la operación';
+COMMENT ON COLUMN RegistroAforo.Detalle IS 'Descripción detallada del registro';
 
--- 1. Trigger para verificación de edad
+-- ========= TRIGGER 1: VERIFICACIÓN DE EDAD =========
+/*
+Propósito: Asegurar que los atletas registrados tengan al menos 10 años
+Tabla objetivo: Atleta
+Momento: BEFORE INSERT OR UPDATE
+*/
 CREATE OR REPLACE FUNCTION verificar_edad_atleta()
 RETURNS TRIGGER AS $$
 BEGIN
@@ -37,12 +55,25 @@ BEFORE INSERT OR UPDATE ON Atleta
 FOR EACH ROW
 EXECUTE FUNCTION verificar_edad_atleta();
 
+COMMENT ON FUNCTION verificar_edad_atleta() IS 'Función que verifica que los atletas tengan al menos 10 años de edad';
+COMMENT ON TRIGGER trigger_verificar_edad_atleta ON Atleta IS 'Trigger que se ejecuta antes de insertar o actualizar un atleta para verificar su edad';
+
 -- Probamos el trigger 1
+-- Permitida:
 --insert into Atleta (IDAtleta, NombrePais, IDEntrenador, Temporada, Nombre, PrimerApellido, SegundoApellido, FechaNacimiento, Nacionalidad, Genero) values (1001, 'Bahamas', 48, 2022, 'Jed', 'Leathard', 'Somerfield', '2005-10-19', 'Emiratí', 'F');
+-- No permitida:
 --insert into Atleta (IDAtleta, NombrePais, IDEntrenador, Temporada, Nombre, PrimerApellido, SegundoApellido, FechaNacimiento, Nacionalidad, Genero) values (1002, 'Bahamas', 48, 2022, 'Jed', 'Leathard', 'Somerfield', '2023-10-19', 'Emiratí', 'F');
 
 
--- 2. Trigger para registro de medallas
+-- ========= TRIGGER 2: VALIDACIÓN DE MEDALLAS =========
+/*
+Propósito: Garantizar la integridad en la asignación de medallas:
+- Evitar duplicados de medallas por atleta en una disciplina
+- Verificar participación del atleta en la disciplina
+- Controlar medallas únicas en disciplinas individuales
+Tabla objetivo: Medalla
+Momento: BEFORE INSERT OR UPDATE
+*/
 CREATE OR REPLACE FUNCTION validar_medalla()
 RETURNS TRIGGER AS $$
 	BEGIN
@@ -94,25 +125,34 @@ BEFORE INSERT OR UPDATE ON Medalla
 FOR EACH ROW
 EXECUTE FUNCTION validar_medalla();
 
--- Probamos el trigger 2
--- insert into Pais (NombrePais) values ('PaisPrueba');
+COMMENT ON FUNCTION validar_medalla() IS 'Función que valida las reglas de asignación de medallas: no duplicados, participación en disciplina y control de medallas individuales';
+COMMENT ON TRIGGER trg_validar_medalla ON Medalla IS 'Trigger que se ejecuta antes de insertar o actualizar una medalla para validar su asignación';
 
+-- Probamos el trigger 2
+
+-- insert into Pais (NombrePais) values ('PaisPrueba');
 -- insert into Disciplina (IDDisciplina, NombreDisciplina, Categoria) values (1000, 'DisciplinaPrueba', 'Duos');
-   
--- insert into Entrenador (IDEntrenador, IDDisciplina, Nombre, PrimerApellido, SegundoApellido, FechaNacimiento, Nacionalidad, Genero) values  
--- (1000, 1000, 'EntrenadorPrueba', '6969', '6969', '1989-05-24', 'PaisPrueba', 'M');
-   
+-- insert into Entrenador (IDEntrenador, IDDisciplina, Nombre, PrimerApellido, SegundoApellido, FechaNacimiento, Nacionalidad, Genero) values (1000, 1000, 'EntrenadorPrueba', '6969', '6969', '1989-05-24', 'PaisPrueba', 'M');
 -- insert into Atleta (IDAtleta, NombrePais, IDEntrenador, Temporada, Nombre, PrimerApellido, SegundoApellido, FechaNacimiento, Nacionalidad, Genero) values 
 -- 	(1000, 'PaisPrueba', 1000, 2024, 'Jada', 'Clere', 'Bodicam', '2007-11-02', 'PaisPrueba', 'M'),
 -- 	(1001, 'PaisPrueba', 1000, 2024, 'Jada', 'Clere', 'Bodicam', '2007-11-02', 'PaisPrueba', 'M');
-
 -- insert into Participa (IDAtleta, IDDisciplina) values (1000, 1000), (1001, 1000);
+-- insert into Medalla (TipoMedalla, IDDisciplina, IDAtleta) values ('Oro', 1000,1000), ('Oro', 1000,1001);
 
--- insert into Medalla (TipoMedalla, IDDIsciplina, IDAtleta) values ('Oro', 1000,1000), ('Oro', 1000,1001);
+-- Lanza mensaje de error:
+-- insert into Medalla (TipoMedalla, IDDisciplina, IDAtleta) values ('Plata', 1000,1000);
 
 
-
--- 3. Trigger para gestión de aforo
+-- ========= TRIGGER 3: GESTIÓN DE AFORO =========
+/*
+Propósito: Controlar la venta de entradas:
+- Verificar disponibilidad de aforo
+- Evitar ventas para eventos pasados
+- Limitar cantidad de entradas por cliente
+- Registrar historial de ventas
+Tabla objetivo: CompraEntrada
+Momento: BEFORE INSERT OR UPDATE
+*/
 CREATE OR REPLACE FUNCTION gestionar_aforo()
 RETURNS TRIGGER AS $$
 DECLARE
@@ -193,6 +233,9 @@ BEFORE INSERT OR UPDATE ON CompraEntrada
 FOR EACH ROW
 EXECUTE FUNCTION gestionar_aforo();
 
+COMMENT ON FUNCTION gestionar_aforo() IS 'Función que controla la venta de entradas, verificando aforo, fechas y límites por cliente';
+COMMENT ON TRIGGER trigger_gestionar_aforo ON CompraEntrada IS 'Trigger que se ejecuta antes de insertar o actualizar una compra de entrada para gestionar el aforo';
+
 -- Probamos el trigger 3
 -- insert into Disciplina (IDDisciplina, NombreDisciplina, Categoria) values 
 -- 	(1000, 'DisciplinaPrueba', 'Individual');
@@ -200,9 +243,7 @@ EXECUTE FUNCTION gestionar_aforo();
 -- insert into Localidad (NombreLocalidad, IDDisciplina, Calle, Numero, Ciudad, Pais, Aforo, Tipo) values 
 -- 	('LocalidadPrueba', 1000, 'Calle Santo Domingo', 49, 'Toronto', 'Costa de Marfil', 10, 'Parque');
 
--- INSERT INTO Evento (IDEvento,NombreLocalidad, IDDisciplina, DuracionMax, Precio, FechaEvento, Fase)
--- VALUES 
---     (1000,'LocalidadPrueba', 1000, 120, 50, '2024-11-30', 1);
+-- INSERT INTO Evento (IDEvento,NombreLocalidad, IDDisciplina, DuracionMax, Precio, FechaEvento, Fase) VALUES (1000,'LocalidadPrueba', 1000, 120, 50, '2024-11-30', 1);
 
 -- insert into cliente (idcliente) values
 -- 	(1000), (1001)
@@ -217,7 +258,13 @@ EXECUTE FUNCTION gestionar_aforo();
 -- insert into compraentrada (idcliente,idevento) values
 -- 	(1001,1000)
 
--- 4. Trigger para validar concursa
+-- ========= TRIGGER 4: VALIDACIÓN DE CONCURSA =========
+/*
+Propósito: Asegurar que los atletas solo concursen en eventos 
+de disciplinas en las que están registrados.
+Tabla objetivo: Concursa
+Momento: BEFORE INSERT OR UPDATE
+*/
 CREATE OR REPLACE FUNCTION verificar_disciplina_concursa()
 RETURNS TRIGGER AS $$
 	BEGIN
@@ -243,6 +290,9 @@ CREATE TRIGGER trigger_verificar_disciplina_concursa
 BEFORE INSERT OR UPDATE ON Concursa
 FOR EACH ROW
 EXECUTE FUNCTION verificar_disciplina_concursa();
+
+COMMENT ON FUNCTION verificar_disciplina_concursa() IS 'Función que verifica que los atletas solo concursen en eventos de disciplinas en las que están registrados';
+COMMENT ON TRIGGER trigger_verificar_disciplina_concursa ON Concursa IS 'Trigger que se ejecuta antes de insertar o actualizar un registro en Concursa para validar la participación del atleta';
 
 -- probamos el trigger 4
 -- insert into Pais (NombrePais) values ('PaisPrueba');
