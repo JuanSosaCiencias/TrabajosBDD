@@ -245,21 +245,22 @@ COMMENT ON COLUMN Patrocinador.NombrePatrocinador IS 'Nombre del patrocinador (P
 -- Agregar reestricciones Primarias y otras (no foraneas)
 
 ALTER TABLE Pais 
-    ADD CONSTRAINT PK_Pais 
+    ADD CONSTRAINT Pais_pkey 
     PRIMARY KEY (NombrePais);
 
 COMMENT ON COLUMN Pais.NombrePais IS 'Es la llave primaria para identificar de manera única cada país';
-COMMENT ON CONSTRAINT PK_Pais ON Pais IS 'Llave primaria de la tabla Pais.'; -- Restricción pais_pkey
+COMMENT ON CONSTRAINT Pais_pkey ON Pais IS 'Llave primaria de la tabla Pais.'; -- Restricción pais_pkey
 
 ALTER TABLE Atleta
-	ADD PRIMARY KEY (IDAtleta),
+	ADD CONSTRAINT Atleta_pkey PRIMARY KEY (IDAtleta),
     ALTER COLUMN Temporada SET DEFAULT 2023,
     ALTER COLUMN Nombre SET NOT NULL,
     ALTER COLUMN PrimerApellido SET DEFAULT 'No proporcionado',
     ALTER COLUMN SegundoApellido SET DEFAULT 'No proporcionado',
     ALTER COLUMN FechaNacimiento SET NOT NULL,
     ALTER COLUMN Nacionalidad SET DEFAULT 'No proporcionado',
-    ALTER COLUMN Genero SET DEFAULT 0;
+    ALTER COLUMN Genero SET DEFAULT 'F';
+    
 
 COMMENT ON COLUMN Atleta.IDAtleta IS 'PK del atleta'; 
 COMMENT ON COLUMN Atleta.Temporada IS 'Se pone el año por defecto al crear un nuevo atleta en la temporada'; 
@@ -302,13 +303,13 @@ COMMENT ON COLUMN Cliente.IDCliente IS 'PK del cliente';
 COMMENT ON CONSTRAINT Cliente_pkey ON Cliente IS 'Llave primaria de la tabla Cliente.'; -- Restricción cliente_pkey
 
 alter table Entrenador 
-	add primary key (IDEntrenador),
+	ADD CONSTRAINT Entrenador_pkey PRIMARY KEY (IDEntrenador),
 	alter column Nombre set not null,
 	alter column PrimerApellido set default 'No proporcionado',
 	alter column SegundoApellido set default 'No proporcionado',
 	alter column FechaNacimiento set not null,
 	alter column Nacionalidad set default 'No proporcionado',
-	alter column Genero set default 0;
+	alter column Genero set default 'F';
 
 COMMENT ON COLUMN Entrenador.IDEntrenador IS 'PK del entrenador';
 COMMENT ON COLUMN Entrenador.Nombre IS 'Asignamos que el nombre del entrenador no puede ser nulo';
@@ -378,7 +379,7 @@ COMMENT ON COLUMN CorreoAtleta.IDAtleta IS 'PK del atleta, parte de la llave com
 COMMENT ON CONSTRAINT CorreoAtleta_pkey ON CorreoAtleta IS 'Llave primaria de la tabla CorreoAtleta.'; -- Restricción correoAtleta_pkey
 
 alter table Medalla 
-	add primary key (TipoMedalla, IDDisciplina);
+	add primary key (TipoMedalla, IDDisciplina, IDAtleta);
 
 COMMENT ON COLUMN Medalla.TipoMedalla IS 'EL Tipo de medalla, forma parte de la llave primaria compuesta';
 COMMENT ON COLUMN Medalla.IDDisciplina IS 'PK de la disciplina, parte de la llave compuesta';
@@ -553,6 +554,7 @@ ON DELETE CASCADE ON UPDATE CASCADE;
 
 COMMENT ON CONSTRAINT FK_CorreoArbitro_Arbitro ON CorreoArbitro IS 'FK que referencia a Arbitro(IDArbitro) para los registros de correo electrónico del árbitro.';
 
+-- Restricciones en tablas
 
 ALTER TABLE Atleta
     ADD CONSTRAINT CK_Atleta_Genero
@@ -562,21 +564,29 @@ ALTER TABLE Atleta
     ADD CONSTRAINT CK_Atleta_FechaNacimiento
     CHECK (FechaNacimiento <= CURRENT_DATE);
 
+COMMENT ON CONSTRAINT CK_Atleta_Genero ON Atleta IS 'Verifica que el género del atleta sea M (masculino) o F (femenino)';
+COMMENT ON CONSTRAINT CK_Atleta_Temporada ON Atleta IS 'Asegura que la temporada sea igual o posterior a 2023';
+COMMENT ON CONSTRAINT CK_Atleta_FechaNacimiento ON Atleta IS 'Verifica que la fecha de nacimiento no sea posterior a la fecha actual';
+
 -- TelefonoAtleta
 ALTER TABLE TelefonoAtleta
     ADD CONSTRAINT CK_TelefonoAtleta_Formato
     CHECK (IDTelefono ~ '^\+?[0-9]{10,15}$');
+COMMENT ON CONSTRAINT CK_TelefonoAtleta_Formato ON TelefonoAtleta IS 'Valida que el número de teléfono tenga entre 10 y 15 dígitos, con posible símbolo + al inicio';
+
 
 -- CorreoAtleta
 ALTER TABLE CorreoAtleta
     ADD CONSTRAINT CK_CorreoAtleta_Formato
     CHECK (IDCorreo ~ '^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$');
+COMMENT ON CONSTRAINT CK_CorreoAtleta_Formato ON CorreoAtleta IS 'Verifica que el correo electrónico tenga un formato válido (usuario@dominio.extensión)';
 
 
 -- Medalla
 ALTER TABLE Medalla
     ADD CONSTRAINT CK_Medalla_Tipo
     CHECK (TipoMedalla IN ('Oro', 'Plata', 'Bronce'));
+COMMENT ON CONSTRAINT CK_Medalla_Tipo ON Medalla IS 'Asegura que el tipo de medalla sea únicamente Oro, Plata o Bronce';
 
 -- Evento
 ALTER TABLE Evento
@@ -587,9 +597,12 @@ ALTER TABLE Evento
     ADD CONSTRAINT CK_Evento_Fase
     CHECK (Fase >= 1 AND Fase <= 3),
     ADD CONSTRAINT CK_Evento_FechaEvento 
-    CHECK (FechaEvento BETWEEN '2023-01-01' AND '2028-12-31');
+    CHECK (FechaEvento BETWEEN '2025-01-01' AND '2028-12-31');
 
-
+COMMENT ON CONSTRAINT CK_Evento_Precio ON Evento IS 'Verifica que el precio de la entrada no sea negativo';
+COMMENT ON CONSTRAINT CK_Evento_DuracionMax ON Evento IS 'Asegura que la duración máxima del evento sea mayor que cero';
+COMMENT ON CONSTRAINT CK_Evento_Fase ON Evento IS 'Limita las fases del evento a valores entre 1 y 3';
+COMMENT ON CONSTRAINT CK_Evento_FechaEvento ON Evento IS 'Restringe las fechas de eventos entre 2025 y 2028';
 
 -- Localidad
 ALTER TABLE Localidad
@@ -610,31 +623,40 @@ ALTER TABLE Entrenador
     CHECK (Genero IN ('M', 'F')),
     ADD CONSTRAINT CK_Entrenador_FechaNacimiento
     CHECK (FechaNacimiento <= CURRENT_DATE);
+COMMENT ON CONSTRAINT CK_Entrenador_Genero ON Entrenador IS 'Verifica que el género del entrenador sea M (masculino) o F (femenino)';
+COMMENT ON CONSTRAINT CK_Entrenador_FechaNacimiento ON Entrenador IS 'Asegura que la fecha de nacimiento no sea posterior a la fecha actual';
 
 -- TelefonoEntrenador
 ALTER TABLE TelefonoEntrenador
     ADD CONSTRAINT CK_TelefonoEntrenador_Formato
     CHECK (IDTelefono ~ '^\+?[0-9]{10,15}$');
+COMMENT ON CONSTRAINT CK_TelefonoEntrenador_Formato ON TelefonoEntrenador IS 'Valida que el número de teléfono tenga entre 10 y 15 dígitos, con posible símbolo + al inicio';
 
 -- CorreoEntrenador
 ALTER TABLE CorreoEntrenador
     ADD CONSTRAINT CK_CorreoEntrenador_Formato
     CHECK (IDCorreo ~ '^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$');
-
+COMMENT ON CONSTRAINT CK_CorreoEntrenador_Formato ON CorreoEntrenador IS 'Verifica que el correo electrónico tenga un formato válido (usuario@dominio.extensión)';
 
 ALTER TABLE Arbitro
     ADD CONSTRAINT CK_Arbitro_Genero
     CHECK (Genero IN ('M', 'F')),
     ADD CONSTRAINT CK_Arbitro_FechaNacimiento
     CHECK (FechaNacimiento <= CURRENT_DATE);
+COMMENT ON CONSTRAINT CK_Arbitro_Genero ON Arbitro IS 'Verifica que el género del árbitro sea M (masculino) o F (femenino)';
+COMMENT ON CONSTRAINT CK_Arbitro_FechaNacimiento ON Arbitro IS 'Asegura que la fecha de nacimiento no sea posterior a la fecha actual';
 
 -- TelefonoArbitro
 ALTER TABLE TelefonoArbitro
     ADD CONSTRAINT CK_TelefonoArbitro_Formato
     CHECK (IDTelefono ~ '^\+?[0-9]{10,15}$');
+COMMENT ON CONSTRAINT CK_TelefonoArbitro_Formato ON TelefonoArbitro IS 'Valida que el número de teléfono tenga entre 10 y 15 dígitos, con posible símbolo + al inicio';
+
 
 -- CorreoArbitro
 ALTER TABLE CorreoArbitro
     ADD CONSTRAINT CK_CorreoArbitro_Formato
     CHECK (IDCorreo ~ '^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$');
+COMMENT ON CONSTRAINT CK_CorreoArbitro_Formato ON CorreoArbitro IS 'Verifica que el correo electrónico tenga un formato válido (usuario@dominio.extensión)';
+
 
