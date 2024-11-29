@@ -18045,6 +18045,8 @@ insert into Participa (IDAtleta, IDDisciplina) values (999, 138);
 insert into Participa (IDAtleta, IDDisciplina) values (1000, 30);
 insert into Participa (IDAtleta, IDDisciplina) values (65, 30);
 insert into Participa (IDAtleta, IDDisciplina) values (65, 180);
+insert into Participa (IDAtleta, IDDisciplina) values (23, 84);
+insert into Participa (IDAtleta, IDDisciplina) values (24, 69);
 
 
                                         -- Población de la tabla Medalla --
@@ -18191,6 +18193,8 @@ insert into Medalla (TipoMedalla, IDDisciplina, IDAtleta) values ('Bronce', 121,
 insert into Medalla (TipoMedalla, IDDisciplina, IDAtleta) values ('Oro', 74, 916);
 insert into Medalla (TipoMedalla, IDDisciplina, IDAtleta) values ('Oro', 30, 65);
 insert into Medalla (TipoMedalla, IDDisciplina, IDAtleta) values ('Oro', 180, 65);
+insert into Medalla (TipoMedalla, IDDisciplina, IDAtleta) values ('Bronce', 84, 23);
+insert into Medalla (TipoMedalla, IDDisciplina, IDAtleta) values ('Bronce', 69, 24);
 
 
                                                 
