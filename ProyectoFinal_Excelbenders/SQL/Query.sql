@@ -177,6 +177,7 @@ ORDER BY
  * - Selecciona el nombre del país y cuenta la cantidad de medallas ganadas.
  * - Agrupa los resultados por el país.
  * - Ordena los resultados por la cantidad de medallas en orden descendente.
+ * - IMPORTANTE: No confundir el país con más medallas ganadas con el país Medallero.
  */
 SELECT 
     p.NombrePais,
@@ -191,3 +192,35 @@ GROUP BY
     p.NombrePais
 ORDER BY 
     CantidadMedallas DESC;
+
+
+/* Consulta Extra:
+*
+* Esta consulta es para cumplir el requerimiento del Caso de Uso para saber el medallero 
+* de los Juegos Olímpicos. 
+*
+* Esta consulta NO genera los 30 resultados.
+*
+* La consulta agrupa los resultados por el país (a.NombrePais), calculando la cantidad de 
+* medallas de cada tipo (oro, plata, bronce).
+* Se ordena primero por el número de medallas de oro en orden descendente.
+* En caso de empate, se usa el número de medallas de plata.
+* Si aún hay empate, se considera el número de medallas de bronce.
+*/
+SELECT 
+    a.NombrePais AS Pais,
+    COALESCE(SUM(CASE WHEN m.TipoMedalla = 'Oro' THEN 1 ELSE 0 END), 0) AS MedallasOro,
+    COALESCE(SUM(CASE WHEN m.TipoMedalla = 'Plata' THEN 1 ELSE 0 END), 0) AS MedallasPlata,
+    COALESCE(SUM(CASE WHEN m.TipoMedalla = 'Bronce' THEN 1 ELSE 0 END), 0) AS MedallasBronce,
+    COALESCE(SUM(CASE WHEN m.TipoMedalla IN ('Oro', 'Plata', 'Bronce') THEN 1 ELSE 0 END), 0) AS TotalMedallas
+FROM 
+    Atleta a
+LEFT JOIN 
+    Medalla m ON a.IDAtleta = m.IDAtleta
+GROUP BY 
+    a.NombrePais
+ORDER BY 
+    MedallasOro DESC, 
+    MedallasPlata DESC, 
+    MedallasBronce DESC
+LIMIT 1;
