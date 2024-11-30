@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8"/><style>
+table {border: medium solid #6495ed;border-collapse: collapse;width: 100%;} th{font-family: monospace;border: thin solid #6495ed;padding: 5px;background-color: #D0E3FA;}th{text-align: left;}td{font-family: sans-serif;border: thin solid #6495ed;padding: 5px;text-align: center;}.odd{background:#e8edff;}img{padding:5px; border:solid; border-color: #dddddd #aaaaaa #aaaaaa #dddddd; border-width: 1px 2px 2px 1px; background-color:white;}</style>
+</head>
+<body>
+<table><tr><th colspan="2"><pre><code>/* Consulta 10: Patrocinadores más activos. <br> * <br> * Esta consulta lista los patrocinadores que están asociados con más disciplinas.<br> * <br> * - Agrupa los registros de la tabla `Patrocina` por el nombre del patrocinador.<br> * - Cuenta cuántas disciplinas ha patrocinado cada patrocinador.<br> * - Ordena los resultados de mayor a menor cantidad de disciplinas patrocinadas.<br> */<br>SELECT <br>    Patrocina.NombrePatrocinador, <br>    COUNT(*) AS DisciplinasPatrocinadas<br>FROM <br>    Patrocina<br>GROUP BY <br>    Patrocina.NombrePatrocinador<br>ORDER BY <br>    DisciplinasPatrocinadas DESC</code></pre></th></tr><tr><th>nombrepatrocinador</th><th>disciplinaspatrocinadas</th></tr><tr class="odd"><td>Maybelline</td><td>5</td></tr>
+<tr><td>Amazon</td><td>5</td></tr>
+<tr class="odd"><td>Nintendo</td><td>4</td></tr>
+<tr><td>HP</td><td>4</td></tr>
+<tr class="odd"><td>New Balance</td><td>4</td></tr>
+<tr><td>Prada</td><td>4</td></tr>
+<tr class="odd"><td>Dell</td><td>4</td></tr>
+<tr><td>Airbus</td><td>4</td></tr>
+<tr class="odd"><td>McDonalds</td><td>3</td></tr>
+<tr><td>Monster Energy</td><td>3</td></tr>
+<tr class="odd"><td>American Express</td><td>3</td></tr>
+<tr><td>HBO</td><td>3</td></tr>
+<tr class="odd"><td>Jack Daniels</td><td>3</td></tr>
+<tr><td>Logitech</td><td>3</td></tr>
+<tr class="odd"><td>Johnson &amp; Johnson</td><td>3</td></tr>
+<tr><td>Zara</td><td>3</td></tr>
+<tr class="odd"><td>Lavazza</td><td>3</td></tr>
+<tr><td>Subway</td><td>3</td></tr>
+<tr class="odd"><td>Panasonic</td><td>3</td></tr>
+<tr><td>Corsair</td><td>3</td></tr>
+<tr class="odd"><td>Burger King</td><td>3</td></tr>
+<tr><td>Kelloggs</td><td>2</td></tr>
+<tr class="odd"><td>Coach</td><td>2</td></tr>
+<tr><td>Disney+</td><td>2</td></tr>
+<tr class="odd"><td>Total</td><td>2</td></tr>
+<tr><td>Intel</td><td>2</td></tr>
+<tr class="odd"><td>Procter &amp; Gamble</td><td>2</td></tr>
+<tr><td>Fossil</td><td>2</td></tr>
+<tr class="odd"><td>Asus</td><td>2</td></tr>
+<tr><td>ExxonMobil</td><td>2</td></tr>
+<tr class="odd"><td>Swarovski</td><td>2</td></tr>
+<tr><td>Microsoft</td><td>2</td></tr>
+<tr class="odd"><td>Chanel</td><td>2</td></tr>
+<tr><td>Tiffany &amp; Co.</td><td>2</td></tr>
+<tr class="odd"><td>Budweiser</td><td>2</td></tr>
+<tr><td>Pizza Hut</td><td>2</td></tr>
+<tr class="odd"><td>OnePlus</td><td>2</td></tr>
+<tr><td>Hersheys</td><td>2</td></tr>
+<tr class="odd"><td>Booking.com</td><td>2</td></tr>
+<tr><td>GoPro</td><td>2</td></tr>
+<tr class="odd"><td>Nivea</td><td>2</td></tr>
+<tr><td>Heineken</td><td>2</td></tr>
+<tr class="odd"><td>Toyota</td><td>2</td></tr>
+<tr><td>Unilever</td><td>2</td></tr>
+<tr class="odd"><td>Pepsi</td><td>2</td></tr>
+<tr><td>Hasbro</td><td>2</td></tr>
+<tr class="odd"><td>Mastercard</td><td>2</td></tr>
+<tr><td>Dunkin Donuts</td><td>2</td></tr>
+<tr class="odd"><td>Doritos</td><td>2</td></tr>
+<tr><td>Qatar Airways</td><td>2</td></tr>
+<tr class="odd"><td>Oakley</td><td>2</td></tr>
+<tr><td>Shell</td><td>2</td></tr>
+<tr class="odd"><td>Uniqlo</td><td>2</td></tr>
+<tr><td>Tag Heuer</td><td>2</td></tr>
+<tr class="odd"><td>Instagram</td><td>2</td></tr>
+<tr><td>Nike</td><td>2</td></tr>
+<tr class="odd"><td>Expedia</td><td>2</td></tr>
+<tr><td>General Mills</td><td>2</td></tr>
+<tr class="odd"><td>Hyundai</td><td>2</td></tr>
+<tr><td>Skullcandy</td><td>2</td></tr>
+<tr class="odd"><td>Acer</td><td>2</td></tr>
+<tr><td>LG</td><td>1</td></tr>
+<tr class="odd"><td>Corona</td><td>1</td></tr>
+<tr><td>Apple</td><td>1</td></tr>
+<tr class="odd"><td>Lufthansa</td><td>1</td></tr>
+<tr><td>DHL</td><td>1</td></tr>
+<tr class="odd"><td>Google</td><td>1</td></tr>
+<tr><td>Swatch</td><td>1</td></tr>
+<tr class="odd"><td>FedEx</td><td>1</td></tr>
+<tr><td>Cartier</td><td>1</td></tr>
+<tr class="odd"><td>Mars</td><td>1</td></tr>
+<tr><td>Netflix</td><td>1</td></tr>
+<tr class="odd"><td>Rolex</td><td>1</td></tr>
+<tr><td>Kraft Heinz</td><td>1</td></tr>
+<tr class="odd"><td>UPS</td><td>1</td></tr>
+<tr><td>Lipton</td><td>1</td></tr>
+<tr class="odd"><td>Mercedes-Benz</td><td>1</td></tr>
+<tr><td>Razer</td><td>1</td></tr>
+<tr class="odd"><td>Xiaomi</td><td>1</td></tr>
+<tr><td>Mattel</td><td>1</td></tr>
+<tr class="odd"><td>Timberland</td><td>1</td></tr>
+<tr><td>Colgate</td><td>1</td></tr>
+<tr class="odd"><td>PlayStation</td><td>1</td></tr>
+<tr><td>Carlsberg</td><td>1</td></tr>
+<tr class="odd"><td>Nissan</td><td>1</td></tr>
+<tr><td>Emirates</td><td>1</td></tr>
+<tr class="odd"><td>Gucci</td><td>1</td></tr>
+<tr><td>JBL</td><td>1</td></tr>
+<tr class="odd"><td>Cadbury</td><td>1</td></tr>
+<tr><td>Danone</td><td>1</td></tr>
+<tr class="odd"><td>Beats by Dre</td><td>1</td></tr>
+<tr><td>Volkswagen</td><td>1</td></tr>
+<tr class="odd"><td>Chevrolet</td><td>1</td></tr>
+<tr><td>Ferrero Rocher</td><td>1</td></tr>
+<tr class="odd"><td>Reebok</td><td>1</td></tr>
+<tr><td>Dove</td><td>1</td></tr>
+<tr class="odd"><td>British Airways</td><td>1</td></tr>
+<tr><td>Lenovo</td><td>1</td></tr>
+<tr class="odd"><td>Powerade</td><td>1</td></tr>
+<tr><td>Gatorade</td><td>1</td></tr>
+<tr class="odd"><td>Twitter</td><td>1</td></tr>
+<tr><td>NVIDIA</td><td>1</td></tr>
+<tr class="odd"><td>Dominos</td><td>1</td></tr>
+<tr><td>AMD</td><td>1</td></tr>
+<tr class="odd"><td>Starbucks</td><td>1</td></tr>
+<tr><td>eBay</td><td>1</td></tr>
+<tr class="odd"><td>Canon</td><td>1</td></tr>
+<tr><td>Pringles</td><td>1</td></tr>
+<tr class="odd"><td>Hulu</td><td>1</td></tr>
+<tr><td>Illy</td><td>1</td></tr>
+<tr class="odd"><td>Nescafé</td><td>1</td></tr>
+<tr><td>Michael Kors</td><td>1</td></tr>
+<tr class="odd"><td>Audi</td><td>1</td></tr>
+<tr><td>Pandora</td><td>1</td></tr>
+<tr class="odd"><td>Ray-Ban</td><td>1</td></tr>
+<tr><td>Lays</td><td>1</td></tr>
+<tr class="odd"><td>BP</td><td>1</td></tr>
+<tr><td>Spotify</td><td>1</td></tr>
+</table></body></html>

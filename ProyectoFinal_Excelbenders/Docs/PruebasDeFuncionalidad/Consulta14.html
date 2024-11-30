@@ -1,0 +1,997 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8"/><style>
+table {border: medium solid #6495ed;border-collapse: collapse;width: 100%;} th{font-family: monospace;border: thin solid #6495ed;padding: 5px;background-color: #D0E3FA;}th{text-align: left;}td{font-family: sans-serif;border: thin solid #6495ed;padding: 5px;text-align: center;}.odd{background:#e8edff;}img{padding:5px; border:solid; border-color: #dddddd #aaaaaa #aaaaaa #dddddd; border-width: 1px 2px 2px 1px; background-color:white;}</style>
+</head>
+<body>
+<table><tr><th colspan="3"><pre><code>/* Consulta 14: Relación entre atletas y sus países de origen.<br> * <br> * Esta consulta obtiene la cantidad de atletas de cada país que participan en cada disciplina.<br> * <br> * - Selecciona el nombre del país, el nombre de la disciplina y la cantidad de atletas.<br> * - Agrupa los resultados por país y disciplina.<br> * - Ordena los resultados por país y disciplina.<br> */<br>SELECT <br>    p.NombrePais,<br>    d.NombreDisciplina,<br>    COUNT(a.IDAtleta) AS CantidadAtletas<br>FROM <br>    Atleta a<br>JOIN <br>    Pais p ON a.NombrePais = p.NombrePais<br>JOIN <br>    Participa pa ON a.IDAtleta = pa.IDAtleta<br>JOIN <br>    Disciplina d ON pa.IDDisciplina = d.IDDisciplina<br>GROUP BY <br>    p.NombrePais, d.NombreDisciplina<br>ORDER BY <br>    p.NombrePais, d.NombreDisciplina</code></pre></th></tr><tr><th>nombrepais</th><th>nombredisciplina</th><th>cantidadatletas</th></tr><tr class="odd"><td>Albania</td><td>Floorball</td><td>1</td></tr>
+<tr><td>Albania</td><td>Fútbol playa</td><td>1</td></tr>
+<tr class="odd"><td>Albania</td><td>Softball</td><td>1</td></tr>
+<tr><td>Albania</td><td>Tlachtli</td><td>1</td></tr>
+<tr class="odd"><td>Alemania</td><td>Curling</td><td>1</td></tr>
+<tr><td>Alemania</td><td>Regata</td><td>1</td></tr>
+<tr class="odd"><td>Alemania</td><td>Tiro con arco en sala</td><td>1</td></tr>
+<tr><td>Angola</td><td>Esquí para ciegos</td><td>1</td></tr>
+<tr class="odd"><td>Angola</td><td>Regata</td><td>1</td></tr>
+<tr><td>Angola</td><td>Snowboard</td><td>1</td></tr>
+<tr class="odd"><td>Angola</td><td>Vela</td><td>1</td></tr>
+<tr><td>Arabia Saudita</td><td>Esgrima</td><td>1</td></tr>
+<tr class="odd"><td>Arabia Saudita</td><td>Jai alai</td><td>1</td></tr>
+<tr><td>Argelia</td><td>Gimnasia rítmica</td><td>1</td></tr>
+<tr class="odd"><td>Argelia</td><td>Kabaddi</td><td>1</td></tr>
+<tr><td>Argelia</td><td>Park golf</td><td>1</td></tr>
+<tr class="odd"><td>Argentina</td><td>Esgrima en silla de ruedas</td><td>1</td></tr>
+<tr><td>Argentina</td><td>Roller derby</td><td>1</td></tr>
+<tr class="odd"><td>Argentina</td><td>Tejo</td><td>1</td></tr>
+<tr><td>Armenia</td><td>Golf</td><td>1</td></tr>
+<tr class="odd"><td>Australia</td><td>E-Sports</td><td>1</td></tr>
+<tr><td>Australia</td><td>Patinaje sobre ruedas</td><td>1</td></tr>
+<tr class="odd"><td>Australia</td><td>Rallycross</td><td>1</td></tr>
+<tr><td>Austria</td><td>Hockey sobre hierba</td><td>1</td></tr>
+<tr class="odd"><td>Austria</td><td>Pencak Silat</td><td>1</td></tr>
+<tr><td>Austria</td><td>Rugby</td><td>1</td></tr>
+<tr class="odd"><td>Austria</td><td>Sambo</td><td>1</td></tr>
+<tr><td>Azerbaiyán</td><td>Apnea</td><td>1</td></tr>
+<tr class="odd"><td>Azerbaiyán</td><td>Carrera de obstáculos</td><td>1</td></tr>
+<tr><td>Azerbaiyán</td><td>Carreras de caballos</td><td>1</td></tr>
+<tr class="odd"><td>Azerbaiyán</td><td>Duelo de Yu-Gi-Oh!</td><td>1</td></tr>
+<tr><td>Azerbaiyán</td><td>Hockey sobre hierba</td><td>1</td></tr>
+<tr class="odd"><td>Bahamas</td><td>Atletismo</td><td>1</td></tr>
+<tr><td>Bahamas</td><td>Bádminton</td><td>1</td></tr>
+<tr class="odd"><td>Bahamas</td><td>Bobsleigh</td><td>1</td></tr>
+<tr><td>Bahamas</td><td>Hockey callejero</td><td>1</td></tr>
+<tr class="odd"><td>Bahamas</td><td>Kendo</td><td>1</td></tr>
+<tr><td>Bahamas</td><td>Patinaje sobre ruedas</td><td>1</td></tr>
+<tr class="odd"><td>Bahamas</td><td>Roller derby</td><td>1</td></tr>
+<tr><td>Bahamas</td><td>Snowboard cross</td><td>2</td></tr>
+<tr class="odd"><td>Bahamas</td><td>Trekking</td><td>1</td></tr>
+<tr><td>Bahamas</td><td>Vovinam</td><td>1</td></tr>
+<tr class="odd"><td>Bangladés</td><td>Billar</td><td>1</td></tr>
+<tr><td>Bangladés</td><td>Fútbol sala</td><td>1</td></tr>
+<tr class="odd"><td>Bangladés</td><td>Hula hoop</td><td>1</td></tr>
+<tr><td>Bangladés</td><td>Pentatlón moderno</td><td>1</td></tr>
+<tr class="odd"><td>Bangladés</td><td>Squash</td><td>2</td></tr>
+<tr><td>Barbados</td><td>Duelo de Yu-Gi-Oh!</td><td>1</td></tr>
+<tr class="odd"><td>Barbados</td><td>Quidditch</td><td>1</td></tr>
+<tr><td>Barbados</td><td>Rafting</td><td>1</td></tr>
+<tr class="odd"><td>Barbados</td><td>Rugby subacuático</td><td>1</td></tr>
+<tr><td>Barbados</td><td>Skeleton</td><td>1</td></tr>
+<tr class="odd"><td>Barbados</td><td>Snowboard cross</td><td>1</td></tr>
+<tr><td>Barbados</td><td>Wushu</td><td>1</td></tr>
+<tr class="odd"><td>Baréin</td><td>Dardos</td><td>1</td></tr>
+<tr><td>Baréin</td><td>Hockey subacuático</td><td>1</td></tr>
+<tr class="odd"><td>Baréin</td><td>Patinaje artístico</td><td>2</td></tr>
+<tr><td>Bélgica</td><td>Aikido</td><td>1</td></tr>
+<tr class="odd"><td>Bélgica</td><td>Charrería</td><td>1</td></tr>
+<tr><td>Bélgica</td><td>Fórmula 1</td><td>1</td></tr>
+<tr class="odd"><td>Bélgica</td><td>Frontón</td><td>1</td></tr>
+<tr><td>Bélgica</td><td>Fútbol playa</td><td>1</td></tr>
+<tr class="odd"><td>Bélgica</td><td>Sumo</td><td>1</td></tr>
+<tr><td>Bélgica</td><td>Surf</td><td>1</td></tr>
+<tr class="odd"><td>Belice</td><td>Aikido</td><td>2</td></tr>
+<tr><td>Belice</td><td>Carrera de coches solares</td><td>1</td></tr>
+<tr class="odd"><td>Belice</td><td>Hula hoop</td><td>1</td></tr>
+<tr><td>Belice</td><td>Natación para ciegos</td><td>1</td></tr>
+<tr class="odd"><td>Belice</td><td>Vela ligera</td><td>1</td></tr>
+<tr><td>Benín</td><td>Bobsleigh skeleton</td><td>1</td></tr>
+<tr class="odd"><td>Benín</td><td>Taekwondo</td><td>1</td></tr>
+<tr><td>Benín</td><td>Tiro con arco en sala</td><td>1</td></tr>
+<tr class="odd"><td>Bolivia</td><td>Bobsleigh</td><td>1</td></tr>
+<tr><td>Bolivia</td><td>Carrera de obstáculos</td><td>1</td></tr>
+<tr class="odd"><td>Bolivia</td><td>Korfball</td><td>1</td></tr>
+<tr><td>Bolivia</td><td>Polo</td><td>1</td></tr>
+<tr class="odd"><td>Bolivia</td><td>Tejo</td><td>1</td></tr>
+<tr><td>Bolivia</td><td>Tlachtli</td><td>1</td></tr>
+<tr class="odd"><td>Bosnia y Herzegovina</td><td>Ajedrez</td><td>1</td></tr>
+<tr><td>Bosnia y Herzegovina</td><td>Ala delta</td><td>1</td></tr>
+<tr class="odd"><td>Bosnia y Herzegovina</td><td>Carrera de triciclos</td><td>1</td></tr>
+<tr><td>Bosnia y Herzegovina</td><td>Escalada</td><td>1</td></tr>
+<tr class="odd"><td>Bosnia y Herzegovina</td><td>Esgrima histórica</td><td>1</td></tr>
+<tr><td>Bosnia y Herzegovina</td><td>Gimnasia</td><td>1</td></tr>
+<tr class="odd"><td>Bosnia y Herzegovina</td><td>Polo acuático</td><td>1</td></tr>
+<tr><td>Bosnia y Herzegovina</td><td>Rodeo</td><td>1</td></tr>
+<tr class="odd"><td>Bosnia y Herzegovina</td><td>Tiro con arco</td><td>1</td></tr>
+<tr><td>Botsuana</td><td>Parapente</td><td>1</td></tr>
+<tr class="odd"><td>Botsuana</td><td>Polo acuático</td><td>1</td></tr>
+<tr><td>Botsuana</td><td>Voleibol sentado</td><td>1</td></tr>
+<tr class="odd"><td>Brasil</td><td>Carrera de sacos</td><td>1</td></tr>
+<tr><td>Brasil</td><td>Lacrosse</td><td>1</td></tr>
+<tr class="odd"><td>Brasil</td><td>Nado sincronizado</td><td>1</td></tr>
+<tr><td>Brasil</td><td>Triatlón</td><td>1</td></tr>
+<tr class="odd"><td>Brunéi</td><td>Esquí acuático</td><td>1</td></tr>
+<tr><td>Brunéi</td><td>Gimnasia acrobática</td><td>1</td></tr>
+<tr class="odd"><td>Brunéi</td><td>Luge</td><td>1</td></tr>
+<tr><td>Brunéi</td><td>Muay thai</td><td>1</td></tr>
+<tr class="odd"><td>Brunéi</td><td>Tiro adaptado</td><td>1</td></tr>
+<tr><td>Brunéi</td><td>Tiro con arco</td><td>1</td></tr>
+<tr class="odd"><td>Brunéi</td><td>Vela ligera</td><td>1</td></tr>
+<tr><td>Bulgaria</td><td>Ecuestre</td><td>1</td></tr>
+<tr class="odd"><td>Bulgaria</td><td>Esquí de fondo</td><td>1</td></tr>
+<tr><td>Bulgaria</td><td>Korfball</td><td>1</td></tr>
+<tr class="odd"><td>Bulgaria</td><td>Patinaje de velocidad en pista corta</td><td>1</td></tr>
+<tr><td>Bulgaria</td><td>Pesca deportiva</td><td>1</td></tr>
+<tr class="odd"><td>Bulgaria</td><td>Simulación de vuelo</td><td>1</td></tr>
+<tr><td>Burundi</td><td>Buceo</td><td>1</td></tr>
+<tr class="odd"><td>Burundi</td><td>Carrera de obstáculos</td><td>1</td></tr>
+<tr><td>Burundi</td><td>Esgrima histórica</td><td>1</td></tr>
+<tr class="odd"><td>Burundi</td><td>Piragüismo</td><td>1</td></tr>
+<tr><td>Bután</td><td>Carrera de obstáculos</td><td>1</td></tr>
+<tr class="odd"><td>Bután</td><td>Carreras de karts</td><td>1</td></tr>
+<tr><td>Bután</td><td>Duelo de Yu-Gi-Oh!</td><td>1</td></tr>
+<tr class="odd"><td>Bután</td><td>Gimnasia acrobática</td><td>1</td></tr>
+<tr><td>Bután</td><td>Lacrosse</td><td>1</td></tr>
+<tr class="odd"><td>Bután</td><td>Patinaje de velocidad en pista corta</td><td>1</td></tr>
+<tr><td>Cabo Verde</td><td>Béisbol</td><td>1</td></tr>
+<tr class="odd"><td>Cabo Verde</td><td>Carrera de relevos</td><td>1</td></tr>
+<tr><td>Cabo Verde</td><td>E-Sports</td><td>1</td></tr>
+<tr class="odd"><td>Cabo Verde</td><td>Nado sincronizado</td><td>1</td></tr>
+<tr><td>Cabo Verde</td><td>Quidditch</td><td>1</td></tr>
+<tr class="odd"><td>Cabo Verde</td><td>Surf de remo</td><td>1</td></tr>
+<tr><td>Camboya</td><td>Crossfit</td><td>1</td></tr>
+<tr class="odd"><td>Camboya</td><td>Gimnasia rítmica</td><td>1</td></tr>
+<tr><td>Camboya</td><td>Jai alai</td><td>1</td></tr>
+<tr class="odd"><td>Camboya</td><td>Muay thai</td><td>1</td></tr>
+<tr><td>Camboya</td><td>Park golf</td><td>1</td></tr>
+<tr class="odd"><td>Camboya</td><td>Tiro con arco</td><td>1</td></tr>
+<tr><td>Camerún</td><td>Fútbol americano</td><td>1</td></tr>
+<tr class="odd"><td>Camerún</td><td>Gimnasia</td><td>1</td></tr>
+<tr><td>Camerún</td><td>Muay thai</td><td>1</td></tr>
+<tr class="odd"><td>Camerún</td><td>Nascar</td><td>1</td></tr>
+<tr><td>Camerún</td><td>Natación en aguas abiertas</td><td>2</td></tr>
+<tr class="odd"><td>Camerún</td><td>Pencak Silat</td><td>1</td></tr>
+<tr><td>Camerún</td><td>Vóley playa</td><td>1</td></tr>
+<tr class="odd"><td>Canadá</td><td>Atletismo</td><td>1</td></tr>
+<tr><td>Canadá</td><td>Bridge</td><td>1</td></tr>
+<tr class="odd"><td>Canadá</td><td>Duelo de Yu-Gi-Oh!</td><td>1</td></tr>
+<tr><td>Canadá</td><td>Skeleton</td><td>1</td></tr>
+<tr class="odd"><td>Canadá</td><td>Triatlón</td><td>1</td></tr>
+<tr><td>Chad</td><td>Carrera de coches solares</td><td>1</td></tr>
+<tr class="odd"><td>Chad</td><td>Combinada nórdica</td><td>1</td></tr>
+<tr><td>Chad</td><td>Frontón</td><td>1</td></tr>
+<tr class="odd"><td>Chad</td><td>Lacrosse</td><td>1</td></tr>
+<tr><td>Chad</td><td>Pádel</td><td>1</td></tr>
+<tr class="odd"><td>Chad</td><td>Piragüismo</td><td>1</td></tr>
+<tr><td>Chad</td><td>Tenis de mesa</td><td>1</td></tr>
+<tr class="odd"><td>Chile</td><td>Balonmano</td><td>1</td></tr>
+<tr><td>Chile</td><td>BMX</td><td>1</td></tr>
+<tr class="odd"><td>Chile</td><td>Canoa slalom</td><td>1</td></tr>
+<tr><td>Chile</td><td>Cricket</td><td>1</td></tr>
+<tr class="odd"><td>Chile</td><td>Hockey subacuático</td><td>1</td></tr>
+<tr><td>Chile</td><td>Kickboxing</td><td>1</td></tr>
+<tr class="odd"><td>Chile</td><td>Pentatlón moderno</td><td>2</td></tr>
+<tr><td>Chile</td><td>Voleibol playa</td><td>1</td></tr>
+<tr class="odd"><td>China</td><td>Ciclismo</td><td>1</td></tr>
+<tr><td>China</td><td>Fútbol sala</td><td>1</td></tr>
+<tr class="odd"><td>China</td><td>Gatka</td><td>1</td></tr>
+<tr><td>China</td><td>Hockey sobre hielo</td><td>1</td></tr>
+<tr class="odd"><td>China</td><td>Rallycross</td><td>1</td></tr>
+<tr><td>China</td><td>Slackline</td><td>1</td></tr>
+<tr class="odd"><td>China</td><td>Tenis</td><td>1</td></tr>
+<tr><td>China</td><td>Tlachtli</td><td>1</td></tr>
+<tr class="odd"><td>Chipre</td><td>BMX</td><td>1</td></tr>
+<tr><td>Chipre</td><td>Pesca submarina</td><td>1</td></tr>
+<tr class="odd"><td>Colombia</td><td>Hockey en aire</td><td>1</td></tr>
+<tr><td>Colombia</td><td>Motocross</td><td>1</td></tr>
+<tr class="odd"><td>Colombia</td><td>Trial</td><td>1</td></tr>
+<tr><td>Colombia</td><td>Triatlón</td><td>1</td></tr>
+<tr class="odd"><td>Colombia</td><td>Wakeboard</td><td>1</td></tr>
+<tr><td>Comoras</td><td>Balonmano</td><td>1</td></tr>
+<tr class="odd"><td>Comoras</td><td>Bobsleigh skeleton</td><td>1</td></tr>
+<tr><td>Comoras</td><td>Carrera de sacos</td><td>1</td></tr>
+<tr class="odd"><td>Comoras</td><td>Carreras de caballos</td><td>1</td></tr>
+<tr><td>Comoras</td><td>Cricket</td><td>1</td></tr>
+<tr class="odd"><td>Comoras</td><td>Parkour</td><td>1</td></tr>
+<tr><td>Comoras</td><td>Rallycross</td><td>1</td></tr>
+<tr class="odd"><td>Comoras</td><td>Rodeo</td><td>1</td></tr>
+<tr><td>Comoras</td><td>Rugby subacuático</td><td>1</td></tr>
+<tr class="odd"><td>Comoras</td><td>Taekwondo</td><td>1</td></tr>
+<tr><td>Congo</td><td>Muay thai</td><td>1</td></tr>
+<tr class="odd"><td>Congo</td><td>Natación para ciegos</td><td>1</td></tr>
+<tr><td>Congo</td><td>Rugby league</td><td>1</td></tr>
+<tr class="odd"><td>Congo</td><td>Windsurf</td><td>1</td></tr>
+<tr><td>Corea del Norte</td><td>Aikido</td><td>1</td></tr>
+<tr class="odd"><td>Corea del Norte</td><td>Gimnasia</td><td>1</td></tr>
+<tr><td>Corea del Norte</td><td>Motocross</td><td>1</td></tr>
+<tr class="odd"><td>Corea del Norte</td><td>Pugilismo</td><td>1</td></tr>
+<tr><td>Corea del Norte</td><td>Snowboard</td><td>1</td></tr>
+<tr class="odd"><td>Corea del Sur</td><td>Carreras de karts</td><td>1</td></tr>
+<tr><td>Corea del Sur</td><td>Hockey subacuático</td><td>1</td></tr>
+<tr class="odd"><td>Corea del Sur</td><td>Jiu-jitsu</td><td>1</td></tr>
+<tr><td>Corea del Sur</td><td>Luge</td><td>1</td></tr>
+<tr class="odd"><td>Corea del Sur</td><td>Simulación de vuelo</td><td>1</td></tr>
+<tr><td>Corea del Sur</td><td>Superbikes</td><td>1</td></tr>
+<tr class="odd"><td>Costa de Marfil</td><td>Carrera de drones</td><td>1</td></tr>
+<tr><td>Costa de Marfil</td><td>Fórmula 1</td><td>1</td></tr>
+<tr class="odd"><td>Costa de Marfil</td><td>Fútbol playa</td><td>1</td></tr>
+<tr><td>Costa de Marfil</td><td>Petanca</td><td>1</td></tr>
+<tr class="odd"><td>Costa Rica</td><td>Baloncesto en silla de ruedas</td><td>1</td></tr>
+<tr><td>Costa Rica</td><td>Dardos</td><td>1</td></tr>
+<tr class="odd"><td>Costa Rica</td><td>Patolli</td><td>1</td></tr>
+<tr><td>Costa Rica</td><td>Pelota Purépecha</td><td>1</td></tr>
+<tr class="odd"><td>Costa Rica</td><td>Simulación de vuelo</td><td>1</td></tr>
+<tr><td>Costa Rica</td><td>Tiro con arco</td><td>1</td></tr>
+<tr class="odd"><td>Croacia</td><td>Kickboxing</td><td>1</td></tr>
+<tr><td>Croacia</td><td>Luge</td><td>1</td></tr>
+<tr class="odd"><td>Croacia</td><td>Sambo</td><td>1</td></tr>
+<tr><td>Cuba</td><td>Carrera de obstáculos</td><td>1</td></tr>
+<tr class="odd"><td>Cuba</td><td>Ciclismo tándem</td><td>1</td></tr>
+<tr><td>Cuba</td><td>Curling</td><td>1</td></tr>
+<tr class="odd"><td>Cuba</td><td>Netball</td><td>1</td></tr>
+<tr><td>Cuba</td><td>Skimboard</td><td>1</td></tr>
+<tr class="odd"><td>Cuba</td><td>Squash</td><td>1</td></tr>
+<tr><td>Cuba</td><td>Tiro con arco</td><td>1</td></tr>
+<tr class="odd"><td>Dinamarca</td><td>Carrera de relevos</td><td>1</td></tr>
+<tr><td>Dinamarca</td><td>Ecuestre</td><td>1</td></tr>
+<tr class="odd"><td>Dinamarca</td><td>Hockey sobre patines</td><td>1</td></tr>
+<tr><td>Dinamarca</td><td>Pádel</td><td>1</td></tr>
+<tr class="odd"><td>Dinamarca</td><td>Pelota Purépecha</td><td>1</td></tr>
+<tr><td>Dinamarca</td><td>Taekwondo</td><td>1</td></tr>
+<tr class="odd"><td>Ecuador</td><td>Carrera vertical</td><td>1</td></tr>
+<tr><td>Ecuador</td><td>Ecuestre</td><td>1</td></tr>
+<tr class="odd"><td>Ecuador</td><td>Patinaje sobre ruedas</td><td>1</td></tr>
+<tr><td>Ecuador</td><td>Sepak takraw</td><td>1</td></tr>
+<tr class="odd"><td>Egipto</td><td>Luge</td><td>1</td></tr>
+<tr><td>Egipto</td><td>Polo</td><td>1</td></tr>
+<tr class="odd"><td>Egipto</td><td>Rallies</td><td>1</td></tr>
+<tr><td>Egipto</td><td>Skeleton</td><td>1</td></tr>
+<tr class="odd"><td>Egipto</td><td>Slackline</td><td>1</td></tr>
+<tr><td>El Salvador</td><td>BMX</td><td>1</td></tr>
+<tr class="odd"><td>El Salvador</td><td>Bridge</td><td>1</td></tr>
+<tr><td>El Salvador</td><td>Carrera de obstáculos</td><td>1</td></tr>
+<tr class="odd"><td>El Salvador</td><td>Fútbol</td><td>1</td></tr>
+<tr><td>El Salvador</td><td>Fútbol gaélico</td><td>1</td></tr>
+<tr class="odd"><td>El Salvador</td><td>Kabaddi</td><td>1</td></tr>
+<tr><td>El Salvador</td><td>Patinaje artístico</td><td>1</td></tr>
+<tr class="odd"><td>El Salvador</td><td>Polo</td><td>1</td></tr>
+<tr><td>El Salvador</td><td>Quidditch</td><td>1</td></tr>
+<tr class="odd"><td>El Salvador</td><td>Wushu</td><td>1</td></tr>
+<tr><td>Emiratos Árabes Unidos</td><td>E-Sports</td><td>1</td></tr>
+<tr class="odd"><td>Emiratos Árabes Unidos</td><td>Fórmula 1</td><td>1</td></tr>
+<tr><td>Emiratos Árabes Unidos</td><td>Netball</td><td>1</td></tr>
+<tr class="odd"><td>Emiratos Árabes Unidos</td><td>Rugby league</td><td>1</td></tr>
+<tr><td>Emiratos Árabes Unidos</td><td>Skeleton</td><td>1</td></tr>
+<tr class="odd"><td>Emiratos Árabes Unidos</td><td>Ulama</td><td>1</td></tr>
+<tr><td>Emiratos Árabes Unidos</td><td>Wakeboard</td><td>1</td></tr>
+<tr class="odd"><td>Eritrea</td><td>Apnea</td><td>1</td></tr>
+<tr><td>Eritrea</td><td>Patinaje de velocidad</td><td>1</td></tr>
+<tr class="odd"><td>Eritrea</td><td>Patinaje de velocidad en pista corta</td><td>1</td></tr>
+<tr><td>Eritrea</td><td>Powerlifting</td><td>1</td></tr>
+<tr class="odd"><td>Eslovaquia</td><td>Ajedrez</td><td>1</td></tr>
+<tr><td>Eslovaquia</td><td>Carrera de Drones</td><td>1</td></tr>
+<tr class="odd"><td>Eslovaquia</td><td>Gimnasia acrobática</td><td>1</td></tr>
+<tr><td>Eslovaquia</td><td>Piragüismo</td><td>1</td></tr>
+<tr class="odd"><td>Eslovaquia</td><td>Sambo</td><td>1</td></tr>
+<tr><td>Eslovaquia</td><td>Tiro con arco en sala</td><td>1</td></tr>
+<tr class="odd"><td>Eslovaquia</td><td>Tlachtli</td><td>1</td></tr>
+<tr><td>Eslovenia</td><td>Apnea</td><td>1</td></tr>
+<tr class="odd"><td>Eslovenia</td><td>Caminata rápida</td><td>1</td></tr>
+<tr><td>Eslovenia</td><td>Combate de Sables Láser</td><td>1</td></tr>
+<tr class="odd"><td>Eslovenia</td><td>Goalball</td><td>1</td></tr>
+<tr><td>Eslovenia</td><td>Halterofilia</td><td>1</td></tr>
+<tr class="odd"><td>Eslovenia</td><td>Patinaje artístico</td><td>1</td></tr>
+<tr><td>Eslovenia</td><td>Pencak Silat</td><td>1</td></tr>
+<tr class="odd"><td>Eslovenia</td><td>Surf</td><td>1</td></tr>
+<tr><td>Eslovenia</td><td>Tiro deportivo</td><td>1</td></tr>
+<tr class="odd"><td>España</td><td>Base jumping</td><td>1</td></tr>
+<tr><td>España</td><td>Carrera de obstáculos</td><td>1</td></tr>
+<tr class="odd"><td>España</td><td>E-Sports</td><td>1</td></tr>
+<tr><td>España</td><td>Hockey subacuático</td><td>1</td></tr>
+<tr class="odd"><td>España</td><td>Natación</td><td>1</td></tr>
+<tr><td>España</td><td>Trekking</td><td>1</td></tr>
+<tr class="odd"><td>España</td><td>Vela</td><td>1</td></tr>
+<tr><td>Estados Unidos</td><td>Trekking</td><td>1</td></tr>
+<tr class="odd"><td>Etiopía</td><td>Billar</td><td>1</td></tr>
+<tr><td>Etiopía</td><td>Carrera de obstáculos</td><td>1</td></tr>
+<tr class="odd"><td>Etiopía</td><td>Ciclismo tándem</td><td>1</td></tr>
+<tr><td>Etiopía</td><td>Gimnasia acrobática</td><td>1</td></tr>
+<tr class="odd"><td>Etiopía</td><td>Parkour</td><td>1</td></tr>
+<tr><td>Etiopía</td><td>Quidditch</td><td>1</td></tr>
+<tr class="odd"><td>Etiopía</td><td>Voleibol</td><td>1</td></tr>
+<tr><td>Filipinas</td><td>Boxeo</td><td>1</td></tr>
+<tr class="odd"><td>Filipinas</td><td>Carreras de karts</td><td>1</td></tr>
+<tr><td>Filipinas</td><td>Combate de Sables Láser</td><td>1</td></tr>
+<tr class="odd"><td>Filipinas</td><td>Gimnasia rítmica</td><td>1</td></tr>
+<tr><td>Filipinas</td><td>Jai alai</td><td>1</td></tr>
+<tr class="odd"><td>Filipinas</td><td>Kurash</td><td>1</td></tr>
+<tr><td>Filipinas</td><td>Wushu</td><td>1</td></tr>
+<tr class="odd"><td>Finlandia</td><td>Balonmano playa</td><td>1</td></tr>
+<tr><td>Finlandia</td><td>Base jumping</td><td>1</td></tr>
+<tr class="odd"><td>Finlandia</td><td>BMX</td><td>1</td></tr>
+<tr><td>Finlandia</td><td>Ciclismo</td><td>1</td></tr>
+<tr class="odd"><td>Finlandia</td><td>Esgrima histórica</td><td>2</td></tr>
+<tr><td>Finlandia</td><td>Gimnasia rítmica</td><td>1</td></tr>
+<tr class="odd"><td>Finlandia</td><td>Motocross</td><td>1</td></tr>
+<tr><td>Finlandia</td><td>Nado sincronizado</td><td>1</td></tr>
+<tr class="odd"><td>Finlandia</td><td>Speedrun de Videojuegos</td><td>1</td></tr>
+<tr><td>Fiyi</td><td>Ala delta</td><td>1</td></tr>
+<tr class="odd"><td>Fiyi</td><td>Bolos</td><td>1</td></tr>
+<tr><td>Fiyi</td><td>Buceo</td><td>1</td></tr>
+<tr class="odd"><td>Fiyi</td><td>Capoeira</td><td>1</td></tr>
+<tr><td>Fiyi</td><td>Carrera de obstáculos</td><td>1</td></tr>
+<tr class="odd"><td>Fiyi</td><td>Fútbol gaélico</td><td>1</td></tr>
+<tr><td>Fiyi</td><td>Muay thai</td><td>1</td></tr>
+<tr class="odd"><td>Fiyi</td><td>Slackline</td><td>1</td></tr>
+<tr><td>Francia</td><td>Balonmano</td><td>1</td></tr>
+<tr class="odd"><td>Francia</td><td>Fórmula 1</td><td>1</td></tr>
+<tr><td>Francia</td><td>Nado sincronizado</td><td>1</td></tr>
+<tr class="odd"><td>Francia</td><td>Pesca submarina</td><td>1</td></tr>
+<tr><td>Francia</td><td>Tejo</td><td>1</td></tr>
+<tr class="odd"><td>Gabón</td><td>Dardos</td><td>1</td></tr>
+<tr><td>Gabón</td><td>Korfball</td><td>1</td></tr>
+<tr class="odd"><td>Gabón</td><td>Voleibol sentado</td><td>1</td></tr>
+<tr><td>Gambia</td><td>Bádminton playa</td><td>1</td></tr>
+<tr class="odd"><td>Gambia</td><td>Esquí alpino</td><td>1</td></tr>
+<tr><td>Gambia</td><td>Piragüismo</td><td>1</td></tr>
+<tr class="odd"><td>Gambia</td><td>Tenis</td><td>1</td></tr>
+<tr><td>Gambia</td><td>Tiro con arco</td><td>1</td></tr>
+<tr class="odd"><td>Georgia</td><td>Ala delta</td><td>1</td></tr>
+<tr><td>Georgia</td><td>Boccia</td><td>1</td></tr>
+<tr class="odd"><td>Georgia</td><td>Jiu-jitsu</td><td>1</td></tr>
+<tr><td>Georgia</td><td>Kayak</td><td>1</td></tr>
+<tr class="odd"><td>Georgia</td><td>Natación</td><td>1</td></tr>
+<tr><td>Georgia</td><td>Quidditch</td><td>1</td></tr>
+<tr class="odd"><td>Georgia</td><td>Windsurf</td><td>1</td></tr>
+<tr><td>Ghana</td><td>Ciclismo tándem</td><td>1</td></tr>
+<tr class="odd"><td>Ghana</td><td>Skimboard</td><td>1</td></tr>
+<tr><td>Grecia</td><td>Ciclismo</td><td>1</td></tr>
+<tr class="odd"><td>Grecia</td><td>Muay thai</td><td>1</td></tr>
+<tr><td>Grecia</td><td>Rallies</td><td>1</td></tr>
+<tr class="odd"><td>Guatemala</td><td>Gatka</td><td>1</td></tr>
+<tr><td>Guinea</td><td>Ala delta</td><td>1</td></tr>
+<tr class="odd"><td>Guinea</td><td>Bodyboard</td><td>1</td></tr>
+<tr><td>Guinea</td><td>Kickboxing</td><td>1</td></tr>
+<tr class="odd"><td>Guinea</td><td>Patinaje sobre ruedas</td><td>1</td></tr>
+<tr><td>Guinea</td><td>Skeleton</td><td>1</td></tr>
+<tr class="odd"><td>Guinea</td><td>Tiro deportivo</td><td>1</td></tr>
+<tr><td>Guinea-Bisáu</td><td>Carrera de triciclos</td><td>1</td></tr>
+<tr class="odd"><td>Guinea-Bisáu</td><td>Carreras de karts</td><td>1</td></tr>
+<tr><td>Guinea-Bisáu</td><td>Equitación</td><td>1</td></tr>
+<tr class="odd"><td>Guinea-Bisáu</td><td>Fútbol americano</td><td>2</td></tr>
+<tr><td>Guyana</td><td>Carrera de coches solares</td><td>1</td></tr>
+<tr class="odd"><td>Guyana</td><td>Carreras de caballos</td><td>1</td></tr>
+<tr><td>Guyana</td><td>Gimnasia acrobática</td><td>1</td></tr>
+<tr class="odd"><td>Guyana</td><td>Hula hoop</td><td>1</td></tr>
+<tr><td>Haití</td><td>Frontón</td><td>1</td></tr>
+<tr class="odd"><td>Haití</td><td>Hula hoop</td><td>1</td></tr>
+<tr><td>Honduras</td><td>Gimnasia en trampolín</td><td>1</td></tr>
+<tr class="odd"><td>Honduras</td><td>Halterofilia</td><td>1</td></tr>
+<tr><td>Honduras</td><td>Jiu-jitsu</td><td>1</td></tr>
+<tr class="odd"><td>Honduras</td><td>Quidditch</td><td>1</td></tr>
+<tr><td>Honduras</td><td>Tiro adaptado</td><td>1</td></tr>
+<tr class="odd"><td>Honduras</td><td>Triatlón</td><td>1</td></tr>
+<tr><td>Honduras</td><td>Ultimate frisbee</td><td>1</td></tr>
+<tr class="odd"><td>Hungría</td><td>Balonmano playa</td><td>1</td></tr>
+<tr><td>Hungría</td><td>Cacería de Pokémons</td><td>1</td></tr>
+<tr class="odd"><td>Hungría</td><td>Ciclismo</td><td>1</td></tr>
+<tr><td>Hungría</td><td>Ecuestre</td><td>1</td></tr>
+<tr class="odd"><td>Hungría</td><td>Goalball</td><td>1</td></tr>
+<tr><td>Hungría</td><td>Hockey sobre hielo</td><td>1</td></tr>
+<tr class="odd"><td>Hungría</td><td>Hula hoop</td><td>1</td></tr>
+<tr><td>Hungría</td><td>Rodeo</td><td>1</td></tr>
+<tr class="odd"><td>Hungría</td><td>Skeleton</td><td>1</td></tr>
+<tr><td>India</td><td>Bodyboard</td><td>1</td></tr>
+<tr class="odd"><td>India</td><td>Fútbol</td><td>1</td></tr>
+<tr><td>India</td><td>Gimnasia</td><td>1</td></tr>
+<tr class="odd"><td>India</td><td>Luge</td><td>1</td></tr>
+<tr><td>India</td><td>Pugilismo</td><td>1</td></tr>
+<tr class="odd"><td>India</td><td>Tenis de mesa</td><td>1</td></tr>
+<tr><td>Indonesia</td><td>Aikido</td><td>1</td></tr>
+<tr class="odd"><td>Indonesia</td><td>Lacrosse</td><td>1</td></tr>
+<tr><td>Indonesia</td><td>Skeleton</td><td>1</td></tr>
+<tr class="odd"><td>Indonesia</td><td>Vela ligera</td><td>1</td></tr>
+<tr><td>Irak</td><td>Bodyboard</td><td>1</td></tr>
+<tr class="odd"><td>Irak</td><td>Cacería de Pokémons</td><td>1</td></tr>
+<tr><td>Irak</td><td>Carrera de coches solares</td><td>1</td></tr>
+<tr class="odd"><td>Irak</td><td>E-Sports</td><td>1</td></tr>
+<tr><td>Irak</td><td>Skateboarding</td><td>1</td></tr>
+<tr class="odd"><td>Irán</td><td>Balonmano</td><td>1</td></tr>
+<tr><td>Irán</td><td>BMX</td><td>1</td></tr>
+<tr class="odd"><td>Irán</td><td>Esquí para ciegos</td><td>1</td></tr>
+<tr><td>Irán</td><td>Fútbol playa</td><td>1</td></tr>
+<tr class="odd"><td>Irán</td><td>Gimnasia</td><td>1</td></tr>
+<tr><td>Irán</td><td>Patinaje de velocidad en pista corta</td><td>1</td></tr>
+<tr class="odd"><td>Irlanda</td><td>Judo</td><td>1</td></tr>
+<tr><td>Irlanda</td><td>Paracaidismo</td><td>1</td></tr>
+<tr class="odd"><td>Irlanda</td><td>Parkour</td><td>1</td></tr>
+<tr><td>Irlanda</td><td>Salto de trampolín</td><td>1</td></tr>
+<tr class="odd"><td>Irlanda</td><td>Skeleton</td><td>1</td></tr>
+<tr><td>Islandia</td><td>Korfball</td><td>1</td></tr>
+<tr class="odd"><td>Islandia</td><td>Lucha grecorromana</td><td>1</td></tr>
+<tr><td>Islandia</td><td>Luge</td><td>1</td></tr>
+<tr class="odd"><td>Islandia</td><td>Pelota Purépecha</td><td>1</td></tr>
+<tr><td>Islandia</td><td>Voleibol</td><td>1</td></tr>
+<tr class="odd"><td>Islas Salomón</td><td>Bádminton playa</td><td>1</td></tr>
+<tr><td>Islas Salomón</td><td>Carrera de triciclos</td><td>1</td></tr>
+<tr class="odd"><td>Islas Salomón</td><td>Carreras de caballos</td><td>1</td></tr>
+<tr><td>Islas Salomón</td><td>Paracaidismo</td><td>1</td></tr>
+<tr class="odd"><td>Islas Salomón</td><td>Pencak Silat</td><td>1</td></tr>
+<tr><td>Islas Salomón</td><td>Taekwondo</td><td>1</td></tr>
+<tr class="odd"><td>Islas Salomón</td><td>Tiro con arco en sala</td><td>1</td></tr>
+<tr><td>Israel</td><td>Kárate</td><td>1</td></tr>
+<tr class="odd"><td>Israel</td><td>Muay thai</td><td>1</td></tr>
+<tr><td>Israel</td><td>Parkour</td><td>1</td></tr>
+<tr class="odd"><td>Israel</td><td>Roller derby</td><td>1</td></tr>
+<tr><td>Israel</td><td>Softball</td><td>1</td></tr>
+<tr class="odd"><td>Israel</td><td>Tiro deportivo</td><td>1</td></tr>
+<tr><td>Italia</td><td>Hula hoop</td><td>1</td></tr>
+<tr class="odd"><td>Italia</td><td>Wushu</td><td>1</td></tr>
+<tr><td>Jamaica</td><td>Batalla Pokémon</td><td>1</td></tr>
+<tr class="odd"><td>Jamaica</td><td>Carrera vertical</td><td>1</td></tr>
+<tr><td>Jamaica</td><td>Patinaje sobre ruedas</td><td>1</td></tr>
+<tr class="odd"><td>Jamaica</td><td>Salto de trampolín</td><td>1</td></tr>
+<tr><td>Jamaica</td><td>Tenis de mesa</td><td>1</td></tr>
+<tr class="odd"><td>Jamaica</td><td>Tiro con arco en sala</td><td>1</td></tr>
+<tr><td>Jamaica</td><td>Vóley playa</td><td>1</td></tr>
+<tr class="odd"><td>Japón</td><td>Duelo de Yu-Gi-Oh!</td><td>1</td></tr>
+<tr><td>Japón</td><td>Fútbol 5</td><td>1</td></tr>
+<tr class="odd"><td>Japón</td><td>Patinaje de velocidad en pista corta</td><td>1</td></tr>
+<tr><td>Japón</td><td>Tenis</td><td>1</td></tr>
+<tr class="odd"><td>Jordania</td><td>Boxeo</td><td>1</td></tr>
+<tr><td>Jordania</td><td>Gimnasia</td><td>1</td></tr>
+<tr class="odd"><td>Jordania</td><td>Motocross</td><td>1</td></tr>
+<tr><td>Jordania</td><td>Rallies</td><td>1</td></tr>
+<tr class="odd"><td>Jordania</td><td>Triatlón</td><td>1</td></tr>
+<tr><td>Jordania</td><td>Wakeboard</td><td>2</td></tr>
+<tr class="odd"><td>Kazajistán</td><td>Ciclismo tándem</td><td>1</td></tr>
+<tr><td>Kazajistán</td><td>Esgrima histórica</td><td>1</td></tr>
+<tr class="odd"><td>Kazajistán</td><td>Natación para ciegos</td><td>1</td></tr>
+<tr><td>Kazajistán</td><td>Pesca deportiva</td><td>1</td></tr>
+<tr class="odd"><td>Kazajistán</td><td>Rallies</td><td>1</td></tr>
+<tr><td>Kenia</td><td>Atletismo</td><td>1</td></tr>
+<tr class="odd"><td>Kenia</td><td>Béisbol</td><td>1</td></tr>
+<tr><td>Kenia</td><td>Disc golf</td><td>1</td></tr>
+<tr class="odd"><td>Kenia</td><td>Frontón</td><td>1</td></tr>
+<tr><td>Kenia</td><td>Fútbol australiano</td><td>1</td></tr>
+<tr class="odd"><td>Kenia</td><td>Fútbol playa</td><td>1</td></tr>
+<tr><td>Kenia</td><td>Jiu-jitsu</td><td>1</td></tr>
+<tr class="odd"><td>Kenia</td><td>Patinaje de velocidad</td><td>1</td></tr>
+<tr><td>Kirguistán</td><td>Baloncesto en silla de ruedas</td><td>1</td></tr>
+<tr class="odd"><td>Kirguistán</td><td>E-Sports</td><td>1</td></tr>
+<tr><td>Kirguistán</td><td>Frontón</td><td>1</td></tr>
+<tr class="odd"><td>Kirguistán</td><td>Hockey subacuático</td><td>1</td></tr>
+<tr><td>Kirguistán</td><td>Pelota vasca</td><td>1</td></tr>
+<tr class="odd"><td>Kirguistán</td><td>Salto de trampolín</td><td>1</td></tr>
+<tr><td>Kirguistán</td><td>Softball</td><td>1</td></tr>
+<tr class="odd"><td>Kosovo</td><td>Curling mixto</td><td>1</td></tr>
+<tr><td>Kuwait</td><td>Carrera de drones</td><td>1</td></tr>
+<tr class="odd"><td>Kuwait</td><td>Ciclismo tándem</td><td>1</td></tr>
+<tr><td>Kuwait</td><td>Lucha grecorromana</td><td>1</td></tr>
+<tr class="odd"><td>Kuwait</td><td>Quidditch</td><td>1</td></tr>
+<tr><td>Kuwait</td><td>Rallies</td><td>1</td></tr>
+<tr class="odd"><td>Laos</td><td>Ecuestre</td><td>1</td></tr>
+<tr><td>Laos</td><td>Esquí de fondo</td><td>1</td></tr>
+<tr class="odd"><td>Laos</td><td>Halterofilia</td><td>1</td></tr>
+<tr><td>Laos</td><td>Luge por equipos</td><td>1</td></tr>
+<tr class="odd"><td>Laos</td><td>Nascar</td><td>1</td></tr>
+<tr><td>Laos</td><td>Pesca deportiva</td><td>1</td></tr>
+<tr class="odd"><td>Laos</td><td>Rallies</td><td>1</td></tr>
+<tr><td>Laos</td><td>Superbikes</td><td>1</td></tr>
+<tr class="odd"><td>Laos</td><td>Voleibol</td><td>1</td></tr>
+<tr><td>Laos</td><td>Windsurf</td><td>1</td></tr>
+<tr class="odd"><td>Lesoto</td><td>Ala delta</td><td>1</td></tr>
+<tr><td>Lesoto</td><td>Esgrima histórica</td><td>1</td></tr>
+<tr class="odd"><td>Lesoto</td><td>Gimnasia rítmica</td><td>1</td></tr>
+<tr><td>Lesoto</td><td>Kayak</td><td>1</td></tr>
+<tr class="odd"><td>Lesoto</td><td>Patolli</td><td>1</td></tr>
+<tr><td>Lesoto</td><td>Sambo</td><td>1</td></tr>
+<tr class="odd"><td>Lesoto</td><td>Trekking</td><td>1</td></tr>
+<tr><td>Líbano</td><td>Bobsleigh</td><td>1</td></tr>
+<tr class="odd"><td>Líbano</td><td>Disc golf</td><td>1</td></tr>
+<tr><td>Líbano</td><td>Esquí de fondo</td><td>1</td></tr>
+<tr class="odd"><td>Líbano</td><td>Remo</td><td>1</td></tr>
+<tr><td>Líbano</td><td>Rugby league</td><td>1</td></tr>
+<tr class="odd"><td>Líbano</td><td>Triatlón</td><td>1</td></tr>
+<tr><td>Líbano</td><td>Vóley playa</td><td>1</td></tr>
+<tr class="odd"><td>Líbano</td><td>Wushu</td><td>1</td></tr>
+<tr><td>Liberia</td><td>Esquí acuático</td><td>1</td></tr>
+<tr class="odd"><td>Liberia</td><td>Lucha grecorromana</td><td>1</td></tr>
+<tr><td>Liberia</td><td>Motocross</td><td>1</td></tr>
+<tr class="odd"><td>Liberia</td><td>Voleibol</td><td>1</td></tr>
+<tr><td>Libia</td><td>Baloncesto en silla de ruedas</td><td>1</td></tr>
+<tr class="odd"><td>Libia</td><td>Boxeo</td><td>1</td></tr>
+<tr><td>Libia</td><td>Crossfit</td><td>1</td></tr>
+<tr class="odd"><td>Libia</td><td>Netball</td><td>1</td></tr>
+<tr><td>Libia</td><td>Regata</td><td>1</td></tr>
+<tr class="odd"><td>Luxemburgo</td><td>Balonmano</td><td>1</td></tr>
+<tr><td>Luxemburgo</td><td>Gimnasia</td><td>2</td></tr>
+<tr class="odd"><td>Luxemburgo</td><td>Natación</td><td>1</td></tr>
+<tr><td>Luxemburgo</td><td>Snowboard cross</td><td>1</td></tr>
+<tr class="odd"><td>Macedonia del Norte</td><td>Combinada nórdica</td><td>1</td></tr>
+<tr><td>Macedonia del Norte</td><td>Fútbol americano</td><td>1</td></tr>
+<tr class="odd"><td>Macedonia del Norte</td><td>Polo</td><td>1</td></tr>
+<tr><td>Macedonia del Norte</td><td>Regata</td><td>1</td></tr>
+<tr class="odd"><td>Macedonia del Norte</td><td>Ulama</td><td>1</td></tr>
+<tr><td>Macedonia del Norte</td><td>Voleibol sentado</td><td>1</td></tr>
+<tr class="odd"><td>Madagascar</td><td>Fútbol tenis</td><td>1</td></tr>
+<tr><td>Madagascar</td><td>Gatka</td><td>1</td></tr>
+<tr class="odd"><td>Madagascar</td><td>Natación con aletas</td><td>1</td></tr>
+<tr><td>Madagascar</td><td>Rugby en silla de ruedas</td><td>1</td></tr>
+<tr class="odd"><td>Madagascar</td><td>Windsurf</td><td>2</td></tr>
+<tr><td>Malasia</td><td>Balonmano sala</td><td>1</td></tr>
+<tr class="odd"><td>Malasia</td><td>Carrera de Drones</td><td>1</td></tr>
+<tr><td>Malasia</td><td>Carreras de caballos</td><td>1</td></tr>
+<tr class="odd"><td>Malasia</td><td>Fútbol gaélico</td><td>1</td></tr>
+<tr><td>Malasia</td><td>Natación para ciegos</td><td>1</td></tr>
+<tr class="odd"><td>Malasia</td><td>Wakeboard</td><td>1</td></tr>
+<tr><td>Malaui</td><td>Biatlón</td><td>1</td></tr>
+<tr class="odd"><td>Malaui</td><td>Equitación</td><td>1</td></tr>
+<tr><td>Malaui</td><td>Esquí para ciegos</td><td>1</td></tr>
+<tr class="odd"><td>Malaui</td><td>Taekwondo</td><td>1</td></tr>
+<tr><td>Maldivas</td><td>Balonmano</td><td>1</td></tr>
+<tr class="odd"><td>Maldivas</td><td>Fútbol</td><td>1</td></tr>
+<tr><td>Maldivas</td><td>Kárate</td><td>1</td></tr>
+<tr class="odd"><td>Maldivas</td><td>Polo acuático</td><td>1</td></tr>
+<tr><td>Maldivas</td><td>Quidditch</td><td>1</td></tr>
+<tr class="odd"><td>Maldivas</td><td>Regata</td><td>1</td></tr>
+<tr><td>Maldivas</td><td>Surf de remo</td><td>1</td></tr>
+<tr class="odd"><td>Maldivas</td><td>Ultimate frisbee</td><td>1</td></tr>
+<tr><td>Malta</td><td>Ala delta</td><td>1</td></tr>
+<tr class="odd"><td>Malta</td><td>Hockey subacuático</td><td>1</td></tr>
+<tr><td>Malta</td><td>Quidditch</td><td>1</td></tr>
+<tr class="odd"><td>Malta</td><td>Saltos de acantilado</td><td>1</td></tr>
+<tr><td>Marruecos</td><td>Baloncesto</td><td>1</td></tr>
+<tr class="odd"><td>Marruecos</td><td>Biatlón</td><td>1</td></tr>
+<tr><td>Marruecos</td><td>Carrera de coches solares</td><td>1</td></tr>
+<tr class="odd"><td>Marruecos</td><td>Carrera de triciclos</td><td>1</td></tr>
+<tr><td>Marruecos</td><td>Esquí para ciegos</td><td>1</td></tr>
+<tr class="odd"><td>Marruecos</td><td>Fútbol</td><td>1</td></tr>
+<tr><td>Marruecos</td><td>Luge por equipos</td><td>1</td></tr>
+<tr class="odd"><td>Marruecos</td><td>Patolli</td><td>1</td></tr>
+<tr><td>Marruecos</td><td>Polo acuático</td><td>1</td></tr>
+<tr class="odd"><td>Marruecos</td><td>Quidditch</td><td>1</td></tr>
+<tr><td>Marruecos</td><td>Rodeo</td><td>1</td></tr>
+<tr class="odd"><td>Mauricio</td><td>BMX</td><td>1</td></tr>
+<tr><td>Mauricio</td><td>Ciclismo tándem</td><td>1</td></tr>
+<tr class="odd"><td>Mauricio</td><td>Esquí de fondo</td><td>1</td></tr>
+<tr><td>Mauricio</td><td>Fórmula 1</td><td>1</td></tr>
+<tr class="odd"><td>Mauricio</td><td>Jiu-jitsu</td><td>1</td></tr>
+<tr><td>México</td><td>Baloncesto</td><td>1</td></tr>
+<tr class="odd"><td>México</td><td>MotoGP</td><td>1</td></tr>
+<tr><td>México</td><td>Parkour</td><td>1</td></tr>
+<tr class="odd"><td>México</td><td>Superbikes</td><td>1</td></tr>
+<tr><td>Mongolia</td><td>Bádminton playa</td><td>1</td></tr>
+<tr class="odd"><td>Mongolia</td><td>BMX</td><td>1</td></tr>
+<tr><td>Mongolia</td><td>Carrera de coches solares</td><td>1</td></tr>
+<tr class="odd"><td>Mongolia</td><td>Esquí acuático</td><td>1</td></tr>
+<tr><td>Mongolia</td><td>Gatka</td><td>1</td></tr>
+<tr class="odd"><td>Mongolia</td><td>Rugby league</td><td>1</td></tr>
+<tr><td>Mongolia</td><td>Softball</td><td>1</td></tr>
+<tr class="odd"><td>Montenegro</td><td>Billar</td><td>1</td></tr>
+<tr><td>Montenegro</td><td>Frontón</td><td>1</td></tr>
+<tr class="odd"><td>Montenegro</td><td>Fútbol</td><td>1</td></tr>
+<tr><td>Montenegro</td><td>Fútbol playa</td><td>1</td></tr>
+<tr class="odd"><td>Montenegro</td><td>Golf</td><td>1</td></tr>
+<tr><td>Montenegro</td><td>Korfball</td><td>1</td></tr>
+<tr class="odd"><td>Montenegro</td><td>Patinaje artístico</td><td>1</td></tr>
+<tr><td>Montenegro</td><td>Rugby subacuático</td><td>1</td></tr>
+<tr class="odd"><td>Montenegro</td><td>Vóley playa</td><td>1</td></tr>
+<tr><td>Mozambique</td><td>Fútbol australiano</td><td>1</td></tr>
+<tr class="odd"><td>Mozambique</td><td>Kárate</td><td>1</td></tr>
+<tr><td>Mozambique</td><td>Pelota vasca</td><td>1</td></tr>
+<tr class="odd"><td>Mozambique</td><td>Remo</td><td>1</td></tr>
+<tr><td>Mozambique</td><td>Salto de trampolín</td><td>1</td></tr>
+<tr class="odd"><td>Myanmar</td><td>Biatlón</td><td>1</td></tr>
+<tr><td>Myanmar</td><td>Boxeo</td><td>1</td></tr>
+<tr class="odd"><td>Myanmar</td><td>Cricket</td><td>1</td></tr>
+<tr><td>Myanmar</td><td>Equitación</td><td>1</td></tr>
+<tr class="odd"><td>Myanmar</td><td>Hockey sobre patines</td><td>1</td></tr>
+<tr><td>Myanmar</td><td>Hockey subacuático</td><td>1</td></tr>
+<tr class="odd"><td>Myanmar</td><td>Kitesurf</td><td>1</td></tr>
+<tr><td>Myanmar</td><td>Speedrun de Videojuegos</td><td>1</td></tr>
+<tr class="odd"><td>Myanmar</td><td>Tlachtli</td><td>1</td></tr>
+<tr><td>Namibia</td><td>Bandy</td><td>1</td></tr>
+<tr class="odd"><td>Namibia</td><td>Equitación</td><td>1</td></tr>
+<tr><td>Namibia</td><td>Frontón</td><td>1</td></tr>
+<tr class="odd"><td>Namibia</td><td>Fútbol sala</td><td>1</td></tr>
+<tr><td>Namibia</td><td>Hockey subacuático</td><td>1</td></tr>
+<tr class="odd"><td>Namibia</td><td>Judo</td><td>1</td></tr>
+<tr><td>Namibia</td><td>Rugby</td><td>1</td></tr>
+<tr class="odd"><td>Namibia</td><td>Vela</td><td>1</td></tr>
+<tr><td>Namibia</td><td>Vóley playa</td><td>1</td></tr>
+<tr class="odd"><td>Nepal</td><td>Equitación</td><td>1</td></tr>
+<tr><td>Nepal</td><td>Hockey sobre hielo</td><td>1</td></tr>
+<tr class="odd"><td>Nepal</td><td>Luge por equipos</td><td>1</td></tr>
+<tr><td>Nepal</td><td>Pelota vasca</td><td>1</td></tr>
+<tr class="odd"><td>Nepal</td><td>Powerlifting</td><td>1</td></tr>
+<tr><td>Nicaragua</td><td>Fútbol sala</td><td>1</td></tr>
+<tr class="odd"><td>Nicaragua</td><td>Hockey sobre hierba</td><td>1</td></tr>
+<tr><td>Nicaragua</td><td>Hula hoop</td><td>1</td></tr>
+<tr class="odd"><td>Nicaragua</td><td>Korfball</td><td>1</td></tr>
+<tr><td>Nicaragua</td><td>Lucha libre</td><td>1</td></tr>
+<tr class="odd"><td>Nicaragua</td><td>Skeleton</td><td>1</td></tr>
+<tr><td>Nicaragua</td><td>Trial</td><td>1</td></tr>
+<tr class="odd"><td>Níger</td><td>Aikido</td><td>1</td></tr>
+<tr><td>Níger</td><td>Atletismo</td><td>1</td></tr>
+<tr class="odd"><td>Níger</td><td>Bádminton playa</td><td>1</td></tr>
+<tr><td>Níger</td><td>Dardos</td><td>1</td></tr>
+<tr class="odd"><td>Níger</td><td>Nascar</td><td>1</td></tr>
+<tr><td>Níger</td><td>Rallies</td><td>1</td></tr>
+<tr class="odd"><td>Níger</td><td>Surf de remo</td><td>1</td></tr>
+<tr><td>Níger</td><td>Triatlón</td><td>1</td></tr>
+<tr class="odd"><td>Nigeria</td><td>BMX</td><td>1</td></tr>
+<tr><td>Nigeria</td><td>Carrera de obstáculos</td><td>1</td></tr>
+<tr class="odd"><td>Nigeria</td><td>Lucha libre</td><td>1</td></tr>
+<tr><td>Nigeria</td><td>Patinaje artístico</td><td>1</td></tr>
+<tr class="odd"><td>Nigeria</td><td>Rodeo</td><td>1</td></tr>
+<tr><td>Nigeria</td><td>Rugby</td><td>1</td></tr>
+<tr class="odd"><td>Noruega</td><td>Esgrima histórica</td><td>1</td></tr>
+<tr><td>Noruega</td><td>Quidditch</td><td>1</td></tr>
+<tr class="odd"><td>Noruega</td><td>Rugby en silla de ruedas</td><td>1</td></tr>
+<tr><td>Noruega</td><td>Tiro con arco</td><td>1</td></tr>
+<tr class="odd"><td>Noruega</td><td>Waterpolo</td><td>1</td></tr>
+<tr><td>Nueva Zelanda</td><td>Combate de Sables Láser</td><td>1</td></tr>
+<tr class="odd"><td>Nueva Zelanda</td><td>Jai alai</td><td>1</td></tr>
+<tr><td>Nueva Zelanda</td><td>Lucha grecorromana</td><td>1</td></tr>
+<tr class="odd"><td>Nueva Zelanda</td><td>Petanca</td><td>1</td></tr>
+<tr><td>Nueva Zelanda</td><td>Savate</td><td>1</td></tr>
+<tr class="odd"><td>Nueva Zelanda</td><td>Sepak takraw</td><td>1</td></tr>
+<tr><td>Nueva Zelanda</td><td>Snowboard</td><td>1</td></tr>
+<tr class="odd"><td>Nueva Zelanda</td><td>Tiro con arco en sala</td><td>1</td></tr>
+<tr><td>Omán</td><td>Bádminton</td><td>1</td></tr>
+<tr class="odd"><td>Omán</td><td>Bádminton playa</td><td>1</td></tr>
+<tr><td>Omán</td><td>Batalla Pokémon</td><td>1</td></tr>
+<tr class="odd"><td>Omán</td><td>Duelo de Yu-Gi-Oh!</td><td>1</td></tr>
+<tr><td>Omán</td><td>E-Sports</td><td>1</td></tr>
+<tr class="odd"><td>Omán</td><td>Fútbol gaélico</td><td>1</td></tr>
+<tr><td>Omán</td><td>Gimnasia en trampolín</td><td>1</td></tr>
+<tr class="odd"><td>Omán</td><td>MotoGP</td><td>1</td></tr>
+<tr><td>Omán</td><td>Patinaje artístico</td><td>1</td></tr>
+<tr class="odd"><td>Omán</td><td>Rugby league</td><td>1</td></tr>
+<tr><td>Omán</td><td>Rugby subacuático</td><td>1</td></tr>
+<tr class="odd"><td>Omán</td><td>Wushu</td><td>1</td></tr>
+<tr><td>Países Bajos</td><td>Atletismo</td><td>1</td></tr>
+<tr class="odd"><td>Países Bajos</td><td>Carrera de sacos</td><td>1</td></tr>
+<tr><td>Países Bajos</td><td>Rugby league</td><td>1</td></tr>
+<tr class="odd"><td>Pakistán</td><td>Combinada nórdica</td><td>1</td></tr>
+<tr><td>Pakistán</td><td>Dardos</td><td>1</td></tr>
+<tr class="odd"><td>Pakistán</td><td>Disc golf</td><td>1</td></tr>
+<tr><td>Pakistán</td><td>Esgrima</td><td>1</td></tr>
+<tr class="odd"><td>Pakistán</td><td>Esquí para ciegos</td><td>1</td></tr>
+<tr><td>Pakistán</td><td>Fútbol playa</td><td>1</td></tr>
+<tr class="odd"><td>Pakistán</td><td>Kickboxing</td><td>1</td></tr>
+<tr><td>Pakistán</td><td>Luge por equipos</td><td>1</td></tr>
+<tr class="odd"><td>Pakistán</td><td>Pugilismo</td><td>1</td></tr>
+<tr><td>Pakistán</td><td>Savate</td><td>1</td></tr>
+<tr class="odd"><td>Pakistán</td><td>Tenis de mesa</td><td>1</td></tr>
+<tr><td>Pakistán</td><td>Voleibol sentado</td><td>1</td></tr>
+<tr class="odd"><td>Palestina</td><td>Fútbol australiano</td><td>1</td></tr>
+<tr><td>Palestina</td><td>Gimnasia</td><td>1</td></tr>
+<tr class="odd"><td>Palestina</td><td>Kabaddi</td><td>1</td></tr>
+<tr><td>Palestina</td><td>Natación con aletas</td><td>1</td></tr>
+<tr class="odd"><td>Palestina</td><td>Patinaje artístico</td><td>1</td></tr>
+<tr><td>Palestina</td><td>Tiro con arco en sala</td><td>1</td></tr>
+<tr class="odd"><td>Palestina</td><td>Voleibol</td><td>1</td></tr>
+<tr><td>Panamá</td><td>Boxeo</td><td>1</td></tr>
+<tr class="odd"><td>Panamá</td><td>Charrería</td><td>1</td></tr>
+<tr><td>Panamá</td><td>Kendo</td><td>1</td></tr>
+<tr class="odd"><td>Panamá</td><td>Natación para ciegos</td><td>1</td></tr>
+<tr><td>Panamá</td><td>Parkour</td><td>1</td></tr>
+<tr class="odd"><td>Papúa Nueva Guinea</td><td>Batalla Pokémon</td><td>1</td></tr>
+<tr><td>Papúa Nueva Guinea</td><td>BMX</td><td>1</td></tr>
+<tr class="odd"><td>Papúa Nueva Guinea</td><td>Fórmula 1</td><td>1</td></tr>
+<tr><td>Papúa Nueva Guinea</td><td>Rafting</td><td>1</td></tr>
+<tr class="odd"><td>Papúa Nueva Guinea</td><td>Rodeo</td><td>1</td></tr>
+<tr><td>Papúa Nueva Guinea</td><td>Simulación de vuelo</td><td>1</td></tr>
+<tr class="odd"><td>Paraguay</td><td>Carrera de drones</td><td>1</td></tr>
+<tr><td>Paraguay</td><td>Duelo de Yu-Gi-Oh!</td><td>1</td></tr>
+<tr class="odd"><td>Paraguay</td><td>Esgrima en silla de ruedas</td><td>1</td></tr>
+<tr><td>Paraguay</td><td>Gimnasia rítmica</td><td>1</td></tr>
+<tr class="odd"><td>Paraguay</td><td>Nado sincronizado</td><td>1</td></tr>
+<tr><td>Paraguay</td><td>Pentatlón moderno</td><td>1</td></tr>
+<tr class="odd"><td>Paraguay</td><td>Taekwondo</td><td>1</td></tr>
+<tr><td>Paraguay</td><td>Voleibol</td><td>1</td></tr>
+<tr class="odd"><td>Perú</td><td>Buceo</td><td>1</td></tr>
+<tr><td>Perú</td><td>Capoeira</td><td>1</td></tr>
+<tr class="odd"><td>Perú</td><td>Carrera de sacos</td><td>1</td></tr>
+<tr><td>Perú</td><td>Carrera de triciclos</td><td>1</td></tr>
+<tr class="odd"><td>Perú</td><td>Natación</td><td>1</td></tr>
+<tr><td>Perú</td><td>Superbikes</td><td>1</td></tr>
+<tr class="odd"><td>Perú</td><td>Surf</td><td>1</td></tr>
+<tr><td>Perú</td><td>Tiro con arco en sala</td><td>1</td></tr>
+<tr class="odd"><td>Polonia</td><td>Carrera de triciclos</td><td>1</td></tr>
+<tr><td>Polonia</td><td>Combate de Sables Láser</td><td>1</td></tr>
+<tr class="odd"><td>Polonia</td><td>Escalada</td><td>1</td></tr>
+<tr><td>Polonia</td><td>Kitesurf</td><td>1</td></tr>
+<tr class="odd"><td>Polonia</td><td>Patinaje sobre ruedas</td><td>1</td></tr>
+<tr><td>Polonia</td><td>Saltos de acantilado</td><td>1</td></tr>
+<tr class="odd"><td>Polonia</td><td>Taekwondo</td><td>1</td></tr>
+<tr><td>Polonia</td><td>Vela</td><td>1</td></tr>
+<tr class="odd"><td>Portugal</td><td>Dardos</td><td>1</td></tr>
+<tr><td>Portugal</td><td>Disc golf</td><td>1</td></tr>
+<tr class="odd"><td>Portugal</td><td>Esquí de fondo</td><td>1</td></tr>
+<tr><td>Portugal</td><td>Gatka</td><td>1</td></tr>
+<tr class="odd"><td>Portugal</td><td>Pencak Silat</td><td>1</td></tr>
+<tr><td>Portugal</td><td>Rugby subacuático</td><td>1</td></tr>
+<tr class="odd"><td>Puerto Rico</td><td>Bádminton</td><td>1</td></tr>
+<tr><td>Puerto Rico</td><td>Curling mixto</td><td>1</td></tr>
+<tr class="odd"><td>Puerto Rico</td><td>Disc golf</td><td>1</td></tr>
+<tr><td>Puerto Rico</td><td>Fútbol gaélico</td><td>1</td></tr>
+<tr class="odd"><td>Qatar</td><td>Esgrima en silla de ruedas</td><td>1</td></tr>
+<tr><td>Qatar</td><td>Esquí alpino</td><td>1</td></tr>
+<tr class="odd"><td>Qatar</td><td>Esquí para ciegos</td><td>1</td></tr>
+<tr><td>Qatar</td><td>Judo</td><td>1</td></tr>
+<tr class="odd"><td>Qatar</td><td>Piragüismo</td><td>1</td></tr>
+<tr><td>Qatar</td><td>Snowboard cross</td><td>1</td></tr>
+<tr class="odd"><td>Qatar</td><td>Tejo</td><td>1</td></tr>
+<tr><td>Reino Unido</td><td>Aikido</td><td>1</td></tr>
+<tr class="odd"><td>Reino Unido</td><td>Combinada nórdica</td><td>1</td></tr>
+<tr><td>Reino Unido</td><td>Equitación</td><td>1</td></tr>
+<tr class="odd"><td>Reino Unido</td><td>Kayak</td><td>1</td></tr>
+<tr><td>Reino Unido</td><td>Netball</td><td>1</td></tr>
+<tr class="odd"><td>Reino Unido</td><td>Rodeo</td><td>1</td></tr>
+<tr><td>Reino Unido</td><td>Sepak takraw</td><td>1</td></tr>
+<tr class="odd"><td>Reino Unido</td><td>Tiro adaptado</td><td>1</td></tr>
+<tr><td>Reino Unido</td><td>Wushu</td><td>1</td></tr>
+<tr class="odd"><td>República Centroafricana</td><td>Biatlón</td><td>1</td></tr>
+<tr><td>República Centroafricana</td><td>Bridge</td><td>1</td></tr>
+<tr class="odd"><td>República Centroafricana</td><td>Fútbol 5</td><td>1</td></tr>
+<tr><td>República Centroafricana</td><td>Hockey sobre patines</td><td>1</td></tr>
+<tr class="odd"><td>República Centroafricana</td><td>Muay thai</td><td>1</td></tr>
+<tr><td>República Centroafricana</td><td>Pesca deportiva</td><td>1</td></tr>
+<tr class="odd"><td>República Centroafricana</td><td>Pugilismo</td><td>1</td></tr>
+<tr><td>República Checa</td><td>Carrera de obstáculos</td><td>1</td></tr>
+<tr class="odd"><td>República Checa</td><td>Carreras de karts</td><td>1</td></tr>
+<tr><td>República Checa</td><td>Combinada nórdica</td><td>1</td></tr>
+<tr class="odd"><td>República Checa</td><td>Esquí de fondo</td><td>1</td></tr>
+<tr><td>República Checa</td><td>Natación</td><td>1</td></tr>
+<tr class="odd"><td>República Checa</td><td>Patinaje de velocidad</td><td>1</td></tr>
+<tr><td>República Checa</td><td>Voleibol sentado</td><td>1</td></tr>
+<tr class="odd"><td>República Democrática del Congo</td><td>Halterofilia</td><td>1</td></tr>
+<tr><td>República Democrática del Congo</td><td>Muay thai</td><td>1</td></tr>
+<tr class="odd"><td>República Democrática del Congo</td><td>Paddle surf</td><td>1</td></tr>
+<tr><td>República Democrática del Congo</td><td>Pugilismo</td><td>1</td></tr>
+<tr class="odd"><td>República Dominicana</td><td>Frontón</td><td>1</td></tr>
+<tr><td>República Dominicana</td><td>Piragüismo</td><td>1</td></tr>
+<tr class="odd"><td>República Dominicana</td><td>Rugby league</td><td>1</td></tr>
+<tr><td>Ruanda</td><td>Ala delta</td><td>1</td></tr>
+<tr class="odd"><td>Ruanda</td><td>Baloncesto 3x3</td><td>1</td></tr>
+<tr><td>Ruanda</td><td>Esquí de fondo</td><td>1</td></tr>
+<tr class="odd"><td>Ruanda</td><td>Fútbol gaélico</td><td>1</td></tr>
+<tr><td>Ruanda</td><td>Nascar</td><td>1</td></tr>
+<tr class="odd"><td>Ruanda</td><td>Skeleton</td><td>1</td></tr>
+<tr><td>Ruanda</td><td>Softball</td><td>1</td></tr>
+<tr class="odd"><td>Ruanda</td><td>Tiro adaptado</td><td>1</td></tr>
+<tr><td>Rumanía</td><td>Escalada en hielo</td><td>1</td></tr>
+<tr class="odd"><td>Rumanía</td><td>Fórmula 1</td><td>1</td></tr>
+<tr><td>Rumanía</td><td>Motocross</td><td>1</td></tr>
+<tr class="odd"><td>Rumanía</td><td>Nado sincronizado</td><td>1</td></tr>
+<tr><td>Rumanía</td><td>Natación en aguas abiertas</td><td>1</td></tr>
+<tr class="odd"><td>Rumanía</td><td>Rodeo</td><td>1</td></tr>
+<tr><td>Rumanía</td><td>Tiro al plato</td><td>1</td></tr>
+<tr class="odd"><td>Rusia</td><td>Bridge</td><td>1</td></tr>
+<tr><td>Rusia</td><td>Patinaje de velocidad</td><td>1</td></tr>
+<tr class="odd"><td>Rusia</td><td>Patinaje de velocidad en pista corta</td><td>1</td></tr>
+<tr><td>Samoa</td><td>Kárate</td><td>1</td></tr>
+<tr class="odd"><td>Samoa</td><td>Nascar</td><td>1</td></tr>
+<tr><td>Samoa</td><td>Parkour</td><td>1</td></tr>
+<tr class="odd"><td>Samoa</td><td>Pelota Purépecha</td><td>1</td></tr>
+<tr><td>Samoa</td><td>Savate</td><td>2</td></tr>
+<tr class="odd"><td>Samoa</td><td>Tenis</td><td>1</td></tr>
+<tr><td>Senegal</td><td>E-Sports</td><td>1</td></tr>
+<tr class="odd"><td>Senegal</td><td>Esquí acuático</td><td>1</td></tr>
+<tr><td>Senegal</td><td>Fútbol sala</td><td>1</td></tr>
+<tr class="odd"><td>Senegal</td><td>Park golf</td><td>1</td></tr>
+<tr><td>Senegal</td><td>Remo</td><td>1</td></tr>
+<tr class="odd"><td>Senegal</td><td>Ultimate frisbee</td><td>1</td></tr>
+<tr><td>Serbia</td><td>Cacería de Pokémons</td><td>1</td></tr>
+<tr class="odd"><td>Serbia</td><td>Curling</td><td>1</td></tr>
+<tr><td>Serbia</td><td>Frontón</td><td>1</td></tr>
+<tr class="odd"><td>Serbia</td><td>Gimnasia en trampolín</td><td>1</td></tr>
+<tr><td>Serbia</td><td>Rugby en silla de ruedas</td><td>1</td></tr>
+<tr class="odd"><td>Serbia</td><td>Slackline</td><td>1</td></tr>
+<tr><td>Serbia</td><td>Speedrun de Videojuegos</td><td>1</td></tr>
+<tr class="odd"><td>Serbia</td><td>Surf de remo</td><td>1</td></tr>
+<tr><td>Serbia</td><td>Tiro con arco en sala</td><td>1</td></tr>
+<tr class="odd"><td>Seychelles</td><td>Biatlón</td><td>1</td></tr>
+<tr><td>Seychelles</td><td>Curling mixto</td><td>1</td></tr>
+<tr class="odd"><td>Seychelles</td><td>Hockey callejero</td><td>1</td></tr>
+<tr><td>Seychelles</td><td>Lucha libre</td><td>1</td></tr>
+<tr class="odd"><td>Seychelles</td><td>Surf de remo</td><td>1</td></tr>
+<tr><td>Seychelles</td><td>Tiro al plato</td><td>1</td></tr>
+<tr class="odd"><td>Seychelles</td><td>Triatlón</td><td>1</td></tr>
+<tr><td>Seychelles</td><td>Windsurf</td><td>1</td></tr>
+<tr class="odd"><td>Sierra Leona</td><td>Equitación</td><td>1</td></tr>
+<tr><td>Sierra Leona</td><td>Hockey en aire</td><td>1</td></tr>
+<tr class="odd"><td>Sierra Leona</td><td>Patinaje de velocidad en pista corta</td><td>1</td></tr>
+<tr><td>Sierra Leona</td><td>Quidditch</td><td>1</td></tr>
+<tr class="odd"><td>Sierra Leona</td><td>Salto de trampolín</td><td>1</td></tr>
+<tr><td>Singapur</td><td>Bandy</td><td>1</td></tr>
+<tr class="odd"><td>Singapur</td><td>Béisbol</td><td>1</td></tr>
+<tr><td>Singapur</td><td>Carrera de coches solares</td><td>1</td></tr>
+<tr class="odd"><td>Singapur</td><td>Rugby</td><td>1</td></tr>
+<tr><td>Singapur</td><td>Skateboarding</td><td>1</td></tr>
+<tr class="odd"><td>Singapur</td><td>Triatlón</td><td>1</td></tr>
+<tr><td>Siria</td><td>Balonmano sala</td><td>1</td></tr>
+<tr class="odd"><td>Siria</td><td>Halterofilia</td><td>1</td></tr>
+<tr><td>Siria</td><td>Kárate</td><td>1</td></tr>
+<tr class="odd"><td>Siria</td><td>Pentatlón moderno</td><td>1</td></tr>
+<tr><td>Siria</td><td>Salto de trampolín</td><td>1</td></tr>
+<tr class="odd"><td>Somalia</td><td>Carreras de karts</td><td>1</td></tr>
+<tr><td>Somalia</td><td>Gimnasia rítmica</td><td>1</td></tr>
+<tr class="odd"><td>Somalia</td><td>Halterofilia</td><td>1</td></tr>
+<tr><td>Somalia</td><td>Patinaje artístico</td><td>1</td></tr>
+<tr class="odd"><td>Somalia</td><td>Rugby</td><td>1</td></tr>
+<tr><td>Somalia</td><td>Rugby en silla de ruedas</td><td>1</td></tr>
+<tr class="odd"><td>Somalia</td><td>Waterpolo</td><td>1</td></tr>
+<tr><td>Sri Lanka</td><td>Fútbol playa</td><td>1</td></tr>
+<tr class="odd"><td>Sri Lanka</td><td>Gimnasia rítmica</td><td>1</td></tr>
+<tr><td>Sri Lanka</td><td>Park golf</td><td>1</td></tr>
+<tr class="odd"><td>Sri Lanka</td><td>Sumo</td><td>1</td></tr>
+<tr><td>Sri Lanka</td><td>Wushu</td><td>1</td></tr>
+<tr class="odd"><td>Suazilandia</td><td>Balonmano sala</td><td>1</td></tr>
+<tr><td>Suazilandia</td><td>Fútbol tenis</td><td>1</td></tr>
+<tr class="odd"><td>Suazilandia</td><td>MotoGP</td><td>1</td></tr>
+<tr><td>Suazilandia</td><td>Remo</td><td>1</td></tr>
+<tr class="odd"><td>Suazilandia</td><td>Roller derby</td><td>1</td></tr>
+<tr><td>Suazilandia</td><td>Tiro deportivo</td><td>1</td></tr>
+<tr class="odd"><td>Suazilandia</td><td>Ulama</td><td>1</td></tr>
+<tr><td>Suazilandia</td><td>Windsurf</td><td>1</td></tr>
+<tr class="odd"><td>Sudáfrica</td><td>Ajedrez</td><td>1</td></tr>
+<tr><td>Sudáfrica</td><td>Balonmano</td><td>1</td></tr>
+<tr class="odd"><td>Sudáfrica</td><td>Balonmano playa</td><td>1</td></tr>
+<tr><td>Sudáfrica</td><td>Frontón</td><td>1</td></tr>
+<tr class="odd"><td>Sudáfrica</td><td>Softball</td><td>1</td></tr>
+<tr><td>Sudáfrica</td><td>Wakeboard</td><td>1</td></tr>
+<tr class="odd"><td>Sudán</td><td>Bodyboard</td><td>1</td></tr>
+<tr><td>Sudán</td><td>Ciclismo</td><td>1</td></tr>
+<tr class="odd"><td>Sudán</td><td>Gimnasia acrobática</td><td>1</td></tr>
+<tr><td>Sudán</td><td>Korfball</td><td>1</td></tr>
+<tr class="odd"><td>Sudán</td><td>Lucha grecorromana</td><td>1</td></tr>
+<tr><td>Sudán</td><td>Skateboarding</td><td>1</td></tr>
+<tr class="odd"><td>Sudán del Sur</td><td>Boxeo</td><td>1</td></tr>
+<tr><td>Sudán del Sur</td><td>Canoa slalom</td><td>1</td></tr>
+<tr class="odd"><td>Sudán del Sur</td><td>Ciclismo</td><td>1</td></tr>
+<tr><td>Sudán del Sur</td><td>Natación</td><td>1</td></tr>
+<tr class="odd"><td>Sudán del Sur</td><td>Snowboard</td><td>1</td></tr>
+<tr><td>Sudán del Sur</td><td>Speedrun de Videojuegos</td><td>1</td></tr>
+<tr class="odd"><td>Suecia</td><td>E-Sports</td><td>1</td></tr>
+<tr><td>Suecia</td><td>Korfball</td><td>1</td></tr>
+<tr class="odd"><td>Suecia</td><td>Lucha grecorromana</td><td>1</td></tr>
+<tr><td>Suecia</td><td>Patinaje de velocidad en pista corta</td><td>1</td></tr>
+<tr class="odd"><td>Suecia</td><td>Snowboard cross</td><td>1</td></tr>
+<tr><td>Suecia</td><td>Vovinam</td><td>1</td></tr>
+<tr class="odd"><td>Suiza</td><td>Esgrima en silla de ruedas</td><td>1</td></tr>
+<tr><td>Suiza</td><td>Kickboxing</td><td>1</td></tr>
+<tr class="odd"><td>Suiza</td><td>Sambo</td><td>1</td></tr>
+<tr><td>Suiza</td><td>Superbikes</td><td>1</td></tr>
+<tr class="odd"><td>Suiza</td><td>Windsurf</td><td>2</td></tr>
+<tr><td>Surinam</td><td>Bádminton playa</td><td>1</td></tr>
+<tr class="odd"><td>Surinam</td><td>Carrera de sacos</td><td>1</td></tr>
+<tr><td>Surinam</td><td>Goalball</td><td>1</td></tr>
+<tr class="odd"><td>Surinam</td><td>Pentatlón moderno</td><td>1</td></tr>
+<tr><td>Surinam</td><td>Piragüismo</td><td>1</td></tr>
+<tr class="odd"><td>Surinam</td><td>Tenis de mesa</td><td>1</td></tr>
+<tr><td>Tailandia</td><td>Batalla Pokémon</td><td>1</td></tr>
+<tr class="odd"><td>Tailandia</td><td>Ciclismo</td><td>1</td></tr>
+<tr><td>Tailandia</td><td>Curling mixto</td><td>1</td></tr>
+<tr class="odd"><td>Tailandia</td><td>Esgrima histórica</td><td>1</td></tr>
+<tr><td>Tailandia</td><td>Goalball</td><td>1</td></tr>
+<tr class="odd"><td>Tailandia</td><td>Hockey callejero</td><td>1</td></tr>
+<tr><td>Tanzania</td><td>Base jumping</td><td>1</td></tr>
+<tr class="odd"><td>Tanzania</td><td>Golf</td><td>1</td></tr>
+<tr><td>Tanzania</td><td>Halterofilia</td><td>2</td></tr>
+<tr class="odd"><td>Tanzania</td><td>Rallycross</td><td>1</td></tr>
+<tr><td>Tanzania</td><td>Wakeboard</td><td>1</td></tr>
+<tr class="odd"><td>Tayikistán</td><td>Combate de Sables Láser</td><td>1</td></tr>
+<tr><td>Tayikistán</td><td>Fútbol tenis</td><td>1</td></tr>
+<tr class="odd"><td>Tayikistán</td><td>Rugby</td><td>1</td></tr>
+<tr><td>Tayikistán</td><td>Skimboard</td><td>1</td></tr>
+<tr class="odd"><td>Tayikistán</td><td>Tiro deportivo</td><td>1</td></tr>
+<tr><td>Tayikistán</td><td>Windsurf</td><td>1</td></tr>
+<tr class="odd"><td>Timor Oriental</td><td>Biatlón</td><td>1</td></tr>
+<tr><td>Timor Oriental</td><td>Escalada</td><td>1</td></tr>
+<tr class="odd"><td>Timor Oriental</td><td>Fútbol playa</td><td>1</td></tr>
+<tr><td>Timor Oriental</td><td>Golf</td><td>1</td></tr>
+<tr class="odd"><td>Timor Oriental</td><td>Halterofilia</td><td>1</td></tr>
+<tr><td>Timor Oriental</td><td>Kabaddi</td><td>1</td></tr>
+<tr class="odd"><td>Togo</td><td>Atletismo</td><td>1</td></tr>
+<tr><td>Togo</td><td>Carrera de coches solares</td><td>1</td></tr>
+<tr class="odd"><td>Togo</td><td>Fútbol sala</td><td>1</td></tr>
+<tr><td>Togo</td><td>Pesca deportiva</td><td>1</td></tr>
+<tr class="odd"><td>Togo</td><td>Vovinam</td><td>1</td></tr>
+<tr><td>Tonga</td><td>Bolos</td><td>1</td></tr>
+<tr class="odd"><td>Tonga</td><td>Capoeira</td><td>1</td></tr>
+<tr><td>Tonga</td><td>Concurso de Cosplay</td><td>1</td></tr>
+<tr class="odd"><td>Tonga</td><td>Escalada</td><td>1</td></tr>
+<tr><td>Tonga</td><td>Fórmula 1</td><td>1</td></tr>
+<tr class="odd"><td>Tonga</td><td>Goalball</td><td>1</td></tr>
+<tr><td>Trinidad y Tobago</td><td>Fútbol tenis</td><td>1</td></tr>
+<tr class="odd"><td>Túnez</td><td>Ala delta</td><td>1</td></tr>
+<tr><td>Túnez</td><td>Esgrima histórica</td><td>1</td></tr>
+<tr class="odd"><td>Túnez</td><td>Paddle surf</td><td>1</td></tr>
+<tr><td>Túnez</td><td>Powerlifting</td><td>1</td></tr>
+<tr class="odd"><td>Túnez</td><td>Softball</td><td>1</td></tr>
+<tr><td>Túnez</td><td>Voleibol</td><td>1</td></tr>
+<tr class="odd"><td>Turkmenistán</td><td>Dardos</td><td>1</td></tr>
+<tr><td>Turkmenistán</td><td>Pádel</td><td>1</td></tr>
+<tr class="odd"><td>Turkmenistán</td><td>Paracaidismo</td><td>1</td></tr>
+<tr><td>Turkmenistán</td><td>Piragüismo</td><td>1</td></tr>
+<tr class="odd"><td>Turquía</td><td>Crossfit</td><td>1</td></tr>
+<tr><td>Turquía</td><td>Parkour</td><td>1</td></tr>
+<tr class="odd"><td>Turquía</td><td>Simulación de vuelo</td><td>1</td></tr>
+<tr><td>Ucrania</td><td>Baloncesto en silla de ruedas</td><td>1</td></tr>
+<tr class="odd"><td>Ucrania</td><td>Escalada</td><td>1</td></tr>
+<tr><td>Ucrania</td><td>Esgrima en silla de ruedas</td><td>1</td></tr>
+<tr class="odd"><td>Ucrania</td><td>Fútbol playa</td><td>1</td></tr>
+<tr><td>Ucrania</td><td>Motocross</td><td>1</td></tr>
+<tr class="odd"><td>Ucrania</td><td>Patinaje de velocidad</td><td>1</td></tr>
+<tr><td>Uganda</td><td>Billar</td><td>1</td></tr>
+<tr class="odd"><td>Uganda</td><td>Carreras de caballos</td><td>1</td></tr>
+<tr><td>Uganda</td><td>Duelo de Yu-Gi-Oh!</td><td>1</td></tr>
+<tr class="odd"><td>Uganda</td><td>Fútbol australiano</td><td>1</td></tr>
+<tr><td>Uganda</td><td>Kickboxing</td><td>1</td></tr>
+<tr class="odd"><td>Uganda</td><td>Pesca submarina</td><td>1</td></tr>
+<tr><td>Uganda</td><td>Rugby</td><td>1</td></tr>
+<tr class="odd"><td>Uganda</td><td>Waterpolo</td><td>1</td></tr>
+<tr><td>Uruguay</td><td>Capoeira</td><td>1</td></tr>
+<tr class="odd"><td>Uruguay</td><td>Charrería</td><td>1</td></tr>
+<tr><td>Uruguay</td><td>Concurso de Cosplay</td><td>1</td></tr>
+<tr class="odd"><td>Uruguay</td><td>Esquí para ciegos</td><td>1</td></tr>
+<tr><td>Uruguay</td><td>Kárate</td><td>1</td></tr>
+<tr class="odd"><td>Uruguay</td><td>Natación en aguas abiertas</td><td>1</td></tr>
+<tr><td>Uruguay</td><td>Taekwondo</td><td>1</td></tr>
+<tr class="odd"><td>Uzbekistán</td><td>Ajedrez</td><td>1</td></tr>
+<tr><td>Uzbekistán</td><td>Billar</td><td>1</td></tr>
+<tr class="odd"><td>Uzbekistán</td><td>Crossfit</td><td>1</td></tr>
+<tr><td>Uzbekistán</td><td>E-Sports</td><td>1</td></tr>
+<tr class="odd"><td>Uzbekistán</td><td>Natación</td><td>1</td></tr>
+<tr><td>Uzbekistán</td><td>Natación con aletas</td><td>1</td></tr>
+<tr class="odd"><td>Uzbekistán</td><td>Piragüismo</td><td>1</td></tr>
+<tr><td>Uzbekistán</td><td>Rugby subacuático</td><td>1</td></tr>
+<tr class="odd"><td>Uzbekistán</td><td>Tenis</td><td>1</td></tr>
+<tr><td>Uzbekistán</td><td>Trekking</td><td>1</td></tr>
+<tr class="odd"><td>Uzbekistán</td><td>Triatlón</td><td>1</td></tr>
+<tr><td>Uzbekistán</td><td>Windsurf</td><td>1</td></tr>
+<tr class="odd"><td>Vanuatu</td><td>Carrera de drones</td><td>2</td></tr>
+<tr><td>Vanuatu</td><td>Polo</td><td>1</td></tr>
+<tr class="odd"><td>Vanuatu</td><td>Rallycross</td><td>1</td></tr>
+<tr><td>Vanuatu</td><td>Roller derby</td><td>1</td></tr>
+<tr class="odd"><td>Vanuatu</td><td>Tlachtli</td><td>1</td></tr>
+<tr><td>Vanuatu</td><td>Triatlón</td><td>1</td></tr>
+<tr class="odd"><td>Vanuatu</td><td>Voleibol sentado</td><td>1</td></tr>
+<tr><td>Venezuela</td><td>Balonmano</td><td>1</td></tr>
+<tr class="odd"><td>Venezuela</td><td>Carrera de drones</td><td>1</td></tr>
+<tr><td>Venezuela</td><td>Quidditch</td><td>1</td></tr>
+<tr class="odd"><td>Venezuela</td><td>Trial</td><td>1</td></tr>
+<tr><td>Vietnam</td><td>Fórmula 1</td><td>1</td></tr>
+<tr class="odd"><td>Vietnam</td><td>Lucha libre</td><td>1</td></tr>
+<tr><td>Vietnam</td><td>Parapente</td><td>1</td></tr>
+<tr class="odd"><td>Vietnam</td><td>Sepak takraw</td><td>1</td></tr>
+<tr><td>Vietnam</td><td>Windsurf</td><td>1</td></tr>
+<tr class="odd"><td>Yemen</td><td>Aikido</td><td>1</td></tr>
+<tr><td>Yemen</td><td>Atletismo</td><td>1</td></tr>
+<tr class="odd"><td>Yemen</td><td>Carrera vertical</td><td>1</td></tr>
+<tr><td>Yemen</td><td>Fútbol</td><td>1</td></tr>
+<tr class="odd"><td>Yemen</td><td>Netball</td><td>1</td></tr>
+<tr><td>Yemen</td><td>Paddle surf</td><td>1</td></tr>
+<tr class="odd"><td>Yemen</td><td>Park golf</td><td>1</td></tr>
+<tr><td>Yemen</td><td>Rugby subacuático</td><td>1</td></tr>
+<tr class="odd"><td>Yemen</td><td>Skeleton</td><td>1</td></tr>
+<tr><td>Yibuti</td><td>Capoeira</td><td>1</td></tr>
+<tr class="odd"><td>Yibuti</td><td>Kitesurf</td><td>1</td></tr>
+<tr><td>Yibuti</td><td>Polo acuático</td><td>1</td></tr>
+<tr class="odd"><td>Yibuti</td><td>Tiro al plato</td><td>1</td></tr>
+<tr><td>Yibuti</td><td>Voleibol sentado</td><td>1</td></tr>
+<tr class="odd"><td>Yibuti</td><td>Windsurf</td><td>1</td></tr>
+<tr><td>Zambia</td><td>Balonmano sala</td><td>1</td></tr>
+<tr class="odd"><td>Zambia</td><td>Bandy</td><td>1</td></tr>
+<tr><td>Zambia</td><td>Caminata rápida</td><td>1</td></tr>
+<tr class="odd"><td>Zambia</td><td>Fórmula 1</td><td>1</td></tr>
+<tr><td>Zambia</td><td>Petanca</td><td>1</td></tr>
+<tr class="odd"><td>Zambia</td><td>Skateboarding</td><td>1</td></tr>
+<tr><td>Zambia</td><td>Skeleton</td><td>1</td></tr>
+<tr class="odd"><td>Zambia</td><td>Tiro deportivo</td><td>1</td></tr>
+<tr><td>Zambia</td><td>Waterpolo</td><td>1</td></tr>
+<tr class="odd"><td>Zimbabue</td><td>Atletismo</td><td>2</td></tr>
+<tr><td>Zimbabue</td><td>Carrera de triciclos</td><td>1</td></tr>
+<tr class="odd"><td>Zimbabue</td><td>Ciclismo tándem</td><td>1</td></tr>
+<tr><td>Zimbabue</td><td>Gimnasia rítmica</td><td>1</td></tr>
+<tr class="odd"><td>Zimbabue</td><td>Halterofilia</td><td>1</td></tr>
+<tr><td>Zimbabue</td><td>Patinaje de velocidad</td><td>1</td></tr>
+<tr class="odd"><td>Zimbabue</td><td>Patinaje de velocidad en pista corta</td><td>1</td></tr>
+<tr><td>Zimbabue</td><td>Piragüismo</td><td>1</td></tr>
+<tr class="odd"><td>Zimbabue</td><td>Pugilismo</td><td>1</td></tr>
+<tr><td>Zimbabue</td><td>Quidditch</td><td>1</td></tr>
+<tr class="odd"><td>Zimbabue</td><td>Windsurf</td><td>1</td></tr>
+</table></body></html>

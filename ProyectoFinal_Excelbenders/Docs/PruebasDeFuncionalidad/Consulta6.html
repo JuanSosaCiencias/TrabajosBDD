@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8"/><style>
+table {border: medium solid #6495ed;border-collapse: collapse;width: 100%;} th{font-family: monospace;border: thin solid #6495ed;padding: 5px;background-color: #D0E3FA;}th{text-align: left;}td{font-family: sans-serif;border: thin solid #6495ed;padding: 5px;text-align: center;}.odd{background:#e8edff;}img{padding:5px; border:solid; border-color: #dddddd #aaaaaa #aaaaaa #dddddd; border-width: 1px 2px 2px 1px; background-color:white;}</style>
+</head>
+<body>
+<table><tr><th colspan="4"><pre><code>/* Consulta 6: Ganancias totales por cada competencia celebrada.<br> * <br> * Esta consulta obtiene las ganancias totales por cada competencia celebrada.<br> * <br> * - Selecciona el ID del evento, el nombre de la localidad, el ID de la disciplina y la suma de los precios de las entradas.<br> * - Agrupa los resultados por el ID del evento, el nombre de la localidad y el ID de la disciplina.<br> * - Ordena los resultados por las ganancias totales en orden descendente.<br> */<br>SELECT <br>    e.IDEvento,<br>    e.NombreLocalidad,<br>    e.IDDisciplina,<br>    SUM(e.Precio) AS GananciasTotales<br>FROM <br>    Evento e<br>JOIN <br>    CompraEntrada ce ON e.IDEvento = ce.IDEvento<br>GROUP BY <br>    e.IDEvento, e.NombreLocalidad, e.IDDisciplina<br>ORDER BY <br>    GananciasTotales DESC</code></pre></th></tr><tr><th>idevento</th><th>nombrelocalidad</th><th>iddisciplina</th><th>gananciastotales</th></tr><tr class="odd"><td>111</td><td>Dojo</td><td>13</td><td>31,000</td></tr>
+<tr><td>135</td><td>Canal de Remo</td><td>23</td><td>30,600</td></tr>
+<tr class="odd"><td>188</td><td>Estadio Central</td><td>107</td><td>28,900</td></tr>
+<tr><td>35</td><td>Cancha de Pádel</td><td>36</td><td>28,800</td></tr>
+<tr class="odd"><td>13</td><td>Velódromo</td><td>7</td><td>27,900</td></tr>
+<tr><td>109</td><td>Marina de Vela</td><td>130</td><td>27,750</td></tr>
+<tr class="odd"><td>75</td><td>Pista de Skeleton</td><td>148</td><td>27,000</td></tr>
+<tr><td>99</td><td>Piscina de Waterpolo</td><td>12</td><td>27,000</td></tr>
+<tr class="odd"><td>36</td><td>Sala de Billar</td><td>200</td><td>25,500</td></tr>
+<tr><td>14</td><td>Skatepark</td><td>78</td><td>25,350</td></tr>
+<tr class="odd"><td>52</td><td>Centro Acuático</td><td>4</td><td>24,800</td></tr>
+<tr><td>181</td><td>Centro de Pentatlón</td><td>149</td><td>24,650</td></tr>
+<tr class="odd"><td>133</td><td>Circuito de Nascar</td><td>87</td><td>24,050</td></tr>
+<tr><td>198</td><td>Pista de Hockey</td><td>195</td><td>23,400</td></tr>
+<tr class="odd"><td>64</td><td>Campo de Fútbol Gaélico</td><td>57</td><td>23,250</td></tr>
+<tr><td>121</td><td>Coliseo de Lucha Libre</td><td>138</td><td>22,400</td></tr>
+<tr class="odd"><td>158</td><td>Estación de Esquí</td><td>125</td><td>22,400</td></tr>
+<tr><td>122</td><td>Plataforma de Salto</td><td>46</td><td>22,100</td></tr>
+<tr class="odd"><td>192</td><td>Sala de Kickboxing</td><td>180</td><td>21,600</td></tr>
+<tr><td>71</td><td>Coliseo de Lucha Grecorromana</td><td>33</td><td>21,500</td></tr>
+<tr class="odd"><td>28</td><td>Campo de Tiro Deportivo</td><td>150</td><td>21,450</td></tr>
+<tr><td>33</td><td>Sala de Esgrima</td><td>15</td><td>20,400</td></tr>
+<tr class="odd"><td>125</td><td>Arena de Voleibol</td><td>112</td><td>19,800</td></tr>
+<tr><td>5</td><td>Snowpark</td><td>126</td><td>19,600</td></tr>
+<tr class="odd"><td>205</td><td>Playa de Surf</td><td>127</td><td>18,850</td></tr>
+<tr><td>63</td><td>Campo de Lacrosse</td><td>54</td><td>18,400</td></tr>
+<tr class="odd"><td>175</td><td>Cancha de Tenis</td><td>3</td><td>18,200</td></tr>
+<tr><td>86</td><td>Estadio de Jai Alai</td><td>53</td><td>18,200</td></tr>
+<tr class="odd"><td>68</td><td>Campo de Cricket</td><td>38</td><td>18,200</td></tr>
+<tr><td>50</td><td>Campo de Lacrosse</td><td>160</td><td>17,550</td></tr>
+<tr class="odd"><td>177</td><td>Estadio de Softball</td><td>59</td><td>17,500</td></tr>
+<tr><td>27</td><td>Piscina de Nado Sincronizado</td><td>153</td><td>17,500</td></tr>
+<tr class="odd"><td>174</td><td>Sala de Savate</td><td>75</td><td>16,800</td></tr>
+<tr><td>59</td><td>Pista de Atletismo</td><td>5</td><td>16,800</td></tr>
+<tr class="odd"><td>190</td><td>Arena de Fútbol Playa</td><td>169</td><td>16,200</td></tr>
+<tr><td>58</td><td>Playa de Kitesurf</td><td>49</td><td>15,750</td></tr>
+<tr class="odd"><td>6</td><td>Playa de Windsurf</td><td>48</td><td>15,400</td></tr>
+<tr><td>26</td><td>Campo de Béisbol</td><td>17</td><td>15,400</td></tr>
+<tr class="odd"><td>105</td><td>Campo de Fútbol Americano</td><td>55</td><td>15,200</td></tr>
+<tr><td>207</td><td>Pista de Bobsleigh</td><td>40</td><td>15,200</td></tr>
+<tr class="odd"><td>164</td><td>Sala de Muay Thai</td><td>73</td><td>15,000</td></tr>
+<tr><td>208</td><td>Plataforma de Salto</td><td>152</td><td>14,800</td></tr>
+<tr class="odd"><td>189</td><td>Circuito de Superbikes</td><td>86</td><td>14,000</td></tr>
+<tr><td>23</td><td>Centro Acuático</td><td>110</td><td>13,950</td></tr>
+<tr class="odd"><td>42</td><td>Parque de Triatlón</td><td>135</td><td>13,800</td></tr>
+<tr><td>117</td><td>Parque de Parkour</td><td>183</td><td>13,750</td></tr>
+<tr class="odd"><td>21</td><td>Arena de Voleibol Playa</td><td>170</td><td>13,500</td></tr>
+<tr><td>49</td><td>Pabellón de Gimnasia</td><td>8</td><td>13,500</td></tr>
+<tr class="odd"><td>187</td><td>Dojo de Aikido</td><td>68</td><td>13,300</td></tr>
+<tr><td>123</td><td>Playa de Surf</td><td>21</td><td>13,300</td></tr>
+<tr class="odd"><td>186</td><td>Snowpark</td><td>20</td><td>13,200</td></tr>
+<tr><td>154</td><td>Circuito de MotoGP</td><td>85</td><td>13,200</td></tr>
+<tr class="odd"><td>66</td><td>Circuito de Trial</td><td>81</td><td>13,125</td></tr>
+<tr><td>157</td><td>Campo de Fútbol Gaélico</td><td>163</td><td>12,600</td></tr>
+<tr class="odd"><td>178</td><td>Tatami de Kárate</td><td>137</td><td>12,600</td></tr>
+<tr><td>8</td><td>Arena de Sepak Takraw</td><td>65</td><td>12,500</td></tr>
+<tr class="odd"><td>184</td><td>Tatami de Tiro con Arco en Sala</td><td>208</td><td>11,500</td></tr>
+<tr><td>165</td><td>Piscina de Nado Sincronizado</td><td>47</td><td>11,400</td></tr>
+<tr class="odd"><td>151</td><td>Pista de Curling</td><td>145</td><td>11,250</td></tr>
+<tr><td>1</td><td>Parque de E-Sports</td><td>210</td><td>10,875</td></tr>
+<tr class="odd"><td>45</td><td>Hipódromo</td><td>131</td><td>10,850</td></tr>
+<tr><td>51</td><td>Tatami de Tiro con Arco en Sala</td><td>102</td><td>10,800</td></tr>
+<tr class="odd"><td>110</td><td>Parque de Triatlón</td><td>29</td><td>10,800</td></tr>
+<tr><td>108</td><td>Fosa de Tiro al Plato</td><td>45</td><td>10,800</td></tr>
+<tr class="odd"><td>141</td><td>Ring de Boxeo</td><td>9</td><td>10,500</td></tr>
+<tr><td>171</td><td>Marina de Vela</td><td>24</td><td>10,400</td></tr>
+<tr class="odd"><td>114</td><td>Arena de Netball</td><td>167</td><td>10,125</td></tr>
+<tr><td>120</td><td>Centro de Halterofilia</td><td>27</td><td>10,125</td></tr>
+<tr class="odd"><td>255</td><td>Sala de Dardos</td><td>202</td><td>9,900</td></tr>
+<tr><td>40</td><td>Dojo de Kendo</td><td>69</td><td>9,350</td></tr>
+<tr class="odd"><td>61</td><td>Ring de Boxeo</td><td>115</td><td>9,200</td></tr>
+<tr><td>62</td><td>Campo de Tiro</td><td>132</td><td>9,000</td></tr>
+<tr class="odd"><td>228</td><td>Centro de Bádminton</td><td>136</td><td>9,000</td></tr>
+<tr><td>199</td><td>Pista de Hockey</td><td>89</td><td>8,750</td></tr>
+<tr class="odd"><td>65</td><td>Pista de Skeleton</td><td>42</td><td>8,400</td></tr>
+<tr><td>196</td><td>Fosa de Tiro al Plato</td><td>151</td><td>8,100</td></tr>
+<tr class="odd"><td>78</td><td>Tatami de Kabaddi</td><td>66</td><td>8,100</td></tr>
+<tr><td>9</td><td>Campo de Polo</td><td>37</td><td>8,100</td></tr>
+<tr class="odd"><td>142</td><td>Cancha de Squash</td><td>141</td><td>8,100</td></tr>
+<tr><td>56</td><td>Sala de Wushu</td><td>72</td><td>7,875</td></tr>
+<tr class="odd"><td>173</td><td>Rocódromo</td><td>22</td><td>7,875</td></tr>
+<tr><td>209</td><td>Tatami de Kárate</td><td>31</td><td>7,600</td></tr>
+<tr class="odd"><td>132</td><td>Estación de Esquí</td><td>19</td><td>7,500</td></tr>
+<tr><td>170</td><td>Arena de Fútbol Playa</td><td>63</td><td>7,350</td></tr>
+<tr class="odd"><td>103</td><td>Sala de Snooker</td><td>201</td><td>7,200</td></tr>
+<tr><td>236</td><td>Arena de Korfball</td><td>166</td><td>7,200</td></tr>
+<tr class="odd"><td>204</td><td>Centro de Cosplay</td><td>105</td><td>6,900</td></tr>
+<tr><td>240</td><td>Tatami de Sumo</td><td>173</td><td>6,750</td></tr>
+<tr class="odd"><td>176</td><td>Estadio Central</td><td>1</td><td>6,750</td></tr>
+<tr><td>46</td><td>Pista de Patinaje Artístico</td><td>28</td><td>6,525</td></tr>
+<tr class="odd"><td>138</td><td>Cancha de Pádel</td><td>142</td><td>6,500</td></tr>
+<tr><td>185</td><td>Dojo</td><td>119</td><td>6,375</td></tr>
+<tr class="odd"><td>270</td><td>Arena de Balonmano Playa</td><td>168</td><td>6,300</td></tr>
+<tr><td>243</td><td>Circuito de MotoGP</td><td>191</td><td>6,300</td></tr>
+<tr class="odd"><td>261</td><td>Estadio de Softball</td><td>165</td><td>6,300</td></tr>
+<tr><td>237</td><td>Pista de Atletismo</td><td>111</td><td>6,300</td></tr>
+<tr class="odd"><td>221</td><td>Estadio de Rugby League</td><td>164</td><td>6,300</td></tr>
+<tr><td>163</td><td>Bolera</td><td>92</td><td>6,250</td></tr>
+<tr class="odd"><td>20</td><td>Sala de Dardos</td><td>96</td><td>6,000</td></tr>
+<tr><td>233</td><td>Skatepark</td><td>184</td><td>6,000</td></tr>
+<tr class="odd"><td>159</td><td>Estadio de Baloncesto 3x3</td><td>101</td><td>5,750</td></tr>
+<tr><td>106</td><td>Arena de Voleibol Playa</td><td>64</td><td>5,700</td></tr>
+<tr class="odd"><td>248</td><td>Estadio de Baloncesto 3x3</td><td>207</td><td>5,600</td></tr>
+<tr><td>254</td><td>Circuito de Nascar</td><td>193</td><td>5,400</td></tr>
+<tr class="odd"><td>113</td><td>Pista de Curling</td><td>39</td><td>5,400</td></tr>
+<tr><td>197</td><td>Pista de Luge</td><td>41</td><td>5,400</td></tr>
+<tr class="odd"><td>143</td><td>Campo de Cricket</td><td>144</td><td>5,400</td></tr>
+<tr><td>10</td><td>Circuito de Motocross</td><td>80</td><td>5,250</td></tr>
+<tr class="odd"><td>266</td><td>Sala de Artes Marciales</td><td>120</td><td>5,200</td></tr>
+<tr><td>47</td><td>Tatami de Sambo</td><td>71</td><td>5,075</td></tr>
+<tr class="odd"><td>203</td><td>Estadio de Rugby League</td><td>58</td><td>5,075</td></tr>
+<tr><td>263</td><td>Dojo de Aikido</td><td>174</td><td>5,000</td></tr>
+<tr class="odd"><td>210</td><td>Arena de Netball</td><td>61</td><td>5,000</td></tr>
+<tr><td>214</td><td>Sala de Capoeira</td><td>182</td><td>4,950</td></tr>
+<tr class="odd"><td>268</td><td>Canal de Piragüismo</td><td>156</td><td>4,900</td></tr>
+<tr><td>167</td><td>Rocódromo de Hielo</td><td>209</td><td>4,725</td></tr>
+<tr class="odd"><td>146</td><td>Salón de Ping Pong</td><td>140</td><td>4,650</td></tr>
+<tr><td>149</td><td>Centro de Halterofilia</td><td>133</td><td>4,550</td></tr>
+<tr class="odd"><td>258</td><td>Parque de E-Sports</td><td>104</td><td>4,500</td></tr>
+<tr><td>201</td><td>Circuito de Rallies</td><td>83</td><td>4,500</td></tr>
+<tr class="odd"><td>256</td><td>Circuito de Motocross</td><td>186</td><td>4,500</td></tr>
+<tr><td>215</td><td>Canal de Remo</td><td>129</td><td>4,200</td></tr>
+<tr class="odd"><td>264</td><td>Tatami de Sambo</td><td>177</td><td>4,200</td></tr>
+<tr><td>239</td><td>Estadio de Jai Alai</td><td>159</td><td>4,050</td></tr>
+<tr class="odd"><td>29</td><td>Sala de Kickboxing</td><td>74</td><td>4,000</td></tr>
+<tr><td>92</td><td>Estadio de Fútbol Sala</td><td>100</td><td>4,000</td></tr>
+<tr class="odd"><td>219</td><td>Circuito de Superbikes</td><td>192</td><td>4,000</td></tr>
+<tr><td>131</td><td>Gimnasio Olímpico</td><td>2</td><td>3,900</td></tr>
+<tr class="odd"><td>172</td><td>Tatami de Jiu-jitsu</td><td>176</td><td>3,850</td></tr>
+<tr><td>218</td><td>Sala de Esgrima</td><td>121</td><td>3,850</td></tr>
+<tr class="odd"><td>245</td><td>Campo de Fútbol Americano</td><td>161</td><td>3,850</td></tr>
+<tr><td>234</td><td>Piscina de Waterpolo</td><td>118</td><td>3,850</td></tr>
+<tr class="odd"><td>252</td><td>Circuito de Rallies</td><td>189</td><td>3,750</td></tr>
+<tr><td>217</td><td>Salón de Speedrun</td><td>106</td><td>3,600</td></tr>
+<tr class="odd"><td>251</td><td>Circuito de Trial</td><td>187</td><td>3,600</td></tr>
+<tr><td>235</td><td>Sala de Savate</td><td>181</td><td>3,400</td></tr>
+<tr class="odd"><td>230</td><td>Sala de Wushu</td><td>178</td><td>3,375</td></tr>
+<tr><td>259</td><td>Pista de BMX</td><td>185</td><td>3,250</td></tr>
+<tr class="odd"><td>57</td><td>Tatami de Kabaddi</td><td>172</td><td>3,100</td></tr>
+<tr><td>231</td><td>Pista de Rallycross</td><td>188</td><td>3,000</td></tr>
+<tr class="odd"><td>267</td><td>Pista de Bobsleigh</td><td>146</td><td>3,000</td></tr>
+<tr><td>253</td><td>Campo de Fútbol Australiano</td><td>162</td><td>2,800</td></tr>
+<tr class="odd"><td>246</td><td>Campo de Ultimate Frisbee</td><td>196</td><td>2,800</td></tr>
+<tr><td>265</td><td>Bolera</td><td>198</td><td>2,800</td></tr>
+<tr class="odd"><td>238</td><td>Velódromo</td><td>113</td><td>2,750</td></tr>
+<tr><td>232</td><td>Estadio de Quidditch</td><td>205</td><td>2,750</td></tr>
+<tr class="odd"><td>80</td><td>Campo de Golf</td><td>18</td><td>2,652</td></tr>
+<tr><td>7</td><td>Sala de Ajedrez</td><td>203</td><td>2,600</td></tr>
+<tr class="odd"><td>222</td><td>Campo de Petanca</td><td>199</td><td>2,500</td></tr>
+<tr><td>216</td><td>Pista de Patinaje de Velocidad</td><td>194</td><td>2,475</td></tr>
+<tr class="odd"><td>241</td><td>Circuito de Fórmula 1</td><td>190</td><td>2,450</td></tr>
+<tr><td>15</td><td>Pista de Patinaje de Velocidad</td><td>88</td><td>2,400</td></tr>
+<tr class="odd"><td>18</td><td>Arena de Voleibol</td><td>6</td><td>2,250</td></tr>
+<tr><td>145</td><td>Frontón</td><td>158</td><td>2,250</td></tr>
+<tr class="odd"><td>182</td><td>Polideportivo</td><td>11</td><td>2,250</td></tr>
+<tr><td>211</td><td>Pista de Patinaje Artístico</td><td>134</td><td>2,200</td></tr>
+<tr class="odd"><td>107</td><td>Campo de Rugby</td><td>116</td><td>2,106</td></tr>
+<tr><td>247</td><td>Pista de Hielo</td><td>122</td><td>2,100</td></tr>
+<tr class="odd"><td>150</td><td>Coliseo de Lucha Libre</td><td>32</td><td>1,950</td></tr>
+<tr><td>70</td><td>Sala de Capoeira</td><td>76</td><td>1,950</td></tr>
+<tr class="odd"><td>90</td><td>Campo de Tiro</td><td>26</td><td>1,950</td></tr>
+<tr><td>202</td><td>Campo de Rugby</td><td>10</td><td>1,800</td></tr>
+<tr class="odd"><td>130</td><td>Pista de BMX</td><td>79</td><td>1,794</td></tr>
+<tr><td>200</td><td>Campo de Disc Golf</td><td>91</td><td>1,716</td></tr>
+<tr class="odd"><td>82</td><td>Sala de Artes Marciales</td><td>14</td><td>1,700</td></tr>
+<tr><td>152</td><td>Pabellón de Gimnasia</td><td>114</td><td>1,650</td></tr>
+<tr class="odd"><td>183</td><td>Sala de Billar</td><td>94</td><td>1,638</td></tr>
+<tr><td>124</td><td>Pista de Hielo</td><td>16</td><td>1,575</td></tr>
+<tr class="odd"><td>262</td><td>Pista de Luge</td><td>147</td><td>1,500</td></tr>
+<tr><td>17</td><td>Sala de Ajedrez</td><td>97</td><td>1,444</td></tr>
+<tr class="odd"><td>93</td><td>Rocódromo de Hielo</td><td>103</td><td>1,350</td></tr>
+<tr><td>225</td><td>Dojo de Kendo</td><td>175</td><td>1,350</td></tr>
+<tr class="odd"><td>229</td><td>Polideportivo</td><td>117</td><td>1,225</td></tr>
+<tr><td>147</td><td>Gimnasio Olímpico</td><td>108</td><td>1,102</td></tr>
+<tr class="odd"><td>74</td><td>Campo de Fútbol Australiano</td><td>56</td><td>1,050</td></tr>
+<tr><td>224</td><td>Playa de Windsurf</td><td>154</td><td>1,050</td></tr>
+<tr class="odd"><td>223</td><td>Pista de Canoa Slalom</td><td>157</td><td>1,050</td></tr>
+<tr><td>257</td><td>Campo de Golf</td><td>124</td><td>1,050</td></tr>
+<tr class="odd"><td>91</td><td>Centro de Pentatlón</td><td>43</td><td>936</td></tr>
+<tr><td>249</td><td>Arena de Sepak Takraw</td><td>171</td><td>900</td></tr>
+<tr class="odd"><td>220</td><td>Campo de Polo</td><td>143</td><td>900</td></tr>
+<tr><td>227</td><td>Campo de Béisbol</td><td>123</td><td>800</td></tr>
+<tr class="odd"><td>226</td><td>Sala de Bridge</td><td>204</td><td>800</td></tr>
+<tr><td>148</td><td>Hipódromo</td><td>25</td><td>798</td></tr>
+<tr class="odd"><td>3</td><td>Estadio de Quidditch</td><td>99</td><td>760</td></tr>
+<tr><td>260</td><td>Coliseo de Lucha Grecorromana</td><td>139</td><td>750</td></tr>
+<tr class="odd"><td>242</td><td>Campo de Disc Golf</td><td>197</td><td>675</td></tr>
+<tr><td>269</td><td>Estadio de Fútbol Sala</td><td>206</td><td>600</td></tr>
+<tr class="odd"><td>250</td><td>Playa de Kitesurf</td><td>155</td><td>600</td></tr>
+<tr><td>244</td><td>Cancha de Tenis</td><td>109</td><td>450</td></tr>
+<tr class="odd"><td>213</td><td>Rocódromo</td><td>128</td><td>300</td></tr>
+<tr><td>212</td><td>Sala de Muay Thai</td><td>179</td><td>250</td></tr>
+</table></body></html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8"/><style>
+table {border: medium solid #6495ed;border-collapse: collapse;width: 100%;} th{font-family: monospace;border: thin solid #6495ed;padding: 5px;background-color: #D0E3FA;}th{text-align: left;}td{font-family: sans-serif;border: thin solid #6495ed;padding: 5px;text-align: center;}.odd{background:#e8edff;}img{padding:5px; border:solid; border-color: #dddddd #aaaaaa #aaaaaa #dddddd; border-width: 1px 2px 2px 1px; background-color:white;}</style>
+</head>
+<body>
+<table><tr><th colspan="2"><pre><code>/* Consulta 13: Entradas vendidas por disciplina en un rango de fechas.<br> * <br> * Esta consulta calcula cuántas entradas se han vendido por disciplina en un rango específico de fechas.<br> * <br> * - Selecciona el nombre de la disciplina y la cantidad de entradas vendidas.<br> * - Filtra los eventos por la fecha en que ocurrieron.<br> * - Agrupa los resultados por disciplina.<br> * - Ordena los resultados por la cantidad de entradas vendidas.<br> */<br>   <br>SELECT <br>    d.NombreDisciplina,<br>    COUNT(ce.idcliente) AS EntradasVendidas<br>FROM <br>    Evento e<br>JOIN <br>    CompraEntrada ce ON e.IDEvento = ce.IDEvento<br>JOIN <br>    Disciplina d ON e.IDDisciplina = d.IDDisciplina<br>WHERE <br>    e.FechaEvento BETWEEN '2025-01-01' AND '2025-12-31'<br>GROUP BY <br>    d.NombreDisciplina<br>ORDER BY <br>    EntradasVendidas DESC</code></pre></th></tr><tr><th>nombredisciplina</th><th>entradasvendidas</th></tr><tr class="odd"><td>Petanca</td><td>38</td></tr>
+<tr><td>Ecuestre</td><td>36</td></tr>
+<tr class="odd"><td>Kitesurf</td><td>35</td></tr>
+<tr><td>Motocross</td><td>35</td></tr>
+<tr class="odd"><td>Windsurf</td><td>34</td></tr>
+<tr><td>Kayak</td><td>34</td></tr>
+<tr class="odd"><td>Golf</td><td>34</td></tr>
+<tr><td>Bodyboard</td><td>33</td></tr>
+<tr class="odd"><td>Ciclismo</td><td>31</td></tr>
+<tr><td>Crossfit</td><td>30</td></tr>
+<tr class="odd"><td>Gimnasia</td><td>30</td></tr>
+<tr><td>Fútbol gaélico</td><td>29</td></tr>
+<tr class="odd"><td>Patinaje artístico</td><td>29</td></tr>
+<tr><td>Tiro con arco en sala</td><td>29</td></tr>
+<tr class="odd"><td>Tenis</td><td>28</td></tr>
+<tr><td>MotoGP</td><td>28</td></tr>
+<tr class="odd"><td>Tenis de mesa</td><td>28</td></tr>
+<tr><td>Carrera de obstáculos</td><td>27</td></tr>
+<tr class="odd"><td>Trekking</td><td>27</td></tr>
+<tr><td>Frontón</td><td>26</td></tr>
+<tr class="odd"><td>Korfball</td><td>25</td></tr>
+<tr><td>Hockey sobre hierba</td><td>25</td></tr>
+<tr class="odd"><td>Quidditch</td><td>25</td></tr>
+<tr><td>Rugby league</td><td>25</td></tr>
+<tr class="odd"><td>Rugby</td><td>24</td></tr>
+<tr><td>Snowboard</td><td>22</td></tr>
+<tr class="odd"><td>Fútbol americano</td><td>21</td></tr>
+<tr><td>Hockey sobre hielo</td><td>21</td></tr>
+<tr class="odd"><td>Ultimate frisbee</td><td>21</td></tr>
+<tr><td>Muay thai</td><td>20</td></tr>
+<tr class="odd"><td>Sepak takraw</td><td>18</td></tr>
+<tr><td>Surf de remo</td><td>11</td></tr>
+<tr class="odd"><td>Base jumping</td><td>8</td></tr>
+<tr><td>Rodeo</td><td>8</td></tr>
+<tr class="odd"><td>Apnea</td><td>7</td></tr>
+<tr><td>Carreras de caballos</td><td>7</td></tr>
+<tr class="odd"><td>Maratón de Series</td><td>7</td></tr>
+<tr><td>Paracaidismo</td><td>7</td></tr>
+<tr class="odd"><td>Carrera de drones</td><td>7</td></tr>
+<tr><td>Fútbol sala</td><td>7</td></tr>
+<tr class="odd"><td>Pugilismo</td><td>7</td></tr>
+<tr><td>Rafting</td><td>4</td></tr>
+</table></body></html>
