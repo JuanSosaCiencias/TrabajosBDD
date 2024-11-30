@@ -1,36 +1,3 @@
-\section*{Consulta 3: Atletas que ganaron más medallas por disciplina y tipo de medalla}
-
-\subsection*{Descripción}
-Esta consulta identifica a los atletas que han ganado la mayor cantidad de medallas, clasificadas por disciplina y tipo de medalla. Es útil para evaluar el rendimiento de los atletas en diferentes disciplinas y tipos de medallas.
-
-\textbf{SQL}
-
-\begin{verbatim}
-SELECT 
-    a.IDAtleta,
-    a.Nombre,
-    a.PrimerApellido,
-    a.SegundoApellido,
-    d.NombreDisciplina,
-    m.TipoMedalla,
-    COUNT(m.TipoMedalla) AS CantidadMedallas
-FROM 
-    Medalla m
-JOIN 
-    Atleta a ON m.IDAtleta = a.IDAtleta
-JOIN 
-    Disciplina d ON m.IDDisciplina = d.IDDisciplina
-GROUP BY 
-    a.IDAtleta, a.Nombre, a.PrimerApellido, a.SegundoApellido, d.NombreDisciplina, m.TipoMedalla
-ORDER BY 
-    CASE 
-        WHEN m.TipoMedalla = 'Oro' THEN 1
-        WHEN m.TipoMedalla = 'Plata' THEN 2
-        WHEN m.TipoMedalla = 'Bronce' THEN 3
-    END,
-    CantidadMedallas DESC;
-\end{verbatim}
-
 \begin{center}
     \includegraphics[width=16.5cm]{resources/Chapters/Consultas/Imagenes/Consulta3.jpeg} 
     

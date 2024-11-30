@@ -1,24 +1,3 @@
-\section*{Consulta 1: Cantidad de atletas registrados por disciplina}
-
-\subsection*{Descripción}
-En primera instancia es importante ver que en esta consulta lo que se busca obtener, es el número de atletas que participan en cada disciplina. De esta forma, esta consulta es útil para entender la popularidad de cada disciplina y la distribución de los atletas.
-
-\textbf{SQL}
-
-\begin{verbatim}
-SELECT 
-    d.NombreDisciplina,
-    COUNT(p.IDAtleta) AS NumParticipantes
-FROM 
-    Disciplina d
-JOIN 
-    Participa p ON d.IDDisciplina = p.IDDisciplina
-GROUP BY 
-    d.NombreDisciplina
-ORDER BY 
-    NumParticipantes DESC;
-\end{verbatim}
-
 \begin{center}
     \includegraphics[width=16.5cm]{resources/Chapters/Consultas/Imagenes/Consulta1.jpeg} 
     

@@ -1,28 +1,3 @@
-\section*{Consulta 4: Países que han ganado más medallas por disciplina}
-
-\subsection*{Descripción}
-
-\textbf{SQL}
-
-\begin{verbatim}
-SELECT 
-    p.NombrePais,
-    d.NombreDisciplina,
-    COUNT(m.TipoMedalla) AS CantidadMedallas
-FROM 
-    Medalla m
-JOIN 
-    Atleta a ON m.IDAtleta = a.IDAtleta
-JOIN 
-    Disciplina d ON m.IDDisciplina = d.IDDisciplina
-JOIN 
-    Pais p ON a.NombrePais = p.NombrePais
-GROUP BY 
-    p.NombrePais, d.NombreDisciplina
-ORDER BY 
-    CantidadMedallas DESC;
-\end{verbatim}
-
 \begin{center}
     \includegraphics[width=16.5cm]{resources/Chapters/Consultas/Imagenes/Consulta4.jpeg} 
     
