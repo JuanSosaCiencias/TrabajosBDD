@@ -387,4 +387,5 @@ ORDER BY
     MedallasOro DESC, 
     MedallasPlata DESC, 
     MedallasBronce DESC
+LIMIT 1;
 

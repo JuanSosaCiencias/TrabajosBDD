@@ -1,0 +1,20 @@
+Para esta sección vamos a detallar los triggers y procedimientos almacenados que se crearon en la base de datos, con el fin de automatizar ciertas tareas y garantizar la integridad de los datos, el codigo de ambos se encuentra en los archivos anexos con los mismos nombres.
+
+\section{Triggers}
+
+\begin{enumerate}
+    \item \textbf{Trigger 1:} 
+    El primer trigger que se creó es para verificar que un atleta tenga al menos 10 años de edad al momento de ser registrado en la base de datos, el trigger actúa tanto en modificacion como en insert. Puede parecer trivial pero es un requisito importante para cumplir con requerimientos de la organización.
+
+
+    \item \textbf{Trigger 2:} 
+    El segundo trigger que se creó es para validar la asignación de medallas a los atletas, el trigger actúa tanto en modificación como en inserción. El trigger verifica que un atleta no tenga ya una medalla en la misma disciplina, que el atleta participe en la disciplina y que solo haya una medalla de cada tipo en disciplinas individuales. El código se muestra a continuación: \vspace{0.5cm}
+
+
+
+        
+
+
+\end{enumerate}
+
+\section{Procedimientos almacenados}

@@ -1,4 +1,4 @@
--- ========= PROCEDIMIENTO: REGISTRAR PARTICIPACIÓN =========
+-- ========= PROCEDIMIENTO: REGISTRAR PARTICIPACIÓN EN EVENTO =========
 /*
 Propósito:
 Registrar la participación de un atleta en un evento y, opcionalmente, asignar una medalla. 
@@ -76,15 +76,6 @@ BEGIN
                 p_id_atleta, p_id_evento;
         END IF;
 
-        -- Verificar si la disciplina es individual y controlar medallas únicas
-        SELECT EsIndividual INTO v_disciplina_individual
-        FROM Disciplina
-        WHERE IDDisciplina = v_disciplina_evento;
-
-        IF v_disciplina_individual THEN
-            RAISE NOTICE 'La disciplina es individual. Solo se permite una medalla por atleta.';
-        END IF;
-
         -- Insertar la medalla
         BEGIN
             INSERT INTO Medalla (TipoMedalla, IDDisciplina, IDAtleta)
@@ -119,7 +110,7 @@ Parámetros:
 -- Registrar participación sin medalla
 -- CALL registrar_participacion(1, 311);
 -- Registrar participación con medalla
--- CALL registrar_participacion(65, 192, 'Oro');
+-- CALL registrar_participacion(1, 311, 'Oro');
 
 
 -- ========= PROCEDIMIENTO: ACTUALIZAR FASE DEL EVENTO =========
@@ -192,3 +183,67 @@ COMMENT ON PROCEDURE ActualizarFaseEvento IS
 
 -- Prueba 
 -- CALL ActualizarFaseEvento(1);
+
+-- ========= PROCEDIMIENTO: REGISTRAR ATLETA EN DISCIPLINA =========
+/*
+Propósito:
+Registrar a un atleta en una disciplina específica, asegurando que no esté ya registrado en la misma.
+
+Validaciones:
+1. Verifica que la disciplina exista en la base de datos.
+2. Comprueba que el atleta no esté ya registrado en la disciplina.
+
+Tablas objetivo:
+- AtletaDisciplina: Se registra la relación entre el atleta y la disciplina.
+
+Parámetros:
+- p_IDAtleta (INT): Identificador único del atleta.
+- p_IDDisciplina (INT): Identificador único de la disciplina.
+
+Notificaciones:
+- Utiliza RAISE NOTICE para informar del éxito de la operación.
+- Genera excepciones con mensajes claros si ocurren errores durante la validación.
+*/
+
+CREATE OR REPLACE PROCEDURE RegistrarAtletaEnDisciplina(
+    IN p_IDAtleta INT,
+    IN p_IDDisciplina INT
+)
+LANGUAGE plpgsql
+AS $$
+BEGIN
+    -- Verificar que la disciplina existe
+    IF NOT EXISTS (
+        SELECT 1
+        FROM Disciplina
+        WHERE IDDisciplina = p_IDDisciplina
+    ) THEN
+        RAISE EXCEPTION 'La disciplina con ID % no existe', p_IDDisciplina;
+    END IF;
+
+    -- Verificar que el atleta no esté ya registrado en la disciplina
+    IF EXISTS (
+        SELECT 1
+        FROM Participa
+        WHERE IDAtleta = p_IDAtleta
+          AND IDDisciplina = p_IDDisciplina
+    ) THEN
+        RAISE EXCEPTION 'El atleta con ID % ya está registrado en la disciplina %', p_IDAtleta, p_IDDisciplina;
+    END IF;
+
+    -- Registrar al atleta en la disciplina
+    INSERT INTO Participa (IDAtleta, IDDisciplina)
+    VALUES (p_IDAtleta, p_IDDisciplina);
+
+    -- Notificar éxito
+    RAISE NOTICE 'El atleta con ID % ha sido registrado en la disciplina %', p_IDAtleta, p_IDDisciplina;
+END;
+$$;
+
+-- Documentación del procedimiento con COMMENT ON
+COMMENT ON PROCEDURE RegistrarAtletaEnDisciplina IS
+'Registra a un atleta en una disciplina específica, asegurando que no esté ya registrado. Valida la existencia de la disciplina y evita duplicados.';
+
+-- Prueba
+-- CALL RegistrarAtletaEnDisciplina(1, 88);
+
