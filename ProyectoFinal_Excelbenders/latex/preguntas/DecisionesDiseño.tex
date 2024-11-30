@@ -6,25 +6,27 @@ A continuación, se detallan las principales entidades y relaciones, justificand
 \subsection*{Persona}
 La entidad \textbf{Persona} es una entidad genérica que contiene atributos básicos como:
 \begin{itemize}
-    \item \textbf{IDPersona}: Identificador único.
+    \item \textbf{IDPersona}: Identificador único; creamos uno sustituto porque va a ser complicado crear uno natural.
     \item \textbf{Nombre}, \textbf{Segundo Apellido}, \textbf{Fecha de Nacimiento}, \textbf{Genero}, \textbf{Teléfono}, \textbf{Correo}, y \textbf{Nacionalidad}.
 \end{itemize}
 
-\textbf{Atleta}, \textbf{Entrenador} y \textbf{Árbitro} son entidades hijas de \textbf{Persona}, ya que todas comparten estos datos básicos. Esta generalización permite evitar redundancia en el diseño.
+\textbf{Atleta}, \textbf{Entrenador} y \textbf{Árbitro} son entidades hijas de \textbf{Persona}, ya que todas comparten estos datos básicos. Esta generalización permite evitar redundancia en el diseño. Aunque en implementación, al ser especializacion total se pierde gran parte de la ventaja. \vspace{0.3cm}
+
+Probablemente, tendriamos que agregar un atributo que indique el equipo al que pertenece, ya que en implementación, si hay una diciplina que es en equipos esta dificil saber a que equipo pertenece cada atleta.
 
 \subsection*{Disciplina}
 La entidad \textbf{Disciplina} representa las actividades deportivas que forman parte de los Juegos Olímpicos. Sus atributos incluyen:
 \begin{itemize}
-    \item \textbf{IDDisciplina}: Identificador único.
+    \item \textbf{IDDisciplina}: Identificador único, podriamos usar tambien el nombreDisciplina como llave primaria, si garantizamos que todas sean unicas por ejemplo "100 metros planos hombres", pero nos limitamos a que solo ocurra el evento una vez (no por temporada) y comparar strings.
     \item \textbf{NombreDisciplina}: Nombre oficial de la disciplina.
     \item \textbf{Categoría}: Clasificación de la disciplina.
-    \item \textbf{NumParticipantes}: Número de atletas participantes.
+    \item \textbf{NumParticipantes}: Número de atletas participantes. Este atributo es calculado a partir de saber si es en equipo y contar el número de atletas que participan en cada equipo.
 \end{itemize}
 
 \subsection*{Evento}
 La entidad \textbf{Evento} representa las competiciones específicas. Sus atributos son:
 \begin{itemize}
-    \item \textbf{IDEvento}: Identificador único.
+    \item \textbf{IDEvento}: Identificador único, usamos este identificador por las mismas razones que el de disciplina.
     \item \textbf{NombreEvento}, \textbf{FechaEvento}, \textbf{DuraciónMax}, \textbf{HorarioInicio}, \textbf{Fase}, \textbf{Precio}.
 \end{itemize}
 El precio de un evento puede variar dependiendo de la fase en la que se encuentre.
@@ -37,7 +39,9 @@ La \textbf{Localidad} es una entidad débil dependiente de \textbf{Disciplina}. 
     \item \textbf{Aforo}: Capacidad máxima del lugar.
     \item \textbf{Tipo}: Clasificación del lugar.
 \end{itemize}
-La dependencia entre \textbf{Localidad} y \textbf{Disciplina} asegura que una localidad solo exista si está asociada a una disciplina. Localidad la consideramos entidad débil dependiendo de Disciplina en el sentido de que cada localidad estará determinada por la existencia de una disciplina, no tiene sentido que guardemos una ubicación de un lugar si no habrá nada relacionado a los juegos.
+La dependencia entre \textbf{Localidad} y \textbf{Disciplina} asegura que una localidad solo exista si está asociada a una disciplina. Localidad la consideramos entidad débil dependiendo de Disciplina en el sentido de que cada localidad estará determinada por la existencia de una disciplina, no tiene sentido que guardemos una ubicación de un lugar si no habrá nada relacionado a los juegos. \vspace{0.3cm}
+
+Al final nos dimos cuenta que probablemente la relacion entre localidad y disciplina debería ser multivaluada, ya que una localidad puede albergar varias disciplinas.
 
 \section*{Relaciones}
 
