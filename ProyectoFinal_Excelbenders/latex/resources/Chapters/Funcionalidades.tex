@@ -4,17 +4,31 @@ Para esta sección vamos a detallar los triggers y procedimientos almacenados qu
 
 \begin{enumerate}
     \item \textbf{Trigger 1:} 
-    El primer trigger que se creó es para verificar que un atleta tenga al menos 10 años de edad al momento de ser registrado en la base de datos, el trigger actúa tanto en modificacion como en insert. Puede parecer trivial pero es un requisito importante para cumplir con requerimientos de la organización.
-
+    El primer trigger que se creó es para verificar que un atleta tenga al menos 10 años de edad al momento de ser registrado en la base de datos, el trigger actúa tanto en modificacion como en insert en la tabla \texttt{Atleta}. Puede parecer trivial pero es un requisito importante para cumplir con requerimientos de la organización.
 
     \item \textbf{Trigger 2:} 
-    El segundo trigger que se creó es para validar la asignación de medallas a los atletas, el trigger actúa tanto en modificación como en inserción. El trigger verifica que un atleta no tenga ya una medalla en la misma disciplina, que el atleta participe en la disciplina y que solo haya una medalla de cada tipo en disciplinas individuales. El código se muestra a continuación: \vspace{0.5cm}
+    El segundo trigger que se creó es para validar la asignación de medallas a los atletas, el trigger actúa tanto en modificación como en inserción en la tabla \texttt{Medalla}. El trigger verifica que un atleta no tenga ya una medalla en la misma disciplina, que el atleta participe en la disciplina y que solo haya una medalla de cada tipo en disciplinas individuales. El código se muestra a continuación: \vspace{0.5cm}
 
+    \item \textbf{Trigger 3:}
+    El tercer trigger que se creó es para gestión de aforo, especificamente tiene como propósito controlar la venta de entradas; verifica la disponibilidad de aforo, evita ventas de eventos pasados, limita la cantidad de entradsa por cliente y registra el historial de ventas en una tabla auxiliar. Igualmente actúa tanto en modificación como en inserción, sobre la tabla de \texttt{CompraEntrada}.\vspace{0.5cm}
 
-
-        
-
+    \item \textbf{Trigger 4:}
+    Finalmente creamos un trigger con el proposito de asegurar que los atletas solo concursen en eventos cuyas diciplinas ellos practiquen, el trigger actua tanto en modificación como en inserción en la tabla \texttt{Concursa}. Básicamente verifica que si el atleta no practica la disciplina, no puede participar en un evento de la misma.\vspace{0.5cm}
 
 \end{enumerate}
 
 \section{Procedimientos almacenados}
+\begin{enumerate}
+    \item \textbf{Procedimiento 1: Registrar Participación en Evento}\\
+    Este procedimiento tiene como objetivo registrar la participación de un atleta en un evento, con la posibilidad opcional de asignarle una medalla. Antes de registrar la participación, se validan varios aspectos: que el evento exista, que el atleta esté registrado en la disciplina del evento, y que no existan duplicados de medallas en la misma disciplina. En caso de que se proporcione una medalla, se asegura que las disciplinas individuales no permitan más de una medalla por tipo para el mismo atleta. Este procedimiento actúa principalmente sobre las tablas \texttt{Concursa} y \texttt{Medalla}, asegurando integridad y consistencia en los datos.\vspace{0.5cm}
+
+    \item \textbf{Procedimiento 2: Actualizar Fase del Evento}\\
+    Este procedimiento cumple con el requerimiento de incrementar la fase eliminatoria de un evento y ajustar su precio en un 9\% cada vez que avanza de fase. Antes de realizar los cambios, verifica que el evento exista en la base de datos y que no se encuentre ya en la última fase (fase 3). Luego actualiza tanto la fase como el precio del evento en la tabla \texttt{Evento}. Utiliza mensajes informativos (\texttt{RAISE NOTICE}) para notificar los cambios realizados, o lanza excepciones en caso de errores.\vspace{0.5cm}
+
+    \item \textbf{Procedimiento 3: Registrar Atleta en Disciplina}\\
+    Este procedimiento asegura el registro de un atleta en una disciplina específica, verificando primero que la disciplina exista en la base de datos y que el atleta no esté ya registrado en la misma. Si las validaciones se cumplen, inserta el registro correspondiente en la tabla \texttt{Participa}. Se utilizan mensajes informativos para notificar el éxito de la operación, mientras que las excepciones manejan cualquier caso de error.\vspace{0.5cm}
+\end{enumerate}
+
+Consideramos que estos triggers y procedimientos almacenados son esenciales para garantizar la integridad y consistencia de los datos en la base de datos del COI. Además, automatizan tareas comunes y críticas, lo que facilita la administración y el mantenimiento del sistema.\vspace{0.5cm}
+
+Aún asi, es importante mencionar que podrían ser mas funcionalidades para facilitar la administración de la base de datos. En este proyecto no se llego a profundizar tanto como nos hubiera gustado.
