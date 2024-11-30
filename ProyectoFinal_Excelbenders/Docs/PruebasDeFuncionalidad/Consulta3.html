@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8"/><style>
+table {border: medium solid #6495ed;border-collapse: collapse;width: 100%;} th{font-family: monospace;border: thin solid #6495ed;padding: 5px;background-color: #D0E3FA;}th{text-align: left;}td{font-family: sans-serif;border: thin solid #6495ed;padding: 5px;text-align: center;}.odd{background:#e8edff;}img{padding:5px; border:solid; border-color: #dddddd #aaaaaa #aaaaaa #dddddd; border-width: 1px 2px 2px 1px; background-color:white;}</style>
+</head>
+<body>
+<table><tr><th colspan="7"><pre><code>/* Consulta 3: Atletas que ganaron más medallas por disciplina y tipo de medalla.<br> * <br> * Esta consulta obtiene los atletas que han ganado más medallas, desglosadas por disciplina y tipo de medalla.<br> * <br> * - Selecciona la información del atleta, el nombre de la disciplina, el tipo de medalla y la cantidad de medallas ganadas.<br> * - Agrupa los resultados por el atleta, la disciplina y el tipo de medalla.<br> * - Ordena los resultados por el tipo de medalla (Oro, Plata, Bronce) y la cantidad de medallas en orden descendente.<br> */<br>SELECT <br>    a.IDAtleta,<br>    a.Nombre,<br>    a.PrimerApellido,<br>    a.SegundoApellido,<br>    d.NombreDisciplina,<br>    m.TipoMedalla,<br>    COUNT(m.TipoMedalla) AS CantidadMedallas<br>FROM <br>    Medalla m<br>JOIN <br>    Atleta a ON m.IDAtleta = a.IDAtleta<br>JOIN <br>    Disciplina d ON m.IDDisciplina = d.IDDisciplina<br>GROUP BY <br>    a.IDAtleta, a.Nombre, a.PrimerApellido, a.SegundoApellido, d.NombreDisciplina, m.TipoMedalla<br>ORDER BY <br>    CASE <br>        WHEN m.TipoMedalla = 'Oro' THEN 1<br>        WHEN m.TipoMedalla = 'Plata' THEN 2<br>        WHEN m.TipoMedalla = 'Bronce' THEN 3<br>    END,<br>    CantidadMedallas DESC</code></pre></th></tr><tr><th>idatleta</th><th>nombre</th><th>primerapellido</th><th>segundoapellido</th><th>nombredisciplina</th><th>tipomedalla</th><th>cantidadmedallas</th></tr><tr class="odd"><td>75</td><td>Ulberto</td><td>De Minico</td><td>Blease</td><td>Golf</td><td>Oro</td><td>1</td></tr>
+<tr><td>100</td><td>Goldina</td><td>Asipenko</td><td>Groom</td><td>Snowboard cross</td><td>Oro</td><td>1</td></tr>
+<tr class="odd"><td>63</td><td>Flossie</td><td>Calcraft</td><td>Fordy</td><td>Ciclismo tándem</td><td>Oro</td><td>1</td></tr>
+<tr><td>131</td><td>Dulcy</td><td>Twinbrow</td><td>Thomesson</td><td>Skeleton</td><td>Oro</td><td>1</td></tr>
+<tr class="odd"><td>36</td><td>Shena</td><td>Chazotte</td><td>Adshed</td><td>Taekwondo</td><td>Oro</td><td>1</td></tr>
+<tr><td>65</td><td>Nevile</td><td>Simanek</td><td>Gatheridge</td><td>Fútbol gaélico</td><td>Oro</td><td>1</td></tr>
+<tr class="odd"><td>145</td><td>Zahara</td><td>Philpotts</td><td>Hardwell</td><td>Baloncesto en silla de ruedas</td><td>Oro</td><td>1</td></tr>
+<tr><td>88</td><td>Carny</td><td>Lillywhite</td><td>Gatesman</td><td>Windsurf</td><td>Oro</td><td>1</td></tr>
+<tr class="odd"><td>916</td><td>Adrianna</td><td>McDonagh</td><td>Jozef</td><td>Muay thai</td><td>Oro</td><td>1</td></tr>
+<tr><td>50</td><td>Denise</td><td>Harhoff</td><td>Astlatt</td><td>Lucha grecorromana</td><td>Oro</td><td>1</td></tr>
+<tr class="odd"><td>126</td><td>Kirby</td><td>Loughhead</td><td>Charlon</td><td>Halterofilia</td><td>Oro</td><td>1</td></tr>
+<tr><td>87</td><td>Minda</td><td>Lovering</td><td>Duggen</td><td>Windsurf</td><td>Oro</td><td>1</td></tr>
+<tr class="odd"><td>147</td><td>Elwira</td><td>Beeck</td><td>Howley</td><td>Luge</td><td>Oro</td><td>1</td></tr>
+<tr><td>7</td><td>Guilbert</td><td>Blackston</td><td>Skrine</td><td>Rugby subacuático</td><td>Oro</td><td>1</td></tr>
+<tr class="odd"><td>59</td><td>Blinny</td><td>Aldersley</td><td>Neylan</td><td>Kárate</td><td>Oro</td><td>1</td></tr>
+<tr><td>31</td><td>Ardeen</td><td>Gladeche</td><td>MacEveley</td><td>Simulación de vuelo</td><td>Oro</td><td>1</td></tr>
+<tr class="odd"><td>65</td><td>Nevile</td><td>Simanek</td><td>Gatheridge</td><td>Bádminton</td><td>Oro</td><td>1</td></tr>
+<tr><td>122</td><td>Hillier</td><td>Danzey</td><td>Kaaskooper</td><td>Park golf</td><td>Oro</td><td>1</td></tr>
+<tr class="odd"><td>95</td><td>Caritta</td><td>Kleinfeld</td><td>Mazin</td><td>Dardos</td><td>Oro</td><td>1</td></tr>
+<tr><td>67</td><td>Raine</td><td>Calven</td><td>McCloid</td><td>Duelo de Yu-Gi-Oh!</td><td>Oro</td><td>1</td></tr>
+<tr class="odd"><td>52</td><td>Urson</td><td>Backe</td><td>Oldroyd</td><td>Trekking</td><td>Oro</td><td>1</td></tr>
+<tr><td>16</td><td>Isabelle</td><td>Vink</td><td>Gready</td><td>Equitación</td><td>Oro</td><td>1</td></tr>
+<tr class="odd"><td>98</td><td>Geralda</td><td>Ainsbury</td><td>Bosson</td><td>Pádel</td><td>Oro</td><td>1</td></tr>
+<tr><td>65</td><td>Nevile</td><td>Simanek</td><td>Gatheridge</td><td>E-Sports</td><td>Oro</td><td>1</td></tr>
+<tr class="odd"><td>68</td><td>Willis</td><td>O'Shields</td><td>Pressman</td><td>Patinaje artístico</td><td>Oro</td><td>1</td></tr>
+<tr><td>132</td><td>Hughie</td><td>Ainslie</td><td>Gail</td><td>Baloncesto</td><td>Oro</td><td>1</td></tr>
+<tr class="odd"><td>97</td><td>Damian</td><td>Merryman</td><td>Kitchaside</td><td>Salto de trampolín</td><td>Oro</td><td>1</td></tr>
+<tr><td>119</td><td>Gladys</td><td>Onn</td><td>Dowle</td><td>Fórmula 1</td><td>Oro</td><td>1</td></tr>
+<tr class="odd"><td>146</td><td>Gabby</td><td>Lavens</td><td>Mackin</td><td>Carreras de karts</td><td>Oro</td><td>1</td></tr>
+<tr><td>17</td><td>Elbertine</td><td>Buer</td><td>Lean</td><td>Carrera de obstáculos</td><td>Oro</td><td>1</td></tr>
+<tr class="odd"><td>76</td><td>Danyelle</td><td>Mandres</td><td>Hallowes</td><td>Motocross</td><td>Oro</td><td>1</td></tr>
+<tr><td>110</td><td>Chet</td><td>Colafate</td><td>Pacey</td><td>Tiro adaptado</td><td>Oro</td><td>1</td></tr>
+<tr class="odd"><td>72</td><td>Maxy</td><td>Leyes</td><td>Duthy</td><td>Boxeo</td><td>Oro</td><td>1</td></tr>
+<tr><td>66</td><td>Kylie</td><td>Duffus</td><td>Nanetti</td><td>Superbikes</td><td>Oro</td><td>1</td></tr>
+<tr class="odd"><td>28</td><td>Henry</td><td>Viney</td><td>Alishoner</td><td>Rodeo</td><td>Oro</td><td>1</td></tr>
+<tr><td>89</td><td>Mina</td><td>Gatteridge</td><td>Nehls</td><td>Korfball</td><td>Oro</td><td>1</td></tr>
+<tr class="odd"><td>58</td><td>Jeanine</td><td>Chalcroft</td><td>Maddaford</td><td>Vóley playa</td><td>Oro</td><td>1</td></tr>
+<tr><td>155</td><td>Hartwell</td><td>Escreet</td><td>Affuso</td><td>Curling mixto</td><td>Oro</td><td>1</td></tr>
+<tr class="odd"><td>71</td><td>Christan</td><td>Worgan</td><td>Mattam</td><td>Nascar</td><td>Oro</td><td>1</td></tr>
+<tr><td>22</td><td>Sharia</td><td>Di Carlo</td><td>Rutigliano</td><td>Waterpolo</td><td>Oro</td><td>1</td></tr>
+<tr class="odd"><td>12</td><td>Noelle</td><td>Cunnah</td><td>Truter</td><td>Patinaje sobre ruedas</td><td>Oro</td><td>1</td></tr>
+<tr><td>86</td><td>Corinna</td><td>Latter</td><td>Milleton</td><td>Patinaje de velocidad en pista corta</td><td>Oro</td><td>1</td></tr>
+<tr class="odd"><td>152</td><td>Wait</td><td>Shildrake</td><td>Gheeraert</td><td>Tiro con arco</td><td>Oro</td><td>1</td></tr>
+<tr><td>103</td><td>Tammie</td><td>Dunkerton</td><td>Press</td><td>Goalball</td><td>Oro</td><td>1</td></tr>
+<tr class="odd"><td>111</td><td>Skylar</td><td>Grain</td><td>Frostdicke</td><td>Remo</td><td>Oro</td><td>1</td></tr>
+<tr><td>57</td><td>Cilka</td><td>Ferbrache</td><td>Veale</td><td>Tiro con arco en sala</td><td>Oro</td><td>1</td></tr>
+<tr class="odd"><td>32</td><td>Ranee</td><td>Ahmad</td><td>Gobel</td><td>Bodyboard</td><td>Oro</td><td>1</td></tr>
+<tr><td>42</td><td>Norton</td><td>Egiloff</td><td>Longson</td><td>Carrera de triciclos</td><td>Oro</td><td>1</td></tr>
+<tr class="odd"><td>45</td><td>Nanice</td><td>Ochterlony</td><td>Spino</td><td>Tlachtli</td><td>Oro</td><td>1</td></tr>
+<tr><td>85</td><td>Jerrilyn</td><td>McCudden</td><td>Carless</td><td>E-Sports</td><td>Oro</td><td>1</td></tr>
+<tr class="odd"><td>143</td><td>Erek</td><td>Dever</td><td>Knee</td><td>Snowboard</td><td>Plata</td><td>1</td></tr>
+<tr><td>3</td><td>Nickie</td><td>Kippin</td><td>Sporner</td><td>Esgrima histórica</td><td>Plata</td><td>1</td></tr>
+<tr class="odd"><td>25</td><td>Ricky</td><td>Wims</td><td>De Gregoli</td><td>Pentatlón moderno</td><td>Plata</td><td>1</td></tr>
+<tr><td>14</td><td>Gerladina</td><td>Trickett</td><td>Kuller</td><td>Windsurf</td><td>Plata</td><td>1</td></tr>
+<tr class="odd"><td>10</td><td>Roberto</td><td>Abrahmson</td><td>Woodberry</td><td>Crossfit</td><td>Plata</td><td>1</td></tr>
+<tr><td>79</td><td>Carmine</td><td>Dawley</td><td>Wyper</td><td>Skateboarding</td><td>Plata</td><td>1</td></tr>
+<tr class="odd"><td>120</td><td>Doti</td><td>Hounsom</td><td>Sandels</td><td>Aikido</td><td>Plata</td><td>1</td></tr>
+<tr><td>116</td><td>Avictor</td><td>Fern</td><td>Melson</td><td>Carrera vertical</td><td>Plata</td><td>1</td></tr>
+<tr class="odd"><td>78</td><td>Elmo</td><td>Osipov</td><td>Cohane</td><td>Carrera de coches solares</td><td>Plata</td><td>1</td></tr>
+<tr><td>99</td><td>Clerkclaude</td><td>Hallford</td><td>Mylchreest</td><td>Softball</td><td>Plata</td><td>1</td></tr>
+<tr class="odd"><td>144</td><td>Shelagh</td><td>Clamp</td><td>Espinha</td><td>Tiro deportivo</td><td>Plata</td><td>1</td></tr>
+<tr><td>21</td><td>Kalil</td><td>Hunnisett</td><td>Horbart</td><td>Parkour</td><td>Plata</td><td>1</td></tr>
+<tr class="odd"><td>43</td><td>Abdul</td><td>Fawdry</td><td>Lovitt</td><td>Wushu</td><td>Plata</td><td>1</td></tr>
+<tr><td>46</td><td>Putnam</td><td>Woolner</td><td>Northcott</td><td>Fútbol gaélico</td><td>Plata</td><td>1</td></tr>
+<tr class="odd"><td>141</td><td>Noelani</td><td>Loveredge</td><td>Sycamore</td><td>Buceo</td><td>Plata</td><td>1</td></tr>
+<tr><td>51</td><td>Elfrieda</td><td>Woan</td><td>Goudard</td><td>Fútbol playa</td><td>Plata</td><td>1</td></tr>
+<tr class="odd"><td>35</td><td>Ed</td><td>Arniz</td><td>Caine</td><td>Snowboard cross</td><td>Plata</td><td>1</td></tr>
+<tr><td>90</td><td>Kerry</td><td>Shynn</td><td>Kelly</td><td>Sepak takraw</td><td>Plata</td><td>1</td></tr>
+<tr class="odd"><td>5</td><td>Kristo</td><td>Berthot</td><td>Zanardii</td><td>Rallies</td><td>Plata</td><td>1</td></tr>
+<tr><td>128</td><td>Alleen</td><td>Cluley</td><td>Gavaghan</td><td>Bridge</td><td>Plata</td><td>1</td></tr>
+<tr class="odd"><td>91</td><td>Rodolphe</td><td>Dightham</td><td>Burgan</td><td>Hockey subacuático</td><td>Plata</td><td>1</td></tr>
+<tr><td>2</td><td>Linnell</td><td>Nutman</td><td>Grunson</td><td>Natación para ciegos</td><td>Plata</td><td>1</td></tr>
+<tr class="odd"><td>93</td><td>Karalynn</td><td>Didball</td><td>Euston</td><td>Frontón</td><td>Plata</td><td>1</td></tr>
+<tr><td>15</td><td>Daniele</td><td>Pattenden</td><td>Genese</td><td>Sambo</td><td>Plata</td><td>1</td></tr>
+<tr class="odd"><td>140</td><td>Kalle</td><td>Pattenden</td><td>Ciabatteri</td><td>Carrera de sacos</td><td>Plata</td><td>1</td></tr>
+<tr><td>92</td><td>Leta</td><td>Scoggins</td><td>Espadas</td><td>Korfball</td><td>Plata</td><td>1</td></tr>
+<tr class="odd"><td>30</td><td>Norene</td><td>Shrieves</td><td>Pontain</td><td>Muay thai</td><td>Plata</td><td>1</td></tr>
+<tr><td>18</td><td>Sidney</td><td>Howat</td><td>Goodie</td><td>Carrera de drones</td><td>Plata</td><td>1</td></tr>
+<tr class="odd"><td>11</td><td>Elana</td><td>Gooders</td><td>Ecob</td><td>Equitación</td><td>Plata</td><td>1</td></tr>
+<tr><td>154</td><td>Cross</td><td>Metts</td><td>Perigo</td><td>Ciclismo</td><td>Plata</td><td>1</td></tr>
+<tr class="odd"><td>64</td><td>Rhys</td><td>Hallmark</td><td>Wilfinger</td><td>Luge</td><td>Plata</td><td>1</td></tr>
+<tr><td>39</td><td>Tobi</td><td>Kernan</td><td>Bozworth</td><td>Skeleton</td><td>Plata</td><td>1</td></tr>
+<tr class="odd"><td>23</td><td>Giorgi</td><td>Baselli</td><td>Roberts</td><td>Atletismo</td><td>Plata</td><td>1</td></tr>
+<tr><td>56</td><td>Tisha</td><td>D'Ambrogi</td><td>Lillecrap</td><td>Roller derby</td><td>Plata</td><td>1</td></tr>
+<tr class="odd"><td>83</td><td>Lacy</td><td>McKitterick</td><td>Firminger</td><td>Taekwondo</td><td>Plata</td><td>1</td></tr>
+<tr><td>24</td><td>Phyllis</td><td>Oldfield-Cherry</td><td>Darch</td><td>Triatlón</td><td>Plata</td><td>1</td></tr>
+<tr class="odd"><td>13</td><td>Sheppard</td><td>Laurance</td><td>Batterton</td><td>Fórmula 1</td><td>Plata</td><td>1</td></tr>
+<tr><td>151</td><td>Sean</td><td>Shevlan</td><td>Merioth</td><td>Rugby league</td><td>Plata</td><td>1</td></tr>
+<tr class="odd"><td>1</td><td>Jada</td><td>Clere</td><td>Bodicam</td><td>Patinaje artístico</td><td>Plata</td><td>1</td></tr>
+<tr><td>134</td><td>Cicely</td><td>Inglesfield</td><td>Page</td><td>Bobsleigh</td><td>Plata</td><td>1</td></tr>
+<tr class="odd"><td>121</td><td>Allix</td><td>Crofthwaite</td><td>Scholtz</td><td>Quidditch</td><td>Plata</td><td>1</td></tr>
+<tr><td>26</td><td>Stephine</td><td>Scard</td><td>Symcock</td><td>Fútbol 5</td><td>Plata</td><td>1</td></tr>
+<tr class="odd"><td>33</td><td>Oralee</td><td>Brugden</td><td>Darree</td><td>Balonmano</td><td>Plata</td><td>1</td></tr>
+<tr><td>82</td><td>Nadean</td><td>Zannetti</td><td>Andrea</td><td>BMX</td><td>Plata</td><td>1</td></tr>
+<tr class="odd"><td>129</td><td>Deonne</td><td>Bullivant</td><td>Knowlden</td><td>Kayak</td><td>Plata</td><td>1</td></tr>
+<tr><td>117</td><td>Reese</td><td>Gagan</td><td>Boecke</td><td>Lucha grecorromana</td><td>Plata</td><td>1</td></tr>
+<tr class="odd"><td>105</td><td>Ximenez</td><td>Jahndel</td><td>Cosslett</td><td>Apnea</td><td>Plata</td><td>1</td></tr>
+<tr><td>150</td><td>Willdon</td><td>Galland</td><td>Fleeman</td><td>Tejo</td><td>Plata</td><td>1</td></tr>
+<tr class="odd"><td>37</td><td>Christi</td><td>Snelman</td><td>Surmeyer</td><td>Billar</td><td>Plata</td><td>1</td></tr>
+<tr><td>8</td><td>Jessalyn</td><td>Piddle</td><td>Stobbs</td><td>Nascar</td><td>Bronce</td><td>1</td></tr>
+<tr class="odd"><td>4</td><td>Brita</td><td>Warbeys</td><td>Hebard</td><td>Squash</td><td>Bronce</td><td>1</td></tr>
+<tr><td>29</td><td>Culver</td><td>Tavener</td><td>Mannagh</td><td>Salto de trampolín</td><td>Bronce</td><td>1</td></tr>
+<tr class="odd"><td>106</td><td>Fernanda</td><td>Walasik</td><td>Roaf</td><td>Patolli</td><td>Bronce</td><td>1</td></tr>
+<tr><td>124</td><td>Orran</td><td>Jennins</td><td>Varfolomeev</td><td>Gimnasia rítmica</td><td>Bronce</td><td>1</td></tr>
+<tr class="odd"><td>49</td><td>Allina</td><td>Mannix</td><td>Doncom</td><td>Softball</td><td>Bronce</td><td>1</td></tr>
+<tr><td>55</td><td>Vernen</td><td>Jesse</td><td>Smeath</td><td>Carreras de karts</td><td>Bronce</td><td>1</td></tr>
+<tr class="odd"><td>53</td><td>Willdon</td><td>Peasnone</td><td>Awmack</td><td>Park golf</td><td>Bronce</td><td>1</td></tr>
+<tr><td>9</td><td>Margaretta</td><td>Hamshar</td><td>Fforde</td><td>Rugby league</td><td>Bronce</td><td>1</td></tr>
+<tr class="odd"><td>27</td><td>Seka</td><td>Leaney</td><td>Morstatt</td><td>Parapente</td><td>Bronce</td><td>1</td></tr>
+<tr><td>47</td><td>Merla</td><td>Bayle</td><td>Webland</td><td>Curling mixto</td><td>Bronce</td><td>1</td></tr>
+<tr class="odd"><td>40</td><td>Adolf</td><td>Gallety</td><td>Checo</td><td>Taekwondo</td><td>Bronce</td><td>1</td></tr>
+<tr><td>133</td><td>Tommi</td><td>Kearns</td><td>Le Monnier</td><td>Muay thai</td><td>Bronce</td><td>1</td></tr>
+<tr class="odd"><td>348</td><td>Elyse</td><td>Skinn</td><td>Witsey</td><td>Fútbol sala</td><td>Bronce</td><td>1</td></tr>
+<tr><td>94</td><td>Emogene</td><td>Pettitt</td><td>Rignold</td><td>Vovinam</td><td>Bronce</td><td>1</td></tr>
+<tr class="odd"><td>136</td><td>Pet</td><td>Josefowicz</td><td>Pedder</td><td>Kayak</td><td>Bronce</td><td>1</td></tr>
+<tr><td>62</td><td>Dorry</td><td>Lattie</td><td>Heaney`</td><td>Duelo de Yu-Gi-Oh!</td><td>Bronce</td><td>1</td></tr>
+<tr class="odd"><td>34</td><td>Rebekkah</td><td>Martinon</td><td>Gobeau</td><td>Rugby en silla de ruedas</td><td>Bronce</td><td>1</td></tr>
+<tr><td>115</td><td>Trudey</td><td>Notman</td><td>Lindsey</td><td>Ecuestre</td><td>Bronce</td><td>1</td></tr>
+<tr class="odd"><td>6</td><td>Harriot</td><td>Ledster</td><td>Mountford</td><td>Piragüismo</td><td>Bronce</td><td>1</td></tr>
+<tr><td>127</td><td>Nerita</td><td>Sidebotton</td><td>Ruggen</td><td>Escalada</td><td>Bronce</td><td>1</td></tr>
+<tr class="odd"><td>70</td><td>Clare</td><td>Halkyard</td><td>Duer</td><td>Voleibol sentado</td><td>Bronce</td><td>1</td></tr>
+<tr><td>23</td><td>Giorgi</td><td>Baselli</td><td>Roberts</td><td>Rallies</td><td>Bronce</td><td>1</td></tr>
+<tr class="odd"><td>148</td><td>Junina</td><td>Chell</td><td>Dunphie</td><td>Skeleton</td><td>Bronce</td><td>1</td></tr>
+<tr><td>142</td><td>Rivy</td><td>Asee</td><td>MacNeice</td><td>Pesca submarina</td><td>Bronce</td><td>1</td></tr>
+<tr class="odd"><td>135</td><td>Cathy</td><td>Gittings</td><td>Knappen</td><td>Tiro con arco en sala</td><td>Bronce</td><td>1</td></tr>
+<tr><td>159</td><td>Kalila</td><td>Layton</td><td>Echallie</td><td>Nado sincronizado</td><td>Bronce</td><td>1</td></tr>
+<tr class="odd"><td>77</td><td>Kaila</td><td>Baillie</td><td>Jago</td><td>Rugby subacuático</td><td>Bronce</td><td>1</td></tr>
+<tr><td>125</td><td>Vivi</td><td>Blue</td><td>Carp</td><td>Bádminton</td><td>Bronce</td><td>1</td></tr>
+<tr class="odd"><td>24</td><td>Phyllis</td><td>Oldfield-Cherry</td><td>Darch</td><td>Aikido</td><td>Bronce</td><td>1</td></tr>
+<tr><td>137</td><td>Karina</td><td>Rainbird</td><td>Dudenie</td><td>Ultimate frisbee</td><td>Bronce</td><td>1</td></tr>
+<tr class="odd"><td>118</td><td>Wandie</td><td>Cave</td><td>Moynham</td><td>Frontón</td><td>Bronce</td><td>1</td></tr>
+<tr><td>54</td><td>Uriel</td><td>Bartolomeazzi</td><td>Gilliatt</td><td>Skimboard</td><td>Bronce</td><td>1</td></tr>
+<tr class="odd"><td>38</td><td>Reyna</td><td>Kevlin</td><td>Cory</td><td>Tiro con arco</td><td>Bronce</td><td>1</td></tr>
+<tr><td>158</td><td>Josh</td><td>Bernade</td><td>McCaskill</td><td>Béisbol</td><td>Bronce</td><td>1</td></tr>
+<tr class="odd"><td>48</td><td>Betsy</td><td>Brownhill</td><td>Richardson</td><td>Ala delta</td><td>Bronce</td><td>1</td></tr>
+<tr><td>44</td><td>Friedrich</td><td>Reddyhoff</td><td>Valentino</td><td>BMX</td><td>Bronce</td><td>1</td></tr>
+<tr class="odd"><td>108</td><td>Lulu</td><td>Drake</td><td>Scottini</td><td>Slackline</td><td>Bronce</td><td>1</td></tr>
+<tr><td>149</td><td>Heath</td><td>Redwood</td><td>Lindup</td><td>Quidditch</td><td>Bronce</td><td>1</td></tr>
+<tr class="odd"><td>112</td><td>Kali</td><td>Goncalo</td><td>Denham</td><td>Carrera de obstáculos</td><td>Bronce</td><td>1</td></tr>
+<tr><td>73</td><td>Hatty</td><td>Hardingham</td><td>Kareman</td><td>Gatka</td><td>Bronce</td><td>1</td></tr>
+<tr class="odd"><td>80</td><td>Alexis</td><td>Filintsev</td><td>Narup</td><td>Gimnasia acrobática</td><td>Bronce</td><td>1</td></tr>
+<tr><td>20</td><td>Miner</td><td>Cumine</td><td>Lafford</td><td>Dardos</td><td>Bronce</td><td>1</td></tr>
+<tr class="odd"><td>84</td><td>Elliot</td><td>Millan</td><td>Chaucer</td><td>Capoeira</td><td>Bronce</td><td>1</td></tr>
+<tr><td>74</td><td>Svend</td><td>Mc Combe</td><td>Eacott</td><td>Tiro deportivo</td><td>Bronce</td><td>1</td></tr>
+<tr class="odd"><td>19</td><td>Rozamond</td><td>Showell</td><td>Konke</td><td>E-Sports</td><td>Bronce</td><td>1</td></tr>
+</table></body></html>

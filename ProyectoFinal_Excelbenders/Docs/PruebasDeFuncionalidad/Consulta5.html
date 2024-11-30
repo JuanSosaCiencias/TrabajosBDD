@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8"/><style>
+table {border: medium solid #6495ed;border-collapse: collapse;width: 100%;} th{font-family: monospace;border: thin solid #6495ed;padding: 5px;background-color: #D0E3FA;}th{text-align: left;}td{font-family: sans-serif;border: thin solid #6495ed;padding: 5px;text-align: center;}.odd{background:#e8edff;}img{padding:5px; border:solid; border-color: #dddddd #aaaaaa #aaaaaa #dddddd; border-width: 1px 2px 2px 1px; background-color:white;}</style>
+</head>
+<body>
+<table><tr><th colspan="5"><pre><code>/* Consulta 5: Atletas que tienen a su cargo cada entrenador.<br> * <br> * Esta consulta obtiene la cantidad de atletas que tiene a su cargo cada entrenador.<br> * <br> * - Selecciona la información del entrenador y cuenta la cantidad de atletas que tiene a su cargo.<br> * - Agrupa los resultados por el entrenador.<br> * - Ordena los resultados por la cantidad de atletas en orden descendente.<br> */<br>SELECT <br>    e.IDEntrenador,<br>    e.Nombre AS NombreEntrenador,<br>    e.PrimerApellido AS PrimerApellidoEntrenador,<br>    e.SegundoApellido AS SegundoApellidoEntrenador,<br>    COUNT(a.IDAtleta) AS CantidadAtletas<br>FROM <br>    Entrenador e<br>JOIN <br>    Atleta a ON e.IDEntrenador = a.IDEntrenador<br>GROUP BY <br>    e.IDEntrenador, e.Nombre, e.PrimerApellido, e.SegundoApellido<br>ORDER BY <br>    CantidadAtletas DESC</code></pre></th></tr><tr><th>identrenador</th><th>nombreentrenador</th><th>primerapellidoentrenador</th><th>segundoapellidoentrenador</th><th>cantidadatletas</th></tr><tr class="odd"><td>50</td><td>Dalila</td><td>Orrett</td><td>Kalkhoven</td><td>11</td></tr>
+<tr><td>101</td><td>Ciro</td><td>Seabon</td><td>Bassom</td><td>11</td></tr>
+<tr class="odd"><td>196</td><td>Hewe</td><td>Fitzsymonds</td><td>Bamling</td><td>11</td></tr>
+<tr><td>118</td><td>Friedrich</td><td>Byer</td><td>Welman</td><td>10</td></tr>
+<tr class="odd"><td>15</td><td>Giffy</td><td>Doncaster</td><td>Raund</td><td>10</td></tr>
+<tr><td>81</td><td>Rosamond</td><td>Killingworth</td><td>Rolley</td><td>10</td></tr>
+<tr class="odd"><td>176</td><td>Susanne</td><td>Dabnor</td><td>Thomazin</td><td>10</td></tr>
+<tr><td>26</td><td>Bertrando</td><td>Bunner</td><td>Bolles</td><td>9</td></tr>
+<tr class="odd"><td>174</td><td>Daffy</td><td>Kobierra</td><td>Oakland</td><td>9</td></tr>
+<tr><td>72</td><td>Emanuele</td><td>Troth</td><td>Dunford</td><td>9</td></tr>
+<tr class="odd"><td>184</td><td>Agretha</td><td>Lochead</td><td>Hurdman</td><td>9</td></tr>
+<tr><td>124</td><td>Cally</td><td>Freyne</td><td>Humfrey</td><td>9</td></tr>
+<tr class="odd"><td>154</td><td>Killian</td><td>Howey</td><td>Bunner</td><td>9</td></tr>
+<tr><td>173</td><td>Torey</td><td>Gallager</td><td>Trethewey</td><td>9</td></tr>
+<tr class="odd"><td>54</td><td>Annabell</td><td>Godbald</td><td>Hacard</td><td>8</td></tr>
+<tr><td>34</td><td>Cele</td><td>Brough</td><td>McGruar</td><td>8</td></tr>
+<tr class="odd"><td>36</td><td>Shaughn</td><td>Scotchforth</td><td>Challens</td><td>8</td></tr>
+<tr><td>181</td><td>Frederik</td><td>Espy</td><td>Corby</td><td>8</td></tr>
+<tr class="odd"><td>51</td><td>Maible</td><td>Rosenbaum</td><td>Brien</td><td>8</td></tr>
+<tr><td>48</td><td>Mitch</td><td>Prince</td><td>Cervantes</td><td>7</td></tr>
+<tr class="odd"><td>90</td><td>Westbrook</td><td>Regnard</td><td>McGuire</td><td>7</td></tr>
+<tr><td>144</td><td>Lotte</td><td>Lynn</td><td>Hutsby</td><td>7</td></tr>
+<tr class="odd"><td>180</td><td>Franky</td><td>Cisneros</td><td>Chatteris</td><td>7</td></tr>
+<tr><td>168</td><td>Jaclin</td><td>Maffi</td><td>Hamsson</td><td>7</td></tr>
+<tr class="odd"><td>120</td><td>Aurelia</td><td>MacCrackan</td><td>Forcade</td><td>7</td></tr>
+<tr><td>91</td><td>Bar</td><td>Paternoster</td><td>Gland</td><td>7</td></tr>
+<tr class="odd"><td>190</td><td>Brittne</td><td>Haselden</td><td>Onthank</td><td>7</td></tr>
+<tr><td>35</td><td>Robby</td><td>Matkovic</td><td>Bridgman</td><td>7</td></tr>
+<tr class="odd"><td>83</td><td>Carver</td><td>Gaul</td><td>Aymes</td><td>7</td></tr>
+<tr><td>175</td><td>Lizbeth</td><td>Shalliker</td><td>Grahamslaw</td><td>7</td></tr>
+<tr class="odd"><td>77</td><td>Evy</td><td>MacElholm</td><td>Antrag</td><td>7</td></tr>
+<tr><td>64</td><td>Derk</td><td>Kelston</td><td>Hanwright</td><td>7</td></tr>
+<tr class="odd"><td>142</td><td>Ezechiel</td><td>Silveston</td><td>Corkhill</td><td>7</td></tr>
+<tr><td>82</td><td>Lacey</td><td>Gleave</td><td>Brounsell</td><td>7</td></tr>
+<tr class="odd"><td>141</td><td>Adorne</td><td>Oneil</td><td>Menhci</td><td>7</td></tr>
+<tr><td>18</td><td>Mac</td><td>Gremain</td><td>Caslane</td><td>7</td></tr>
+<tr class="odd"><td>114</td><td>Teodoro</td><td>Seed</td><td>Gallymore</td><td>7</td></tr>
+<tr><td>132</td><td>Hally</td><td>Segrave</td><td>Gillicuddy</td><td>7</td></tr>
+<tr class="odd"><td>69</td><td>Salomon</td><td>Robson</td><td>Layman</td><td>7</td></tr>
+<tr><td>76</td><td>Daniel</td><td>Newarte</td><td>Rodda</td><td>7</td></tr>
+<tr class="odd"><td>7</td><td>Tessa</td><td>Morphew</td><td>Nettles</td><td>7</td></tr>
+<tr><td>133</td><td>Tanitansy</td><td>Harman</td><td>Bellenie</td><td>7</td></tr>
+<tr class="odd"><td>89</td><td>Jaimie</td><td>Fillis</td><td>Mielnik</td><td>7</td></tr>
+<tr><td>5</td><td>Gavin</td><td>Garrick</td><td>Kernley</td><td>7</td></tr>
+<tr class="odd"><td>193</td><td>Osborn</td><td>Spaduzza</td><td>Gregh</td><td>6</td></tr>
+<tr><td>164</td><td>Cynthie</td><td>Rogister</td><td>Andrejs</td><td>6</td></tr>
+<tr class="odd"><td>12</td><td>Gino</td><td>MacCleay</td><td>Badland</td><td>6</td></tr>
+<tr><td>62</td><td>Gibbie</td><td>Friett</td><td>Simcoe</td><td>6</td></tr>
+<tr class="odd"><td>126</td><td>Angela</td><td>Smouten</td><td>Sargeaunt</td><td>6</td></tr>
+<tr><td>161</td><td>Emelia</td><td>Eliesco</td><td>O'Callaghan</td><td>6</td></tr>
+<tr class="odd"><td>157</td><td>Silvan</td><td>Meconi</td><td>Mouncey</td><td>6</td></tr>
+<tr><td>112</td><td>Merissa</td><td>Boerderman</td><td>Scamerden</td><td>6</td></tr>
+<tr class="odd"><td>60</td><td>Obie</td><td>Boakes</td><td>Shewon</td><td>6</td></tr>
+<tr><td>105</td><td>Hazlett</td><td>Scorey</td><td>McCambrois</td><td>6</td></tr>
+<tr class="odd"><td>9</td><td>Dot</td><td>Bedminster</td><td>Dayley</td><td>6</td></tr>
+<tr><td>116</td><td>Dyanna</td><td>Patkin</td><td>Ryrie</td><td>6</td></tr>
+<tr class="odd"><td>52</td><td>Florella</td><td>Samter</td><td>Smartman</td><td>6</td></tr>
+<tr><td>80</td><td>Gaspar</td><td>Tutchell</td><td>Branche</td><td>6</td></tr>
+<tr class="odd"><td>129</td><td>Kippar</td><td>Gammons</td><td>Scarfe</td><td>6</td></tr>
+<tr><td>94</td><td>Mata</td><td>Lambie</td><td>Postles</td><td>6</td></tr>
+<tr class="odd"><td>45</td><td>Hugibert</td><td>Brazur</td><td>Jacobs</td><td>6</td></tr>
+<tr><td>10</td><td>Rubi</td><td>Brownbill</td><td>Laxton</td><td>6</td></tr>
+<tr class="odd"><td>103</td><td>Britta</td><td>Dudek</td><td>Lopes</td><td>6</td></tr>
+<tr><td>158</td><td>Mickey</td><td>Clemendot</td><td>Pawelski</td><td>6</td></tr>
+<tr class="odd"><td>19</td><td>Rasla</td><td>Jirka</td><td>Castelyn</td><td>6</td></tr>
+<tr><td>37</td><td>Tyrus</td><td>De Witt</td><td>Hollyar</td><td>6</td></tr>
+<tr class="odd"><td>106</td><td>Nikaniki</td><td>Valentin</td><td>Whitesel</td><td>6</td></tr>
+<tr><td>87</td><td>Kirbie</td><td>Upjohn</td><td>Reicharz</td><td>6</td></tr>
+<tr class="odd"><td>97</td><td>Lyda</td><td>Ricards</td><td>Goard</td><td>6</td></tr>
+<tr><td>53</td><td>Buffy</td><td>Ettridge</td><td>Bridgens</td><td>6</td></tr>
+<tr class="odd"><td>2</td><td>Jordain</td><td>Canedo</td><td>Moberley</td><td>6</td></tr>
+<tr><td>102</td><td>Anet</td><td>Gilkes</td><td>Filon</td><td>6</td></tr>
+<tr class="odd"><td>95</td><td>Guss</td><td>McGirr</td><td>Trevaskiss</td><td>6</td></tr>
+<tr><td>147</td><td>Zara</td><td>Pantecost</td><td>Demcak</td><td>6</td></tr>
+<tr class="odd"><td>140</td><td>Barnabas</td><td>Hasser</td><td>Stollwerk</td><td>6</td></tr>
+<tr><td>119</td><td>William</td><td>Webb</td><td>Ander</td><td>6</td></tr>
+<tr class="odd"><td>156</td><td>Rustie</td><td>Starsmore</td><td>Gowler</td><td>6</td></tr>
+<tr><td>146</td><td>Eirena</td><td>Oldrey</td><td>Jandac</td><td>5</td></tr>
+<tr class="odd"><td>70</td><td>Briant</td><td>Cassely</td><td>Desport</td><td>5</td></tr>
+<tr><td>117</td><td>Orelia</td><td>Ragles</td><td>Cloney</td><td>5</td></tr>
+<tr class="odd"><td>57</td><td>Gerry</td><td>Ferdinand</td><td>Bryer</td><td>5</td></tr>
+<tr><td>29</td><td>Lazar</td><td>MacLaren</td><td>Stout</td><td>5</td></tr>
+<tr class="odd"><td>6</td><td>Torie</td><td>Lohan</td><td>Stuehmeyer</td><td>5</td></tr>
+<tr><td>128</td><td>Rollo</td><td>Gee</td><td>Oldrey</td><td>5</td></tr>
+<tr class="odd"><td>38</td><td>Gisella</td><td>Rush</td><td>Bonass</td><td>5</td></tr>
+<tr><td>186</td><td>Diana</td><td>Bazylets</td><td>Loftie</td><td>5</td></tr>
+<tr class="odd"><td>182</td><td>Marlee</td><td>Caddens</td><td>MacCarrane</td><td>5</td></tr>
+<tr><td>192</td><td>Clemmie</td><td>Wray</td><td>Eeles</td><td>5</td></tr>
+<tr class="odd"><td>44</td><td>Gilly</td><td>Daniele</td><td>Kentwell</td><td>5</td></tr>
+<tr><td>85</td><td>Cosmo</td><td>Mendonca</td><td>Farress</td><td>5</td></tr>
+<tr class="odd"><td>172</td><td>Frieda</td><td>Liebmann</td><td>Ovitz</td><td>5</td></tr>
+<tr><td>21</td><td>Alasteir</td><td>MacAlpin</td><td>Millyard</td><td>5</td></tr>
+<tr class="odd"><td>56</td><td>Elston</td><td>Bosher</td><td>Hyams</td><td>5</td></tr>
+<tr><td>138</td><td>Steffane</td><td>Jerzak</td><td>Benford</td><td>5</td></tr>
+<tr class="odd"><td>41</td><td>Rhodia</td><td>Anear</td><td>Methringham</td><td>5</td></tr>
+<tr><td>46</td><td>Russ</td><td>Hawse</td><td>Frankton</td><td>5</td></tr>
+<tr class="odd"><td>32</td><td>Nady</td><td>Goutcher</td><td>Gaspar</td><td>5</td></tr>
+<tr><td>169</td><td>Roy</td><td>Derrington</td><td>Thornthwaite</td><td>5</td></tr>
+<tr class="odd"><td>121</td><td>Adore</td><td>Rollitt</td><td>Jackes</td><td>5</td></tr>
+<tr><td>61</td><td>Nap</td><td>Auletta</td><td>Fleay</td><td>5</td></tr>
+<tr class="odd"><td>93</td><td>Colette</td><td>Tylor</td><td>Hlavac</td><td>5</td></tr>
+<tr><td>14</td><td>Araldo</td><td>Bauldry</td><td>Popescu</td><td>5</td></tr>
+<tr class="odd"><td>109</td><td>Shelley</td><td>Welds</td><td>Stamps</td><td>5</td></tr>
+<tr><td>199</td><td>Ashien</td><td>Boulden</td><td>Wallentin</td><td>5</td></tr>
+<tr class="odd"><td>78</td><td>Thibaud</td><td>Eyckel</td><td>Beames</td><td>5</td></tr>
+<tr><td>20</td><td>Joete</td><td>Lamar</td><td>Caffrey</td><td>5</td></tr>
+<tr class="odd"><td>1</td><td>Valencia</td><td>Poytres</td><td>Sexten</td><td>5</td></tr>
+<tr><td>178</td><td>Brok</td><td>Riccelli</td><td>Kettle</td><td>5</td></tr>
+<tr class="odd"><td>68</td><td>Valery</td><td>Wix</td><td>Rafferty</td><td>5</td></tr>
+<tr><td>162</td><td>Richmound</td><td>Danneil</td><td>Sukbhans</td><td>5</td></tr>
+<tr class="odd"><td>79</td><td>Simone</td><td>Ryam</td><td>Paxeford</td><td>5</td></tr>
+<tr><td>63</td><td>Krisha</td><td>Aymer</td><td>Renols</td><td>5</td></tr>
+<tr class="odd"><td>100</td><td>Myrtice</td><td>Levis</td><td>Jinkinson</td><td>5</td></tr>
+<tr><td>24</td><td>Jacklin</td><td>Kubicek</td><td>Lockyer</td><td>5</td></tr>
+<tr class="odd"><td>191</td><td>Germaine</td><td>Ekell</td><td>Gentzsch</td><td>5</td></tr>
+<tr><td>104</td><td>Idalina</td><td>Swanton</td><td>Banton</td><td>4</td></tr>
+<tr class="odd"><td>145</td><td>Clareta</td><td>Hadgraft</td><td>Mattaus</td><td>4</td></tr>
+<tr><td>49</td><td>Felic</td><td>MacDunlevy</td><td>Bartaloni</td><td>4</td></tr>
+<tr class="odd"><td>86</td><td>Hillel</td><td>Philler</td><td>Milmith</td><td>4</td></tr>
+<tr><td>88</td><td>Emelita</td><td>Ossulton</td><td>Scarf</td><td>4</td></tr>
+<tr class="odd"><td>179</td><td>Bartlet</td><td>Southgate</td><td>Duffie</td><td>4</td></tr>
+<tr><td>130</td><td>Rosemaria</td><td>Hedden</td><td>Blakelock</td><td>4</td></tr>
+<tr class="odd"><td>28</td><td>Edie</td><td>Brunsden</td><td>Ganter</td><td>4</td></tr>
+<tr><td>17</td><td>Enriqueta</td><td>McClelland</td><td>Hext</td><td>4</td></tr>
+<tr class="odd"><td>166</td><td>Mel</td><td>Lanning</td><td>Francie</td><td>4</td></tr>
+<tr><td>122</td><td>Arch</td><td>Sobey</td><td>Niemetz</td><td>4</td></tr>
+<tr class="odd"><td>75</td><td>Rafa</td><td>Maw</td><td>Thorald</td><td>4</td></tr>
+<tr><td>39</td><td>Anderson</td><td>Kellick</td><td>Leindecker</td><td>4</td></tr>
+<tr class="odd"><td>33</td><td>Neilla</td><td>Hattam</td><td>De Meyer</td><td>4</td></tr>
+<tr><td>188</td><td>Celestyna</td><td>Berringer</td><td>Worrell</td><td>4</td></tr>
+<tr class="odd"><td>183</td><td>Yvette</td><td>Abelov</td><td>Rossey</td><td>4</td></tr>
+<tr><td>150</td><td>Dori</td><td>Campbell-Dunlop</td><td>Beville</td><td>4</td></tr>
+<tr class="odd"><td>155</td><td>Conway</td><td>Lathey</td><td>Yuranovev</td><td>4</td></tr>
+<tr><td>127</td><td>Gunter</td><td>Bayston</td><td>Cowlas</td><td>4</td></tr>
+<tr class="odd"><td>195</td><td>Butch</td><td>Gye</td><td>Slegg</td><td>4</td></tr>
+<tr><td>99</td><td>Jodee</td><td>Weymont</td><td>Lorraine</td><td>4</td></tr>
+<tr class="odd"><td>113</td><td>Misti</td><td>Braidley</td><td>Meiklejohn</td><td>4</td></tr>
+<tr><td>137</td><td>Brigid</td><td>Jahn</td><td>Bisset</td><td>4</td></tr>
+<tr class="odd"><td>159</td><td>Sebastien</td><td>Andree</td><td>Doble</td><td>4</td></tr>
+<tr><td>43</td><td>Donaugh</td><td>Halpine</td><td>Carreyette</td><td>4</td></tr>
+<tr class="odd"><td>163</td><td>Rubetta</td><td>Doerffer</td><td>McCard</td><td>4</td></tr>
+<tr><td>108</td><td>Milli</td><td>Roome</td><td>Cridland</td><td>4</td></tr>
+<tr class="odd"><td>115</td><td>June</td><td>Maben</td><td>Hudd</td><td>4</td></tr>
+<tr><td>3</td><td>Jacinda</td><td>Wardel</td><td>Pollendine</td><td>4</td></tr>
+<tr class="odd"><td>170</td><td>Colline</td><td>Batterton</td><td>Scanes</td><td>4</td></tr>
+<tr><td>4</td><td>Felicle</td><td>Angood</td><td>Jilkes</td><td>4</td></tr>
+<tr class="odd"><td>167</td><td>Jennee</td><td>Wormleighton</td><td>Lennie</td><td>4</td></tr>
+<tr><td>189</td><td>Gaultiero</td><td>Tidball</td><td>Ilden</td><td>4</td></tr>
+<tr class="odd"><td>84</td><td>Candy</td><td>McWhannel</td><td>Mollnar</td><td>4</td></tr>
+<tr><td>58</td><td>Sandra</td><td>Tombleson</td><td>Leehane</td><td>4</td></tr>
+<tr class="odd"><td>42</td><td>Kalina</td><td>Grose</td><td>Spriddle</td><td>4</td></tr>
+<tr><td>143</td><td>Pauline</td><td>Jacqueminot</td><td>Saffill</td><td>4</td></tr>
+<tr class="odd"><td>23</td><td>Lindsey</td><td>Lynde</td><td>Chadbourne</td><td>3</td></tr>
+<tr><td>74</td><td>Annabelle</td><td>Barrack</td><td>Mongain</td><td>3</td></tr>
+<tr class="odd"><td>165</td><td>Ilka</td><td>Cumesky</td><td>Mariault</td><td>3</td></tr>
+<tr><td>11</td><td>Alaric</td><td>Marjanovic</td><td>Glasgow</td><td>3</td></tr>
+<tr class="odd"><td>31</td><td>Corny</td><td>Blore</td><td>Turk</td><td>3</td></tr>
+<tr><td>59</td><td>Wanda</td><td>McParland</td><td>Stansall</td><td>3</td></tr>
+<tr class="odd"><td>25</td><td>Delinda</td><td>Kurten</td><td>Ketteringham</td><td>3</td></tr>
+<tr><td>71</td><td>Caldwell</td><td>Treanor</td><td>Spiller</td><td>3</td></tr>
+<tr class="odd"><td>27</td><td>Quillan</td><td>Riggott</td><td>Johnsey</td><td>3</td></tr>
+<tr><td>177</td><td>Renata</td><td>Hackworthy</td><td>Waycot</td><td>3</td></tr>
+<tr class="odd"><td>98</td><td>Bren</td><td>Bicknell</td><td>Martineau</td><td>3</td></tr>
+<tr><td>200</td><td>Ross</td><td>Hammor</td><td>Henryson</td><td>3</td></tr>
+<tr class="odd"><td>66</td><td>Prudy</td><td>Searle</td><td>Stanford</td><td>3</td></tr>
+<tr><td>131</td><td>Wainwright</td><td>Carde</td><td>Beggini</td><td>3</td></tr>
+<tr class="odd"><td>134</td><td>Devi</td><td>Clarabut</td><td>Tacker</td><td>3</td></tr>
+<tr><td>160</td><td>Isabel</td><td>Domeny</td><td>Agg</td><td>3</td></tr>
+<tr class="odd"><td>187</td><td>Manya</td><td>Cheley</td><td>Petranek</td><td>3</td></tr>
+<tr><td>111</td><td>Jody</td><td>Mapples</td><td>Adnam</td><td>3</td></tr>
+<tr class="odd"><td>136</td><td>Stearne</td><td>Kettley</td><td>Giacobilio</td><td>3</td></tr>
+<tr><td>139</td><td>Rosa</td><td>Thornewell</td><td>Redolfi</td><td>3</td></tr>
+<tr class="odd"><td>194</td><td>Eva</td><td>Plaide</td><td>Allom</td><td>3</td></tr>
+<tr><td>185</td><td>Ogdon</td><td>Bastistini</td><td>Beardall</td><td>3</td></tr>
+<tr class="odd"><td>40</td><td>Jdavie</td><td>Flowerden</td><td>Upton</td><td>3</td></tr>
+<tr><td>149</td><td>Jacky</td><td>Spancock</td><td>Dowyer</td><td>3</td></tr>
+<tr class="odd"><td>30</td><td>Mariann</td><td>Bryns</td><td>Matzkaitis</td><td>2</td></tr>
+<tr><td>67</td><td>Bobbee</td><td>Harwick</td><td>McCullagh</td><td>2</td></tr>
+<tr class="odd"><td>92</td><td>Arabella</td><td>Ovenden</td><td>Lamball</td><td>2</td></tr>
+<tr><td>55</td><td>Milt</td><td>Roote</td><td>Mulrean</td><td>2</td></tr>
+<tr class="odd"><td>151</td><td>Quinlan</td><td>Van den Hof</td><td>Gamell</td><td>2</td></tr>
+<tr><td>13</td><td>Dick</td><td>Grelik</td><td>Pistol</td><td>2</td></tr>
+<tr class="odd"><td>171</td><td>Kippy</td><td>Vasey</td><td>Pretorius</td><td>2</td></tr>
+<tr><td>198</td><td>Constantine</td><td>Temperley</td><td>Bridgestock</td><td>2</td></tr>
+<tr class="odd"><td>152</td><td>Larry</td><td>Stoggell</td><td>Staten</td><td>2</td></tr>
+<tr><td>47</td><td>Tess</td><td>Dunlap</td><td>Colbourne</td><td>2</td></tr>
+<tr class="odd"><td>96</td><td>Karina</td><td>Laba</td><td>Hupe</td><td>2</td></tr>
+<tr><td>8</td><td>Ogden</td><td>Howen</td><td>Tarbet</td><td>2</td></tr>
+<tr class="odd"><td>135</td><td>Camellia</td><td>Kinforth</td><td>Charlin</td><td>2</td></tr>
+<tr><td>125</td><td>Tori</td><td>Geratt</td><td>Booij</td><td>2</td></tr>
+<tr class="odd"><td>123</td><td>Dylan</td><td>Poyzer</td><td>Brach</td><td>2</td></tr>
+<tr><td>22</td><td>Lexine</td><td>Sherburn</td><td>Jermyn</td><td>2</td></tr>
+<tr class="odd"><td>73</td><td>Brent</td><td>Naylor</td><td>Aslum</td><td>2</td></tr>
+<tr><td>16</td><td>Siward</td><td>Robshaw</td><td>Frankton</td><td>1</td></tr>
+<tr class="odd"><td>197</td><td>Gonzales</td><td>Saberton</td><td>Speek</td><td>1</td></tr>
+<tr><td>148</td><td>Udall</td><td>Capaldo</td><td>McGrayle</td><td>1</td></tr>
+<tr class="odd"><td>153</td><td>Bord</td><td>Le Prevost</td><td>Giacobo</td><td>1</td></tr>
+<tr><td>65</td><td>Granny</td><td>Spargo</td><td>MacGahy</td><td>1</td></tr>
+<tr class="odd"><td>107</td><td>Georgia</td><td>Girardi</td><td>Becerro</td><td>1</td></tr>
+<tr><td>110</td><td>Pren</td><td>Eddoes</td><td>Rosbrough</td><td>1</td></tr>
+</table></body></html>
