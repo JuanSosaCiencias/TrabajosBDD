@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8"/><style>
+table {border: medium solid #6495ed;border-collapse: collapse;width: 100%;} th{font-family: monospace;border: thin solid #6495ed;padding: 5px;background-color: #D0E3FA;}th{text-align: left;}td{font-family: sans-serif;border: thin solid #6495ed;padding: 5px;text-align: center;}.odd{background:#e8edff;}img{padding:5px; border:solid; border-color: #dddddd #aaaaaa #aaaaaa #dddddd; border-width: 1px 2px 2px 1px; background-color:white;}</style>
+</head>
+<body>
+<table><tr><th colspan="2"><pre><code>/* Consulta 11: Promedio de edad por disciplina.<br> * <br> * Esta consulta calcula el promedio de edad de los atletas por cada disciplina, ordenados alfabéticamente.<br> * <br> * - Selecciona el nombre de la disciplina y calcula el promedio de la edad de los atletas.<br> * - Agrupa los resultados por disciplina.<br> * - Ordena los resultados alfabéticamente por el nombre de la disciplina.<br> */<br>SELECT <br>    d.NombreDisciplina,<br>    AVG(extract(year from evento.fechaevento) - extract(year from a.FechaNacimiento)) AS PromedioEdad<br>FROM <br>     Evento, Disciplina d<br>JOIN <br>    Participa p ON d.IDDisciplina = p.IDDisciplina<br>JOIN <br>    Atleta a ON p.IDAtleta = a.IDAtleta<br>GROUP BY <br>    d.NombreDisciplina<br>ORDER BY <br>    d.NombreDisciplina</code></pre></th></tr><tr><th>nombredisciplina</th><th>promedioedad</th></tr><tr class="odd"><td>Aikido</td><td>28.7001295337</td></tr>
+<tr><td>Ajedrez</td><td>28.8251295337</td></tr>
+<tr class="odd"><td>Ala delta</td><td>25.4501295337</td></tr>
+<tr><td>Apnea</td><td>30.2417962003</td></tr>
+<tr class="odd"><td>Atletismo</td><td>29.3529073115</td></tr>
+<tr><td>Bádminton</td><td>26.2417962003</td></tr>
+<tr class="odd"><td>Bádminton playa</td><td>27.908462867</td></tr>
+<tr><td>Baloncesto</td><td>21.0751295337</td></tr>
+<tr class="odd"><td>Baloncesto 3x3</td><td>31.5751295337</td></tr>
+<tr><td>Baloncesto en silla de ruedas</td><td>25.8251295337</td></tr>
+<tr class="odd"><td>Balonmano</td><td>29.8251295337</td></tr>
+<tr><td>Balonmano playa</td><td>30.908462867</td></tr>
+<tr class="odd"><td>Balonmano sala</td><td>31.0751295337</td></tr>
+<tr><td>Bandy</td><td>29.908462867</td></tr>
+<tr class="odd"><td>Base jumping</td><td>29.5751295337</td></tr>
+<tr><td>Batalla Pokémon</td><td>31.0751295337</td></tr>
+<tr class="odd"><td>Béisbol</td><td>26.908462867</td></tr>
+<tr><td>Biatlón</td><td>27.908462867</td></tr>
+<tr class="odd"><td>Billar</td><td>26.5751295337</td></tr>
+<tr><td>BMX</td><td>26.1306850892</td></tr>
+<tr class="odd"><td>Bobsleigh</td><td>31.908462867</td></tr>
+<tr><td>Bobsleigh skeleton</td><td>22.0751295337</td></tr>
+<tr class="odd"><td>Boccia</td><td>20.5751295337</td></tr>
+<tr><td>Bodyboard</td><td>25.0751295337</td></tr>
+<tr class="odd"><td>Bolos</td><td>29.0751295337</td></tr>
+<tr><td>Boxeo</td><td>26.0751295337</td></tr>
+<tr class="odd"><td>Bridge</td><td>30.5751295337</td></tr>
+<tr><td>Buceo</td><td>29.2417962003</td></tr>
+<tr class="odd"><td>Cacería de Pokémons</td><td>30.2417962003</td></tr>
+<tr><td>Caminata rápida</td><td>24.0751295337</td></tr>
+<tr class="odd"><td>Canoa slalom</td><td>27.5751295337</td></tr>
+<tr><td>Capoeira</td><td>29.9751295337</td></tr>
+<tr class="odd"><td>Carrera de coches solares</td><td>25.7001295337</td></tr>
+<tr><td>Carrera de drones</td><td>28.7417962003</td></tr>
+<tr class="odd"><td>Carrera de Drones</td><td>20.5751295337</td></tr>
+<tr><td>Carrera de obstáculos</td><td>24.5751295337</td></tr>
+<tr class="odd"><td>Carrera de relevos</td><td>28.5751295337</td></tr>
+<tr><td>Carrera de sacos</td><td>30.9751295337</td></tr>
+<tr class="odd"><td>Carrera de triciclos</td><td>27.4322723908</td></tr>
+<tr><td>Carreras de caballos</td><td>24.908462867</td></tr>
+<tr class="odd"><td>Carreras de karts</td><td>25.5751295337</td></tr>
+<tr><td>Carrera vertical</td><td>25.2417962003</td></tr>
+<tr class="odd"><td>Charrería</td><td>33.908462867</td></tr>
+<tr><td>Ciclismo</td><td>23.7179866765</td></tr>
+<tr class="odd"><td>Ciclismo tándem</td><td>26.1465581051</td></tr>
+<tr><td>Combate de Sables Láser</td><td>25.9751295337</td></tr>
+<tr class="odd"><td>Combinada nórdica</td><td>24.5751295337</td></tr>
+<tr><td>Concurso de Cosplay</td><td>22.0751295337</td></tr>
+<tr class="odd"><td>Cricket</td><td>27.5751295337</td></tr>
+<tr><td>Crossfit</td><td>24.5751295337</td></tr>
+<tr class="odd"><td>Curling</td><td>23.5751295337</td></tr>
+<tr><td>Curling mixto</td><td>27.0751295337</td></tr>
+<tr class="odd"><td>Dardos</td><td>24.0037009623</td></tr>
+<tr><td>Disc golf</td><td>23.1751295337</td></tr>
+<tr class="odd"><td>Duelo de Yu-Gi-Oh!</td><td>23.5751295337</td></tr>
+<tr><td>Ecuestre</td><td>28.7751295337</td></tr>
+<tr class="odd"><td>Equitación</td><td>31.7179866765</td></tr>
+<tr><td>Escalada</td><td>26.7751295337</td></tr>
+<tr class="odd"><td>Escalada en hielo</td><td>35.5751295337</td></tr>
+<tr><td>Esgrima</td><td>24.0751295337</td></tr>
+<tr class="odd"><td>Esgrima en silla de ruedas</td><td>31.3751295337</td></tr>
+<tr><td>Esgrima histórica</td><td>28.0195739781</td></tr>
+<tr class="odd"><td>E-Sports</td><td>29.4751295337</td></tr>
+<tr><td>Esquí acuático</td><td>28.0751295337</td></tr>
+<tr class="odd"><td>Esquí alpino</td><td>30.5751295337</td></tr>
+<tr><td>Esquí de fondo</td><td>29.7179866765</td></tr>
+<tr class="odd"><td>Esquí para ciegos</td><td>26.5751295337</td></tr>
+<tr><td>Floorball</td><td>30.5751295337</td></tr>
+<tr class="odd"><td>Fórmula 1</td><td>27.2751295337</td></tr>
+<tr><td>Frontón</td><td>27.9751295337</td></tr>
+<tr class="odd"><td>Fútbol</td><td>29.408462867</td></tr>
+<tr><td>Fútbol 5</td><td>30.0751295337</td></tr>
+<tr class="odd"><td>Fútbol americano</td><td>28.0751295337</td></tr>
+<tr><td>Fútbol australiano</td><td>30.0751295337</td></tr>
+<tr class="odd"><td>Fútbol gaélico</td><td>26.908462867</td></tr>
+<tr><td>Fútbol playa</td><td>25.2751295337</td></tr>
+<tr class="odd"><td>Fútbol sala</td><td>29.0751295337</td></tr>
+<tr><td>Fútbol tenis</td><td>28.5751295337</td></tr>
+<tr class="odd"><td>Gatka</td><td>26.7751295337</td></tr>
+<tr><td>Gimnasia</td><td>24.7973517559</td></tr>
+<tr class="odd"><td>Gimnasia acrobática</td><td>26.7417962003</td></tr>
+<tr><td>Gimnasia en trampolín</td><td>24.908462867</td></tr>
+<tr class="odd"><td>Gimnasia rítmica</td><td>29.2417962003</td></tr>
+<tr><td>Goalball</td><td>22.5751295337</td></tr>
+<tr class="odd"><td>Golf</td><td>28.8251295337</td></tr>
+<tr><td>Halterofilia</td><td>28.1751295337</td></tr>
+<tr class="odd"><td>Hockey callejero</td><td>26.5751295337</td></tr>
+<tr><td>Hockey en aire</td><td>26.5751295337</td></tr>
+<tr class="odd"><td>Hockey sobre hielo</td><td>24.2417962003</td></tr>
+<tr><td>Hockey sobre hierba</td><td>30.2417962003</td></tr>
+<tr class="odd"><td>Hockey sobre patines</td><td>30.908462867</td></tr>
+<tr><td>Hockey subacuático</td><td>27.0751295337</td></tr>
+<tr class="odd"><td>Hula hoop</td><td>28.4322723908</td></tr>
+<tr><td>Jai alai</td><td>25.0751295337</td></tr>
+<tr class="odd"><td>Jiu-jitsu</td><td>26.9751295337</td></tr>
+<tr><td>Judo</td><td>20.908462867</td></tr>
+<tr class="odd"><td>Kabaddi</td><td>32.0751295337</td></tr>
+<tr><td>Kárate</td><td>27.2417962003</td></tr>
+<tr class="odd"><td>Kayak</td><td>27.5751295337</td></tr>
+<tr><td>Kendo</td><td>23.0751295337</td></tr>
+<tr class="odd"><td>Kickboxing</td><td>27.5751295337</td></tr>
+<tr><td>Kitesurf</td><td>24.2417962003</td></tr>
+<tr class="odd"><td>Korfball</td><td>25.5751295337</td></tr>
+<tr><td>Kurash</td><td>19.5751295337</td></tr>
+<tr class="odd"><td>Lacrosse</td><td>22.5751295337</td></tr>
+<tr><td>Lucha grecorromana</td><td>25.408462867</td></tr>
+<tr class="odd"><td>Lucha libre</td><td>28.5751295337</td></tr>
+<tr><td>Luge</td><td>28.0751295337</td></tr>
+<tr class="odd"><td>Luge por equipos</td><td>28.8251295337</td></tr>
+<tr><td>Motocross</td><td>32.1465581051</td></tr>
+<tr class="odd"><td>MotoGP</td><td>26.5751295337</td></tr>
+<tr><td>Muay thai</td><td>24.908462867</td></tr>
+<tr class="odd"><td>Nado sincronizado</td><td>30.7417962003</td></tr>
+<tr><td>Nascar</td><td>20.9751295337</td></tr>
+<tr class="odd"><td>Natación</td><td>24.7179866765</td></tr>
+<tr><td>Natación con aletas</td><td>23.908462867</td></tr>
+<tr class="odd"><td>Natación en aguas abiertas</td><td>23.0751295337</td></tr>
+<tr><td>Natación para ciegos</td><td>26.9751295337</td></tr>
+<tr class="odd"><td>Netball</td><td>29.9751295337</td></tr>
+<tr><td>Paddle surf</td><td>19.5751295337</td></tr>
+<tr class="odd"><td>Pádel</td><td>25.5751295337</td></tr>
+<tr><td>Paracaidismo</td><td>29.5751295337</td></tr>
+<tr class="odd"><td>Parapente</td><td>35.5751295337</td></tr>
+<tr><td>Park golf</td><td>27.7751295337</td></tr>
+<tr class="odd"><td>Parkour</td><td>29.9501295337</td></tr>
+<tr><td>Patinaje artístico</td><td>26.908462867</td></tr>
+<tr class="odd"><td>Patinaje de velocidad</td><td>25.2417962003</td></tr>
+<tr><td>Patinaje de velocidad en pista corta</td><td>30.0195739781</td></tr>
+<tr class="odd"><td>Patinaje sobre ruedas</td><td>26.408462867</td></tr>
+<tr><td>Patolli</td><td>21.908462867</td></tr>
+<tr class="odd"><td>Pelota Purépecha</td><td>27.8251295337</td></tr>
+<tr><td>Pelota vasca</td><td>24.908462867</td></tr>
+<tr class="odd"><td>Pencak Silat</td><td>27.1751295337</td></tr>
+<tr><td>Pentatlón moderno</td><td>29.7417962003</td></tr>
+<tr class="odd"><td>Pesca deportiva</td><td>27.7751295337</td></tr>
+<tr><td>Pesca submarina</td><td>26.5751295337</td></tr>
+<tr class="odd"><td>Petanca</td><td>34.2417962003</td></tr>
+<tr><td>Piragüismo</td><td>29.2751295337</td></tr>
+<tr class="odd"><td>Polo</td><td>31.7751295337</td></tr>
+<tr><td>Polo acuático</td><td>27.3751295337</td></tr>
+<tr class="odd"><td>Powerlifting</td><td>33.5751295337</td></tr>
+<tr><td>Pugilismo</td><td>26.408462867</td></tr>
+<tr class="odd"><td>Quidditch</td><td>29.7179866765</td></tr>
+<tr><td>Rafting</td><td>27.5751295337</td></tr>
+<tr class="odd"><td>Rallies</td><td>28.0037009623</td></tr>
+<tr><td>Rallycross</td><td>28.1751295337</td></tr>
+<tr class="odd"><td>Regata</td><td>29.7751295337</td></tr>
+<tr><td>Remo</td><td>25.8251295337</td></tr>
+<tr class="odd"><td>Rodeo</td><td>26.8251295337</td></tr>
+<tr><td>Roller derby</td><td>25.1751295337</td></tr>
+<tr class="odd"><td>Rugby</td><td>27.289415248</td></tr>
+<tr><td>Rugby en silla de ruedas</td><td>31.3251295337</td></tr>
+<tr class="odd"><td>Rugby league</td><td>26.8608438194</td></tr>
+<tr><td>Rugby subacuático</td><td>26.8608438194</td></tr>
+<tr class="odd"><td>Salto de trampolín</td><td>25.5751295337</td></tr>
+<tr><td>Saltos de acantilado</td><td>28.5751295337</td></tr>
+<tr class="odd"><td>Sambo</td><td>25.3751295337</td></tr>
+<tr><td>Savate</td><td>27.5751295337</td></tr>
+<tr class="odd"><td>Sepak takraw</td><td>27.0751295337</td></tr>
+<tr><td>Simulación de vuelo</td><td>27.5751295337</td></tr>
+<tr class="odd"><td>Skateboarding</td><td>28.0751295337</td></tr>
+<tr><td>Skeleton</td><td>26.3251295337</td></tr>
+<tr class="odd"><td>Skimboard</td><td>26.5751295337</td></tr>
+<tr><td>Slackline</td><td>26.5751295337</td></tr>
+<tr class="odd"><td>Snowboard</td><td>25.3251295337</td></tr>
+<tr><td>Snowboard cross</td><td>27.908462867</td></tr>
+<tr class="odd"><td>Softball</td><td>25.0037009623</td></tr>
+<tr><td>Speedrun de Videojuegos</td><td>28.8251295337</td></tr>
+<tr class="odd"><td>Squash</td><td>25.5751295337</td></tr>
+<tr><td>Sumo</td><td>35.0751295337</td></tr>
+<tr class="odd"><td>Superbikes</td><td>31.1751295337</td></tr>
+<tr><td>Surf</td><td>28.2417962003</td></tr>
+<tr class="odd"><td>Surf de remo</td><td>31.1751295337</td></tr>
+<tr><td>Taekwondo</td><td>29.5751295337</td></tr>
+<tr class="odd"><td>Tejo</td><td>28.8251295337</td></tr>
+<tr><td>Tenis</td><td>25.3751295337</td></tr>
+<tr class="odd"><td>Tenis de mesa</td><td>25.5751295337</td></tr>
+<tr><td>Tiro adaptado</td><td>27.5751295337</td></tr>
+<tr class="odd"><td>Tiro al plato</td><td>28.908462867</td></tr>
+<tr><td>Tiro con arco</td><td>25.5751295337</td></tr>
+<tr class="odd"><td>Tiro con arco en sala</td><td>26.4640184226</td></tr>
+<tr><td>Tiro deportivo</td><td>25.408462867</td></tr>
+<tr class="odd"><td>Tlachtli</td><td>29.7417962003</td></tr>
+<tr><td>Trekking</td><td>26.7751295337</td></tr>
+<tr class="odd"><td>Trial</td><td>32.2417962003</td></tr>
+<tr><td>Triatlón</td><td>30.7569477155</td></tr>
+<tr class="odd"><td>Ulama</td><td>28.908462867</td></tr>
+<tr><td>Ultimate frisbee</td><td>25.908462867</td></tr>
+<tr class="odd"><td>Vela</td><td>27.3251295337</td></tr>
+<tr><td>Vela ligera</td><td>29.908462867</td></tr>
+<tr class="odd"><td>Voleibol</td><td>26.4322723908</td></tr>
+<tr><td>Voleibol playa</td><td>26.5751295337</td></tr>
+<tr class="odd"><td>Voleibol sentado</td><td>25.7179866765</td></tr>
+<tr><td>Vóley playa</td><td>29.5751295337</td></tr>
+<tr class="odd"><td>Vovinam</td><td>24.2417962003</td></tr>
+<tr><td>Wakeboard</td><td>22.7179866765</td></tr>
+<tr class="odd"><td>Waterpolo</td><td>28.8251295337</td></tr>
+<tr><td>Windsurf</td><td>27.8608438194</td></tr>
+<tr class="odd"><td>Wushu</td><td>30.5751295337</td></tr>
+</table></body></html>
