@@ -304,7 +304,7 @@ JOIN
 JOIN 
     Disciplina d ON e.IDDisciplina = d.IDDisciplina
 WHERE 
-    e.FechaEvento BETWEEN '2024-01-01' AND '2024-12-31'
+    e.FechaEvento BETWEEN '2025-01-01' AND '2025-12-31'
 GROUP BY 
     d.NombreDisciplina
 ORDER BY 
@@ -387,5 +387,4 @@ ORDER BY
     MedallasOro DESC, 
     MedallasPlata DESC, 
     MedallasBronce DESC
-LIMIT 1;
 

@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8"/><style>
+table {border: medium solid #6495ed;border-collapse: collapse;width: 100%;} th{font-family: monospace;border: thin solid #6495ed;padding: 5px;background-color: #D0E3FA;}th{text-align: left;}td{font-family: sans-serif;border: thin solid #6495ed;padding: 5px;text-align: center;}.odd{background:#e8edff;}img{padding:5px; border:solid; border-color: #dddddd #aaaaaa #aaaaaa #dddddd; border-width: 1px 2px 2px 1px; background-color:white;}</style>
+</head>
+<body>
+<table><tr><th colspan="2"><pre><code>/* Consulta 15: Número de atletas por cada país.<br> * <br> * Esta consulta obtiene el número de atletas registrados por cada país.<br> * <br> * - Selecciona el nombre del país y cuenta la cantidad de atletas registrados en ese país.<br> * - Agrupa los resultados por el nombre del país.<br> * - Ordena los resultados por la cantidad de atletas en orden descendente.<br> */<br>SELECT <br>    p.NombrePais,<br>    COUNT(a.IDAtleta) AS NumeroAtletas<br>FROM <br>    Pais p<br>JOIN <br>    Atleta a ON p.NombrePais = a.NombrePais<br>GROUP BY <br>    p.NombrePais<br>ORDER BY <br>    NumeroAtletas DESC</code></pre></th></tr><tr><th>nombrepais</th><th>numeroatletas</th></tr><tr class="odd"><td>Zimbabue</td><td>12</td></tr>
+<tr><td>Pakistán</td><td>12</td></tr>
+<tr class="odd"><td>Uzbekistán</td><td>12</td></tr>
+<tr><td>Marruecos</td><td>11</td></tr>
+<tr class="odd"><td>Bahamas</td><td>11</td></tr>
+<tr><td>Laos</td><td>10</td></tr>
+<tr class="odd"><td>El Salvador</td><td>10</td></tr>
+<tr><td>Omán</td><td>10</td></tr>
+<tr class="odd"><td>Comoras</td><td>10</td></tr>
+<tr><td>Finlandia</td><td>10</td></tr>
+<tr class="odd"><td>Zambia</td><td>9</td></tr>
+<tr><td>Myanmar</td><td>9</td></tr>
+<tr class="odd"><td>Serbia</td><td>9</td></tr>
+<tr><td>Bosnia y Herzegovina</td><td>9</td></tr>
+<tr class="odd"><td>Hungría</td><td>9</td></tr>
+<tr><td>Eslovenia</td><td>9</td></tr>
+<tr class="odd"><td>Namibia</td><td>9</td></tr>
+<tr><td>Yemen</td><td>9</td></tr>
+<tr class="odd"><td>Reino Unido</td><td>9</td></tr>
+<tr><td>Chile</td><td>9</td></tr>
+<tr class="odd"><td>Seychelles</td><td>8</td></tr>
+<tr><td>Uganda</td><td>8</td></tr>
+<tr class="odd"><td>Ruanda</td><td>8</td></tr>
+<tr><td>Montenegro</td><td>8</td></tr>
+<tr class="odd"><td>Kenia</td><td>8</td></tr>
+<tr><td>Perú</td><td>8</td></tr>
+<tr class="odd"><td>Líbano</td><td>8</td></tr>
+<tr><td>China</td><td>8</td></tr>
+<tr class="odd"><td>Maldivas</td><td>8</td></tr>
+<tr><td>Polonia</td><td>8</td></tr>
+<tr class="odd"><td>Suazilandia</td><td>8</td></tr>
+<tr><td>Vanuatu</td><td>8</td></tr>
+<tr class="odd"><td>Paraguay</td><td>8</td></tr>
+<tr><td>Nueva Zelanda</td><td>8</td></tr>
+<tr class="odd"><td>Fiyi</td><td>8</td></tr>
+<tr><td>Camerún</td><td>8</td></tr>
+<tr class="odd"><td>Barbados</td><td>7</td></tr>
+<tr><td>Eslovaquia</td><td>7</td></tr>
+<tr class="odd"><td>Uruguay</td><td>7</td></tr>
+<tr><td>Emiratos Árabes Unidos</td><td>7</td></tr>
+<tr class="odd"><td>Islas Salomón</td><td>7</td></tr>
+<tr><td>Georgia</td><td>7</td></tr>
+<tr class="odd"><td>Brunéi</td><td>7</td></tr>
+<tr><td>Filipinas</td><td>7</td></tr>
+<tr class="odd"><td>Cuba</td><td>7</td></tr>
+<tr><td>España</td><td>7</td></tr>
+<tr class="odd"><td>Jordania</td><td>7</td></tr>
+<tr><td>Samoa</td><td>7</td></tr>
+<tr class="odd"><td>Etiopía</td><td>7</td></tr>
+<tr><td>Lesoto</td><td>7</td></tr>
+<tr class="odd"><td>Bélgica</td><td>7</td></tr>
+<tr><td>República Centroafricana</td><td>7</td></tr>
+<tr class="odd"><td>Palestina</td><td>7</td></tr>
+<tr><td>Rumanía</td><td>7</td></tr>
+<tr class="odd"><td>Honduras</td><td>7</td></tr>
+<tr><td>Mongolia</td><td>7</td></tr>
+<tr class="odd"><td>Jamaica</td><td>7</td></tr>
+<tr><td>República Checa</td><td>7</td></tr>
+<tr class="odd"><td>Somalia</td><td>7</td></tr>
+<tr><td>Chad</td><td>7</td></tr>
+<tr class="odd"><td>Nicaragua</td><td>7</td></tr>
+<tr><td>Qatar</td><td>7</td></tr>
+<tr class="odd"><td>Kirguistán</td><td>7</td></tr>
+<tr><td>Bulgaria</td><td>6</td></tr>
+<tr class="odd"><td>Singapur</td><td>6</td></tr>
+<tr><td>Níger</td><td>6</td></tr>
+<tr class="odd"><td>Túnez</td><td>6</td></tr>
+<tr><td>Portugal</td><td>6</td></tr>
+<tr class="odd"><td>Camboya</td><td>6</td></tr>
+<tr><td>Ucrania</td><td>6</td></tr>
+<tr class="odd"><td>Surinam</td><td>6</td></tr>
+<tr><td>Israel</td><td>6</td></tr>
+<tr class="odd"><td>Senegal</td><td>6</td></tr>
+<tr><td>Madagascar</td><td>6</td></tr>
+<tr class="odd"><td>Cabo Verde</td><td>6</td></tr>
+<tr><td>Guinea</td><td>6</td></tr>
+<tr class="odd"><td>Nigeria</td><td>6</td></tr>
+<tr><td>Bangladés</td><td>6</td></tr>
+<tr class="odd"><td>Bután</td><td>6</td></tr>
+<tr><td>Irán</td><td>6</td></tr>
+<tr class="odd"><td>Belice</td><td>6</td></tr>
+<tr><td>Timor Oriental</td><td>6</td></tr>
+<tr class="odd"><td>Yibuti</td><td>6</td></tr>
+<tr><td>Dinamarca</td><td>6</td></tr>
+<tr class="odd"><td>Papúa Nueva Guinea</td><td>6</td></tr>
+<tr><td>Corea del Sur</td><td>6</td></tr>
+<tr class="odd"><td>Tailandia</td><td>6</td></tr>
+<tr><td>Sudán del Sur</td><td>6</td></tr>
+<tr class="odd"><td>Sudáfrica</td><td>6</td></tr>
+<tr><td>Suiza</td><td>6</td></tr>
+<tr class="odd"><td>Sudán</td><td>6</td></tr>
+<tr><td>India</td><td>6</td></tr>
+<tr class="odd"><td>Suecia</td><td>6</td></tr>
+<tr><td>Malasia</td><td>6</td></tr>
+<tr class="odd"><td>Bolivia</td><td>6</td></tr>
+<tr><td>Tayikistán</td><td>6</td></tr>
+<tr class="odd"><td>Tonga</td><td>6</td></tr>
+<tr><td>Tanzania</td><td>6</td></tr>
+<tr class="odd"><td>Costa Rica</td><td>6</td></tr>
+<tr><td>Macedonia del Norte</td><td>6</td></tr>
+<tr class="odd"><td>Kazajistán</td><td>5</td></tr>
+<tr><td>Canadá</td><td>5</td></tr>
+<tr class="odd"><td>Sri Lanka</td><td>5</td></tr>
+<tr><td>Guinea-Bisáu</td><td>5</td></tr>
+<tr class="odd"><td>Francia</td><td>5</td></tr>
+<tr><td>Azerbaiyán</td><td>5</td></tr>
+<tr class="odd"><td>Sierra Leona</td><td>5</td></tr>
+<tr><td>Gambia</td><td>5</td></tr>
+<tr class="odd"><td>Vietnam</td><td>5</td></tr>
+<tr><td>Noruega</td><td>5</td></tr>
+<tr class="odd"><td>Kuwait</td><td>5</td></tr>
+<tr><td>Irlanda</td><td>5</td></tr>
+<tr class="odd"><td>Mauricio</td><td>5</td></tr>
+<tr><td>Nepal</td><td>5</td></tr>
+<tr class="odd"><td>Mozambique</td><td>5</td></tr>
+<tr><td>Panamá</td><td>5</td></tr>
+<tr class="odd"><td>Corea del Norte</td><td>5</td></tr>
+<tr><td>Luxemburgo</td><td>5</td></tr>
+<tr class="odd"><td>Irak</td><td>5</td></tr>
+<tr><td>Colombia</td><td>5</td></tr>
+<tr class="odd"><td>Siria</td><td>5</td></tr>
+<tr><td>Islandia</td><td>5</td></tr>
+<tr class="odd"><td>Libia</td><td>5</td></tr>
+<tr><td>Togo</td><td>5</td></tr>
+<tr class="odd"><td>Egipto</td><td>5</td></tr>
+<tr><td>República Democrática del Congo</td><td>4</td></tr>
+<tr class="odd"><td>Congo</td><td>4</td></tr>
+<tr><td>Albania</td><td>4</td></tr>
+<tr class="odd"><td>Malaui</td><td>4</td></tr>
+<tr><td>Costa de Marfil</td><td>4</td></tr>
+<tr class="odd"><td>Burundi</td><td>4</td></tr>
+<tr><td>Ecuador</td><td>4</td></tr>
+<tr class="odd"><td>Angola</td><td>4</td></tr>
+<tr><td>Guyana</td><td>4</td></tr>
+<tr class="odd"><td>Austria</td><td>4</td></tr>
+<tr><td>Turkmenistán</td><td>4</td></tr>
+<tr class="odd"><td>Malta</td><td>4</td></tr>
+<tr><td>México</td><td>4</td></tr>
+<tr class="odd"><td>Brasil</td><td>4</td></tr>
+<tr><td>Eritrea</td><td>4</td></tr>
+<tr class="odd"><td>Indonesia</td><td>4</td></tr>
+<tr><td>Baréin</td><td>4</td></tr>
+<tr class="odd"><td>Japón</td><td>4</td></tr>
+<tr><td>Puerto Rico</td><td>4</td></tr>
+<tr class="odd"><td>Venezuela</td><td>4</td></tr>
+<tr><td>Liberia</td><td>4</td></tr>
+<tr class="odd"><td>Países Bajos</td><td>3</td></tr>
+<tr><td>Argelia</td><td>3</td></tr>
+<tr class="odd"><td>República Dominicana</td><td>3</td></tr>
+<tr><td>Grecia</td><td>3</td></tr>
+<tr class="odd"><td>Gabón</td><td>3</td></tr>
+<tr><td>Australia</td><td>3</td></tr>
+<tr class="odd"><td>Botsuana</td><td>3</td></tr>
+<tr><td>Argentina</td><td>3</td></tr>
+<tr class="odd"><td>Alemania</td><td>3</td></tr>
+<tr><td>Rusia</td><td>3</td></tr>
+<tr class="odd"><td>Croacia</td><td>3</td></tr>
+<tr><td>Turquía</td><td>3</td></tr>
+<tr class="odd"><td>Benín</td><td>3</td></tr>
+<tr><td>Haití</td><td>2</td></tr>
+<tr class="odd"><td>Arabia Saudita</td><td>2</td></tr>
+<tr><td>Chipre</td><td>2</td></tr>
+<tr class="odd"><td>Ghana</td><td>2</td></tr>
+<tr><td>Italia</td><td>2</td></tr>
+<tr class="odd"><td>Guatemala</td><td>1</td></tr>
+<tr><td>Trinidad y Tobago</td><td>1</td></tr>
+<tr class="odd"><td>Kosovo</td><td>1</td></tr>
+<tr><td>Estados Unidos</td><td>1</td></tr>
+<tr class="odd"><td>Armenia</td><td>1</td></tr>
+</table></body></html>
