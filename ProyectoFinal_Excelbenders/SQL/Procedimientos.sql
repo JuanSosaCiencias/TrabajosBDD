@@ -76,15 +76,6 @@ BEGIN
                 p_id_atleta, p_id_evento;
         END IF;
 
-        -- Verificar si la disciplina es individual y controlar medallas únicas
-        SELECT EsIndividual INTO v_disciplina_individual
-        FROM Disciplina
-        WHERE IDDisciplina = v_disciplina_evento;
-
-        IF v_disciplina_individual THEN
-            RAISE NOTICE 'La disciplina es individual. Solo se permite una medalla por atleta.';
-        END IF;
-
         -- Insertar la medalla
         BEGIN
             INSERT INTO Medalla (TipoMedalla, IDDisciplina, IDAtleta)
@@ -119,7 +110,7 @@ Parámetros:
 -- Registrar participación sin medalla
 -- CALL registrar_participacion(1, 311);
 -- Registrar participación con medalla
--- CALL registrar_participacion(65, 192, 'Oro');
+-- CALL registrar_participacion(1, 311, 'Oro');
 
 
 -- ========= PROCEDIMIENTO: ACTUALIZAR FASE DEL EVENTO =========
