@@ -118,7 +118,77 @@ Parámetros:
 -- Pruebas
 -- Registrar participación sin medalla
 -- CALL registrar_participacion(1, 311);
-
 -- Registrar participación con medalla
 -- CALL registrar_participacion(65, 192, 'Oro');
 
+
+-- ========= PROCEDIMIENTO: ACTUALIZAR FASE DEL EVENTO =========
+/*
+Este procedimiento es para cumplir el requerimiento del Caso de Uso de aumentar el precio de un evento
+en 9% cada que pase una fase eliminatoria. 
+Propósito:
+Actualizar la fase eliminatoria de un evento y, al hacerlo, incrementar su precio en un 9%. 
+El procedimiento realiza las siguientes validaciones:
+1. Verifica que el evento exista en la base de datos.
+2. Asegura que la fase actual del evento no sea la última (fase 3).
+3. Calcula la nueva fase y el nuevo precio del evento.
+4. Actualiza la tabla `Evento` con los valores calculados.
+
+Tablas objetivo:
+- Evento: Se actualizan las columnas `Fase` y `Precio` del evento.
+
+Notificaciones:
+- Utiliza RAISE NOTICE para informar del éxito de la operación.
+- Genera excepciones con mensajes claros si ocurren errores durante la validación.
+
+Parámetros:
+- p_IDEvento (INT): Identificador único del evento que se desea actualizar.
+*/
+
+CREATE OR REPLACE PROCEDURE ActualizarFaseEvento(
+    IN p_IDEvento INT
+)
+LANGUAGE plpgsql
+AS $$
+DECLARE
+    v_fase_actual INT;
+    v_precio_actual INT;
+    v_nueva_fase INT;
+    v_nuevo_precio NUMERIC;
+BEGIN
+    -- Verificar que el evento existe
+    SELECT Fase, Precio
+    INTO v_fase_actual, v_precio_actual
+    FROM Evento
+    WHERE IDEvento = p_IDEvento;
+
+    IF NOT FOUND THEN
+        RAISE EXCEPTION 'El evento con ID % no existe', p_IDEvento;
+    END IF;
+
+    -- Verificar que la fase actual no sea la última (3)
+    IF v_fase_actual >= 3 THEN
+        RAISE EXCEPTION 'El evento con ID % ya está en la última fase (3)', p_IDEvento;
+    END IF;
+
+    -- Calcular la nueva fase y el nuevo precio
+    v_nueva_fase := v_fase_actual + 1;
+    v_nuevo_precio := v_precio_actual * 1.09;
+
+    -- Actualizar la fase y el precio del evento
+    UPDATE Evento
+    SET Fase = v_nueva_fase,
+        Precio = v_nuevo_precio
+    WHERE IDEvento = p_IDEvento;
+
+    -- Notificar los cambios realizados
+    RAISE NOTICE 'El evento con ID % ha sido actualizado a la fase % y su nuevo precio es %.2f',
+        p_IDEvento, v_nueva_fase, v_nuevo_precio;
+END;
+$$;
+
+COMMENT ON PROCEDURE ActualizarFaseEvento IS
+'Actualiza la fase de un evento incrementando su precio en un 9%. Valida que el evento exista y que no se encuentre en la última fase.';
+
+-- Prueba 
+-- CALL ActualizarFaseEvento(1);

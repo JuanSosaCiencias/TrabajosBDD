@@ -821,6 +821,7 @@ insert into Evento (IDEvento, NombreLocalidad, IDDisciplina, DuracionMax, Precio
 insert into Evento (IDEvento, NombreLocalidad, IDDisciplina, DuracionMax, Precio, FechaEvento, Fase) values (209, 'Tatami de Kárate', 31, 6, 400, '2028-10-11', 3);
 insert into Evento (IDEvento, NombreLocalidad, IDDisciplina, DuracionMax, Precio, FechaEvento, Fase) values (270, 'Arena de Balonmano Playa', 168, 8, 900, '2027-01-26', 3);
 insert into Evento (IDEvento, NombreLocalidad, IDDisciplina, DuracionMax, Precio, FechaEvento, Fase) values (210, 'Arena de Netball', 61, 16, 200, '2025-03-03', 2);
+insert into Evento (IDEvento, NombreLocalidad, IDDisciplina, DuracionMax, Precio, FechaEvento, Fase) values (311, 'Arena de Netball', 61, 180, 3500, '2025-03-03', 2);
 
 
 
@@ -18047,6 +18048,8 @@ insert into Participa (IDAtleta, IDDisciplina) values (65, 30);
 insert into Participa (IDAtleta, IDDisciplina) values (65, 180);
 insert into Participa (IDAtleta, IDDisciplina) values (23, 84);
 insert into Participa (IDAtleta, IDDisciplina) values (24, 69);
+insert into Participa (IDAtleta, IDDisciplina) values (1, 61);
+
 
 
                                         -- Población de la tabla Medalla --
