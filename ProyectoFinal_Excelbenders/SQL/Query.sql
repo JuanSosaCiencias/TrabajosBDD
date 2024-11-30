@@ -8,7 +8,7 @@
  */
 SELECT 
     d.NombreDisciplina,
-    COUNT(p.IDAtleta) AS CantidadAtletas
+    COUNT(p.IDAtleta) AS NumParticipantes
 FROM 
     Disciplina d
 JOIN 
@@ -16,7 +16,7 @@ JOIN
 GROUP BY 
     d.NombreDisciplina
 ORDER BY 
-    CantidadAtletas DESC;
+    NumParticipantes DESC;
 
 /* Consulta 2: Cantidad de asistentes y ganancias por disciplina y localidad.
  * 
